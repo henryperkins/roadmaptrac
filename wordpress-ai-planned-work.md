@@ -6,9 +6,9 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-06-30 (board + live PR/release checks) |
-> | **Scope** | **74 non-Done board cards** = 54 open issues + 19 open board-tracked PRs + 1 stale merged card (#484) |
-> | **Latest shipped** | v1.0.2 (2026-06-16) · **Active:** v1.1.0 (27 Done / 2 open; release tracked in [#805](https://github.com/WordPress/ai/issues/805), target 2026-07-30) · **Next:** v1.2.0 (0 Done / 31 open — now the live build wave) |
+> | **Data snapshot** | 2026-07-02 (board + live PR/release checks) |
+> | **Scope** | **75 non-Done board cards** = 55 open issues + 19 open board-tracked PRs + 1 stale merged card (#484) |
+> | **Latest shipped** | **v1.1.0** (2026-07-01 — 17th release; PR [#560](https://github.com/WordPress/ai/pull/560) merged, release issue [#805](https://github.com/WordPress/ai/issues/805) closed) · **Active:** v1.2.0 (0 Done / 32 open — the live build wave; milestone due 2026-07-30) · **Next:** Future Release backlog (40 open; no dated milestone beyond 1.2.0) |
 > | **For issue detail** | see the [open-issues dossier](./wordpress-ai-open-issues.md) (linked per item) |
 
 ---
@@ -25,22 +25,22 @@ So an item can be "In progress" yet unscheduled, or milestoned yet still "In dis
 
 | Tier | Milestones | Items | What it means |
 |---|---|---|---|
-| **① Committed — dated release** | 1.1.0, 1.2.0 | **33** (21 iss + 12 PR) | The firm plan; slated for an upcoming numbered release. **1.1.0 has all but shipped (27 Done / 2 open); 1.2.0 is now the active build wave (31 open).** |
+| **① Committed — dated release** | 1.2.0 | **32** (20 iss + 12 PR) | The firm plan; slated for the next numbered release. **v1.1.0 shipped 2026-07-01, so 1.2.0 is now the sole active build wave (32 open).** |
 | **② Planned backlog — unscheduled** | Future Release | **40** (33 iss + 7 PR) | Accepted direction, queued, no release assigned |
 | **③ Straggler** | 0.9.0 | **1** (stale merged-card PR) | #484 is already merged but still non-Done on the board — see flag #1 |
-| **④ Unscheduled (no milestone)** | — | **0** | Now empty — the prior unmilestoned bug #771 moved board-Done on 2026-06-30 |
+| **④ Unscheduled (no milestone)** | — | **2** | Board-new **#809** (Content-Summary nested-block detection, In progress, PR #810) + **#816** (Type-Ahead front-end/WooCommerce regression, Triage) — see §④ below |
 
 ### Delivery readiness at a glance (non-Done, by status)
 
 | Closest-to-ship → furthest | Count |
 |---|---|
-| **Needs review** (in code review) | 9 |
-| **In progress** (actively being built) | 28 |
-| **To do** (queued, scoped) | 7 |
-| **Backlog** (planned, not started) | 8 |
+| **Needs review** (in code review) | 10 |
+| **In progress** (actively being built) | 27 |
+| **To do** (queued, scoped) | 8 |
+| **Backlog** (planned, not started) | 7 |
 | **In discussion / Needs decision** (proposed, undecided) | 21 |
-| **Triage** (unsorted) | 1 |
-| **Total** | **74** |
+| **Triage** (unsorted) | 2 |
+| **Total** | **75** |
 
 > Reading tip: Tiers ① and ② Backlog/To do/In progress/Needs review are the genuinely *planned* pipeline. The 21 "In discussion / Needs decision" items are *proposed* — directionally planned but not committed (kept here for completeness, clearly marked).
 
@@ -63,20 +63,19 @@ The single most useful synthesis: **what new capabilities are coming**, split by
 | **`core/read-content` ability** | [#739](https://github.com/WordPress/ai/pull/739) | 1.2.0 | In progress | Read-only ability to fetch/query posts of ability-exposed types (part of #40; mirrors core `WP_Content_Abilities`) |
 | **`core/manage-settings` ability** | [#764](https://github.com/WordPress/ai/pull/764) | 1.2.0 | Needs review | Write counterpart to `core/settings` (#691) — atomic, all-or-nothing settings updates (part of #40) |
 | **`core/read-users` ability** | [#774](https://github.com/WordPress/ai/pull/774) | 1.2.0 | Needs review | Read-only single-user lookup + user-collection queries (part of #40) |
-| **Connector key encryption** | [#560](https://github.com/WordPress/ai/pull/560) | 1.1.0 | In progress | Encrypts AI Connector API keys at rest (decrypt on use) — the last open 1.1.0 PR |
 | **Chrome DevTools agent integration** | [#760](https://github.com/WordPress/ai/pull/760) | Future | Needs review (PoC) | Exposes AI Features + a recent-run log to Chrome DevTools for agents |
 | **Ability Explorer payload AI-gen** | [#695](https://github.com/WordPress/ai/pull/695) | Future | In progress (draft) | Natural-language → valid JSON payload in the Ability Test Runner |
 
 > 🛡️ **The C2PA / content-provenance suite is the largest in-flight theme by code volume** (#294 ≈ +9.9k LOC, #302 ≈ +6.3k, #459 ≈ +3.2k). #459 (read) + #294 (text sign) + #302 (image sign) form a deliberate family; #302 is stacked on #294. See [the PR dossiers](#future-release--open-prs-6) for the signature-verification caveat on #294.
 
-> ✅ **Recently shipped off this list:** Type Ahead (#151) merged board-Done into the **1.1.0** lane on 2026-06-25; its follow-up PR [#776](https://github.com/WordPress/ai/pull/776) (provider/model overrides + Guidelines) **merged board-Done in this 2026-06-30 refresh**, alongside #775 (preserve omitted ability input), #785/#786/#787 (Abilities Explorer + E2E quality), and #796 (feature-request YML) — all on the 1.1.0 lane.
+> 🚀 **Shipped in v1.1.0 (2026-07-01):** the entire 1.1.0 lane went public this refresh — headlined by **Type Ahead** (#151, ghost-text autocomplete) and **Connector API-key encryption** ([PR #560](https://github.com/WordPress/ai/pull/560), merged 2026-06-30, the last open 1.1.0 PR). Type Ahead's follow-up #776 (provider/model overrides + Guidelines) and the late-June board-Done hardening (#775, #785/#786/#787, #796) shipped too. The release-tracking issue #805 is closed. Separately, the credentials-gate issue **#197** closed board-Done on 2026-07-01 (milestone cleared; its off-board PR #799 closed **unmerged**), so it resolved *without* shipping in the 1.1.0 payload. ⚠️ A **post-release regression** was already filed against Type Ahead — **#816** (its front-end `wp-editor` enqueue intermittently breaks WooCommerce block checkout; Triage, unmilestoned).
 
 ### Proposed (issues, mostly no code yet) — see dossiers for detail
 Content Generation co-author ([#297](./wordpress-ai-open-issues.md#297--new-experiment-content-generation-)) · Social Content Generation ([#625](https://github.com/WordPress/ai/issues/625)) · "Suggest Reply" ([#508](https://github.com/WordPress/ai/issues/508)) — ⚙ **now has open [PR #724](https://github.com/WordPress/ai/pull/724)** · Analytics-aware content + amplification ([#338](https://github.com/WordPress/ai/issues/338)) · Frontend chat agent ([#142](https://github.com/WordPress/ai/issues/142)) · Admin AI Workspace ([#282](https://github.com/WordPress/ai/issues/282)) · Site Agent ([#189](https://github.com/WordPress/ai/issues/189)) · Site-wide insights ([#190](https://github.com/WordPress/ai/issues/190)) · Comment value/relevance ([#514](https://github.com/WordPress/ai/issues/514)) — ⚙ **now has open [PR #681](https://github.com/WordPress/ai/pull/681)** · AI Playground ([#32](https://github.com/WordPress/ai/issues/32)) · plus the reusable control layer: Tone ([#186](https://github.com/WordPress/ai/issues/186)) / Multilingual ([#187](https://github.com/WordPress/ai/issues/187)) / Persona ([#188](https://github.com/WordPress/ai/issues/188)).
 
 ### Board vs. repo: open PRs not on the board
 
-> ⚠️ This doc mirrors the **proj240 board** (19 open board-tracked PRs + stale #484), but `WordPress/ai` currently has **35 open PRs** — **16 are not on the board** (16 substantive + 0 routine bot/CI). The table below is a live 2026-06-30 refresh. The third column is the mapped issue's current **board** status/milestone; `—` means no issue ref was parsed from the PR title/body (best-effort). Regenerate any time with `./wp-ai-roadmap-refresh.sh` (or inspect via `census` / `gap`).
+> ⚠️ This doc mirrors the **proj240 board** (19 open board-tracked PRs + stale #484), but `WordPress/ai` currently has **35 open PRs** — **16 are not on the board** (16 substantive + 0 routine bot/CI). The table below is a live 2026-07-02 refresh. The third column is the mapped issue's current **board** status/milestone; `—` means no issue ref was parsed from the PR title/body (best-effort). Regenerate any time with `./wp-ai-roadmap-refresh.sh` (or inspect via `census` / `gap`).
 
 | Open PR (live) | Implements | Board state of that issue |
 |---|---|---|
@@ -95,37 +94,24 @@ Content Generation co-author ([#297](./wordpress-ai-open-issues.md#297--new-expe
 | #759 [issue #660] feat: Update generalised error message for all features | #660 | In progress/1.2.0 |
 | #770 Prompt template extension points | #192 | In progress/Future Release |
 | #798 Clarify global AI toggle as a master switch (#600) | #600, #617 | In progress/1.2.0; #617 not on board |
-| #799 Gate provider-backed features until valid credentials exist (#197) | #197, #731 | In progress/1.2.0; #731 not on board |
+| #810 Enhance Content Summary block detection to nested blocks | #809 | In progress/— (no milestone) |
 
-**Substantive open PRs still off the board:** all 16 map to a board issue (or are an alternate take on one): #633/#452 taxonomy relevance · #650/#614 bulk summary · #681/#514 comment value · #686 & #759/#660 editor error copy · #692/#690 uninstall cleanup · #714/#203 Ability Table column hook · #724/#508 Suggest Reply (the board card is **Needs review**) · #734/#191 settings import/export · #735/#689 Request-Log age-based delete · #747 AI-powered content translation (relates to #187) · #749/#736 role/user access controls · #757/#732 non-SDK-transport logging · #770/#192 prompt-template hooks · #798/#600 global-toggle master switch (punted from 1.1.0 per #805) · #799/#197 gate provider-backed features (punted from 1.1.0 per #805).
+**Substantive open PRs still off the board:** all 16 map to a board issue (or are an alternate take on one): #633/#452 taxonomy relevance · #650/#614 bulk summary · #681/#514 comment value · #686 & #759/#660 editor error copy · #692/#690 uninstall cleanup · #714/#203 Ability Table column hook · #724/#508 Suggest Reply (the board card is **Needs review**) · #734/#191 settings import/export · #735/#689 Request-Log age-based delete · #747 AI-powered content translation (relates to #187) · #749/#736 role/user access controls · #757/#732 non-SDK-transport logging · #770/#192 prompt-template hooks · #798/#600 global-toggle master switch (deferred off 1.1.0; #600 now 1.2.0) · **#810/#809** Content-Summary nested-block detection (board-new issue #809, unmilestoned).
 
-> **Newly board-tracked since the 2026-06-26 snapshot** (so they left this list): #560 (Connector key encryption), #695 (Ability Explorer payload AI-gen), #758 (operation REST filter param), #760 (Chrome DevTools PoC), #774 (`core/read-users`), #777 (Composer deps + PHPStan). **Already board-tracked** (covered in the tables above), for reference: #211, #224, #294, #302, #459, #494, #594, #621, #683, #739, #764, #765, #789 (+ stale merged #484). **No routine/bot PRs are open this refresh.** **Newly opened off-board since 2026-06-26:** #798, #799 (both punted from 1.1.0). **Merged/closed off the board since the prior snapshot:** #151 follow-up #776, plus #722 (CI), #772 (#771 pill-restore), #773 (E2E), #775 (omitted ability input).
+> **Board-tracked open PRs (19)**, covered in the tables above: #211, #224, #294, #302, #459, #494, #594, #621, #683, #695, #739, #758, #760, #764, #765, #774, #777, #789, and board-new **#814** — plus stale merged #484. **No routine/bot PRs are open this refresh.** **Changes vs the 2026-06-30 snapshot:** off-board **#810** opened (Closes #809); **#560** (Connector key encryption) merged into the 1.1.0 release and is now board-Done; **#799** (gate provider-backed features) closed alongside board-Done #197.
 > **Why the gap:** WordPress/ai doesn't add every PR to proj240. **Fixed 2026-06-16:** `wp-ai-roadmap-refresh.sh` now runs a repo census (`gh pr list` + `gh release list`) on every run, regenerates the table above, and flags new releases — so this gap surfaces automatically. Inspect with `./wp-ai-roadmap-refresh.sh census` or `gap <board.json> <prs.json>`.
 
 ---
 
 ## ① Committed — dated releases
 
-### v1.1.0 — Active release (release tracked in #805, target 2026-07-30) — 2 not-Done
+### v1.1.0 — ✅ Shipped 2026-07-01 — 0 not-Done
 
-> **1.1.0 has all but shipped: 27 of its 29 cards are board-Done.** Release issue [#805](https://github.com/WordPress/ai/issues/805) (target **30 July 2026**; owners @dkotter / @jeffpaul) is now the gating tracker — its pre-release checklist has merged or punted everything except encryption PR #560. Most former 1.1.0 work either shipped board-Done in the 2026-06-30 refresh (empty-state gating, button sizing, translations, Snackbar reposition, Type Ahead overrides, Abilities-Explorer/E2E quality) or was re-milestoned **1.2.0** (see changelog). #798/#799 were punted off 1.1.0 and remain open off-board.
+> **v1.1.0 shipped on 2026-07-01** — the 17th release. Its final two open cards closed in this refresh: encryption PR **[#560](https://github.com/WordPress/ai/pull/560)** merged (2026-06-30; +2880/-0, 19 files — encrypts every AI Connector API key at rest and decrypts on use, so WP 7.0's Connectors API no longer stores provider keys in plain text; follow-up to the #467 discussion) and the release-tracking issue **[#805](https://github.com/WordPress/ai/issues/805)** closed board-Done. Type Ahead (#151) and the late-June hardening (empty-state gating, button sizing, translations, Snackbar reposition, Type Ahead overrides, Abilities-Explorer/E2E quality) rode this release. (The credentials gate **#197** also closed board-Done on 2026-07-01, but its off-board PR #799 closed **unmerged** and its milestone was cleared — resolved *without* shipping in 1.1.0.) **Nothing remains non-Done on the 1.1.0 lane.** ⚠️ Post-release, front-end regression **#816** was filed against Type Ahead — see §④ below.
 
-**Issue (1)** — full detail in the [dossier](./wordpress-ai-open-issues.md):
+### v1.2.0 — Active release — the build wave — 32 not-Done (20 issues + 12 PRs)
 
-| # | Status | Title |
-|---|---|---|
-| [#805](https://github.com/WordPress/ai/issues/805) | To do | Release version 1.1.0 — release-tracking checklist, target 2026-07-30 (@dkotter, @jeffpaul) |
-
-**PR (1):**
-
-#### PR #560 — Add encryption for AI Connector API keys  ·  *In progress · not draft · MERGEABLE · +2880/-0, 19 files*
-[Link](https://github.com/WordPress/ai/pull/560) · @dkotter
-**Delivers.** Encrypts every AI Connector API key on save and decrypts it on use, so WP 7.0's new Connectors API no longer stores provider keys as plain text in the database. Follow-up to the #467 discussion.
-**Blockers.** Mergeable — the **last open 1.1.0 PR**. #805's checklist flags it "review and merge/punt" as the final pre-release decision.
-
-### v1.2.0 — Next release — now the active build wave — 31 not-Done (20 issues + 11 PRs)
-
-> On 2026-06-30, 1.2.0 absorbed the bulk of the former 1.1.0 lane: as 1.1.0 wound down to its release checklist, most still-open hardening issues and the C2PA/abilities PRs were re-milestoned here. v1.2.0 holds **0 Done / 31 open** and is where active development now concentrates.
+> On 2026-06-30, 1.2.0 absorbed the bulk of the former 1.1.0 lane: as 1.1.0 wound down, most still-open hardening issues and the C2PA/abilities PRs were re-milestoned here. With v1.1.0 now shipped, v1.2.0 is the **sole active dated release** — **0 Done / 32 open** — and is where development concentrates. Net +1 this refresh (added PR #814 + issue #815; #197 closed board-Done into 1.1.0).
 
 **Issues (20)** — full detail in the [dossier](./wordpress-ai-open-issues.md):
 
@@ -134,7 +120,6 @@ Content Generation co-author ([#297](./wordpress-ai-open-issues.md#297--new-expe
 | [#187](https://github.com/WordPress/ai/issues/187) | Needs review | Multilingual rewriting/translation via AI (draft PR #747) |
 | [#508](https://github.com/WordPress/ai/issues/508) | Needs review | "Suggest Reply" experiment for Comments/Activity (PR #724) |
 | [#191](https://github.com/WordPress/ai/issues/191) | In progress | Settings import/export (PR #734) |
-| [#197](https://github.com/WordPress/ai/issues/197) | In progress | Gate features until valid credentials (PR #799) |
 | [#203](https://github.com/WordPress/ai/issues/203) | In progress | Ability Table column extensibility hook (draft PR #714) |
 | [#452](https://github.com/WordPress/ai/issues/452) | In progress | Content Classification: improve taxonomy relevance (PR #633) |
 | [#514](https://github.com/WordPress/ai/issues/514) | In progress | Comment value/relevance in Comment Moderation (PR #681) |
@@ -148,11 +133,12 @@ Content Generation co-author ([#297](./wordpress-ai-open-issues.md#297--new-expe
 | [#421](https://github.com/WordPress/ai/issues/421) | To do | Detect C2PA manifests on upload (impl. by PR #459) |
 | [#507](https://github.com/WordPress/ai/issues/507) | To do | Editorial Updates end flow → Visual Revisions (@zeus2611) |
 | [#793](https://github.com/WordPress/ai/issues/793) | To do | Developer Tool: "Customize experiments" advanced-settings toggle |
+| [#815](https://github.com/WordPress/ai/issues/815) | To do | Connector Approvals: no admin notice that the AI plugin still needs provider access (board-new; related #660) |
 | [#23](https://github.com/WordPress/ai-provider-for-google/issues/23) | In discussion | [Bug] Google Image Generation `candidates[0].content` |
 | [#324](https://github.com/WordPress/ai/issues/324) | In discussion | ⭐ Evolve Refine → agentic/collaborative editorial (gated on Gutenberg RTC) |
 | [#741](https://github.com/WordPress/ai/issues/741) | In discussion | AI/Connectors admin-page flicker (@prasadkarmalkar) |
 
-**PRs (11):**
+**PRs (12):**
 
 #### PR #459 — Add C2PA Monitor experiment  ·  *Needs review · CHANGES_REQUESTED · CONFLICTING · +3151/-0, 16 files · moved 1.1.0 → 1.2.0*
 [Link](https://github.com/WordPress/ai/pull/459) · @lnispel
@@ -208,6 +194,11 @@ Content Generation co-author ([#297](./wordpress-ai-open-issues.md#297--new-expe
 [Link](https://github.com/WordPress/ai/pull/789) · @simison
 **Delivers.** Refreshes the bundled `@wordpress/*` packages (theme, ui, dataviews, admin-ui) pulled from Gutenberg. Dependency maintenance; no feature impact.
 **Blockers.** Awaiting review.
+
+#### PR #814 — Fix markdown formatting in feature request template  ·  *Needs review · not draft · board-new · milestone 1.2.0*
+[Link](https://github.com/WordPress/ai/pull/814) · @jeffpaul
+**Delivers.** Repo-ops only: corrects the rendering of the GitHub **feature-request issue template** (forces the body into a string so GitHub's template parser stops mangling it). No plugin code or feature impact.
+**Blockers.** Awaiting review; trivial (jeffpaul notes it's "attempt 3" at getting the template to render). Board-tracked as the newest 1.2.0 PR card.
 
 ---
 
@@ -274,9 +265,12 @@ Content Generation co-author ([#297](./wordpress-ai-open-issues.md#297--new-expe
 
 ---
 
-## ④ Unscheduled — none
+## ④ Unscheduled — 2
 
-> Empty this refresh. The last unmilestoned bug, **[#771](https://github.com/WordPress/ai/issues/771)** (Content Classification suggestion pill lost on add-failure), moved **board-Done** on 2026-06-30 when its draft PR #772 merged. The board currently has **no non-Done cards without a milestone** — every planned item sits in tier ①, ②, or ③.
+> Two board-new cards carry **no milestone** this refresh (the tier was empty last refresh, after #771 moved board-Done on 2026-06-30):
+>
+> - **[#809](https://github.com/WordPress/ai/issues/809)** — *In progress* — Content Summarization only detects its summary group at the **top level** (`allBlocks.find(... block.name === 'core/group' && attributes.aiGeneratedSummary)`), so a summary moved inside a Group/Column nested block isn't found on "Regenerate" and a second block gets inserted. Fix in progress via **PR [#810](https://github.com/WordPress/ai/pull/810)** (Intenzi, *Closes #809*).
+> - **[#816](https://github.com/WordPress/ai/issues/816)** — *Triage* — the **Type Ahead** experiment (just shipped in 1.1.0) registers assets on `enqueue_block_assets` with no `is_admin()` guard, so every front-end page load pulls in `wp-editor` and registers the `core/editor` store — intermittently corrupting **WooCommerce block checkout** (its Store API cart resolver keys off `!! select('core/editor')`). A live post-release regression; see Data-quality flag #11.
 
 ---
 
@@ -288,10 +282,11 @@ Content Generation co-author ([#297](./wordpress-ai-open-issues.md#297--new-expe
 4. **#339** repro is unconfirmed on current versions — needs re-test on AI ≥0.9.0 / WP 7.0 RC2-3 / Gutenberg 23.1.0; likely a provider-plugin issue, not core plugin.
 5. **`closingIssuesReferences` was unavailable** via `gh pr view`; PR→issue links were parsed from PR bodies (so a few may be incomplete).
 6. **Three more issues moved board-Done in the 2026-06-30 refresh** — #145 (rename experiment `register()`), #767 (locale-aware content gate), and #771 (Content Classification pill) are no longer counted as planned work; they join the open-issues "Recently board-Done" set. Separately, three already-Done 1.0.2 items (#699, #704, #718) were **de-carded** from Project #240 this refresh.
-7. **Board ≠ repo** — the board tracks 19 currently open PRs plus stale #484, while the repo has **35 open** (live 2026-06-30); **16 substantive open PRs (0 routine)** are not on the board. See [Board vs. repo](#board-vs-repo-open-prs-not-on-the-board). `wp-ai-roadmap-refresh.sh` diffs the *board* only, so the repo census remains important.
-8. **Latest shipped is v1.0.2** (2026-06-16), not v1.0.1 — a patch released outside the 1.1.0/1.2.0 milestone ladder; the board-based refresh didn't surface it. 1.1.0's own release is now tracked in #805 (target 2026-07-30) but has not yet shipped.
+7. **Board ≠ repo** — the board tracks 19 currently open PRs plus stale #484, while the repo has **35 open** (live 2026-07-02); **16 substantive open PRs (0 routine)** are not on the board. See [Board vs. repo](#board-vs-repo-open-prs-not-on-the-board). `wp-ai-roadmap-refresh.sh` diffs the *board* only, so the repo census remains important.
+8. **Latest shipped is now v1.1.0** (2026-07-01) — the 17th release; encryption PR #560 merged (2026-06-30) and release-tracking issue #805 closed board-Done. The prior public patch was v1.0.2 (2026-06-16). v1.2.0 is now the sole active dated milestone; there is no dated release beyond it yet.
 9. **#145 closed board-Done** on 2026-06-30 — its implementation PR #159 had closed without merge on 2026-06-17, and the issue itself was subsequently closed directly.
 10. **#84 is no longer on Project #240** — the `WordPress/abilities-api` issue remains open upstream under milestone Later and is still conceptually tied to #40, but it is no longer counted as current board work.
+11. **#816 is a live post-1.1.0 regression** — the Type Ahead experiment (shipped in v1.1.0, 2026-07-01) enqueues on `enqueue_block_assets` with **no `is_admin()` guard**, so `wp-editor` and the `core/editor` data store load on the **front end** and intermittently break WooCommerce block checkout (its Store API cart resolver keys off `!! select('core/editor')`). Currently **Triage / unmilestoned**; worth fast-tracking since it affects a public release. The issue has a code-level root-cause analysis but **no fix PR yet**.
 
 ---
 
@@ -299,7 +294,9 @@ Content Generation co-author ([#297](./wordpress-ai-open-issues.md#297--new-expe
 
 > Recorded as a backlog rather than actioned now (per request). Each is a discrete next task.
 
-- [ ] **1.1.0 release watch** — burn-down essentially complete: **27 Done / 2 open** as of 2026-06-30, with the release now tracked in **#805 (target 30 July 2026)**. Only encryption PR **#560** and the #805 checklist itself remain; #805 has already merged/punted the rest (#798/#799 punted off-board; #739 punted to 1.2.0). The 2026-06-30 refresh re-milestoned the remaining 1.1.0 hardening work (#459/#594/#621/#765 PRs and most In-progress issues) down to **1.2.0**. Next decision is the #560 merge/punt call before cutting `release/1.1.0`.
+- [x] **1.1.0 release watch** — ✅ **v1.1.0 shipped 2026-07-01.** Encryption PR **#560** merged (2026-06-30) and release issue **#805** closed board-Done; Type Ahead (#151) rode the release, and the remaining 1.1.0 hardening work had been re-milestoned to 1.2.0 in the prior refresh. (The credentials gate #197 closed board-Done post-release with its PR #799 **unmerged** — not part of the 1.1.0 payload.) **Release focus is now 1.2.0** (32 open; no date set yet).
+- [ ] **Triage #816 (post-1.1.0 regression)** — Type Ahead enqueues `wp-editor` on the front end (no `is_admin()` guard on `enqueue_block_assets`), pulling the block-editor stack + `core/editor` store onto public pages and intermittently breaking WooCommerce block checkout **in a shipped release**. Confirm the repro, add the `is_admin()` guard / split the front-end asset, and decide whether it warrants a **1.1.1 patch**. Currently Triage, unmilestoned, no fix PR.
+- [ ] **Land #809/#810 (Content-Summary nested blocks)** — off-board PR #810 (Closes #809) fixes top-level-only summary detection; confirm it needs a board milestone (currently unmilestoned) and review.
 - [ ] **C2PA / provenance suite consolidation** — 3 overlapping PRs (#459 read, #294 text-sign, #302 image-sign), 2 authors (erik-sv, lnispel), reassigned to JasonTheAdams. Needs an owner + decision: merge order, shared signer code, and resolving #294's signature-verification blocker before any ships.
 - [ ] **Confirm PR-only experiments have backing issues** — Service Account (#211) is introduced by a PR with no linked tracking issue; decide whether it needs one (it's a "do we need this?" draft). Type Ahead (#151) shipped without one — its follow-up #776 (provider/model overrides + Guidelines) is also issue-less.
 - [ ] **Escalate/triage #643** as a WP 7.0 core-integrity question, not a plugin bug; confirm with a clean-core repro.
@@ -316,6 +313,7 @@ Content Generation co-author ([#297](./wordpress-ai-open-issues.md#297--new-expe
 
 | Date | Change |
 |---|---|
+| 2026-07-02 | **Live board + repo refresh vs 2026-06-30 baseline.** Non-Done scope **74 → 75** = 55 open issues + 19 open board-tracked PRs + stale #484. **🚀 v1.1.0 shipped 2026-07-01** (17th release): encryption PR #560 merged (2026-06-30), release issue #805 closed board-Done, and credentials gate #197 closed board-Done — **Tier ① is now 1.2.0 only (32 = 20 iss + 12 PR)** as the 1.1.0 lane emptied. 4 new open cards: #809 (Content-Summary nested-block detection, In progress, off-board PR #810), #814 (feature-request-template fix, Needs review PR, 1.2.0), #815 (Connector-Approvals notice gap, To do, 1.2.0), #816 (Type-Ahead front-end/WooCommerce regression, Triage). **Tier ④ (no milestone) 0 → 2** (#809, #816). #190 moved Backlog → To do. Delivery-readiness by status: Needs review 9→10, In progress 28→27, To do 7→8, Backlog 8→7, Triage 1→2 (In discussion 21 unchanged). Board totals **269 → 271**; Done **195 → 196** (#701/#721 de-carded from the 1.1.0 lane; #632/#197 milestones cleared into no-milestone-Done, 18→22). Repo gap holds at **35 open / 16 untracked** (16 substantive + 0 routine); off-board #810 opened (Closes #809), #560 merged, #799 closed. Latest shipped **v1.0.2 → v1.1.0** (2026-07-01). Dependency watchlist unchanged at 16 (10 open / 3 closed / 3 merged). |
 | 2026-06-30 | **Live board + repo refresh vs 2026-06-26 baseline.** Non-Done scope **66 → 74** = 54 open issues + 19 open board-tracked PRs + stale #484. **1.1.0 all but shipped: 14 Done/13 open → 27 Done/2 open**, with the release now tracked in **#805** (target **30 July 2026**); only encryption PR #560 remains on the 1.1.0 lane. **Big re-milestone wave 1.1.0 → 1.2.0** — #459/#594/#621/#739/#765 PRs and issues #197/#452/#507/#600/#614/#690/#741 (plus #187/#508 → Needs review) moved down; **v1.2.0 is now the active build wave at 0 Done / 31 open** (20 iss + 11 PR). Tier ① **20 → 33**; Tier ② Future Release **44 → 40** (#27 in from 1.1.0, #791 new; #191/#203/#514/#732/#736 out to 1.2.0); **Tier ④ now empty** — #771 merged board-Done. 3 issues newly board-Done (#145, #767, #771); already-Done #699/#704/#718 de-carded from Project #240. Board totals **249 → 269**; Done **183 → 195**. Six off-board PRs became board-tracked (#560/#695/#758/#760/#774/#777) and #789 was added; repo gap now **35 open / 16 untracked** (16 substantive + 0 routine); #798/#799 newly opened off-board (punted from 1.1.0). Latest shipped still **v1.0.2** (2026-06-16). |
 | 2026-06-26 | **Live board + repo refresh vs 2026-06-25 baseline.** Non-Done scope **67 → 66** = 53 open issues + 12 open board-tracked PRs + stale #484. **PR #151 (Type Ahead) merged board-Done** into 1.1.0 — removed from the in-flight table and the v1.1.0 PR list (5 → 4 PRs). **#767** milestoned **1.2.0** and moved **In discussion → To do** — relocated from Tier ④ (now **1**: only #771) into v1.2.0 (now **7** = 5 iss + 2 PR). Tier ① holds at **20** (now 14 iss + 6 PR). Board totals **250 → 249** (board-Done bug #697 de-carded); Done holds at **183**. Repo PR gap refreshed to **37 open / 25 untracked** (24 substantive + 1 routine #722); board-tracked open PRs now **12**. Newly opened off-board: #773–#777 (incl. #774 `core/users` ability, #776 Type Ahead follow-up). Latest shipped still **v1.0.2** (2026-06-16). v1.1.0 now **past due** (14 Done / 13 open). |
 | 2026-06-25 | **Live board + repo refresh vs 2026-06-20 baseline.** Non-Done scope **65 → 67** = 53 open issues + 13 open board-tracked PRs + stale #484. Tier ① Committed **15 → 20** (13 iss + 7 PR): 1.1.0 now **14 not-Done** (9 iss + 5 PR), 1.2.0 now **6** (4 iss + 2 PR). Milestone moves: #614 & #741 → 1.1.0; #683 → 1.2.0; #621 1.1.0 → Future Release. Tier ② Future Release **47 → 44** (38 iss + 6 PR). New board PRs dossiered: #739 (`core/content`, 1.1.0), #764 (`core/manage-settings`, 1.2.0), #765 (Repo Automator, 1.1.0). Tier ④ swapped to board-new bugs **#767** (In discussion) + **#771** (In progress, draft PR #772); the prior pair #750/#752 moved board-Done (with #632). Repo PR gap refreshed to **33 open / 20 untracked** (19 substantive + 1 routine #722); board-tracked open PRs now 13. Status moves Backlog → In progress: #192 (PR #770), #732 (draft PR #757). Latest shipped still **v1.0.2** (2026-06-16). |

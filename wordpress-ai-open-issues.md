@@ -1,16 +1,16 @@
 # WordPress AI — Open Issues Dossier (Companion Reference)
 
-> Deep per-issue documentation for all **54 open issues** (status current to 2026-06-30) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240), tracking the `WordPress/ai` Showcase Plugin.
+> Deep per-issue documentation for all **55 open issues** (status current to 2026-07-02) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240), tracking the `WordPress/ai` Showcase Plugin.
 > Companion to **[`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md)** (the strategic overview + tracker) and **[`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md)** (Gutenberg + abilities-api upstream watchlist). This file is the *detailed dossier*: problem, proposed approach, open decisions, dependencies, and discussion for each issue.
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-06-30 |
-> | **Scope** | 54 current open-issue dossiers + 1 removed-board reference (#84) + 14 recently board-Done issues retained for reference (#145, #390, #391, #571, #578, #632, #678, #699, #701, #721, #750, #752, #767, #771). Excludes 20 non-Done PR cards and the rest of the 195 Done items. |
-> | **Repos** | `WordPress/ai` (53 open issues) · `WordPress/ai-provider-for-google` (#23). `WordPress/abilities-api` #84 remains open upstream and is now tracked in the cross-repo dependency watchlist, but is no longer on Project #240. |
+> | **Data snapshot** | 2026-07-02 |
+> | **Scope** | 55 current open-issue dossiers + 1 removed-board reference (#84) + 16 recently board-Done issues retained for reference (#145, #197, #390, #391, #571, #578, #632, #678, #699, #701, #721, #750, #752, #767, #771, #805). Excludes 20 non-Done PR cards and the rest of the 196 Done items. |
+> | **Repos** | `WordPress/ai` (54 open issues) · `WordPress/ai-provider-for-google` (#23). `WordPress/abilities-api` #84 remains open upstream and is now tracked in the cross-repo dependency watchlist, but is no longer on Project #240. |
 > | **Each dossier** | Status · Milestone · Labels · Assignees · Last updated · Comment count · Link, then Problem → Approach → Open decisions → Dependencies → Discussion |
 
-**Grouped by board status** (count, current to 2026-06-30): [In discussion / Needs decision (19)](#in-discussion--needs-decision-19) · [In progress (17)](#in-progress-17) · [Backlog (8)](#backlog-8) · [To do (7)](#to-do-7) · [Triage (1)](#triage-1) · [Needs review (2)](#needs-review-2) · [Recently board-Done (14)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
+**Grouped by board status** (count, current to 2026-07-02): [In discussion / Needs decision (19)](#in-discussion--needs-decision-19) · [In progress (17)](#in-progress-17) · [Backlog (7)](#backlog-7) · [To do (8)](#to-do-8) · [Triage (2)](#triage-2) · [Needs review (2)](#needs-review-2) · [Recently board-Done (16)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
 
 > ⭐ = major strategic bet · ⚠️ = notable risk / live regression. "Status" reflects the **board's project status**; "Milestone" is the release target.
 
@@ -558,23 +558,6 @@
 
 **Discussion highlights.** Infinite-Null shared an initial implementation and demo with per-feature role/user controls in AI settings, now open as **draft PR #749** (+893/−106, 18 files). dkotter said the direction looked correct and requested save-state UX, snackbar feedback, and possibly checkboxes for roles.
 
-### #197 — Disable features until valid AI credentials are entered
-**Status:** In progress · **Milestone:** 1.2.0 *(moved To do → In progress, 1.1.0 → 1.2.0, 2026-06-30)* · **Labels:** [Type] Enhancement, Good first issue, Help Wanted · **Assignee(s):** — · **Updated:** 2026-06-16 · **Comments:** 5
-**Link:** https://github.com/WordPress/ai/issues/197
-
-**Problem / goal.** Users can enable Experiments without valid credentials; the title-generation button then appears in the editor but Regenerate errors. Goal: enforce credential validation as a prerequisite for AI-dependent features while leaving non-AI Experiments (e.g. Abilities Explorer) always available.
-
-**Proposed approach.** Original: a strict gate (verify credentials before activating the Enable Experiments checkbox / making experiments selectable / enabling Save). Refined toward **per-Experiment disabling**: jeffpaul favors disabling credential-requiring Experiments with a short message + link ("Add credential to enable this experiment"). juanfra proposed a discoverability-friendly "setup required" state instead of hiding — exposing `hasCredentials`, `hasValidCredentials`, `credentialsPageURL` to the JS context (prototype attached).
-
-**Open decisions / blockers.**
-- Hard-disable vs. "setup required" discoverable state (leaning latter / per-Experiment).
-- Can't globally force credentials because some Experiments need no AI.
-- Need a reliable capability marker so the UI can distinguish provider-backed features from non-AI experiments.
-
-**Dependencies.** Builds on PR #173 (settings no longer force valid credentials before enabling Experiments); jeffpaul suggests pairing with #218. Now in active development as **draft PR #799** ("Gate provider-backed features until valid credentials exist"), which was punted off the 1.1.0 release checklist (#805). Current source path uses localized credential state from `Settings_Page.php`, feature `capability` metadata, and the `routes/ai-home/stage.tsx` toggle-selection branch.
-
-**Discussion highlights.** dkotter favors per-Experiment disabling or better onboarding; jeffpaul called per-Experiment disabling the easiest near-term fix (4 👍); juanfra pushed the non-hiding "setup required" approach for discoverability. kiranmagic7 later mapped a narrow implementation path using existing localized credential data and per-feature capability metadata.
-
 ### #690 — Plugin does not clean up database table and options on uninstall
 **Status:** In progress · **Milestone:** 1.2.0 *(moved Needs review → In progress, 1.1.0 → 1.2.0, 2026-06-30)* · **Labels:** [Type] Enhancement · **Assignee(s):** hbhalodia · **Updated:** 2026-06-16 · **Comments:** 1
 **Link:** https://github.com/WordPress/ai/issues/690
@@ -603,11 +586,25 @@
 
 **Discussion highlights.** Contributors are self-assigning individual experiment specs (Infinite-Null on Excerpt Generation; hasanmehmood on Content Classification, following the #762/#773 pattern); yogeshbhutkar is coordinating reviews.
 
+### #809 — Enhancement/Fix: Content Summarization block found inside nested blocks
+**Status:** In progress · **Milestone:** — · **Labels:** — · **Assignee(s):** Intenzi · **Updated:** 2026-07-01 · **Comments:** 0 · *(board-new, filed 2026-07-01)*
+**Link:** https://github.com/WordPress/ai/issues/809
+
+**Problem / goal.** The Content Summarization experiment inserts an `ai-generated-summary` group block and, on "Regenerate Summary", tries to find and modify that block in place. But it only scans **top-level** blocks (`allBlocks.find( block => block.name === 'core/group' && block.attributes.aiGeneratedSummary === true )`), so if the summary was moved inside a nested container (Group/Column — a common layout), it isn't found and a **second** summary block is inserted instead of updating the existing one.
+
+**Proposed approach.** Recurse into `innerBlocks` when detecting the existing summary group so regeneration updates the block wherever it sits in the tree.
+
+**Open decisions / blockers.** —
+
+**Dependencies.** The Content Summarization experiment's block-detection logic. Fix in flight as off-board **PR #810** ("Enhance Content Summary block detection to nested blocks", *Closes #809*, by Intenzi). Unmilestoned (board Tier ④).
+
+**Discussion highlights.** Filed by Intenzi with the offending code snippet; PR #810 opened the same day.
+
 ---
 
-## Backlog (8)
+## Backlog (7)
 
-*Planned, not yet started. The new-experiment proposals and the agentic/site-agent direction concentrate here. (#192 and #732 were promoted to In progress on 2026-06-25.)*
+*Planned, not yet started. The new-experiment proposals and the agentic/site-agent direction concentrate here. (#192 and #732 were promoted to In progress on 2026-06-25; #190 moved to To do on 2026-07-02.)*
 
 ### #142 — Frontend chat agent powered by site content ⭐
 **Status:** Backlog · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Needs Design · **Assignee(s):** — · **Updated:** 2025-12-08 · **Comments:** 0
@@ -674,23 +671,6 @@
 
 **Discussion highlights.** —
 
-### #190 — Add site-wide AI-powered content insights
-**Status:** Backlog · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-06-17 · **Comments:** 2
-**Link:** https://github.com/WordPress/ai/issues/190
-
-**Problem / goal.** Explore AI insights analyzing content across the whole site — themes, gaps, trends, opportunities. Distinct from editor-level assistance; for site owners/editors planning strategy. Experimental; avoids automated changes.
-
-**Proposed approach.** Early concept: introduce insight verticals based on post metadata, trading some precision for lower context size. First iteration may stay synchronous, persist the latest run, and start with a smaller subset of insight verticals before expanding.
-
-**Open decisions / blockers.**
-- Which insight verticals make the v1 cut (current mockup may include too many).
-- How much metadata/context is enough to produce useful insights without excessive cost.
-- Admin presentation details and performance/cost approach still need documentation.
-
-**Dependencies.** WP AI Client; multi-post/content-type querying. Overlaps the "Strategic Content Planning"/"Site Querying" use cases of #282; could share its RAG-lite retrieval.
-
-**Discussion highlights.** yogeshbhutkar shared a high-fidelity mockup and proposed metadata-driven insight verticals. dkotter liked the concept and design direction, while noting usefulness needs validation and v1 should probably trim the number of insight types.
-
 ### #193 — Add developer-only log panel for inspecting AI provider responses
 **Status:** Backlog · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-01-17 · **Comments:** 0
 **Link:** https://github.com/WordPress/ai/issues/193
@@ -741,7 +721,7 @@
 
 ---
 
-## To do (7)
+## To do (8)
 
 *Planned and queued; concrete enough to start.*
 
@@ -761,6 +741,23 @@
 **Dependencies.** WP AI Client (general prompt + list-models REST endpoints, which felixarntz offered to implement); felixarntz's ai-services plugin as reference.
 
 **Discussion highlights.** felixarntz noted the high complexity and offered to contribute his implementation; recommended stakeholders install AI Services (Tools → AI Playground) and report which features to port. JasonTheAdams confirmed that's the goal; felixarntz said building from scratch has no real upside.
+
+### #190 — Add site-wide AI-powered content insights
+**Status:** To do · **Milestone:** Future Release *(moved Backlog → To do, 2026-07-02)* · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-06-17 · **Comments:** 2
+**Link:** https://github.com/WordPress/ai/issues/190
+
+**Problem / goal.** Explore AI insights analyzing content across the whole site — themes, gaps, trends, opportunities. Distinct from editor-level assistance; for site owners/editors planning strategy. Experimental; avoids automated changes.
+
+**Proposed approach.** Early concept: introduce insight verticals based on post metadata, trading some precision for lower context size. First iteration may stay synchronous, persist the latest run, and start with a smaller subset of insight verticals before expanding.
+
+**Open decisions / blockers.**
+- Which insight verticals make the v1 cut (current mockup may include too many).
+- How much metadata/context is enough to produce useful insights without excessive cost.
+- Admin presentation details and performance/cost approach still need documentation.
+
+**Dependencies.** WP AI Client; multi-post/content-type querying. Overlaps the "Strategic Content Planning"/"Site Querying" use cases of #282; could share its RAG-lite retrieval.
+
+**Discussion highlights.** yogeshbhutkar shared a high-fidelity mockup and proposed metadata-driven insight verticals. dkotter liked the concept and design direction, while noting usefulness needs validation and v1 should probably trim the number of insight types.
 
 ### #233 — Refactor experiments to leverage AI_Service layer
 **Status:** To do · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Help Wanted, + 6 [Experiment] labels · **Assignee(s):** — · **Updated:** 2026-04-23 · **Comments:** 1
@@ -843,25 +840,25 @@
 
 **Discussion highlights.** Filed by jeffpaul with annotated screenshots; no comments yet.
 
-### #805 — Release version 1.1.0
-**Status:** To do · **Milestone:** 1.1.0 · **Labels:** — · **Assignee(s):** dkotter, jeffpaul · **Updated:** 2026-06-30 · **Comments:** 0 · *(board-new, filed 2026-06-30; release-tracking issue)*
-**Link:** https://github.com/WordPress/ai/issues/805
+### #815 — Connector Approvals doesn't immediately flag need to grant AI plugin access to a provider
+**Status:** To do · **Milestone:** 1.2.0 · **Labels:** [Type] Bug, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-01 · **Comments:** 0 · *(board-new, filed 2026-07-01)*
+**Link:** https://github.com/WordPress/ai/issues/815
 
-**Problem / goal.** The release-tracking checklist for **1.1.0**, target release date **30 July 2026**. It coordinates the pre-release decisions (review/merge or punt each remaining PR) and the standard release steps (cut `release/1.1.0` from `develop`, bump `WPAI_VERSION` in `ai.php` + `readme.txt`, update `@since` lines, changelogs, CREDITS, `.gitattributes`).
+**Problem / goal.** Originally reported on the WPORG support forum ("Enabling Experimental Features Breaks Open AI Connector"). When Connector Approvals is first enabled, **no admin notice** tells the user they must approve the AI plugin's access to a connected provider plugin. The gap only surfaces later as a "no available connector" error when they try to use an AI feature — after which the notice does appear. Lightly related to #660 (ambiguous "blocked by Connector Approvals" editor error).
 
-**Proposed approach.** Work the checklist. Pre-release status as filed: **#560** (Connector key encryption) is the one item still flagged "review and merge/punt"; **#739** (`core/read-content`) and **#798/#799** (global-toggle master switch / credential gating) were **punted** to later milestones; #772, #787, #794, #797, #801, #802, #804, #806, #807 were reviewed/merged. Then follow [RELEASE_INSTRUCTIONS.md](https://github.com/WordPress/ai/blob/develop/docs/RELEASE_INSTRUCTIONS.md).
+**Proposed approach.** Surface the "grant the AI plugin access to your provider(s)" admin notice immediately on enabling Connector Approvals, rather than only after a failed generation.
 
-**Open decisions / blockers.** The final #560 merge/punt call before cutting the release branch; everything else on the pre-release list is resolved.
+**Open decisions / blockers.** —
 
-**Dependencies.** 1.1.0 milestone cards (notably PR #560); the documented release process. This issue is the gating tracker that makes **1.1.0 "all but shipped" (27 Done / 2 open)**.
+**Dependencies.** The Connector Approvals flow and its admin-notice logic; overlaps #660.
 
-**Discussion highlights.** Filed by dkotter (assignees dkotter + jeffpaul); no comments yet.
+**Discussion highlights.** Filed by jeffpaul from a WPORG support report (@vfontjr); no comments yet.
 
 ---
 
-## Triage (1)
+## Triage (2)
 
-*Newly arrived / unsorted. Currently only the foundational Core Abilities platform issue remains in Triage.*
+*Newly arrived / unsorted: the foundational Core Abilities platform issue, plus the board-new Type Ahead front-end regression #816.*
 
 ### #40 — WordPress Core Abilities ⭐
 **Status:** Triage · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** gziolo, jorgefilipecosta · **Updated:** 2026-05-07 · **Comments:** 37
@@ -880,6 +877,22 @@
 **Dependencies.** WordPress Core (wordpress-develop PRs #10665/#10747/#10775/#10848/#10954/#10976); Gutenberg #74234, #70710 (workflows), DataViews/DataForms schemas; MCP Adapter layered tooling (mcp-adapter#48); abilities-api #38/#62/#84/#105/#106; #21.
 
 **Discussion highlights.** swissspidy mapped the CP-vs-MCP tension (granular "Create a new page" for humans, one `create_post` tool for machines) and flagged i18n issues with string concatenation. JasonTheAdams shared TEC/GiveWP MCP findings — single CRUD tools fared poorly, settling on read/create-update/delete. johnbillion sharply questioned shipping `show_in_abilities` into 7.0 beta without API-design review. justlevine and jorgefilipecosta debated core-first vs. Experiments-first process. gziolo initially favored curated settings abilities, then reversed to broad-first after consulting Automattic AI experts, preserving `core/get-site-info` for back-compat.
+
+### #816 — Type-Ahead experiment loads wp-editor on the front end, intermittently breaking WooCommerce block checkout ⚠️
+**Status:** Triage · **Milestone:** — · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-07-01 · **Comments:** 0 · *(board-new, filed 2026-07-01; post-1.1.0 regression)*
+**Link:** https://github.com/WordPress/ai/issues/816
+
+**Problem / goal.** The **Type Ahead** experiment (shipped in v1.1.0) registers its assets on `enqueue_block_assets`, which fires on the **front end** as well as in the editor, with no `is_admin()` guard. The built `experiments/type-ahead` script declares `wp-editor` as a dependency, so every front-end page load pulls in the entire block-editor stack (`editor.min.js` + ~20 dependency scripts) and — critically — registers the `core/editor` data store on the front end.
+
+**Impact.** WooCommerce's Store API cart resolver decides "am I in the editor?" via `!! select( 'core/editor' )`; with `core/editor` now present publicly, that check misfires and **intermittently corrupts block-based checkout** (reproduced on the sample Beanie/Cap cart). It is also a needless performance hit — the full editor bundle loads on every public page.
+
+**Open decisions / blockers.** Whether it warrants a **1.1.1 patch** since it affects a shipped release; no fix PR yet.
+
+**Proposed approach.** Guard Type Ahead asset registration with `is_admin()` (or an editor-only hook), and/or drop the `wp-editor` dependency from the front-end build so `core/editor` isn't registered publicly.
+
+**Dependencies.** The Type Ahead experiment (PR #151, shipped 1.1.0); its `enqueue_block_assets` hook and generated `type-ahead.asset.php` dependency list. Interacts with WooCommerce's Store API cart resolver.
+
+**Discussion highlights.** Filed by xuanji86 with source-line references (`Type_Ahead.php` L70–73) and the WooCommerce cross-reference — a clear code-level root cause. See also planned-work Data-quality flag #11.
 
 ---
 
@@ -923,7 +936,7 @@
 
 ## Recently board-Done (since the 2026-06-15 snapshot)
 
-*Closed or moved to board-Done after the snapshot — retained for reference, not counted in the open totals above. Only #699 is confirmed in the public 1.0.2 release notes; the others are board-Done/closed items awaiting the next release train (most now bound for the 1.1.0 release tracked in #805, target 2026-07-30) unless noted otherwise. The 2026-06-30 refresh added #145, #767, and #771 here (14 retained).*
+*Closed or moved to board-Done after the snapshot — retained for reference, not counted in the open totals above. **v1.1.0 shipped 2026-07-01**, so the 1.1.0-milestone items below are now in a public release (#699 shipped earlier, in 1.0.2). The 2026-07-02 refresh added **#197** and **#805** here (16 retained).*
 
 ### #145 — Rename experiment register() method to better reflect initialization
 **Status:** Done · **Milestone:** — *(was 1.1.0)* · **Labels:** [Type] Enhancement · **Assignee(s):** juanmaguitar · **Updated:** 2026-06-30 · **Comments:** 4 · *(board-Done / closed 2026-06-30)*
@@ -932,6 +945,14 @@
 **Problem / goal.** The experiment lifecycle conflated registration (adding to `Experiment_Registry`) with initialization/launch (running logic once enabled); naming the launch method `register()` blurred the two and made `Experiment_Loader` harder to read.
 
 **Resolution / retained context.** Agreed direction was to rename the boot method `register()` → `init()` (keeping "register" for registry insertion only). The first implementation PR #159 closed without merge on 2026-06-17; the issue itself closed board-Done on 2026-06-30 (milestone dropped from 1.1.0).
+
+### #197 — Disable features until valid AI credentials are entered
+**Status:** Done · **Milestone:** — *(was on the 1.1.0/1.2.0 hardening lane; cleared on close)* · **Labels:** [Type] Enhancement, Good first issue, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-01 · **Comments:** 5 · *(board-Done / closed 2026-07-01)*
+**Link:** https://github.com/WordPress/ai/issues/197
+
+**Problem / goal.** Users could enable Experiments without valid credentials — the title-generation button then appeared in the editor but Regenerate errored. Goal: gate AI-dependent features on credential validation while leaving non-AI Experiments (e.g. Abilities Explorer) always available.
+
+**Resolution / retained context.** Moved **board-Done on 2026-07-01** with its milestone cleared. Its tracked off-board PR **#799** ("Gate provider-backed features until valid credentials exist") was **closed unmerged** the same day (both ~15:08–15:09 UTC, ~15 h *after* the 1.1.0 release cut at 00:07 UTC), so #197 resolved **without shipping in the 1.1.0 payload** — closed as done via other means / de-scoped rather than by a merged PR. Direction had settled on a per-Experiment "setup required" state (exposing `hasCredentials` / `hasValidCredentials` / `credentialsPageURL`) over a hard global gate.
 
 ### #390 — Generate Review Notes and Generate Summary options present even with no post content
 **Status:** Done · **Milestone:** 1.1.0 · **Labels:** [Type] Enhancement · **Assignee(s):** coderGtm · **Updated:** 2026-06-17 · **Comments:** 16 · *(board-Done 2026-06-17)*
@@ -1045,6 +1066,14 @@
 
 **Resolution / retained context.** Resolved by restoring the suggestion pill to its original position on failure; implemented in **PR #772** and moved board-Done on 2026-06-30 under milestone 1.1.0. Adjacent to relevance work #452.
 
+### #805 — Release version 1.1.0
+**Status:** Done · **Milestone:** 1.1.0 · **Labels:** — · **Assignee(s):** dkotter, jeffpaul · **Updated:** 2026-07-01 · **Comments:** 0 · *(board-Done / closed 2026-07-01 — release cut)*
+**Link:** https://github.com/WordPress/ai/issues/805
+
+**Problem / goal.** The release-tracking checklist for **v1.1.0**: pre-release PR review/merge-or-punt decisions plus the standard steps (cut `release/1.1.0` from `develop`, bump `WPAI_VERSION` in `ai.php` + `readme.txt`, update `@since`/changelogs/CREDITS/`.gitattributes`).
+
+**Resolution / retained context.** **v1.1.0 shipped 2026-07-01** (17th release) and the tracker closed board-Done. The last gating PR — #560 (Connector key encryption) — merged 2026-06-30; #739 (`core/read-content`) and #798/#799 (global-toggle / credential gating) were punted off the release. Filed and driven by dkotter + jeffpaul; the release beat its original 2026-07-30 target by roughly four weeks.
+
 ---
 
 ## Removed from Project #240 (reference)
@@ -1092,3 +1121,4 @@ gh issue view WordPress/ai#<N> --json number,title,body,state,labels,milestone,a
 | 2026-06-25 | Live Project #240 refresh. Open issues **54 → 53**: In discussion 20, In progress **17**, Backlog **8**, To do 6, Triage 1, Needs review 1. Promoted #192 (custom prompt-template hooks, PR #770) and #732 (non-SDK-transport logging, draft PR #757) from Backlog → In progress; retagged #741 (admin-page flicker) to milestone 1.1.0; added dossiers for two board-new **unmilestoned** bugs — #767 (locale-aware content gate disables AI buttons for CJK content; In discussion) and #771 (Content Classification suggestion pill lost on add-failure; In progress, draft PR #772). Moved #632 (deactivate-connector), #750 (guest-comment moderation), and #752 (Request-Log 30-day window) to **Recently board-Done** (11 retained). Done total now **183**. |
 | 2026-06-26 | Live Project #240 refresh. Open issues hold at **53**: In discussion / Needs decision **20 → 19**, To do **6 → 7** (In progress 17, Backlog 8, Triage 1, Needs review 1 unchanged). **#767** (locale-aware content gate) moved **In discussion → To do** and was milestoned **1.2.0** — its dossier relocated accordingly. PR **#151** (Type Ahead experiment) merged board-Done off the 1.1.0 lane (a PR card, not dossiered here), and board-Done bug **#697** (excerpt focus loss; closed 2026-06-11) was de-carded from Project #240. Board totals **250 → 249**; Done holds at **183**; non-Done PR cards **14 → 13**. |
 | 2026-06-30 | Live Project #240 refresh. Open issues **53 → 54**: Needs review **1 → 2** (In discussion 19, In progress 17, Backlog 8, To do 7, Triage 1 unchanged). Status moves: **#187** and **#508** In progress → **Needs review** (draft PR #747 / PR #724); **#197** To do → In progress (draft PR #799); **#690** Needs review → In progress. Dossiered **4 board-new open issues** — #778 (E2E user-facing locators), #791 (Type Ahead loading cursor), #793 ("Customize experiments" Developer Tool), #805 (Release 1.1.0 tracker, target 2026-07-30). Moved **#145**, **#767**, **#771** to **Recently board-Done** (11 → **14** retained) as they closed board-Done on 2026-06-30. Large **1.1.0 → 1.2.0 re-milestone wave**: #191, #203, #452, #514, #600, #614, #690, #732, #736 (In progress) + #187/#508 (Needs review) + #507 (To do) + #741 (In discussion) all moved to 1.2.0; **#27** moved 1.1.0 → Future. Already-Done **#699/#704/#718** (1.0.2) were de-carded from Project #240 (#699 kept here as a shipped reference). Board totals **249 → 269**; Done **183 → 195**; non-Done PR cards **13 → 20**. |
+| 2026-07-02 | Live Project #240 refresh. Open issues **54 → 55**: Backlog **8 → 7**, To do **7 → 8**, Triage **1 → 2** (In discussion 19, In progress 17, Needs review 2 unchanged). **v1.1.0 shipped 2026-07-01** — moved **#197** (credentials gate; closed board-Done with off-board PR #799 closed **unmerged**, so not in the 1.1.0 payload) and **#805** (release tracker) to **Recently board-Done** (14 → **16** retained). Dossiered **3 board-new open issues** — #809 (Content-Summary nested-block detection, In progress, off-board PR #810), #815 (Connector-Approvals access-notice gap, To do / 1.2.0), #816 (Type-Ahead front-end `wp-editor` load breaks WooCommerce block checkout, Triage — post-1.1.0 regression). **#190** moved Backlog → To do. Board totals **269 → 271**; Done **195 → 196**; non-Done PR cards hold at **20**. `WordPress/ai` open issues 53 → 54 (+ #23 on `ai-provider-for-google`). |
