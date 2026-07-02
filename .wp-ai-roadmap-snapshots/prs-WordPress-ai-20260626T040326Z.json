@@ -1,0 +1,460 @@
+[
+  {
+    "id": "WordPress/ai#211",
+    "number": 211,
+    "title": "Add Service Account experiment",
+    "isDraft": true,
+    "author": "Jameswlepage",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-02-05T19:33:30Z"
+  },
+  {
+    "id": "WordPress/ai#224",
+    "number": 224,
+    "title": "Add WebMCP adapter experiment",
+    "isDraft": true,
+    "author": "Jameswlepage",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-05-25T02:28:56Z"
+  },
+  {
+    "id": "WordPress/ai#294",
+    "number": 294,
+    "title": "feat: Content Provenance experiment (C2PA 2.3 §A.7 text authentication)",
+    "isDraft": false,
+    "author": "erik-sv",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      340,
+      376
+    ],
+    "updatedAt": "2026-05-25T17:39:02Z"
+  },
+  {
+    "id": "WordPress/ai#302",
+    "number": 302,
+    "title": "feat: Image Provenance experiment and CDN worker templates (C2PA image signing)",
+    "isDraft": false,
+    "author": "erik-sv",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      294
+    ],
+    "updatedAt": "2026-05-18T20:27:18Z"
+  },
+  {
+    "id": "WordPress/ai#459",
+    "number": 459,
+    "title": "Add C2PA Monitor experiment",
+    "isDraft": false,
+    "author": "lnispel",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-16T00:33:00Z"
+  },
+  {
+    "id": "WordPress/ai#494",
+    "number": 494,
+    "title": "[Feature]: Issue 238 | Focus-aware crop suggestions",
+    "isDraft": false,
+    "author": "TylerB24890",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      238
+    ],
+    "updatedAt": "2026-05-07T19:56:54Z"
+  },
+  {
+    "id": "WordPress/ai#560",
+    "number": 560,
+    "title": "Add encryption for AI Connector API keys",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-05-22T07:46:34Z"
+  },
+  {
+    "id": "WordPress/ai#594",
+    "number": 594,
+    "title": "Add Stylelint",
+    "isDraft": false,
+    "author": "simison",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      0,
+      5,
+      3858,
+      8030,
+      707070,
+      757575,
+      926300
+    ],
+    "updatedAt": "2026-06-17T15:31:37Z"
+  },
+  {
+    "id": "WordPress/ai#621",
+    "number": 621,
+    "title": "Fix alt text upload URL matching",
+    "isDraft": false,
+    "author": "1d0u",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-23T14:22:14Z"
+  },
+  {
+    "id": "WordPress/ai#633",
+    "number": 633,
+    "title": "Content Classification: improve relevance of taxonomy suggestions",
+    "isDraft": false,
+    "author": "saarnilauri",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      452
+    ],
+    "updatedAt": "2026-06-16T00:33:06Z"
+  },
+  {
+    "id": "WordPress/ai#650",
+    "number": 650,
+    "title": "Add bulk \"Generate AI Summary\" action to the posts list table",
+    "isDraft": false,
+    "author": "prasadkarmalkar",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      614
+    ],
+    "updatedAt": "2026-06-25T20:05:17Z"
+  },
+  {
+    "id": "WordPress/ai#681",
+    "number": 681,
+    "title": "Feat 514: add comment value score",
+    "isDraft": false,
+    "author": "priyanshuhaldar007",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      514
+    ],
+    "updatedAt": "2026-06-23T15:02:34Z"
+  },
+  {
+    "id": "WordPress/ai#683",
+    "number": 683,
+    "title": "Add native vector search",
+    "isDraft": true,
+    "author": "artpi",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-23T14:28:58Z"
+  },
+  {
+    "id": "WordPress/ai#686",
+    "number": 686,
+    "title": "[issue #660] Add context-aware error message in Block Editor",
+    "isDraft": false,
+    "author": "AshishJii",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      660
+    ],
+    "updatedAt": "2026-06-17T16:31:50Z"
+  },
+  {
+    "id": "WordPress/ai#692",
+    "number": 692,
+    "title": "Feature: Cleanup plugin data on uninstall via user opt in",
+    "isDraft": false,
+    "author": "hbhalodia",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      690
+    ],
+    "updatedAt": "2026-06-17T16:35:19Z"
+  },
+  {
+    "id": "WordPress/ai#695",
+    "number": 695,
+    "title": "Add: AI-assisted payload generation to the Ability Explorer - Test Ability Screen",
+    "isDraft": false,
+    "author": "Arkenon",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-25T10:25:19Z"
+  },
+  {
+    "id": "WordPress/ai#714",
+    "number": 714,
+    "title": "Abilities Explorer: Add a filter to customize the Ability Table class and expose ability meta",
+    "isDraft": true,
+    "author": "i-anubhav-anand",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      203
+    ],
+    "updatedAt": "2026-06-22T16:51:17Z"
+  },
+  {
+    "id": "WordPress/ai#722",
+    "number": 722,
+    "title": "ci: skip push-triggered checks on forks",
+    "isDraft": true,
+    "author": "t-hamano",
+    "isBot": false,
+    "routine": true,
+    "issues": [],
+    "updatedAt": "2026-06-14T15:23:40Z"
+  },
+  {
+    "id": "WordPress/ai#724",
+    "number": 724,
+    "title": "Experiment: Add Suggest Reply experiment",
+    "isDraft": false,
+    "author": "Infinite-Null",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      508
+    ],
+    "updatedAt": "2026-06-25T12:38:12Z"
+  },
+  {
+    "id": "WordPress/ai#734",
+    "number": 734,
+    "title": "feat: add settings import/export functionality",
+    "isDraft": false,
+    "author": "coderGtm",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      191
+    ],
+    "updatedAt": "2026-06-25T11:52:40Z"
+  },
+  {
+    "id": "WordPress/ai#735",
+    "number": 735,
+    "title": "Logging: replace \"Purge All Logs\" with age-based delete control",
+    "isDraft": false,
+    "author": "i-anubhav-anand",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      689
+    ],
+    "updatedAt": "2026-06-18T14:51:14Z"
+  },
+  {
+    "id": "WordPress/ai#739",
+    "number": 739,
+    "title": "Add core/content ability",
+    "isDraft": false,
+    "author": "jorgefilipecosta",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      691
+    ],
+    "updatedAt": "2026-06-25T22:57:52Z"
+  },
+  {
+    "id": "WordPress/ai#747",
+    "number": 747,
+    "title": "Feat[Experiment]: Add AI-Powered Content Translation",
+    "isDraft": false,
+    "author": "yogeshbhutkar",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-26T01:04:39Z"
+  },
+  {
+    "id": "WordPress/ai#749",
+    "number": 749,
+    "title": "Feat/add role user access controls",
+    "isDraft": false,
+    "author": "Infinite-Null",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      736
+    ],
+    "updatedAt": "2026-06-22T08:17:05Z"
+  },
+  {
+    "id": "WordPress/ai#757",
+    "number": 757,
+    "title": "fix(logging): capture generations that bypass the SDK HTTP transporter",
+    "isDraft": false,
+    "author": "i-anubhav-anand",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      732
+    ],
+    "updatedAt": "2026-06-23T16:21:54Z"
+  },
+  {
+    "id": "WordPress/ai#758",
+    "number": 758,
+    "title": "fix(logging): register the operation REST filter param",
+    "isDraft": true,
+    "author": "i-anubhav-anand",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      2
+    ],
+    "updatedAt": "2026-06-22T17:51:02Z"
+  },
+  {
+    "id": "WordPress/ai#759",
+    "number": 759,
+    "title": "[issue #660] feat: Update generalised error message for all features",
+    "isDraft": false,
+    "author": "SohamPatel46",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      660
+    ],
+    "updatedAt": "2026-06-23T16:22:16Z"
+  },
+  {
+    "id": "WordPress/ai#760",
+    "number": 760,
+    "title": "PoC: Basic integration with Chrome DevTools for agents",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-23T16:35:20Z"
+  },
+  {
+    "id": "WordPress/ai#764",
+    "number": 764,
+    "title": "Add a core/manage-settings ability",
+    "isDraft": false,
+    "author": "jorgefilipecosta",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      691
+    ],
+    "updatedAt": "2026-06-24T17:12:36Z"
+  },
+  {
+    "id": "WordPress/ai#765",
+    "number": 765,
+    "title": "Add Repo Automator action",
+    "isDraft": false,
+    "author": "jeffpaul",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-24T21:26:20Z"
+  },
+  {
+    "id": "WordPress/ai#770",
+    "number": 770,
+    "title": "Prompt template extension points",
+    "isDraft": false,
+    "author": "the-hercules",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      192
+    ],
+    "updatedAt": "2026-06-24T14:14:04Z"
+  },
+  {
+    "id": "WordPress/ai#772",
+    "number": 772,
+    "title": "Restore classification suggestion pill to original position on API failure",
+    "isDraft": false,
+    "author": "Intenzi",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      771
+    ],
+    "updatedAt": "2026-06-25T14:59:59Z"
+  },
+  {
+    "id": "WordPress/ai#773",
+    "number": 773,
+    "title": "E2E[WIP]: Prefer user-facing attributes",
+    "isDraft": true,
+    "author": "yogeshbhutkar",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-25T11:30:03Z"
+  },
+  {
+    "id": "WordPress/ai#774",
+    "number": 774,
+    "title": "Add core/users ability",
+    "isDraft": false,
+    "author": "jorgefilipecosta",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-25T17:01:46Z"
+  },
+  {
+    "id": "WordPress/ai#775",
+    "number": 775,
+    "title": "Utils: Preserve omitted ability input",
+    "isDraft": false,
+    "author": "jorgefilipecosta",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-25T19:41:20Z"
+  },
+  {
+    "id": "WordPress/ai#776",
+    "number": 776,
+    "title": "Ensure the Type Ahead experiment supports provider/model overrides and Guidelines",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      151
+    ],
+    "updatedAt": "2026-06-25T19:25:27Z"
+  },
+  {
+    "id": "WordPress/ai#777",
+    "number": 777,
+    "title": "dev: Update Composer deps and remediate PHPStan smells",
+    "isDraft": true,
+    "author": "justlevine",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-25T22:13:10Z"
+  }
+]
