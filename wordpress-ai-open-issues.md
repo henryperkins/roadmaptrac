@@ -1,16 +1,16 @@
 # WordPress AI — Open Issues Dossier (Companion Reference)
 
-> Deep per-issue documentation for all **55 open issues** (status current to 2026-07-02) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240), tracking the `WordPress/ai` Showcase Plugin.
+> Deep per-issue documentation for all **56 open issues** (status current to 2026-07-03) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240), tracking the `WordPress/ai` Showcase Plugin.
 > Companion to **[`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md)** (the strategic overview + tracker) and **[`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md)** (Gutenberg + abilities-api upstream watchlist). This file is the *detailed dossier*: problem, proposed approach, open decisions, dependencies, and discussion for each issue.
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-02 |
-> | **Scope** | 55 current open-issue dossiers + 1 removed-board reference (#84) + 16 recently board-Done issues retained for reference (#145, #197, #390, #391, #571, #578, #632, #678, #699, #701, #721, #750, #752, #767, #771, #805). Excludes 20 non-Done PR cards and the rest of the 196 Done items. |
-> | **Repos** | `WordPress/ai` (54 open issues) · `WordPress/ai-provider-for-google` (#23). `WordPress/abilities-api` #84 remains open upstream and is now tracked in the cross-repo dependency watchlist, but is no longer on Project #240. |
+> | **Data snapshot** | 2026-07-03 |
+> | **Scope** | 56 current open-issue dossiers + 1 removed-board reference (#84) + 16 recently board-Done issues retained for reference (#145, #197, #390, #391, #571, #578, #632, #678, #699, #701, #721, #750, #752, #767, #771, #805). Excludes 20 non-Done PR cards and the rest of the 189 Done items. *(Note: five of the retained board-Done issues — #390/#391/#571/#578/#678 — plus #589/#727 were de-carded from Project #240 on 2026-07-03; they remain closed/shipped and are kept here for reference.)* |
+> | **Repos** | `WordPress/ai` (55 open issues) · `WordPress/ai-provider-for-google` (#23). `WordPress/abilities-api` #84 remains open upstream and is now tracked in the cross-repo dependency watchlist, but is no longer on Project #240. |
 > | **Each dossier** | Status · Milestone · Labels · Assignees · Last updated · Comment count · Link, then Problem → Approach → Open decisions → Dependencies → Discussion |
 
-**Grouped by board status** (count, current to 2026-07-02): [In discussion / Needs decision (19)](#in-discussion--needs-decision-19) · [In progress (17)](#in-progress-17) · [Backlog (7)](#backlog-7) · [To do (8)](#to-do-8) · [Triage (2)](#triage-2) · [Needs review (2)](#needs-review-2) · [Recently board-Done (16)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
+**Grouped by board status** (count, current to 2026-07-03): [In discussion / Needs decision (19)](#in-discussion--needs-decision-19) · [In progress (19)](#in-progress-19) · [Backlog (7)](#backlog-7) · [To do (8)](#to-do-8) · [Triage (1)](#triage-1) · [Needs review (2)](#needs-review-2) · [Recently board-Done (16)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
 
 > ⭐ = major strategic bet · ⚠️ = notable risk / live regression. "Status" reflects the **board's project status**; "Milestone" is the release target.
 
@@ -335,9 +335,9 @@
 
 ---
 
-## In progress (17)
+## In progress (19)
 
-*Actively being built. Now dominated by **1.2.0** hardening — most of this section was re-milestoned 1.1.0/Future → **1.2.0** on 2026-06-30 as 1.1.0 wound down to its release checklist — plus a few longer-horizon experiments. This refresh: **#197** promoted To do → In progress and **#690** demoted Needs review → In progress; board-new **#778** (E2E locators) added; **#187** and **#508** advanced to Needs review; and **#771** shipped board-Done.*
+*Actively being built. Now dominated by **1.2.0** hardening — most of this section was re-milestoned 1.1.0/Future → **1.2.0** on 2026-06-30 as 1.1.0 wound down to its release checklist — plus a few longer-horizon experiments. **This refresh (2026-07-03):** **#816** (Type-Ahead front-end regression) promoted Triage → In progress (fix PR #820), and board-new **#818** (missing alt text on the AI Home feature card, PR #819) added — both unmilestoned (board Tier ④), joining #809.*
 
 ### #191 — Add import/export support for AI settings and provider configuration
 **Status:** In progress · **Milestone:** 1.2.0 *(moved Future Release → 1.2.0 2026-06-30)* · **Labels:** [Type] Enhancement · **Assignee(s):** coderGtm · **Updated:** 2026-06-11 · **Comments:** 7 · *(moved from In discussion / Needs decision, 2026-06-16)*
@@ -600,6 +600,36 @@
 
 **Discussion highlights.** Filed by Intenzi with the offending code snippet; PR #810 opened the same day.
 
+### #816 — Type-Ahead experiment loads wp-editor on the front end, intermittently breaking WooCommerce block checkout ⚠️
+**Status:** In progress *(moved Triage → In progress, 2026-07-03)* · **Milestone:** — · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-07-02 · **Comments:** 0 · *(board-new, filed 2026-07-01; post-1.1.0 regression)*
+**Link:** https://github.com/WordPress/ai/issues/816
+
+**Problem / goal.** The **Type Ahead** experiment (shipped in v1.1.0) registers its assets on `enqueue_block_assets`, which fires on the **front end** as well as in the editor, with no `is_admin()` guard (`includes/Experiments/Type_Ahead/Type_Ahead.php` L70–73). The built `experiments/type-ahead` script declares `wp-editor` as a dependency, so every front-end page load pulls in the entire block-editor stack (`editor.min.js` + ~20 dependency scripts) and — critically — registers the `core/editor` data store on the front end.
+
+**Impact.** WooCommerce's Store API cart resolver decides "am I in the editor?" via `!! select( 'core/editor' )`; with `core/editor` now present publicly, that check misfires and **intermittently corrupts block-based checkout** (reproduced on the sample Beanie/Cap cart). It is also a needless performance hit — the full editor bundle loads on every public page.
+
+**Proposed approach.** Guard Type Ahead asset registration with `is_admin()` (or an editor-only hook), and/or drop the `wp-editor` dependency from the front-end build so `core/editor` isn't registered publicly.
+
+**Open decisions / blockers.** Whether it warrants a **1.1.1 patch** since it affects a shipped release. A fix is now in flight as off-board **PR #820** ("feat: update Type Ahead experiment implementation").
+
+**Dependencies.** The Type Ahead experiment (PR #151, shipped 1.1.0); its `enqueue_block_assets` hook and generated `type-ahead.asset.php` dependency list. Interacts with WooCommerce's Store API cart resolver. Related E2E-selector refactor in PR #817. Unmilestoned (board Tier ④).
+
+**Discussion highlights.** Filed by xuanji86 with source-line references (`Type_Ahead.php` L70–73) and the WooCommerce cross-reference — a clear code-level root cause. Moved off Triage into active work with PR #820. See also planned-work Data-quality flag #11.
+
+### #818 — Missing alt text on feature card image in AI Home stage
+**Status:** In progress · **Milestone:** — · **Labels:** [Type] Bug · **Assignee(s):** — · **Updated:** 2026-07-02 · **Comments:** 0 · *(board-new, filed 2026-07-02)*
+**Link:** https://github.com/WordPress/ai/issues/818
+
+**Problem / goal.** The feature-card image in `routes/ai-home/stage.tsx` (L659) renders with an empty `alt` attribute — `<img alt="" loading="lazy" src={ feature.image } />`. Because the image conveys meaningful content (it illustrates the feature the card represents), the empty `alt` makes it inaccessible to screen-reader users and **fails WCAG 1.1.1 (Non-text Content)**.
+
+**Proposed approach.** Populate `alt` with a descriptive value derived from the feature — e.g. `alt={ feature.label }`.
+
+**Open decisions / blockers.** —
+
+**Dependencies.** The AI Home stage component. Fix in flight as off-board **PR #819** ("Fix image ALT text issue"). Unmilestoned (board Tier ④). Part of the same 2026-07-03 wave of a11y/E2E hardening as the ARIA-selector refactors (#817, #828).
+
+**Discussion highlights.** Filed with a code-line reference (`stage.tsx` L659), a screenshot, and reproduction steps (Settings → AI → inspect the image) on WordPress 7.0 / Chrome.
+
 ---
 
 ## Backlog (7)
@@ -856,9 +886,9 @@
 
 ---
 
-## Triage (2)
+## Triage (1)
 
-*Newly arrived / unsorted: the foundational Core Abilities platform issue, plus the board-new Type Ahead front-end regression #816.*
+*Newly arrived / unsorted: just the foundational Core Abilities platform issue. (Board-new #816, the Type Ahead front-end regression, moved Triage → In progress on 2026-07-03 — its dossier is now in [In progress](#in-progress-19).)*
 
 ### #40 — WordPress Core Abilities ⭐
 **Status:** Triage · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** gziolo, jorgefilipecosta · **Updated:** 2026-05-07 · **Comments:** 37
@@ -877,22 +907,6 @@
 **Dependencies.** WordPress Core (wordpress-develop PRs #10665/#10747/#10775/#10848/#10954/#10976); Gutenberg #74234, #70710 (workflows), DataViews/DataForms schemas; MCP Adapter layered tooling (mcp-adapter#48); abilities-api #38/#62/#84/#105/#106; #21.
 
 **Discussion highlights.** swissspidy mapped the CP-vs-MCP tension (granular "Create a new page" for humans, one `create_post` tool for machines) and flagged i18n issues with string concatenation. JasonTheAdams shared TEC/GiveWP MCP findings — single CRUD tools fared poorly, settling on read/create-update/delete. johnbillion sharply questioned shipping `show_in_abilities` into 7.0 beta without API-design review. justlevine and jorgefilipecosta debated core-first vs. Experiments-first process. gziolo initially favored curated settings abilities, then reversed to broad-first after consulting Automattic AI experts, preserving `core/get-site-info` for back-compat.
-
-### #816 — Type-Ahead experiment loads wp-editor on the front end, intermittently breaking WooCommerce block checkout ⚠️
-**Status:** Triage · **Milestone:** — · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-07-01 · **Comments:** 0 · *(board-new, filed 2026-07-01; post-1.1.0 regression)*
-**Link:** https://github.com/WordPress/ai/issues/816
-
-**Problem / goal.** The **Type Ahead** experiment (shipped in v1.1.0) registers its assets on `enqueue_block_assets`, which fires on the **front end** as well as in the editor, with no `is_admin()` guard. The built `experiments/type-ahead` script declares `wp-editor` as a dependency, so every front-end page load pulls in the entire block-editor stack (`editor.min.js` + ~20 dependency scripts) and — critically — registers the `core/editor` data store on the front end.
-
-**Impact.** WooCommerce's Store API cart resolver decides "am I in the editor?" via `!! select( 'core/editor' )`; with `core/editor` now present publicly, that check misfires and **intermittently corrupts block-based checkout** (reproduced on the sample Beanie/Cap cart). It is also a needless performance hit — the full editor bundle loads on every public page.
-
-**Open decisions / blockers.** Whether it warrants a **1.1.1 patch** since it affects a shipped release; no fix PR yet.
-
-**Proposed approach.** Guard Type Ahead asset registration with `is_admin()` (or an editor-only hook), and/or drop the `wp-editor` dependency from the front-end build so `core/editor` isn't registered publicly.
-
-**Dependencies.** The Type Ahead experiment (PR #151, shipped 1.1.0); its `enqueue_block_assets` hook and generated `type-ahead.asset.php` dependency list. Interacts with WooCommerce's Store API cart resolver.
-
-**Discussion highlights.** Filed by xuanji86 with source-line references (`Type_Ahead.php` L70–73) and the WooCommerce cross-reference — a clear code-level root cause. See also planned-work Data-quality flag #11.
 
 ---
 
@@ -936,7 +950,7 @@
 
 ## Recently board-Done (since the 2026-06-15 snapshot)
 
-*Closed or moved to board-Done after the snapshot — retained for reference, not counted in the open totals above. **v1.1.0 shipped 2026-07-01**, so the 1.1.0-milestone items below are now in a public release (#699 shipped earlier, in 1.0.2). The 2026-07-02 refresh added **#197** and **#805** here (16 retained).*
+*Closed or moved to board-Done after the snapshot — retained for reference, not counted in the open totals above. **v1.1.0 shipped 2026-07-01**, so the 1.1.0-milestone items below are now in a public release (#699 shipped earlier, in 1.0.2). The 2026-07-02 refresh added **#197** and **#805** here (16 retained). **2026-07-03:** five of these — **#390/#391/#571/#578/#678** — were de-carded from Project #240 (along with #589 and the 1.0.2 release-tracker #727, which were never dossiered here); they remain closed/shipped and are kept below purely as reference.*
 
 ### #145 — Rename experiment register() method to better reflect initialization
 **Status:** Done · **Milestone:** — *(was 1.1.0)* · **Labels:** [Type] Enhancement · **Assignee(s):** juanmaguitar · **Updated:** 2026-06-30 · **Comments:** 4 · *(board-Done / closed 2026-06-30)*
@@ -1121,4 +1135,5 @@ gh issue view WordPress/ai#<N> --json number,title,body,state,labels,milestone,a
 | 2026-06-25 | Live Project #240 refresh. Open issues **54 → 53**: In discussion 20, In progress **17**, Backlog **8**, To do 6, Triage 1, Needs review 1. Promoted #192 (custom prompt-template hooks, PR #770) and #732 (non-SDK-transport logging, draft PR #757) from Backlog → In progress; retagged #741 (admin-page flicker) to milestone 1.1.0; added dossiers for two board-new **unmilestoned** bugs — #767 (locale-aware content gate disables AI buttons for CJK content; In discussion) and #771 (Content Classification suggestion pill lost on add-failure; In progress, draft PR #772). Moved #632 (deactivate-connector), #750 (guest-comment moderation), and #752 (Request-Log 30-day window) to **Recently board-Done** (11 retained). Done total now **183**. |
 | 2026-06-26 | Live Project #240 refresh. Open issues hold at **53**: In discussion / Needs decision **20 → 19**, To do **6 → 7** (In progress 17, Backlog 8, Triage 1, Needs review 1 unchanged). **#767** (locale-aware content gate) moved **In discussion → To do** and was milestoned **1.2.0** — its dossier relocated accordingly. PR **#151** (Type Ahead experiment) merged board-Done off the 1.1.0 lane (a PR card, not dossiered here), and board-Done bug **#697** (excerpt focus loss; closed 2026-06-11) was de-carded from Project #240. Board totals **250 → 249**; Done holds at **183**; non-Done PR cards **14 → 13**. |
 | 2026-06-30 | Live Project #240 refresh. Open issues **53 → 54**: Needs review **1 → 2** (In discussion 19, In progress 17, Backlog 8, To do 7, Triage 1 unchanged). Status moves: **#187** and **#508** In progress → **Needs review** (draft PR #747 / PR #724); **#197** To do → In progress (draft PR #799); **#690** Needs review → In progress. Dossiered **4 board-new open issues** — #778 (E2E user-facing locators), #791 (Type Ahead loading cursor), #793 ("Customize experiments" Developer Tool), #805 (Release 1.1.0 tracker, target 2026-07-30). Moved **#145**, **#767**, **#771** to **Recently board-Done** (11 → **14** retained) as they closed board-Done on 2026-06-30. Large **1.1.0 → 1.2.0 re-milestone wave**: #191, #203, #452, #514, #600, #614, #690, #732, #736 (In progress) + #187/#508 (Needs review) + #507 (To do) + #741 (In discussion) all moved to 1.2.0; **#27** moved 1.1.0 → Future. Already-Done **#699/#704/#718** (1.0.2) were de-carded from Project #240 (#699 kept here as a shipped reference). Board totals **249 → 269**; Done **183 → 195**; non-Done PR cards **13 → 20**. |
+| 2026-07-03 | Live Project #240 refresh. Open issues **55 → 56**: In progress **17 → 19**, Triage **2 → 1** (In discussion 19, Backlog 7, To do 8, Needs review 2 unchanged). **#816** (Type-Ahead front-end `wp-editor`/WooCommerce regression) moved **Triage → In progress** (fix PR #820) — dossier relocated accordingly. **Dossiered 1 board-new open issue:** #818 (missing alt text on the AI Home feature-card `<img>`; In progress, unmilestoned, PR #819). **7 already-Done issues de-carded from the board** (#390/#391/#571/#578/#678 from 1.1.0, #589/#727 from 1.0.2) — the five previously dossiered here are retained for reference. Board totals **271 → 265**; Done **196 → 189**; non-Done PR cards hold at **20**. `WordPress/ai` open issues 54 → 55 (+ #23 on `ai-provider-for-google`). |
 | 2026-07-02 | Live Project #240 refresh. Open issues **54 → 55**: Backlog **8 → 7**, To do **7 → 8**, Triage **1 → 2** (In discussion 19, In progress 17, Needs review 2 unchanged). **v1.1.0 shipped 2026-07-01** — moved **#197** (credentials gate; closed board-Done with off-board PR #799 closed **unmerged**, so not in the 1.1.0 payload) and **#805** (release tracker) to **Recently board-Done** (14 → **16** retained). Dossiered **3 board-new open issues** — #809 (Content-Summary nested-block detection, In progress, off-board PR #810), #815 (Connector-Approvals access-notice gap, To do / 1.2.0), #816 (Type-Ahead front-end `wp-editor` load breaks WooCommerce block checkout, Triage — post-1.1.0 regression). **#190** moved Backlog → To do. Board totals **269 → 271**; Done **195 → 196**; non-Done PR cards hold at **20**. `WordPress/ai` open issues 53 → 54 (+ #23 on `ai-provider-for-google`). |

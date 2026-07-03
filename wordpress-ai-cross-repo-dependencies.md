@@ -4,9 +4,9 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-02 |
+> | **Data snapshot** | 2026-07-03 |
 > | **Scope** | 16 tracked dependencies = 11 Gutenberg items + 5 abilities-api items |
-> | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs 2026-06-30)* |
+> | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs 2026-07-02)* |
 > | **Source command** | `./wp-ai-roadmap-refresh.sh dependencies --json` |
 
 This document intentionally tracks a **curated dependency watchlist**, not every open Gutenberg or abilities-api issue. Gutenberg is too broad for whole-repo tracking to be useful here; the watchlist follows only items that are explicitly referenced by the WordPress AI roadmap, issue dossiers, or planned-work risk notes.
@@ -60,6 +60,7 @@ Use `--save` on the normal refresh to persist a dependency snapshot under `.wp-a
 
 | Date | Change |
 |---|---|
+| 2026-07-03 | Live refresh vs the 2026-07-02 baseline snapshot. **No state, milestone, title, list, or activity changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged; abilities-api 5, Gutenberg 11). No `Updated` cells bumped (no upstream activity in the window). Context: `WordPress/ai` de-carded 7 already-Done issues from Project #240 this window, but no watchlisted Gutenberg/abilities-api dependency changed. |
 | 2026-07-02 | Live refresh vs the 2026-06-30 baseline snapshot. **No state, milestone, title, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged). 2 items had new upstream activity; bumped Updated cells: `WordPress/gutenberg#73771` → 2026-07-01, `#77230` → 2026-07-01. Context: `WordPress/ai` shipped **v1.1.0** (2026-07-01) in this window, but no watchlisted Gutenberg/abilities-api dependency changed state. |
 | 2026-06-30 | Live refresh vs the 2026-06-26 baseline snapshot. **No state, milestone, title, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged). 3 items had new upstream activity; bumped Updated cells: `WordPress/gutenberg#73771` → 2026-06-30, `#77230` → 2026-06-30, `#77816` → 2026-06-29. |
 | 2026-06-26 | Live refresh vs the 2026-06-25 baseline snapshot. **No state, milestone, title, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged). 1 item had new upstream activity; bumped Updated cell: `WordPress/gutenberg#77994` → 2026-06-25. |
