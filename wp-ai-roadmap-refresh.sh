@@ -628,15 +628,18 @@ esac
 if [ "$SAVE" = 1 ]; then
   TS="$(date -u +%Y%m%dT%H%M%SZ)"
   DEST="$SNAP_DIR/proj$PROJECT-$TS.json"; cp "$TMP_CUR" "$DEST"
-  echo "" ; echo "Saved snapshot: $DEST (now the baseline for next run)."
+  # Status messages go to stderr so stdout stays pure report/JSON — otherwise
+  # `--json --save` appends these plain-text lines after the JSON and any
+  # downstream `jq` consumer chokes on the trailing garbage.
+  echo "Saved snapshot: $DEST (now the baseline for next run)." >&2
   if [ "$DO_REPO" = 1 ]; then
     cp "$TMP_PRS" "$SNAP_DIR/prs-$REPO_SLUG-$TS.json"
     cp "$TMP_REL" "$SNAP_DIR/releases-$REPO_SLUG-$TS.json"
-    echo "Saved repo snapshots: prs-$REPO_SLUG-$TS.json, releases-$REPO_SLUG-$TS.json."
+    echo "Saved repo snapshots: prs-$REPO_SLUG-$TS.json, releases-$REPO_SLUG-$TS.json." >&2
   fi
   if [ "$DO_DEPS" = 1 ]; then
     cp "$TMP_DEPS" "$SNAP_DIR/$DEPS_SLUG-$TS.json"
-    echo "Saved dependency snapshot: $DEPS_SLUG-$TS.json."
+    echo "Saved dependency snapshot: $DEPS_SLUG-$TS.json." >&2
   fi
 fi
 

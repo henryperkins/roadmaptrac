@@ -4,9 +4,9 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-03 |
+> | **Data snapshot** | 2026-07-09 |
 > | **Scope** | 16 tracked dependencies = 11 Gutenberg items + 5 abilities-api items |
-> | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs 2026-07-02)* |
+> | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs 2026-07-03)* |
 > | **Source command** | `./wp-ai-roadmap-refresh.sh dependencies --json` |
 
 This document intentionally tracks a **curated dependency watchlist**, not every open Gutenberg or abilities-api issue. Gutenberg is too broad for whole-repo tracking to be useful here; the watchlist follows only items that are explicitly referenced by the WordPress AI roadmap, issue dossiers, or planned-work risk notes.
@@ -30,7 +30,7 @@ Project #240 is still the canonical source for `WordPress/ai` roadmap counts. Th
 | [`WordPress/gutenberg#16549`](https://github.com/WordPress/gutenberg/issues/16549) | Issue | OPEN | — | Admin UX / accessibility | #699 | 2026-02-23 |
 | [`WordPress/gutenberg#70710`](https://github.com/WordPress/gutenberg/issues/70710) | Issue | OPEN | — | Platform / workflows | #21, #40, #430 | 2026-06-22 |
 | [`WordPress/gutenberg#72734`](https://github.com/WordPress/gutenberg/issues/72734) | Issue | OPEN | — | Media Editor | #325 | 2026-06-09 |
-| [`WordPress/gutenberg#73771`](https://github.com/WordPress/gutenberg/issues/73771) | Issue | OPEN | — | Media Editor | #238, #325 | 2026-07-01 |
+| [`WordPress/gutenberg#73771`](https://github.com/WordPress/gutenberg/issues/73771) | Issue | OPEN | — | Media Editor | #238, #325 | 2026-07-08 |
 | [`WordPress/gutenberg#74234`](https://github.com/WordPress/gutenberg/pull/74234) | PullRequest | OPEN | — | Platform / core abilities | #40 | 2026-06-19 |
 | [`WordPress/gutenberg#74572`](https://github.com/WordPress/gutenberg/pull/74572) | PullRequest | MERGED | Gutenberg 22.7 | Admin UX / DataViews | #741 | 2026-02-26 |
 | [`WordPress/gutenberg#75221`](https://github.com/WordPress/gutenberg/issues/75221) | Issue | OPEN | — | Media / focal point | #238 | 2026-02-04 |
@@ -60,6 +60,7 @@ Use `--save` on the normal refresh to persist a dependency snapshot under `.wp-a
 
 | Date | Change |
 |---|---|
+| 2026-07-09 | Live refresh vs the 2026-07-03 baseline snapshot. **No state, milestone, title, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged; abilities-api 5, Gutenberg 11). 1 item had new upstream activity; bumped Updated cell: `WordPress/gutenberg#73771` → 2026-07-08. Context: the `WordPress/ai` **v1.2.0** lane opened its first 10 board-Done items this window (incl. the new `core/read-users` Ability, PR #774, merged), but no watchlisted Gutenberg/abilities-api dependency changed state. |
 | 2026-07-03 | Live refresh vs the 2026-07-02 baseline snapshot. **No state, milestone, title, list, or activity changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged; abilities-api 5, Gutenberg 11). No `Updated` cells bumped (no upstream activity in the window). Context: `WordPress/ai` de-carded 7 already-Done issues from Project #240 this window, but no watchlisted Gutenberg/abilities-api dependency changed. |
 | 2026-07-02 | Live refresh vs the 2026-06-30 baseline snapshot. **No state, milestone, title, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged). 2 items had new upstream activity; bumped Updated cells: `WordPress/gutenberg#73771` → 2026-07-01, `#77230` → 2026-07-01. Context: `WordPress/ai` shipped **v1.1.0** (2026-07-01) in this window, but no watchlisted Gutenberg/abilities-api dependency changed state. |
 | 2026-06-30 | Live refresh vs the 2026-06-26 baseline snapshot. **No state, milestone, title, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged). 3 items had new upstream activity; bumped Updated cells: `WordPress/gutenberg#73771` → 2026-06-30, `#77230` → 2026-06-30, `#77816` → 2026-06-29. |

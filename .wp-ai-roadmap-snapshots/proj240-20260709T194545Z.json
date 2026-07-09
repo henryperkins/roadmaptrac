@@ -1,0 +1,4223 @@
+[
+  {
+    "id": "WordPress/ai#1",
+    "type": "PullRequest",
+    "number": 1,
+    "title": "Update license to GPL-2.0-or-later",
+    "url": "https://github.com/WordPress/ai/pull/1",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-07-18T14:06:14Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-10-06T16:57:49Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#105",
+    "type": "PullRequest",
+    "number": 105,
+    "title": "Bump js-yaml",
+    "url": "https://github.com/WordPress/ai/pull/105",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-26T23:43:33Z",
+    "milestone": "0.1.1",
+    "updatedAt": "2025-11-26T23:43:34Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#107",
+    "type": "PullRequest",
+    "number": 107,
+    "title": "Remove the Abilities API dependency and rely on what's in WP 6.9",
+    "url": "https://github.com/WordPress/ai/pull/107",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-10T18:00:13Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2025-12-10T18:49:06Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#112",
+    "type": "PullRequest",
+    "number": 112,
+    "title": "Update post-release steps in CONTRIBUTING.md",
+    "url": "https://github.com/WordPress/ai/pull/112",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-28T15:55:24Z",
+    "milestone": "0.1.1",
+    "updatedAt": "2025-11-28T15:55:27Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#113",
+    "type": "PullRequest",
+    "number": 113,
+    "title": "Fix asset loader bugs causing missing dependencies, lack of RTL support, lack of inlining for performance",
+    "url": "https://github.com/WordPress/ai/pull/113",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-01T18:23:41Z",
+    "milestone": "0.1.1",
+    "updatedAt": "2025-12-01T18:23:43Z",
+    "status": "Done",
+    "assignees": [
+      "felixarntz"
+    ]
+  },
+  {
+    "id": "WordPress/ai#114",
+    "type": "PullRequest",
+    "number": 114,
+    "title": "Update format script to only format JS to avoid random JSON file changes",
+    "url": "https://github.com/WordPress/ai/pull/114",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-01T17:58:30Z",
+    "milestone": "0.1.1",
+    "updatedAt": "2025-12-01T17:58:31Z",
+    "status": "Done",
+    "assignees": [
+      "felixarntz"
+    ]
+  },
+  {
+    "id": "WordPress/ai#120",
+    "type": "PullRequest",
+    "number": 120,
+    "title": "Remove the credentials check from our `is_enabled` check",
+    "url": "https://github.com/WordPress/ai/pull/120",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-01T22:13:58Z",
+    "milestone": "0.1.1",
+    "updatedAt": "2025-12-01T22:31:38Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#122",
+    "type": "PullRequest",
+    "number": 122,
+    "title": "Ensure the right version of the PHP AI Client is installed",
+    "url": "https://github.com/WordPress/ai/pull/122",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-01T22:09:00Z",
+    "milestone": "0.1.1",
+    "updatedAt": "2025-12-01T22:31:35Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#125",
+    "type": "PullRequest",
+    "number": 125,
+    "title": "Updates WP AI Client to 0.2.0 and sets MCP Adapter version",
+    "url": "https://github.com/WordPress/ai/pull/125",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-02T03:01:35Z",
+    "milestone": "0.1.1",
+    "updatedAt": "2025-12-02T03:01:36Z",
+    "status": "Done",
+    "assignees": [
+      "JasonTheAdams"
+    ]
+  },
+  {
+    "id": "WordPress/ai#137",
+    "type": "PullRequest",
+    "number": 137,
+    "title": "Move blueprints directory",
+    "url": "https://github.com/WordPress/ai/pull/137",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-08T21:04:21Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2025-12-08T21:04:23Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#14",
+    "type": "PullRequest",
+    "number": 14,
+    "title": "Add context to readme from WCUS Contributor Day",
+    "url": "https://github.com/WordPress/ai/pull/14",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-09-01T00:41:13Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-10-06T16:57:45Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#142",
+    "type": "Issue",
+    "number": 142,
+    "title": "Frontend chat agent powered by site content",
+    "url": "https://github.com/WordPress/ai/issues/142",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2025-12-08T21:27:20Z",
+    "status": "Backlog",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#144",
+    "type": "PullRequest",
+    "number": 144,
+    "title": "Try out the new `WordPress/action-wp-playground-pr-preview` GitHub Action",
+    "url": "https://github.com/WordPress/ai/pull/144",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-18T23:21:26Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2025-12-19T15:23:04Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#145",
+    "type": "Issue",
+    "number": 145,
+    "title": "Rename experiment register() method to better reflect initialization",
+    "url": "https://github.com/WordPress/ai/issues/145",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-06-30T16:37:35Z",
+    "status": "Done",
+    "assignees": [
+      "juanmaguitar"
+    ]
+  },
+  {
+    "id": "WordPress/ai#149",
+    "type": "PullRequest",
+    "number": 149,
+    "title": "Add AI Request Logging experiment with observability dashboard",
+    "url": "https://github.com/WordPress/ai/pull/149",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-04-16T21:42:02Z",
+    "status": "Done",
+    "assignees": [
+      "Jameswlepage"
+    ]
+  },
+  {
+    "id": "WordPress/ai#150",
+    "type": "PullRequest",
+    "number": 150,
+    "title": "Change `contents` permissions from read to write on our `PR Playground Preview` workflow",
+    "url": "https://github.com/WordPress/ai/pull/150",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-19T21:48:40Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2025-12-19T21:48:42Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#151",
+    "type": "PullRequest",
+    "number": 151,
+    "title": "Add Type Ahead experiment",
+    "url": "https://github.com/WordPress/ai/pull/151",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-25T18:23:15Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-25T18:23:15Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter",
+      "Jameswlepage"
+    ]
+  },
+  {
+    "id": "WordPress/ai#155",
+    "type": "PullRequest",
+    "number": 155,
+    "title": "Add Comment Moderation experiment",
+    "url": "https://github.com/WordPress/ai/pull/155",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-06T16:34:04Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-06T16:34:04Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter",
+      "Jameswlepage"
+    ]
+  },
+  {
+    "id": "WordPress/ai#158",
+    "type": "PullRequest",
+    "number": 158,
+    "title": "Replace title gen screenshots with gif",
+    "url": "https://github.com/WordPress/ai/pull/158",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-23T21:45:04Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2025-12-23T21:45:06Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#161",
+    "type": "PullRequest",
+    "number": 161,
+    "title": "Wording improvements in WordPress AI Experiments plugin documentation",
+    "url": "https://github.com/WordPress/ai/pull/161",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-12-23T21:40:55Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2025-12-23T21:41:28Z",
+    "status": "Done",
+    "assignees": [
+      "mehrazmorshed"
+    ]
+  },
+  {
+    "id": "WordPress/ai#164",
+    "type": "PullRequest",
+    "number": 164,
+    "title": "Grammar and punctuation fixes in AI Experiments plugin docs",
+    "url": "https://github.com/WordPress/ai/pull/164",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-07T17:59:54Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2026-01-07T18:01:20Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#165",
+    "type": "PullRequest",
+    "number": 165,
+    "title": "Bump preact from 10.27.2 to 10.28.2",
+    "url": "https://github.com/WordPress/ai/pull/165",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-07T20:22:47Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2026-01-07T20:22:48Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#166",
+    "type": "PullRequest",
+    "number": 166,
+    "title": "Bump qs and express",
+    "url": "https://github.com/WordPress/ai/pull/166",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-07T20:22:10Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2026-01-07T20:22:12Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#167",
+    "type": "PullRequest",
+    "number": 167,
+    "title": "Fix new Plugin Check errors",
+    "url": "https://github.com/WordPress/ai/pull/167",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-13T16:25:25Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2026-01-13T16:25:44Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#171",
+    "type": "PullRequest",
+    "number": 171,
+    "title": "chore: bump (and add missing) dev deps",
+    "url": "https://github.com/WordPress/ai/pull/171",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-12T17:44:12Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2026-01-12T17:44:14Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#172",
+    "type": "PullRequest",
+    "number": 172,
+    "title": "chore: cleanup scaffold files",
+    "url": "https://github.com/WordPress/ai/pull/172",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-13T19:25:40Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2026-01-13T19:25:43Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#176",
+    "type": "PullRequest",
+    "number": 176,
+    "title": "Fix new lint and config errors",
+    "url": "https://github.com/WordPress/ai/pull/176",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-14T20:50:45Z",
+    "milestone": "0.2.0",
+    "updatedAt": "2026-01-14T20:52:07Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#177",
+    "type": "PullRequest",
+    "number": 177,
+    "title": "Fix null handling in preg_replace calls inside normalize_content()",
+    "url": "https://github.com/WordPress/ai/pull/177",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-23T19:25:09Z",
+    "milestone": "0.2.1",
+    "updatedAt": "2026-01-26T19:20:41Z",
+    "status": "Done",
+    "assignees": [
+      "juanfra"
+    ]
+  },
+  {
+    "id": "WordPress/ai#186",
+    "type": "Issue",
+    "number": 186,
+    "title": "Add tone adjustment controls for AI-generated content",
+    "url": "https://github.com/WordPress/ai/issues/186",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-03-10T17:54:39Z",
+    "status": "Backlog",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#187",
+    "type": "Issue",
+    "number": 187,
+    "title": "Support multilingual rewriting and translation via AI",
+    "url": "https://github.com/WordPress/ai/issues/187",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T17:44:13Z",
+    "status": "Needs review",
+    "assignees": [
+      "yogeshbhutkar"
+    ]
+  },
+  {
+    "id": "WordPress/ai#188",
+    "type": "Issue",
+    "number": 188,
+    "title": "Add persona-driven content generation experiments",
+    "url": "https://github.com/WordPress/ai/issues/188",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-01-17T21:11:04Z",
+    "status": "Backlog",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#189",
+    "type": "Issue",
+    "number": 189,
+    "title": "Explore an admin Site Agent for executing WordPress actions",
+    "url": "https://github.com/WordPress/ai/issues/189",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-01-17T21:12:39Z",
+    "status": "Backlog",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#190",
+    "type": "Issue",
+    "number": 190,
+    "title": "Add site-wide AI-powered content insights",
+    "url": "https://github.com/WordPress/ai/issues/190",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-30T18:13:33Z",
+    "status": "To do",
+    "assignees": [
+      "yogeshbhutkar"
+    ]
+  },
+  {
+    "id": "WordPress/ai#191",
+    "type": "Issue",
+    "number": 191,
+    "title": "Add import/export support for AI settings and provider configuration",
+    "url": "https://github.com/WordPress/ai/issues/191",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T17:38:45Z",
+    "status": "In progress",
+    "assignees": [
+      "coderGtm"
+    ]
+  },
+  {
+    "id": "WordPress/ai#192",
+    "type": "Issue",
+    "number": 192,
+    "title": "Add extension points for custom prompt templates",
+    "url": "https://github.com/WordPress/ai/issues/192",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-26T17:36:42Z",
+    "status": "In progress",
+    "assignees": [
+      "the-hercules"
+    ]
+  },
+  {
+    "id": "WordPress/ai#193",
+    "type": "Issue",
+    "number": 193,
+    "title": "Add developer-only log panel for inspecting AI provider responses",
+    "url": "https://github.com/WordPress/ai/issues/193",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-30T21:53:24Z",
+    "status": "Backlog",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#194",
+    "type": "PullRequest",
+    "number": 194,
+    "title": "Add Markdown Feeds experiment",
+    "url": "https://github.com/WordPress/ai/pull/194",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-02-19T16:53:56Z",
+    "status": "Done",
+    "assignees": [
+      "Jameswlepage"
+    ]
+  },
+  {
+    "id": "WordPress/ai#195",
+    "type": "PullRequest",
+    "number": 195,
+    "title": "Fix/cruft",
+    "url": "https://github.com/WordPress/ai/pull/195",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-26T17:49:02Z",
+    "milestone": "0.2.1",
+    "updatedAt": "2026-01-26T19:20:53Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#196",
+    "type": "PullRequest",
+    "number": 196,
+    "title": "Bump diff from 4.0.2 to 4.0.4",
+    "url": "https://github.com/WordPress/ai/pull/196",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-21T13:53:38Z",
+    "milestone": "0.2.1",
+    "updatedAt": "2026-01-26T19:20:57Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#197",
+    "type": "Issue",
+    "number": 197,
+    "title": "Disable features until valid AI credentials are entered (leaving non-Connector powered features alone like Abilities Explorer)",
+    "url": "https://github.com/WordPress/ai/issues/197",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-01T15:09:14Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#198",
+    "type": "PullRequest",
+    "number": 198,
+    "title": "Bump lodash-es from 4.17.22 to 4.17.23",
+    "url": "https://github.com/WordPress/ai/pull/198",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-26T17:32:19Z",
+    "milestone": "0.2.1",
+    "updatedAt": "2026-01-26T19:21:00Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#199",
+    "type": "PullRequest",
+    "number": 199,
+    "title": "Bump lodash from 4.17.21 to 4.17.23",
+    "url": "https://github.com/WordPress/ai/pull/199",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-01-26T17:57:05Z",
+    "milestone": "0.2.1",
+    "updatedAt": "2026-01-26T19:21:04Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#203",
+    "type": "Issue",
+    "number": 203,
+    "title": "Add extensibility hook for custom Ability Table columns",
+    "url": "https://github.com/WordPress/ai/issues/203",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T17:57:05Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#207",
+    "type": "PullRequest",
+    "number": 207,
+    "title": "Docs: Fix missing global tag and remove non-standard hook tag",
+    "url": "https://github.com/WordPress/ai/pull/207",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-02T15:34:35Z",
+    "milestone": "0.3.0",
+    "updatedAt": "2026-02-02T15:36:03Z",
+    "status": "Done",
+    "assignees": [
+      "huzaifaalmesbah"
+    ]
+  },
+  {
+    "id": "WordPress/ai#208",
+    "type": "PullRequest",
+    "number": 208,
+    "title": "Fix: Add missing strict_types declarations to Abilities Explorer",
+    "url": "https://github.com/WordPress/ai/pull/208",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-02T23:37:16Z",
+    "milestone": "0.3.0",
+    "updatedAt": "2026-02-02T23:38:03Z",
+    "status": "Done",
+    "assignees": [
+      "huzaifaalmesbah"
+    ]
+  },
+  {
+    "id": "WordPress/ai#209",
+    "type": "PullRequest",
+    "number": 209,
+    "title": "Bump phpunit/phpunit from 9.6.31 to 9.6.33",
+    "url": "https://github.com/WordPress/ai/pull/209",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-02T19:55:21Z",
+    "milestone": "0.3.0",
+    "updatedAt": "2026-02-02T19:55:24Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#21",
+    "type": "Issue",
+    "number": 21,
+    "title": "How to best support hundreds or thousands of abilities",
+    "url": "https://github.com/WordPress/ai/issues/21",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-25T04:55:21Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#210",
+    "type": "PullRequest",
+    "number": 210,
+    "title": "Docs: Add missing descriptions to @return tags",
+    "url": "https://github.com/WordPress/ai/pull/210",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-03T16:24:36Z",
+    "milestone": "0.3.0",
+    "updatedAt": "2026-02-03T16:25:52Z",
+    "status": "Done",
+    "assignees": [
+      "huzaifaalmesbah"
+    ]
+  },
+  {
+    "id": "WordPress/ai#211",
+    "type": "PullRequest",
+    "number": 211,
+    "title": "Add Service Account experiment",
+    "url": "https://github.com/WordPress/ai/pull/211",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-02-05T19:33:30Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#212",
+    "type": "PullRequest",
+    "number": 212,
+    "title": "Add CC0-1.0 license to dependency review config",
+    "url": "https://github.com/WordPress/ai/pull/212",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-05T19:30:57Z",
+    "milestone": "0.3.0",
+    "updatedAt": "2026-02-05T19:30:59Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#213",
+    "type": "PullRequest",
+    "number": 213,
+    "title": "Add MIT-0 license to dependency review config",
+    "url": "https://github.com/WordPress/ai/pull/213",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-05T21:49:05Z",
+    "milestone": "0.3.0",
+    "updatedAt": "2026-02-05T21:49:07Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#214",
+    "type": "PullRequest",
+    "number": 214,
+    "title": "Add new licenses to dependency review config",
+    "url": "https://github.com/WordPress/ai/pull/214",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-06T15:03:16Z",
+    "milestone": "0.3.0",
+    "updatedAt": "2026-02-06T15:03:18Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#224",
+    "type": "PullRequest",
+    "number": 224,
+    "title": "Add WebMCP adapter experiment",
+    "url": "https://github.com/WordPress/ai/pull/224",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-07-08T07:19:23Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#227",
+    "type": "PullRequest",
+    "number": 227,
+    "title": "Standardize the Title Generation Ability to match our other Abilities",
+    "url": "https://github.com/WordPress/ai/pull/227",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-18T20:47:43Z",
+    "milestone": "0.6.0",
+    "updatedAt": "2026-03-18T20:58:48Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#228",
+    "type": "PullRequest",
+    "number": 228,
+    "title": "Standardize to using `runAbility` to call our Abilities",
+    "url": "https://github.com/WordPress/ai/pull/228",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-03T18:33:24Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-03-03T19:48:02Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#229",
+    "type": "PullRequest",
+    "number": 229,
+    "title": "Bump qs from 6.14.1 to 6.14.2",
+    "url": "https://github.com/WordPress/ai/pull/229",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-17T20:04:54Z",
+    "milestone": "0.3.1",
+    "updatedAt": "2026-02-17T20:04:56Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#233",
+    "type": "Issue",
+    "number": 233,
+    "title": "Refactor experiments to leverage AI_Service layer",
+    "url": "https://github.com/WordPress/ai/issues/233",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-04-23T20:40:58Z",
+    "status": "To do",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#238",
+    "type": "Issue",
+    "number": 238,
+    "title": "Add focus-aware crop suggestions",
+    "url": "https://github.com/WordPress/ai/issues/238",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-19T18:34:14Z",
+    "status": "In progress",
+    "assignees": [
+      "TylerB24890"
+    ]
+  },
+  {
+    "id": "WordPress/ai#243",
+    "type": "PullRequest",
+    "number": 243,
+    "title": "Abilities Explorer: Add contextual help to the abilities pages.",
+    "url": "https://github.com/WordPress/ai/pull/243",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-23T21:28:20Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-02-23T22:42:05Z",
+    "status": "Done",
+    "assignees": [
+      "juanfra"
+    ]
+  },
+  {
+    "id": "WordPress/ai#245",
+    "type": "PullRequest",
+    "number": 245,
+    "title": "Abilities Explorer: Fix \"copy\" button placement.",
+    "url": "https://github.com/WordPress/ai/pull/245",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-23T17:07:44Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-02-23T17:08:25Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#246",
+    "type": "PullRequest",
+    "number": 246,
+    "title": "Abilities Explorer: Remove `cb` column.",
+    "url": "https://github.com/WordPress/ai/pull/246",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-23T22:25:19Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-02-23T22:58:50Z",
+    "status": "Done",
+    "assignees": [
+      "juanfra"
+    ]
+  },
+  {
+    "id": "WordPress/ai#247",
+    "type": "PullRequest",
+    "number": 247,
+    "title": "Abilities Explorer: Add i18n to labels.",
+    "url": "https://github.com/WordPress/ai/pull/247",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-23T22:53:26Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-02-24T07:03:26Z",
+    "status": "Done",
+    "assignees": [
+      "juanfra"
+    ]
+  },
+  {
+    "id": "WordPress/ai#248",
+    "type": "PullRequest",
+    "number": 248,
+    "title": "Abilities Explorer: Improve table layout, bringing cohesion with other WP tables.",
+    "url": "https://github.com/WordPress/ai/pull/248",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-02-23T18:03:35Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-02-23T18:03:54Z",
+    "status": "Done",
+    "assignees": [
+      "juanfra"
+    ]
+  },
+  {
+    "id": "WordPress/ai#249",
+    "type": "PullRequest",
+    "number": 249,
+    "title": "Support WordPress 7.0 core AI client integration",
+    "url": "https://github.com/WordPress/ai/pull/249",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-03-05T23:45:55Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#253",
+    "type": "PullRequest",
+    "number": 253,
+    "title": "Generate summary: Update button to match the styling of other buttons.",
+    "url": "https://github.com/WordPress/ai/pull/253",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-02T16:31:54Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-03-02T17:35:04Z",
+    "status": "Done",
+    "assignees": [
+      "juanfra"
+    ]
+  },
+  {
+    "id": "WordPress/ai#255",
+    "type": "PullRequest",
+    "number": 255,
+    "title": "Remove duplicate error display in generate Alt text",
+    "url": "https://github.com/WordPress/ai/pull/255",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-17T11:07:58Z",
+    "milestone": "0.6.0",
+    "updatedAt": "2026-03-17T12:07:59Z",
+    "status": "Done",
+    "assignees": [
+      "juanfra"
+    ]
+  },
+  {
+    "id": "WordPress/ai#256",
+    "type": "PullRequest",
+    "number": 256,
+    "title": "Ability test page: Better i18n, add copy functionality.",
+    "url": "https://github.com/WordPress/ai/pull/256",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-02T16:33:18Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-03-02T17:35:38Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#259",
+    "type": "PullRequest",
+    "number": 259,
+    "title": "Bump basic-ftp from 5.1.0 to 5.2.0",
+    "url": "https://github.com/WordPress/ai/pull/259",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-02T16:32:44Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-03-02T16:32:47Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#262",
+    "type": "Issue",
+    "number": 262,
+    "title": "Provider-Level Model Bucketing for Model Selection",
+    "url": "https://github.com/WordPress/ai/issues/262",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-07-07T15:43:23Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#267",
+    "type": "PullRequest",
+    "number": 267,
+    "title": "Support the new Review Notes Experiment on a block-by-block basis",
+    "url": "https://github.com/WordPress/ai/pull/267",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-05T19:26:45Z",
+    "milestone": "0.4.0",
+    "updatedAt": "2026-03-05T19:27:19Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#268",
+    "type": "PullRequest",
+    "number": 268,
+    "title": "feat: check `wp_supports_ai()` before initializing experiments",
+    "url": "https://github.com/WordPress/ai/pull/268",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-21T20:52:13Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-21T20:52:53Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#27",
+    "type": "Issue",
+    "number": 27,
+    "title": "Display additional AI provider plugins on Connectors page (alongside default Anthropic, Google, and OpenAI ones)",
+    "url": "https://github.com/WordPress/ai/issues/27",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-30T16:37:21Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#273",
+    "type": "PullRequest",
+    "number": 273,
+    "title": "Bump immutable from 5.1.4 to 5.1.5",
+    "url": "https://github.com/WordPress/ai/pull/273",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-06T14:10:42Z",
+    "milestone": "0.4.1",
+    "updatedAt": "2026-03-06T14:10:44Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#274",
+    "type": "PullRequest",
+    "number": 274,
+    "title": "Bump svgo from 3.3.2 to 3.3.3",
+    "url": "https://github.com/WordPress/ai/pull/274",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-06T14:10:54Z",
+    "milestone": "0.4.1",
+    "updatedAt": "2026-03-06T14:10:56Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#277",
+    "type": "PullRequest",
+    "number": 277,
+    "title": "Update release instructions for merging branches",
+    "url": "https://github.com/WordPress/ai/pull/277",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-06T17:43:28Z",
+    "milestone": "0.4.1",
+    "updatedAt": "2026-03-06T17:49:06Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#280",
+    "type": "PullRequest",
+    "number": 280,
+    "title": "Update release instructions to include merge verification",
+    "url": "https://github.com/WordPress/ai/pull/280",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-06T23:06:24Z",
+    "milestone": "0.5.0",
+    "updatedAt": "2026-03-10T15:53:43Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#281",
+    "type": "PullRequest",
+    "number": 281,
+    "title": "Update/screencasts",
+    "url": "https://github.com/WordPress/ai/pull/281",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-10T02:24:25Z",
+    "milestone": "0.5.0",
+    "updatedAt": "2026-03-10T02:24:58Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#282",
+    "type": "Issue",
+    "number": 282,
+    "title": "Chat experiment: Integration outside the editor and outside single-task AI use",
+    "url": "https://github.com/WordPress/ai/issues/282",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-03-11T16:31:01Z",
+    "status": "Backlog",
+    "assignees": [
+      "karmatosed"
+    ]
+  },
+  {
+    "id": "WordPress/ai#288",
+    "type": "PullRequest",
+    "number": 288,
+    "title": "Update plugin icon and banner assets",
+    "url": "https://github.com/WordPress/ai/pull/288",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-05-13T19:33:10Z",
+    "status": "Done",
+    "assignees": [
+      "shaunandrews"
+    ]
+  },
+  {
+    "id": "WordPress/ai#290",
+    "type": "PullRequest",
+    "number": 290,
+    "title": "UX iteration for the title generation experiment",
+    "url": "https://github.com/WordPress/ai/pull/290",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-23T14:19:19Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-24T06:24:27Z",
+    "status": "Done",
+    "assignees": [
+      "juanfra"
+    ]
+  },
+  {
+    "id": "WordPress/ai#291",
+    "type": "PullRequest",
+    "number": 291,
+    "title": "Revise merge instructions for develop to trunk",
+    "url": "https://github.com/WordPress/ai/pull/291",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-10T16:41:01Z",
+    "milestone": "0.5.0",
+    "updatedAt": "2026-03-10T16:41:28Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#293",
+    "type": "PullRequest",
+    "number": 293,
+    "title": "Fix markup in contributing.md",
+    "url": "https://github.com/WordPress/ai/pull/293",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-10T17:31:24Z",
+    "milestone": "0.5.0",
+    "updatedAt": "2026-03-10T17:42:22Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#294",
+    "type": "PullRequest",
+    "number": 294,
+    "title": "feat: Content Provenance experiment (C2PA 2.3 §A.7 text authentication)",
+    "url": "https://github.com/WordPress/ai/pull/294",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-25T17:39:02Z",
+    "status": "Needs review",
+    "assignees": [
+      "erik-sv"
+    ]
+  },
+  {
+    "id": "WordPress/ai#295",
+    "type": "PullRequest",
+    "number": 295,
+    "title": "Bump simple-git from 3.30.0 to 3.33.0",
+    "url": "https://github.com/WordPress/ai/pull/295",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-11T16:31:09Z",
+    "milestone": "0.5.0",
+    "updatedAt": "2026-03-11T16:31:11Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#296",
+    "type": "PullRequest",
+    "number": 296,
+    "title": "Fix formatting inconsistencies in README.md",
+    "url": "https://github.com/WordPress/ai/pull/296",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-11T16:30:10Z",
+    "milestone": "0.5.0",
+    "updatedAt": "2026-03-11T16:30:34Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#297",
+    "type": "Issue",
+    "number": 297,
+    "title": "New experiment: Content Generation",
+    "url": "https://github.com/WordPress/ai/issues/297",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-03-11T16:49:52Z",
+    "status": "Backlog",
+    "assignees": [
+      "karmatosed"
+    ]
+  },
+  {
+    "id": "WordPress/ai#301",
+    "type": "PullRequest",
+    "number": 301,
+    "title": "Switch to the new `wp_get_connectors` function",
+    "url": "https://github.com/WordPress/ai/pull/301",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-12T13:14:28Z",
+    "milestone": "0.5.0",
+    "updatedAt": "2026-03-12T13:14:42Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#302",
+    "type": "PullRequest",
+    "number": 302,
+    "title": "feat: Image Provenance experiment and CDN worker templates (C2PA image signing)",
+    "url": "https://github.com/WordPress/ai/pull/302",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-18T20:27:18Z",
+    "status": "Needs review",
+    "assignees": [
+      "erik-sv"
+    ]
+  },
+  {
+    "id": "WordPress/ai#303",
+    "type": "PullRequest",
+    "number": 303,
+    "title": "fix: replace `Invalid_Experiment_Exception` with `_doing_it_wrong()`",
+    "url": "https://github.com/WordPress/ai/pull/303",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-16T14:48:38Z",
+    "milestone": "0.6.0",
+    "updatedAt": "2026-03-16T14:48:48Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#307",
+    "type": "Issue",
+    "number": 307,
+    "title": "Add AGENTS.md to streamline contributor onboarding",
+    "url": "https://github.com/WordPress/ai/issues/307",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-07T17:47:48Z",
+    "status": "In progress",
+    "assignees": [
+      "gziolo"
+    ]
+  },
+  {
+    "id": "WordPress/ai#311",
+    "type": "PullRequest",
+    "number": 311,
+    "title": "Add some basic dashboard widgets",
+    "url": "https://github.com/WordPress/ai/pull/311",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-20T17:00:49Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-20T17:01:32Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#314",
+    "type": "PullRequest",
+    "number": 314,
+    "title": "Fix contributor name in readme.txt",
+    "url": "https://github.com/WordPress/ai/pull/314",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-18T14:52:33Z",
+    "milestone": "0.6.0",
+    "updatedAt": "2026-03-18T14:53:47Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#32",
+    "type": "Issue",
+    "number": 32,
+    "title": "Add AI Playground interface (prompt testing & debug tools)",
+    "url": "https://github.com/WordPress/ai/issues/32",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-04T18:19:46Z",
+    "status": "To do",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#324",
+    "type": "Issue",
+    "number": 324,
+    "title": "Evolve Refine from Notes into collaborative and agentic editorial workflows",
+    "url": "https://github.com/WordPress/ai/issues/324",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-05-18T22:07:57Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#325",
+    "type": "Issue",
+    "number": 325,
+    "title": "Integrate media features and experiments with Gutenberg's experimental Media Editor",
+    "url": "https://github.com/WordPress/ai/issues/325",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-19T18:34:03Z",
+    "status": "In progress",
+    "assignees": [
+      "TylerB24890"
+    ]
+  },
+  {
+    "id": "WordPress/ai#328",
+    "type": "PullRequest",
+    "number": 328,
+    "title": "build(deps-dev): bump flatted from 3.3.3 to 3.4.2",
+    "url": "https://github.com/WordPress/ai/pull/328",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-20T15:29:58Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-03-20T15:30:01Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#329",
+    "type": "PullRequest",
+    "number": 329,
+    "title": "fix changelog derps",
+    "url": "https://github.com/WordPress/ai/pull/329",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-03-20T17:07:48Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-03-20T17:08:42Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#338",
+    "type": "Issue",
+    "number": 338,
+    "title": "New Experiments: Analytics-aware content and amplification recommendations",
+    "url": "https://github.com/WordPress/ai/issues/338",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-07-09T15:51:34Z",
+    "status": "In discussion / Needs decision",
+    "assignees": [
+      "zeus2611"
+    ]
+  },
+  {
+    "id": "WordPress/ai#339",
+    "type": "Issue",
+    "number": 339,
+    "title": "AI 0.6 + WP7RC1 + Gutenberg 22.7.1 : can't keep connection alive within the AI plugin",
+    "url": "https://github.com/WordPress/ai/issues/339",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-07T19:31:47Z",
+    "status": "To do",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#340",
+    "type": "PullRequest",
+    "number": 340,
+    "title": "Add modern wp-build DataForm route for AI settings page",
+    "url": "https://github.com/WordPress/ai/pull/340",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-07T10:28:18Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-09T07:31:08Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#348",
+    "type": "Issue",
+    "number": 348,
+    "title": "Feature Request: Unified AI Management Layer for WordPress Core",
+    "url": "https://github.com/WordPress/ai/issues/348",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-04-09T02:47:07Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#354",
+    "type": "Issue",
+    "number": 354,
+    "title": "Unifiied Abilities exposure controls",
+    "url": "https://github.com/WordPress/ai/issues/354",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-04-08T16:33:07Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#358",
+    "type": "PullRequest",
+    "number": 358,
+    "title": "Fix system instruction loading failing on repeated calls",
+    "url": "https://github.com/WordPress/ai/pull/358",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-01T15:06:49Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-01T15:07:50Z",
+    "status": "Done",
+    "assignees": [
+      "gziolo"
+    ]
+  },
+  {
+    "id": "WordPress/ai#360",
+    "type": "PullRequest",
+    "number": 360,
+    "title": "Fix failing and flaky E2E tests",
+    "url": "https://github.com/WordPress/ai/pull/360",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-01T16:53:01Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-01T16:53:44Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#361",
+    "type": "PullRequest",
+    "number": 361,
+    "title": "Update our preferred models",
+    "url": "https://github.com/WordPress/ai/pull/361",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-06T13:28:37Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-06T13:29:13Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#362",
+    "type": "PullRequest",
+    "number": 362,
+    "title": "Add `is_supported_*` checks for better error handling",
+    "url": "https://github.com/WordPress/ai/pull/362",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-09T14:01:51Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-09T14:02:20Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#367",
+    "type": "PullRequest",
+    "number": 367,
+    "title": "When getting content for a post, ensure we're always getting the most recent version",
+    "url": "https://github.com/WordPress/ai/pull/367",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-06T18:46:23Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-06T18:46:56Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#369",
+    "type": "PullRequest",
+    "number": 369,
+    "title": "build(deps): bump lodash-es from 4.17.23 to 4.18.1",
+    "url": "https://github.com/WordPress/ai/pull/369",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-06T14:52:22Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-06T14:52:24Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#37",
+    "type": "Issue",
+    "number": 37,
+    "title": "MCP usage across features and request routing",
+    "url": "https://github.com/WordPress/ai/issues/37",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-19T08:43:17Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#370",
+    "type": "PullRequest",
+    "number": 370,
+    "title": "build(deps-dev): bump lodash from 4.17.23 to 4.18.1",
+    "url": "https://github.com/WordPress/ai/pull/370",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-06T14:51:35Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-06T14:51:38Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#371",
+    "type": "PullRequest",
+    "number": 371,
+    "title": "build(deps-dev): bump node-forge from 1.3.3 to 1.4.0",
+    "url": "https://github.com/WordPress/ai/pull/371",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-06T14:50:38Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-06T14:50:40Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#372",
+    "type": "PullRequest",
+    "number": 372,
+    "title": "build(deps): bump picomatch",
+    "url": "https://github.com/WordPress/ai/pull/372",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-06T14:53:06Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-06T14:53:08Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#373",
+    "type": "PullRequest",
+    "number": 373,
+    "title": "build(deps): bump yaml",
+    "url": "https://github.com/WordPress/ai/pull/373",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-06T14:53:48Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-06T14:53:51Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#376",
+    "type": "PullRequest",
+    "number": 376,
+    "title": "Use toggle UI, auto-save, and inline DataForm settings for experiments",
+    "url": "https://github.com/WordPress/ai/pull/376",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-09T13:33:51Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-09T13:34:43Z",
+    "status": "Done",
+    "assignees": [
+      "jorgefilipecosta"
+    ]
+  },
+  {
+    "id": "WordPress/ai#378",
+    "type": "PullRequest",
+    "number": 378,
+    "title": "Remove unneeded `function_exists` checks",
+    "url": "https://github.com/WordPress/ai/pull/378",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-09T13:50:50Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-09T13:51:26Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#386",
+    "type": "PullRequest",
+    "number": 386,
+    "title": "build(deps): bump basic-ftp from 5.2.0 to 5.2.1",
+    "url": "https://github.com/WordPress/ai/pull/386",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-04-09T14:30:32Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#393",
+    "type": "PullRequest",
+    "number": 393,
+    "title": "Align testing docs with current test setup",
+    "url": "https://github.com/WordPress/ai/pull/393",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-16T21:46:03Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-05-01T22:21:09Z",
+    "status": "Done",
+    "assignees": [
+      "ekamran"
+    ]
+  },
+  {
+    "id": "WordPress/ai#397",
+    "type": "PullRequest",
+    "number": 397,
+    "title": "Remove icon import from TitleToolbar component",
+    "url": "https://github.com/WordPress/ai/pull/397",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-05-04T18:47:01Z",
+    "status": "Done",
+    "assignees": [
+      "hemanttejwani2610"
+    ]
+  },
+  {
+    "id": "WordPress/ai#40",
+    "type": "Issue",
+    "number": 40,
+    "title": "WordPress Core Abilities",
+    "url": "https://github.com/WordPress/ai/issues/40",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-07T17:51:41Z",
+    "status": "Triage",
+    "assignees": [
+      "gziolo",
+      "jorgefilipecosta"
+    ]
+  },
+  {
+    "id": "WordPress/ai#401",
+    "type": "PullRequest",
+    "number": 401,
+    "title": "chore: Update NPM and Composer deps",
+    "url": "https://github.com/WordPress/ai/pull/401",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-09T14:28:45Z",
+    "milestone": "0.7.0",
+    "updatedAt": "2026-04-09T14:29:28Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#404",
+    "type": "PullRequest",
+    "number": 404,
+    "title": "refactor: cleanup `Main` bootstrap class",
+    "url": "https://github.com/WordPress/ai/pull/404",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-13T16:34:18Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-13T16:35:03Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#405",
+    "type": "PullRequest",
+    "number": 405,
+    "title": "ci: add dependabot.yml for updates",
+    "url": "https://github.com/WordPress/ai/pull/405",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-09T20:51:02Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-09T20:53:27Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#407",
+    "type": "PullRequest",
+    "number": 407,
+    "title": "chore(ci): bump the github-actions-updates group with 11 updates",
+    "url": "https://github.com/WordPress/ai/pull/407",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-09T21:05:22Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-09T21:05:24Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#408",
+    "type": "PullRequest",
+    "number": 408,
+    "title": "fix(deps-dev): bump the npm-dev-minor-patch group across 1 directory with 2 updates",
+    "url": "https://github.com/WordPress/ai/pull/408",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-04-22T15:16:52Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#409",
+    "type": "PullRequest",
+    "number": 409,
+    "title": "fix(deps): bump the npm-prod-minor-patch group across 1 directory with 5 updates",
+    "url": "https://github.com/WordPress/ai/pull/409",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-04-17T13:20:18Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#412",
+    "type": "PullRequest",
+    "number": 412,
+    "title": "fix(deps): bump @wordpress/components from 30.9.0 to 32.3.0",
+    "url": "https://github.com/WordPress/ai/pull/412",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-04-22T15:17:59Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#414",
+    "type": "PullRequest",
+    "number": 414,
+    "title": "Remove references to DALL·E image models",
+    "url": "https://github.com/WordPress/ai/pull/414",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-09T22:51:55Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-09T22:52:32Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#419",
+    "type": "PullRequest",
+    "number": 419,
+    "title": "Comment Moderation, AI Observability (Logging), and the Site Agent (Natural Language Admin).",
+    "url": "https://github.com/WordPress/ai/pull/419",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-05-04T18:49:58Z",
+    "status": "Done",
+    "assignees": [
+      "SynapticSmith"
+    ]
+  },
+  {
+    "id": "WordPress/ai#42",
+    "type": "PullRequest",
+    "number": 42,
+    "title": "Add documentation files to docs branch",
+    "url": "https://github.com/WordPress/ai/pull/42",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-10-29T02:53:31Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-10-29T02:54:36Z",
+    "status": "Done",
+    "assignees": [
+      "Ref34t"
+    ]
+  },
+  {
+    "id": "WordPress/ai#421",
+    "type": "Issue",
+    "number": 421,
+    "title": "WordPress should detect C2PA manifests on upload",
+    "url": "https://github.com/WordPress/ai/issues/421",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-05-19T18:35:03Z",
+    "status": "To do",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#424",
+    "type": "PullRequest",
+    "number": 424,
+    "title": "Add an admin redirect from the old `ai` page to the new `ai-wp-admin` page",
+    "url": "https://github.com/WordPress/ai/pull/424",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-13T20:04:55Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-13T20:05:09Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#425",
+    "type": "Issue",
+    "number": 425,
+    "title": "Update placement of Alt Text generation buttons",
+    "url": "https://github.com/WordPress/ai/issues/425",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-18T22:16:08Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#429",
+    "type": "PullRequest",
+    "number": 429,
+    "title": "Update PR template sections",
+    "url": "https://github.com/WordPress/ai/pull/429",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-14T14:59:14Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-14T15:00:38Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#430",
+    "type": "Issue",
+    "number": 430,
+    "title": "Skills in a WordPress admin context",
+    "url": "https://github.com/WordPress/ai/issues/430",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-04-27T12:05:18Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#432",
+    "type": "PullRequest",
+    "number": 432,
+    "title": "Ensure our lint command excludes the `build-scripts` directory",
+    "url": "https://github.com/WordPress/ai/pull/432",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-16T17:44:26Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-16T17:45:12Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#434",
+    "type": "PullRequest",
+    "number": 434,
+    "title": "Reduce token usage when running Review Notes",
+    "url": "https://github.com/WordPress/ai/pull/434",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-20T16:47:04Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-20T16:47:28Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#438",
+    "type": "PullRequest",
+    "number": 438,
+    "title": "Refactor string checks to use str_starts_with and str_contains functions",
+    "url": "https://github.com/WordPress/ai/pull/438",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-20T15:20:21Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-20T15:20:51Z",
+    "status": "Done",
+    "assignees": [
+      "Soean"
+    ]
+  },
+  {
+    "id": "WordPress/ai#442",
+    "type": "PullRequest",
+    "number": 442,
+    "title": "chore(ci): bump the github-actions-updates group with 3 updates",
+    "url": "https://github.com/WordPress/ai/pull/442",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-17T13:22:47Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-17T13:22:52Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#443",
+    "type": "PullRequest",
+    "number": 443,
+    "title": "fix(deps): bump the npm-prod-minor-patch group across 1 directory with 17 updates",
+    "url": "https://github.com/WordPress/ai/pull/443",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-04-21T22:24:08Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#444",
+    "type": "PullRequest",
+    "number": 444,
+    "title": "Review Notes and Refine Notes: Add post type support check",
+    "url": "https://github.com/WordPress/ai/pull/444",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-20T14:56:54Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-20T14:57:05Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#447",
+    "type": "PullRequest",
+    "number": 447,
+    "title": "chore: update all NPM deps and migrate configs",
+    "url": "https://github.com/WordPress/ai/pull/447",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-22T15:14:37Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-22T16:47:08Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#448",
+    "type": "Issue",
+    "number": 448,
+    "title": "Add WebMCP experiment",
+    "url": "https://github.com/WordPress/ai/issues/448",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-04-21T21:15:54Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#452",
+    "type": "Issue",
+    "number": 452,
+    "title": "Content Classification: Improve relevance of taxonomy suggestions",
+    "url": "https://github.com/WordPress/ai/issues/452",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T17:55:12Z",
+    "status": "In progress",
+    "assignees": [
+      "saarnilauri"
+    ]
+  },
+  {
+    "id": "WordPress/ai#453",
+    "type": "PullRequest",
+    "number": 453,
+    "title": "fix: defer failed Requirement messages until translation functions are available",
+    "url": "https://github.com/WordPress/ai/pull/453",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-21T22:04:43Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-21T22:09:40Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#454",
+    "type": "PullRequest",
+    "number": 454,
+    "title": "fix(deps): bump the npm-prod-minor-patch group across 1 directory with 14 updates",
+    "url": "https://github.com/WordPress/ai/pull/454",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-04-22T15:17:05Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#456",
+    "type": "PullRequest",
+    "number": 456,
+    "title": "Add support for the new `gpt-image-2` model",
+    "url": "https://github.com/WordPress/ai/pull/456",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-22T19:44:57Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-22T20:22:34Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#458",
+    "type": "PullRequest",
+    "number": 458,
+    "title": "refactor!: cleanup Asset_Loader and add error checking",
+    "url": "https://github.com/WordPress/ai/pull/458",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-22T19:00:15Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-22T19:21:47Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#459",
+    "type": "PullRequest",
+    "number": 459,
+    "title": "Add C2PA Monitor experiment",
+    "url": "https://github.com/WordPress/ai/pull/459",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T21:09:52Z",
+    "status": "Needs review",
+    "assignees": [
+      "lnispel"
+    ]
+  },
+  {
+    "id": "WordPress/ai#463",
+    "type": "PullRequest",
+    "number": 463,
+    "title": "chore: use `npm run format` for repo-wide Prettier",
+    "url": "https://github.com/WordPress/ai/pull/463",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-23T15:38:53Z",
+    "milestone": "0.8.0",
+    "updatedAt": "2026-04-23T15:45:57Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#465",
+    "type": "PullRequest",
+    "number": 465,
+    "title": "[Fix]: Meta Description Experiment | ensure_text_generation_supported",
+    "url": "https://github.com/WordPress/ai/pull/465",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-24T14:25:32Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-04-24T14:25:54Z",
+    "status": "Done",
+    "assignees": [
+      "TylerB24890"
+    ]
+  },
+  {
+    "id": "WordPress/ai#468",
+    "type": "PullRequest",
+    "number": 468,
+    "title": "fix(deps-dev): bump phpstan/phpstan from 2.1.46 to 2.1.49 in the composer-dev-minor-patch group",
+    "url": "https://github.com/WordPress/ai/pull/468",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-24T13:13:45Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-04-24T13:13:48Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#469",
+    "type": "PullRequest",
+    "number": 469,
+    "title": "chore(ci): bump actions/setup-node from 6.3.0 to 6.4.0 in the github-actions-updates group",
+    "url": "https://github.com/WordPress/ai/pull/469",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-24T13:13:10Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-04-24T13:13:12Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#47",
+    "type": "Issue",
+    "number": 47,
+    "title": "Low-/no-tech educational content",
+    "url": "https://github.com/WordPress/ai/issues/47",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-04-08T16:37:00Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#470",
+    "type": "PullRequest",
+    "number": 470,
+    "title": "fix(deps-dev): bump typescript from 5.9.3 to 6.0.2",
+    "url": "https://github.com/WordPress/ai/pull/470",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-05-04T19:50:40Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#472",
+    "type": "PullRequest",
+    "number": 472,
+    "title": "Update settings page to use @wordpress/ui components",
+    "url": "https://github.com/WordPress/ai/pull/472",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-07T14:52:56Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-07T14:52:56Z",
+    "status": "Done",
+    "assignees": [
+      "simison"
+    ]
+  },
+  {
+    "id": "WordPress/ai#481",
+    "type": "PullRequest",
+    "number": 481,
+    "title": "Ensure any `sanitize_callback`'s in our Abilities input schema are executed",
+    "url": "https://github.com/WordPress/ai/pull/481",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-06-17T15:28:42Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#484",
+    "type": "PullRequest",
+    "number": 484,
+    "title": "Ignore .wp-env.test.override.json",
+    "url": "https://github.com/WordPress/ai/pull/484",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-29T04:24:25Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-04T19:55:57Z",
+    "status": "Needs review",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#485",
+    "type": "PullRequest",
+    "number": 485,
+    "title": "Force LTR for ability schema JSON viewer",
+    "url": "https://github.com/WordPress/ai/pull/485",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-29T16:46:29Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-04-29T16:49:57Z",
+    "status": "Done",
+    "assignees": [
+      "t-hamano"
+    ]
+  },
+  {
+    "id": "WordPress/ai#486",
+    "type": "PullRequest",
+    "number": 486,
+    "title": "Add developer settings mode with the ability to set desired provider and model per feature",
+    "url": "https://github.com/WordPress/ai/pull/486",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-07T16:22:29Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-07-08T20:05:58Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#488",
+    "type": "PullRequest",
+    "number": 488,
+    "title": "Update Admin UI package to latest, and use new visual prop",
+    "url": "https://github.com/WordPress/ai/pull/488",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-30T19:56:13Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-04-30T19:56:24Z",
+    "status": "Done",
+    "assignees": [
+      "simison"
+    ]
+  },
+  {
+    "id": "WordPress/ai#49",
+    "type": "PullRequest",
+    "number": 49,
+    "title": "Add in various test GitHub Action workflows",
+    "url": "https://github.com/WordPress/ai/pull/49",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-10-28T17:23:59Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-10-28T17:24:36Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#490",
+    "type": "PullRequest",
+    "number": 490,
+    "title": "Settings: use notice from @wordpress/ui",
+    "url": "https://github.com/WordPress/ai/pull/490",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-30T19:40:47Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-04-30T19:41:56Z",
+    "status": "Done",
+    "assignees": [
+      "simison"
+    ]
+  },
+  {
+    "id": "WordPress/ai#491",
+    "type": "PullRequest",
+    "number": 491,
+    "title": "Settings: use _n() instead of __() for numerical updates",
+    "url": "https://github.com/WordPress/ai/pull/491",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-04-30T19:25:50Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-04-30T19:27:55Z",
+    "status": "Done",
+    "assignees": [
+      "simison"
+    ]
+  },
+  {
+    "id": "WordPress/ai#493",
+    "type": "PullRequest",
+    "number": 493,
+    "title": "fix(deps-dev): bump phpstan/phpstan from 2.1.49 to 2.1.51 in the composer-dev-minor-patch group",
+    "url": "https://github.com/WordPress/ai/pull/493",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-01T13:43:17Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-01T13:43:19Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#494",
+    "type": "PullRequest",
+    "number": 494,
+    "title": "[Feature]: Issue 238 | Focus-aware crop suggestions",
+    "url": "https://github.com/WordPress/ai/pull/494",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-07T19:56:54Z",
+    "status": "In progress",
+    "assignees": [
+      "TylerB24890"
+    ]
+  },
+  {
+    "id": "WordPress/ai#498",
+    "type": "PullRequest",
+    "number": 498,
+    "title": "Add E2E coverage for dashboard widgets",
+    "url": "https://github.com/WordPress/ai/pull/498",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-05T15:09:02Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-05T18:49:59Z",
+    "status": "Done",
+    "assignees": [
+      "ekamran"
+    ]
+  },
+  {
+    "id": "WordPress/ai#50",
+    "type": "PullRequest",
+    "number": 50,
+    "title": "Pull in the various AI dependencies we'll be using",
+    "url": "https://github.com/WordPress/ai/pull/50",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-10-27T20:25:39Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-10-30T18:12:37Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#501",
+    "type": "PullRequest",
+    "number": 501,
+    "title": "docs: add and refine experiment documentation",
+    "url": "https://github.com/WordPress/ai/pull/501",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-18T21:03:46Z",
+    "milestone": "1.0.0",
+    "updatedAt": "2026-05-18T21:03:46Z",
+    "status": "Done",
+    "assignees": [
+      "henryperkins"
+    ]
+  },
+  {
+    "id": "WordPress/ai#502",
+    "type": "Issue",
+    "number": 502,
+    "title": "Define how AI provider plugins are discovered, labeled, and surfaced in Connectors",
+    "url": "https://github.com/WordPress/ai/issues/502",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-05-05T01:53:29Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#503",
+    "type": "PullRequest",
+    "number": 503,
+    "title": "Fix dependabot alerts",
+    "url": "https://github.com/WordPress/ai/pull/503",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-07T17:19:06Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-07T17:19:10Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#504",
+    "type": "PullRequest",
+    "number": 504,
+    "title": "Add squash merge strategy to docs",
+    "url": "https://github.com/WordPress/ai/pull/504",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-05T13:34:10Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-05T13:34:12Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#505",
+    "type": "PullRequest",
+    "number": 505,
+    "title": "Settings: simplify feature toggles",
+    "url": "https://github.com/WordPress/ai/pull/505",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-06T14:14:51Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-07T14:18:41Z",
+    "status": "Done",
+    "assignees": [
+      "simison"
+    ]
+  },
+  {
+    "id": "WordPress/ai#507",
+    "type": "Issue",
+    "number": 507,
+    "title": "Iterate on Editorial Updates end flow to Visual Revisions",
+    "url": "https://github.com/WordPress/ai/issues/507",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-30T16:37:59Z",
+    "status": "To do",
+    "assignees": [
+      "zeus2611"
+    ]
+  },
+  {
+    "id": "WordPress/ai#508",
+    "type": "Issue",
+    "number": 508,
+    "title": "New Experiment: “Suggest Reply” for Comments and Activity widget",
+    "url": "https://github.com/WordPress/ai/issues/508",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-30T16:38:23Z",
+    "status": "Needs review",
+    "assignees": [
+      "Infinite-Null"
+    ]
+  },
+  {
+    "id": "WordPress/ai#510",
+    "type": "PullRequest",
+    "number": 510,
+    "title": "More flexibility in the Content Summarization experiment",
+    "url": "https://github.com/WordPress/ai/pull/510",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-07T15:32:30Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-07T15:32:36Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#511",
+    "type": "PullRequest",
+    "number": 511,
+    "title": "Update/merge docs",
+    "url": "https://github.com/WordPress/ai/pull/511",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-06T13:40:25Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-07T17:26:28Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#514",
+    "type": "Issue",
+    "number": 514,
+    "title": "Add comment value / relevance to Comment Moderation experiment",
+    "url": "https://github.com/WordPress/ai/issues/514",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T18:12:58Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#521",
+    "type": "PullRequest",
+    "number": 521,
+    "title": "Revise squash merge commit title and description guidelines",
+    "url": "https://github.com/WordPress/ai/pull/521",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-07T17:57:26Z",
+    "milestone": "0.9.0",
+    "updatedAt": "2026-05-07T17:57:29Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#525",
+    "type": "PullRequest",
+    "number": 525,
+    "title": "fix(deps-dev): bump the npm-dev-minor-patch group across 1 directory with 2 updates",
+    "url": "https://github.com/WordPress/ai/pull/525",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-11T21:04:50Z",
+    "milestone": "1.0.0",
+    "updatedAt": "2026-05-11T21:04:53Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#53",
+    "type": "PullRequest",
+    "number": 53,
+    "title": "Add Essential GitHub Repository Files (LICENSE, SUPPORT, PR Template, Issue Templates)",
+    "url": "https://github.com/WordPress/ai/pull/53",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-10-29T02:58:54Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-10-29T02:58:59Z",
+    "status": "Done",
+    "assignees": [
+      "theaminulai"
+    ]
+  },
+  {
+    "id": "WordPress/ai#553",
+    "type": "PullRequest",
+    "number": 553,
+    "title": "Add a default cooldown of 7 days for GitHub Action updates",
+    "url": "https://github.com/WordPress/ai/pull/553",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-15T15:09:10Z",
+    "milestone": "1.0.0",
+    "updatedAt": "2026-05-15T15:09:14Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#56",
+    "type": "PullRequest",
+    "number": 56,
+    "title": "Change the event the PR Comment workflow runs on",
+    "url": "https://github.com/WordPress/ai/pull/56",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-10-29T22:25:09Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-10-29T22:31:16Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#560",
+    "type": "PullRequest",
+    "number": 560,
+    "title": "Add encryption for AI Connector API keys",
+    "url": "https://github.com/WordPress/ai/pull/560",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-30T18:41:06Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-30T18:41:14Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#59",
+    "type": "PullRequest",
+    "number": 59,
+    "title": "Review and streamline contributor and developer documentation",
+    "url": "https://github.com/WordPress/ai/pull/59",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-10-29T15:31:01Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-10-29T15:31:14Z",
+    "status": "Done",
+    "assignees": [
+      "iqbal-web"
+    ]
+  },
+  {
+    "id": "WordPress/ai#594",
+    "type": "PullRequest",
+    "number": 594,
+    "title": "Add Stylelint",
+    "url": "https://github.com/WordPress/ai/pull/594",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T18:03:03Z",
+    "status": "In progress",
+    "assignees": [
+      "simison"
+    ]
+  },
+  {
+    "id": "WordPress/ai#595",
+    "type": "PullRequest",
+    "number": 595,
+    "title": "Better connector approval matching",
+    "url": "https://github.com/WordPress/ai/pull/595",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-26T14:18:01Z",
+    "milestone": "1.0.1",
+    "updatedAt": "2026-05-26T14:18:18Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#599",
+    "type": "PullRequest",
+    "number": 599,
+    "title": "[Request Logs]: Fix focus loss on interaction with Purge Actions",
+    "url": "https://github.com/WordPress/ai/pull/599",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-21T17:50:12Z",
+    "milestone": "1.0.1",
+    "updatedAt": "2026-05-22T03:39:55Z",
+    "status": "Done",
+    "assignees": [
+      "yogeshbhutkar"
+    ]
+  },
+  {
+    "id": "WordPress/ai#600",
+    "type": "Issue",
+    "number": 600,
+    "title": "`Enable AI` header toggle doesn't reflect aggregate state of sub-features",
+    "url": "https://github.com/WordPress/ai/issues/600",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-29T20:01:17Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#603",
+    "type": "PullRequest",
+    "number": 603,
+    "title": "Change our AI connector check from looking at configuration to looking at if authentication is set",
+    "url": "https://github.com/WordPress/ai/pull/603",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-27T14:29:33Z",
+    "milestone": "1.0.1",
+    "updatedAt": "2026-05-27T14:29:46Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#604",
+    "type": "PullRequest",
+    "number": 604,
+    "title": "Fix AI Status feature checklist state",
+    "url": "https://github.com/WordPress/ai/pull/604",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-26T17:54:17Z",
+    "milestone": "1.0.1",
+    "updatedAt": "2026-06-07T17:50:25Z",
+    "status": "Done",
+    "assignees": [
+      "ekamran"
+    ]
+  },
+  {
+    "id": "WordPress/ai#606",
+    "type": "PullRequest",
+    "number": 606,
+    "title": "fix(deps-dev): bump the npm-dev-minor-patch group with 2 updates",
+    "url": "https://github.com/WordPress/ai/pull/606",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-26T21:50:10Z",
+    "milestone": "1.0.1",
+    "updatedAt": "2026-05-26T21:50:12Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#607",
+    "type": "PullRequest",
+    "number": 607,
+    "title": "fix(deps): bump the npm-prod-minor-patch group across 1 directory with 3 updates",
+    "url": "https://github.com/WordPress/ai/pull/607",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-06-05T13:50:09Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#609",
+    "type": "PullRequest",
+    "number": 609,
+    "title": "Code Quality: Remove deprecated `__nextHasNoMarginBottom` prop",
+    "url": "https://github.com/WordPress/ai/pull/609",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-26T15:24:17Z",
+    "milestone": "1.0.1",
+    "updatedAt": "2026-05-27T10:50:46Z",
+    "status": "Done",
+    "assignees": [
+      "yogeshbhutkar"
+    ]
+  },
+  {
+    "id": "WordPress/ai#612",
+    "type": "PullRequest",
+    "number": 612,
+    "title": "Fix Abilities Explorer schema constraint validation",
+    "url": "https://github.com/WordPress/ai/pull/612",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-02T15:25:33Z",
+    "milestone": "1.0.2",
+    "updatedAt": "2026-06-07T17:50:25Z",
+    "status": "Done",
+    "assignees": [
+      "ekamran"
+    ]
+  },
+  {
+    "id": "WordPress/ai#614",
+    "type": "Issue",
+    "number": 614,
+    "title": "Add support for bulk summary generation ",
+    "url": "https://github.com/WordPress/ai/issues/614",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-30T16:38:15Z",
+    "status": "In progress",
+    "assignees": [
+      "prasadkarmalkar"
+    ]
+  },
+  {
+    "id": "WordPress/ai#616",
+    "type": "PullRequest",
+    "number": 616,
+    "title": "Hide empty provider capabilities section",
+    "url": "https://github.com/WordPress/ai/pull/616",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-26T16:27:54Z",
+    "milestone": "1.0.1",
+    "updatedAt": "2026-06-07T17:50:25Z",
+    "status": "Done",
+    "assignees": [
+      "ekamran"
+    ]
+  },
+  {
+    "id": "WordPress/ai#620",
+    "type": "PullRequest",
+    "number": 620,
+    "title": "Fix readme connector setup wording",
+    "url": "https://github.com/WordPress/ai/pull/620",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-26T14:17:45Z",
+    "milestone": "1.0.1",
+    "updatedAt": "2026-05-26T14:23:32Z",
+    "status": "Done",
+    "assignees": [
+      "1d0u"
+    ]
+  },
+  {
+    "id": "WordPress/ai#621",
+    "type": "PullRequest",
+    "number": 621,
+    "title": "Fix alt text upload URL matching",
+    "url": "https://github.com/WordPress/ai/pull/621",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T18:06:00Z",
+    "status": "In progress",
+    "assignees": [
+      "1d0u"
+    ]
+  },
+  {
+    "id": "WordPress/ai#625",
+    "type": "Issue",
+    "number": 625,
+    "title": "New Experiment: Social Content Generation for platform-specific social posts",
+    "url": "https://github.com/WordPress/ai/issues/625",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-01T17:06:32Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#630",
+    "type": "PullRequest",
+    "number": 630,
+    "title": "fix(deps): bump tmp from 0.2.5 to 0.2.7",
+    "url": "https://github.com/WordPress/ai/pull/630",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-05-28T14:38:39Z",
+    "milestone": "1.0.2",
+    "updatedAt": "2026-05-28T14:38:42Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#632",
+    "type": "Issue",
+    "number": 632,
+    "title": "be enable to deactivate a connector and not lost settings",
+    "url": "https://github.com/WordPress/ai/issues/632",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-01T00:08:38Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#638",
+    "type": "PullRequest",
+    "number": 638,
+    "title": "Clarify AI Connector provider setup",
+    "url": "https://github.com/WordPress/ai/pull/638",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-10T16:45:57Z",
+    "milestone": "1.0.2",
+    "updatedAt": "2026-06-10T18:02:35Z",
+    "status": "Done",
+    "assignees": [
+      "ekamran"
+    ]
+  },
+  {
+    "id": "WordPress/ai#643",
+    "type": "Issue",
+    "number": 643,
+    "title": "\"AI\" plugin 1.0.1 – Connectors and AI settings pages load blank (JavaScript error) on WordPress 7.0",
+    "url": "https://github.com/WordPress/ai/issues/643",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-18T14:59:12Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#66",
+    "type": "PullRequest",
+    "number": 66,
+    "title": "Add plugin assets",
+    "url": "https://github.com/WordPress/ai/pull/66",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-07T16:49:04Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-07T16:49:06Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#660",
+    "type": "Issue",
+    "number": 660,
+    "title": "UX: Ambiguous error message in editor when a provider is blocked by Connector Approvals",
+    "url": "https://github.com/WordPress/ai/issues/660",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-22T18:04:57Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#683",
+    "type": "PullRequest",
+    "number": 683,
+    "title": "Add native vector search",
+    "url": "https://github.com/WordPress/ai/pull/683",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-08T19:40:45Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#689",
+    "type": "Issue",
+    "number": 689,
+    "title": "Add a user-facing control for automatic log cleanup",
+    "url": "https://github.com/WordPress/ai/issues/689",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-18T14:51:26Z",
+    "status": "In progress",
+    "assignees": [
+      "i-anubhav-anand"
+    ]
+  },
+  {
+    "id": "WordPress/ai#690",
+    "type": "Issue",
+    "number": 690,
+    "title": "Plugin does not clean up database table and options on uninstall",
+    "url": "https://github.com/WordPress/ai/issues/690",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T18:08:36Z",
+    "status": "In progress",
+    "assignees": [
+      "hbhalodia"
+    ]
+  },
+  {
+    "id": "WordPress/ai#695",
+    "type": "PullRequest",
+    "number": 695,
+    "title": "Add: AI-assisted payload generation to the Ability Explorer - Test Ability Screen",
+    "url": "https://github.com/WordPress/ai/pull/695",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-26T17:32:53Z",
+    "status": "In progress",
+    "assignees": [
+      "Arkenon"
+    ]
+  },
+  {
+    "id": "WordPress/ai#71",
+    "type": "PullRequest",
+    "number": 71,
+    "title": "chore: improve `.wp-env.json` for dev use",
+    "url": "https://github.com/WordPress/ai/pull/71",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-10T22:34:16Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-10T22:34:18Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#72",
+    "type": "PullRequest",
+    "number": 72,
+    "title": "code quality: declare strict / inline types",
+    "url": "https://github.com/WordPress/ai/pull/72",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-10T23:41:10Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-10T23:41:16Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#722",
+    "type": "PullRequest",
+    "number": 722,
+    "title": "ci: skip push-triggered checks on forks",
+    "url": "https://github.com/WordPress/ai/pull/722",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-29T14:04:03Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-29T14:04:03Z",
+    "status": "Done",
+    "assignees": [
+      "t-hamano"
+    ]
+  },
+  {
+    "id": "WordPress/ai#73",
+    "type": "PullRequest",
+    "number": 73,
+    "title": "chore: update node and NPM dev deps",
+    "url": "https://github.com/WordPress/ai/pull/73",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-10T22:34:41Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-10T22:34:43Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#732",
+    "type": "Issue",
+    "number": 732,
+    "title": "AI Request Logging only captures providers that use the SDK HTTP transporter; sidecar/custom-transport providers are invisible",
+    "url": "https://github.com/WordPress/ai/issues/732",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T17:40:44Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#736",
+    "type": "Issue",
+    "number": 736,
+    "title": "Expose role/user access controls per feature/experiment",
+    "url": "https://github.com/WordPress/ai/issues/736",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-30T18:14:17Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#739",
+    "type": "PullRequest",
+    "number": 739,
+    "title": "Add core/read-content ability",
+    "url": "https://github.com/WordPress/ai/pull/739",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-09T15:35:20Z",
+    "status": "In progress",
+    "assignees": [
+      "jorgefilipecosta"
+    ]
+  },
+  {
+    "id": "WordPress/ai#74",
+    "type": "PullRequest",
+    "number": 74,
+    "title": "Update readme.txt",
+    "url": "https://github.com/WordPress/ai/pull/74",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-12T16:03:12Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-12T16:03:31Z",
+    "status": "Done",
+    "assignees": [
+      "mujuonly"
+    ]
+  },
+  {
+    "id": "WordPress/ai#741",
+    "type": "Issue",
+    "number": 741,
+    "title": "AI Admin Pages Exhibit Visible Flicker During Initial Render",
+    "url": "https://github.com/WordPress/ai/issues/741",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T20:00:29Z",
+    "status": "In discussion / Needs decision",
+    "assignees": [
+      "prasadkarmalkar"
+    ]
+  },
+  {
+    "id": "WordPress/ai#742",
+    "type": "PullRequest",
+    "number": 742,
+    "title": "Update GitHub Project Board link in README",
+    "url": "https://github.com/WordPress/ai/pull/742",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-18T18:33:26Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-18T18:33:29Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#758",
+    "type": "PullRequest",
+    "number": 758,
+    "title": "fix(logging): register the operation REST filter param",
+    "url": "https://github.com/WordPress/ai/pull/758",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-26T19:44:52Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#760",
+    "type": "PullRequest",
+    "number": 760,
+    "title": "PoC: Basic integration with Chrome DevTools for agents",
+    "url": "https://github.com/WordPress/ai/pull/760",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-06-30T09:28:42Z",
+    "status": "Needs review",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#764",
+    "type": "PullRequest",
+    "number": 764,
+    "title": "Add a core/manage-settings ability",
+    "url": "https://github.com/WordPress/ai/pull/764",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-24T17:12:36Z",
+    "status": "Needs review",
+    "assignees": [
+      "jorgefilipecosta"
+    ]
+  },
+  {
+    "id": "WordPress/ai#765",
+    "type": "PullRequest",
+    "number": 765,
+    "title": "Add Repo Automator action",
+    "url": "https://github.com/WordPress/ai/pull/765",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-07-08T19:39:29Z",
+    "status": "In progress",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#766",
+    "type": "PullRequest",
+    "number": 766,
+    "title": "Add editor support to readmes",
+    "url": "https://github.com/WordPress/ai/pull/766",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-23T20:05:53Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-23T20:05:58Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#767",
+    "type": "Issue",
+    "number": 767,
+    "title": "AI feature buttons remain disabled for sufficient non-space-delimited content in word-based locales",
+    "url": "https://github.com/WordPress/ai/issues/767",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-30T14:26:42Z",
+    "status": "Done",
+    "assignees": [
+      "yogeshbhutkar"
+    ]
+  },
+  {
+    "id": "WordPress/ai#771",
+    "type": "Issue",
+    "number": 771,
+    "title": "Suggested Tags/Categories when selected are removed from view irrespective of end result being a failure. (Content Classification exp)",
+    "url": "https://github.com/WordPress/ai/issues/771",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-29T20:22:58Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#774",
+    "type": "PullRequest",
+    "number": 774,
+    "title": "New Ability: core/read-users",
+    "url": "https://github.com/WordPress/ai/pull/774",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-07-09T18:38:27Z",
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-09T18:38:29Z",
+    "status": "Done",
+    "assignees": [
+      "gziolo",
+      "jorgefilipecosta"
+    ]
+  },
+  {
+    "id": "WordPress/ai#775",
+    "type": "PullRequest",
+    "number": 775,
+    "title": "Utils: Preserve omitted ability input",
+    "url": "https://github.com/WordPress/ai/pull/775",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-29T17:02:45Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-29T17:02:47Z",
+    "status": "Done",
+    "assignees": [
+      "jorgefilipecosta"
+    ]
+  },
+  {
+    "id": "WordPress/ai#776",
+    "type": "PullRequest",
+    "number": 776,
+    "title": "Ensure the Type Ahead experiment supports provider/model overrides and Guidelines",
+    "url": "https://github.com/WordPress/ai/pull/776",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-26T17:45:02Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-26T17:45:18Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#777",
+    "type": "PullRequest",
+    "number": 777,
+    "title": "dev: Update Composer deps and remediate PHPStan smells",
+    "url": "https://github.com/WordPress/ai/pull/777",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-07T14:20:54Z",
+    "status": "In progress",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#778",
+    "type": "Issue",
+    "number": 778,
+    "title": "E2E: Prefer user-facing attributes",
+    "url": "https://github.com/WordPress/ai/issues/778",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-09T09:16:47Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#78",
+    "type": "PullRequest",
+    "number": 78,
+    "title": "Add/wporg reqs",
+    "url": "https://github.com/WordPress/ai/pull/78",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-19T02:15:48Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-19T02:15:49Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#782",
+    "type": "PullRequest",
+    "number": 782,
+    "title": "fix(deps): bump the npm-prod-minor-patch group with 22 updates",
+    "url": "https://github.com/WordPress/ai/pull/782",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-06-29T16:44:07Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#785",
+    "type": "PullRequest",
+    "number": 785,
+    "title": "Settings: replace CSS with Stack component",
+    "url": "https://github.com/WordPress/ai/pull/785",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-29T13:44:32Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-29T13:44:32Z",
+    "status": "Done",
+    "assignees": [
+      "simison"
+    ]
+  },
+  {
+    "id": "WordPress/ai#786",
+    "type": "PullRequest",
+    "number": 786,
+    "title": "Code Quality: Extract model selection helpers for E2E tests",
+    "url": "https://github.com/WordPress/ai/pull/786",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-26T20:27:52Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-26T20:27:52Z",
+    "status": "Done",
+    "assignees": [
+      "Infinite-Null"
+    ]
+  },
+  {
+    "id": "WordPress/ai#787",
+    "type": "PullRequest",
+    "number": 787,
+    "title": "Fix Abilities Explorer input schema validation",
+    "url": "https://github.com/WordPress/ai/pull/787",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-30T15:04:32Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-07-02T16:44:56Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#788",
+    "type": "Issue",
+    "number": 788,
+    "title": "Title Generation modal button incorrectly uses \"Generate/Generating...\" instead of \"Regenerate/Regenerating...\"",
+    "url": "https://github.com/WordPress/ai/issues/788",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-29T15:04:50Z",
+    "status": "Done",
+    "assignees": [
+      "Intenzi"
+    ]
+  },
+  {
+    "id": "WordPress/ai#789",
+    "type": "PullRequest",
+    "number": 789,
+    "title": "Update bundled wp deps (theme, ui, dataviews, admin-ui)",
+    "url": "https://github.com/WordPress/ai/pull/789",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-06-29T14:33:41Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#791",
+    "type": "Issue",
+    "number": 791,
+    "title": "Add loading animation/custom cursor for Type Ahead",
+    "url": "https://github.com/WordPress/ai/issues/791",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-07-09T05:34:09Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#792",
+    "type": "Issue",
+    "number": 792,
+    "title": "Editorial Note generation spinner shows on all blocks' settings menu",
+    "url": "https://github.com/WordPress/ai/issues/792",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-29T19:59:38Z",
+    "status": "Done",
+    "assignees": [
+      "Intenzi"
+    ]
+  },
+  {
+    "id": "WordPress/ai#793",
+    "type": "Issue",
+    "number": 793,
+    "title": "New Developer Tool: Customize experiments",
+    "url": "https://github.com/WordPress/ai/issues/793",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-07T14:49:25Z",
+    "status": "In progress",
+    "assignees": [
+      "Infinite-Null"
+    ]
+  },
+  {
+    "id": "WordPress/ai#795",
+    "type": "Issue",
+    "number": 795,
+    "title": "Update Playground PR to start on AI settings page",
+    "url": "https://github.com/WordPress/ai/issues/795",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-29T19:09:39Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#796",
+    "type": "PullRequest",
+    "number": 796,
+    "title": "Convert feature request to YML format",
+    "url": "https://github.com/WordPress/ai/pull/796",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-06-26T21:07:50Z",
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-26T21:07:52Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#800",
+    "type": "Issue",
+    "number": 800,
+    "title": "UX Improvement Proposal: Reposition Snackbar Notifications to Avoid Covering Settings Content",
+    "url": "https://github.com/WordPress/ai/issues/800",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.1.0",
+    "updatedAt": "2026-06-29T19:32:42Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#805",
+    "type": "Issue",
+    "number": 805,
+    "title": "Release version 1.1.0",
+    "url": "https://github.com/WordPress/ai/issues/805",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.1.0",
+    "updatedAt": "2026-07-01T14:03:10Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter",
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#809",
+    "type": "Issue",
+    "number": 809,
+    "title": "Enhancement/Fix: Content Summarization block to be found inside nested blocks",
+    "url": "https://github.com/WordPress/ai/issues/809",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-01T09:43:48Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#81",
+    "type": "PullRequest",
+    "number": 81,
+    "title": "Add/dependency check",
+    "url": "https://github.com/WordPress/ai/pull/81",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-19T20:46:37Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-19T20:46:39Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#814",
+    "type": "PullRequest",
+    "number": 814,
+    "title": "Fix markdown formatting in feature request template",
+    "url": "https://github.com/WordPress/ai/pull/814",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-07-08T17:48:36Z",
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-08T17:48:38Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#815",
+    "type": "Issue",
+    "number": 815,
+    "title": "Connector Approvals doesn't immediately flag need to grant AI plugin access to available provider(s)",
+    "url": "https://github.com/WordPress/ai/issues/815",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-01T16:47:29Z",
+    "status": "In progress",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#816",
+    "type": "Issue",
+    "number": 816,
+    "title": "Type-Ahead experiment loads wp-editor on the front end, intermittently breaking WooCommerce block checkout (sample Beanie/Cap cart)",
+    "url": "https://github.com/WordPress/ai/issues/816",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-08T18:37:50Z",
+    "status": "Done",
+    "assignees": [
+      "SohamPatel46"
+    ]
+  },
+  {
+    "id": "WordPress/ai#818",
+    "type": "Issue",
+    "number": 818,
+    "title": "Missing alt text on feature card image in AI Home stage",
+    "url": "https://github.com/WordPress/ai/issues/818",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-06T16:08:45Z",
+    "status": "Done",
+    "assignees": [
+      "monzuralam"
+    ]
+  },
+  {
+    "id": "WordPress/ai#82",
+    "type": "PullRequest",
+    "number": 82,
+    "title": "Create `plugin-check.yml`",
+    "url": "https://github.com/WordPress/ai/pull/82",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "0.1.0",
+    "updatedAt": "2026-03-19T20:45:57Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#821",
+    "type": "PullRequest",
+    "number": 821,
+    "title": "chore(ci): bump actions/cache from 5.0.5 to 6.1.0 in the github-actions-updates group",
+    "url": "https://github.com/WordPress/ai/pull/821",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-07-06T16:38:08Z",
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-06T16:38:10Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#822",
+    "type": "PullRequest",
+    "number": 822,
+    "title": "fix(deps-dev): bump the npm-dev-minor-patch group with 6 updates",
+    "url": "https://github.com/WordPress/ai/pull/822",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-06T17:55:26Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#823",
+    "type": "PullRequest",
+    "number": 823,
+    "title": "fix(deps): bump the npm-prod-minor-patch group with 22 updates",
+    "url": "https://github.com/WordPress/ai/pull/823",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-06T17:55:43Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#824",
+    "type": "PullRequest",
+    "number": 824,
+    "title": "fix(deps): bump @wordpress/dataviews from 14.3.0 to 15.0.0",
+    "url": "https://github.com/WordPress/ai/pull/824",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-06T16:43:44Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#825",
+    "type": "PullRequest",
+    "number": 825,
+    "title": "fix(deps): bump @wordpress/compose from 7.46.0 to 8.0.0",
+    "url": "https://github.com/WordPress/ai/pull/825",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-06T16:44:16Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#826",
+    "type": "PullRequest",
+    "number": 826,
+    "title": "fix(deps): bump @wordpress/element from 6.46.0 to 7.0.0",
+    "url": "https://github.com/WordPress/ai/pull/826",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-06T16:44:07Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#827",
+    "type": "PullRequest",
+    "number": 827,
+    "title": "fix(deps): bump @wordpress/components from 32.6.0 to 34.0.0",
+    "url": "https://github.com/WordPress/ai/pull/827",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-06T16:43:58Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#831",
+    "type": "PullRequest",
+    "number": 831,
+    "title": "ci: pin NPM deps and ignore `@wordpress` from dependabot",
+    "url": "https://github.com/WordPress/ai/pull/831",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-07-06T17:54:56Z",
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-06T17:54:56Z",
+    "status": "Done",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#832",
+    "type": "PullRequest",
+    "number": 832,
+    "title": "chore(deps): drop @wordpress dependencies to wp-7.0 versions",
+    "url": "https://github.com/WordPress/ai/pull/832",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-07T15:03:49Z",
+    "status": "In progress",
+    "assignees": [
+      "justlevine"
+    ]
+  },
+  {
+    "id": "WordPress/ai#833",
+    "type": "Issue",
+    "number": 833,
+    "title": "Title Generation: uncaught TypeError — MutationObserver.observe() called with null when editor canvas iframe body isn't ready after the fixed 500 ms delay",
+    "url": "https://github.com/WordPress/ai/issues/833",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-09T19:27:17Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#837",
+    "type": "PullRequest",
+    "number": 837,
+    "title": "fix(deps): bump the npm-prod-minor-patch group across 1 directory with 2 updates",
+    "url": "https://github.com/WordPress/ai/pull/837",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-07T14:19:59Z",
+    "status": "Needs review",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#838",
+    "type": "PullRequest",
+    "number": 838,
+    "title": "Update/screenshots",
+    "url": "https://github.com/WordPress/ai/pull/838",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2026-07-06T21:18:40Z",
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-06T21:18:51Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#839",
+    "type": "Issue",
+    "number": 839,
+    "title": "Type Ahead: Suggestion restarts immediately after Escape dismissal",
+    "url": "https://github.com/WordPress/ai/issues/839",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-07T14:19:48Z",
+    "status": "Done",
+    "assignees": [
+      "yogeshbhutkar"
+    ]
+  },
+  {
+    "id": "WordPress/ai#844",
+    "type": "Issue",
+    "number": 844,
+    "title": "New Experiment: Semantic search in wp admin",
+    "url": "https://github.com/WordPress/ai/issues/844",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-07-08T19:54:43Z",
+    "status": "Backlog",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#845",
+    "type": "Issue",
+    "number": 845,
+    "title": "New Experiment: Markdown feeds (powered by `html-to-md`)",
+    "url": "https://github.com/WordPress/ai/issues/845",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-07-08T20:32:00Z",
+    "status": "Backlog",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#846",
+    "type": "Issue",
+    "number": 846,
+    "title": "Type Ahead: Ghost text placement and empty-block placeholder overlap",
+    "url": "https://github.com/WordPress/ai/issues/846",
+    "repo": "WordPress/ai",
+    "state": "CLOSED",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-07-09T17:53:26Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#848",
+    "type": "Issue",
+    "number": 848,
+    "title": "How AI-Powered Cloud Services in India Are Transforming Modern Enterprises",
+    "url": "https://github.com/WordPress/ai/issues/848",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-09T10:36:47Z",
+    "status": "Triage",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#86",
+    "type": "PullRequest",
+    "number": 86,
+    "title": "Register some utility Abilities",
+    "url": "https://github.com/WordPress/ai/pull/86",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-19T02:17:18Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-12-01T22:31:59Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#87",
+    "type": "PullRequest",
+    "number": 87,
+    "title": "Add an `Asset_Loader` class",
+    "url": "https://github.com/WordPress/ai/pull/87",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-17T22:20:25Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-12-01T22:31:56Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#88",
+    "type": "PullRequest",
+    "number": 88,
+    "title": "Add basic webpack config",
+    "url": "https://github.com/WordPress/ai/pull/88",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-18T00:20:52Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-12-01T22:31:53Z",
+    "status": "Done",
+    "assignees": [
+      "dkotter"
+    ]
+  },
+  {
+    "id": "WordPress/ai#89",
+    "type": "PullRequest",
+    "number": 89,
+    "title": "Bump js-yaml",
+    "url": "https://github.com/WordPress/ai/pull/89",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-18T18:20:56Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-18T18:20:57Z",
+    "status": "Done",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#90",
+    "type": "Issue",
+    "number": 90,
+    "title": "Clarify and consolidate Title Generation options in UI and Experiment settings",
+    "url": "https://github.com/WordPress/ai/issues/90",
+    "repo": "WordPress/ai",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "Future Release",
+    "updatedAt": "2026-02-20T03:26:13Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  },
+  {
+    "id": "WordPress/ai#93",
+    "type": "PullRequest",
+    "number": 93,
+    "title": "Create `wporg-plugin-deploy.yml`",
+    "url": "https://github.com/WordPress/ai/pull/93",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-25T20:36:54Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-25T20:37:03Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai#95",
+    "type": "PullRequest",
+    "number": 95,
+    "title": "Add/community files",
+    "url": "https://github.com/WordPress/ai/pull/95",
+    "repo": "WordPress/ai",
+    "state": "MERGED",
+    "mergedAt": "2025-11-25T20:35:39Z",
+    "milestone": "0.1.0",
+    "updatedAt": "2025-11-25T20:35:41Z",
+    "status": "Done",
+    "assignees": [
+      "jeffpaul"
+    ]
+  },
+  {
+    "id": "WordPress/ai-provider-for-google#23",
+    "type": "Issue",
+    "number": 23,
+    "title": "[Bug]: Image Generation fails with \"Unexpected Google API response: Missing the candidates[0].content key\"",
+    "url": "https://github.com/WordPress/ai-provider-for-google/issues/23",
+    "repo": "WordPress/ai-provider-for-google",
+    "state": "OPEN",
+    "mergedAt": null,
+    "milestone": "1.2.0",
+    "updatedAt": "2026-05-13T21:43:40Z",
+    "status": "In discussion / Needs decision",
+    "assignees": []
+  }
+]
