@@ -4,9 +4,9 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-09 |
+> | **Data snapshot** | 2026-07-12 |
 > | **Scope** | 16 tracked dependencies = 11 Gutenberg items + 5 abilities-api items |
-> | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs 2026-07-03)* |
+> | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs 2026-07-09)* |
 > | **Source command** | `./wp-ai-roadmap-refresh.sh dependencies --json` |
 
 This document intentionally tracks a **curated dependency watchlist**, not every open Gutenberg or abilities-api issue. Gutenberg is too broad for whole-repo tracking to be useful here; the watchlist follows only items that are explicitly referenced by the WordPress AI roadmap, issue dossiers, or planned-work risk notes.
@@ -34,7 +34,7 @@ Project #240 is still the canonical source for `WordPress/ai` roadmap counts. Th
 | [`WordPress/gutenberg#74234`](https://github.com/WordPress/gutenberg/pull/74234) | PullRequest | OPEN | — | Platform / core abilities | #40 | 2026-06-19 |
 | [`WordPress/gutenberg#74572`](https://github.com/WordPress/gutenberg/pull/74572) | PullRequest | MERGED | Gutenberg 22.7 | Admin UX / DataViews | #741 | 2026-02-26 |
 | [`WordPress/gutenberg#75221`](https://github.com/WordPress/gutenberg/issues/75221) | Issue | OPEN | — | Media / focal point | #238 | 2026-02-04 |
-| [`WordPress/gutenberg#77230`](https://github.com/WordPress/gutenberg/issues/77230) | Issue | OPEN | — | Skills / Guidelines | #430 | 2026-07-01 |
+| [`WordPress/gutenberg#77230`](https://github.com/WordPress/gutenberg/issues/77230) | Issue | OPEN | — | Skills / Guidelines | #430 | 2026-07-11 |
 | [`WordPress/gutenberg#77643`](https://github.com/WordPress/gutenberg/pull/77643) | PullRequest | MERGED | Gutenberg 23.1 | Skills / Guidelines | #430 | 2026-04-29 |
 | [`WordPress/gutenberg#77816`](https://github.com/WordPress/gutenberg/issues/77816) | Issue | OPEN | — | Admin UX / toast component | #699 | 2026-06-29 |
 | [`WordPress/gutenberg#77994`](https://github.com/WordPress/gutenberg/pull/77994) | PullRequest | MERGED | Gutenberg 23.2 | Media Editor | #325 | 2026-06-25 |
@@ -60,6 +60,7 @@ Use `--save` on the normal refresh to persist a dependency snapshot under `.wp-a
 
 | Date | Change |
 |---|---|
+| 2026-07-12 | Live refresh vs the 2026-07-09 baseline snapshot. **No state, milestone, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged; abilities-api 5, Gutenberg 11). **1 title change + 1 activity bump**, both on `WordPress/gutenberg#77230`: retitled "Guidelines built on Knowledge in WordPress **7.1**" → "…WordPress **7.2**", and its Updated cell bumped 2026-07-01 → 2026-07-11. Context: the `WordPress/ai` **v1.2.0** lane advanced (6 more board-Done, incl. the #508 "Suggest Reply" experiment) and two more core-ability PRs opened upstream-adjacent (#856 `core/read-settings` snapshot ordering, #858 `core/read-nav-menus`), but no watchlisted Gutenberg/abilities-api dependency changed state. |
 | 2026-07-09 | Live refresh vs the 2026-07-03 baseline snapshot. **No state, milestone, title, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged; abilities-api 5, Gutenberg 11). 1 item had new upstream activity; bumped Updated cell: `WordPress/gutenberg#73771` → 2026-07-08. Context: the `WordPress/ai` **v1.2.0** lane opened its first 10 board-Done items this window (incl. the new `core/read-users` Ability, PR #774, merged), but no watchlisted Gutenberg/abilities-api dependency changed state. |
 | 2026-07-03 | Live refresh vs the 2026-07-02 baseline snapshot. **No state, milestone, title, list, or activity changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged; abilities-api 5, Gutenberg 11). No `Updated` cells bumped (no upstream activity in the window). Context: `WordPress/ai` de-carded 7 already-Done issues from Project #240 this window, but no watchlisted Gutenberg/abilities-api dependency changed. |
 | 2026-07-02 | Live refresh vs the 2026-06-30 baseline snapshot. **No state, milestone, title, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged). 2 items had new upstream activity; bumped Updated cells: `WordPress/gutenberg#73771` → 2026-07-01, `#77230` → 2026-07-01. Context: `WordPress/ai` shipped **v1.1.0** (2026-07-01) in this window, but no watchlisted Gutenberg/abilities-api dependency changed state. |

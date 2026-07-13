@@ -1,16 +1,16 @@
 # WordPress AI — Open Issues Dossier (Companion Reference)
 
-> Deep per-issue documentation for all **57 open issues** (status current to 2026-07-09) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240), tracking the `WordPress/ai` Showcase Plugin.
+> Deep per-issue documentation for all **53 open issues** (status current to 2026-07-12) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240), tracking the `WordPress/ai` Showcase Plugin.
 > Companion to **[`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md)** (the strategic overview + tracker) and **[`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md)** (Gutenberg + abilities-api upstream watchlist). This file is the *detailed dossier*: problem, proposed approach, open decisions, dependencies, and discussion for each issue.
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-09 |
-> | **Scope** | 57 current open-issue dossiers + 1 removed-board reference (#84) + 21 recently board-Done issues retained for reference (#145, #197, #390, #391, #571, #578, #632, #678, #699, #701, #721, #750, #752, #767, #771, #805, #816, #818, #833, #839, #846). Excludes 20 non-Done PR cards and the rest of the 200 Done items. *(Note: this refresh de-carded five already-Done issues from Project #240 — #750/#755/#763/#768 (1.1.0) + #752 (no-milestone); #750 and #752 remain retained here, the other three were never dossiered. Earlier de-cards: #390/#391/#571/#578/#678 + #589/#727 on 2026-07-03.)* |
-> | **Repos** | `WordPress/ai` (56 open issues) · `WordPress/ai-provider-for-google` (#23). `WordPress/abilities-api` #84 remains open upstream and is now tracked in the cross-repo dependency watchlist, but is no longer on Project #240. |
+> | **Data snapshot** | 2026-07-12 |
+> | **Scope** | 53 current open-issue dossiers + 1 removed-board reference (#84) + 26 recently board-Done issues retained for reference (#145, #197, #390, #391, #508, #571, #578, #632, #678, #699, #701, #721, #750, #752, #767, #771, #793, #805, #809, #815, #816, #818, #833, #839, #846, #848). Excludes 20 non-Done PR cards and the rest of the 206 Done items. *(Note: this refresh moved five issues to board-Done — #508/#793/#815 (1.2.0), #809 (no-milestone), and the closed spam #848 — and #845 moved Backlog → In progress.)* |
+> | **Repos** | `WordPress/ai` (52 open issues) · `WordPress/ai-provider-for-google` (#23). `WordPress/abilities-api` #84 remains open upstream and is now tracked in the cross-repo dependency watchlist, but is no longer on Project #240. |
 > | **Each dossier** | Status · Milestone · Labels · Assignees · Last updated · Comment count · Link, then Problem → Approach → Open decisions → Dependencies → Discussion |
 
-**Grouped by board status** (count, current to 2026-07-09): [In discussion / Needs decision (19)](#in-discussion--needs-decision-19) · [In progress (19)](#in-progress-19) · [Backlog (9)](#backlog-9) · [To do (6)](#to-do-6) · [Triage (2)](#triage-2) · [Needs review (2)](#needs-review-2) · [Recently board-Done (21)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
+**Grouped by board status** (count, current to 2026-07-12): [In discussion / Needs decision (19)](#in-discussion--needs-decision-19) · [In progress (17)](#in-progress-17) · [Backlog (8)](#backlog-8) · [To do (6)](#to-do-6) · [Triage (2)](#triage-2) · [Needs review (1)](#needs-review-1) · [Recently board-Done (26)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
 
 > ⭐ = major strategic bet · ⚠️ = notable risk / live regression. "Status" reflects the **board's project status**; "Milestone" is the release target.
 
@@ -335,9 +335,9 @@
 
 ---
 
-## In progress (19)
+## In progress (17)
 
-*Actively being built. Now dominated by **1.2.0** hardening — most of this section was re-milestoned 1.1.0/Future → **1.2.0** on 2026-06-30 as 1.1.0 wound down to its release checklist — plus a few longer-horizon experiments. **This refresh (2026-07-03):** **#816** (Type-Ahead front-end regression) promoted Triage → In progress (fix PR #820), and board-new **#818** (missing alt text on the AI Home feature card, PR #819) added — both unmilestoned (board Tier ④), joining #809.*
+*Actively being built. Now dominated by **1.2.0** hardening — most of this section was re-milestoned 1.1.0/Future → **1.2.0** on 2026-06-30 — plus a few longer-horizon experiments. **This refresh (2026-07-12):** three cards left In progress for board-Done — #793 (Customize-experiments tool), #815 (Connector-Approvals notice), and #809 (nested-block fix; see [Recently board-Done](#recently-board-done-since-the-2026-06-15-snapshot)) — and **#845** (Markdown feeds) arrived from Backlog as its implementing off-board PR #855 opened.*
 
 ### #191 — Add import/export support for AI settings and provider configuration
 **Status:** In progress · **Milestone:** 1.2.0 *(moved Future Release → 1.2.0 2026-06-30)* · **Labels:** [Type] Enhancement · **Assignee(s):** coderGtm · **Updated:** 2026-06-11 · **Comments:** 7 · *(moved from In discussion / Needs decision, 2026-06-16)*
@@ -586,55 +586,25 @@
 
 **Discussion highlights.** Contributors are self-assigning individual experiment specs (Infinite-Null on Excerpt Generation; hasanmehmood on Content Classification, following the #762/#773 pattern); yogeshbhutkar is coordinating reviews.
 
-### #809 — Enhancement/Fix: Content Summarization block found inside nested blocks
-**Status:** In progress · **Milestone:** — · **Labels:** — · **Assignee(s):** Intenzi · **Updated:** 2026-07-01 · **Comments:** 0 · *(board-new, filed 2026-07-01)*
-**Link:** https://github.com/WordPress/ai/issues/809
+### #845 — New Experiment: Markdown feeds (powered by `html-to-md`)
+**Status:** In progress *(moved Backlog → In progress, 2026-07-12)* · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** dkotter · **Updated:** 2026-07-08 · **Comments:** 0 · *(board-new, filed 2026-07-08)*
+**Link:** https://github.com/WordPress/ai/issues/845
 
-**Problem / goal.** The Content Summarization experiment inserts an `ai-generated-summary` group block and, on "Regenerate Summary", tries to find and modify that block in place. But it only scans **top-level** blocks (`allBlocks.find( block => block.name === 'core/group' && block.attributes.aiGeneratedSummary === true )`), so if the summary was moved inside a nested container (Group/Column — a common layout), it isn't found and a **second** summary block is inserted instead of updating the existing one.
+**Problem / goal.** Markdown output makes content easier for AI tools, agents, search/indexing workflows, static exports, and plaintext-preferring readers to consume. A prior implementation (#194) explored the surface — Markdown feed output, singular Markdown views, autodiscovery links, `Accept: text/markdown` support, settings toggles, filters, and tests — but maintained its own converter.
 
-**Proposed approach.** Recurse into `innerBlocks` when detecting the existing summary group so regeneration updates the block wherever it sits in the tree.
+**Proposed approach.** A new **Markdown Feeds** experiment exposing content as Markdown, using [`dmsnell/html-to-md`](https://github.com/dmsnell/html-to-md) as the conversion layer rather than a bespoke converter, revisiting the #194 direction. Implementation now in flight as off-board **PR #855** ("Markdown feeds experiment", @dkotter, *Closes #845*).
 
-**Open decisions / blockers.** —
+**Open decisions / blockers.** Which parts of the #194 surface (feeds vs. singular views vs. `Accept`-header negotiation) make the first cut; reliance on the external `html-to-md` library.
 
-**Dependencies.** The Content Summarization experiment's block-detection logic. Fix in flight as off-board **PR #810** ("Enhance Content Summary block detection to nested blocks", *Closes #809*, by Intenzi). Unmilestoned (board Tier ④).
+**Dependencies.** `dmsnell/html-to-md`; prior art in #194; WP feed / REST plumbing.
 
-**Discussion highlights.** Filed by Intenzi with the offending code snippet; PR #810 opened the same day.
-
-### #793 — New Developer Tool: Customize experiments
-**Status:** In progress *(moved To do → In progress, 2026-07-09)* · **Milestone:** 1.2.0 · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-06-26 · **Comments:** 0 · *(board-new, filed 2026-06-26)*
-**Link:** https://github.com/WordPress/ai/issues/793
-
-**Problem / goal.** The AI plugin targets non-technical site owners, yet enabling some experiments immediately surfaces advanced settings (e.g. Content Classification's taxonomy strategy + maximum suggestions), adding cognitive load — "turn it on" becomes "turn it on and then figure out what these settings mean." The proposal adds a **"Customize experiments"** option under the Developer Tools menu (the ⋮ in the AI settings header) to keep advanced per-experiment settings hidden by default.
-
-**Proposed approach.** Add a Developer Tools toggle "Customize experiments" (description: "Show additional settings for experiments"), **disabled by default**. When off, hide advanced settings such as Content Classification's taxonomy strategy / maximum suggestions and the Type Ahead extras (re-surfacing the Type Ahead settings noted in the #151 discussion); when on, expose them. Title TBD — jeffpaul is unsure about "Customize experiments" and invites alternatives.
-
-**Open decisions / blockers.**
-- Final option label/description.
-- Exactly which per-experiment settings move behind the toggle vs. stay visible by default.
-
-**Dependencies.** The AI settings page Developer Tools (⋮) menu; Content Classification and Type Ahead settings UIs; relates to Type Ahead settings from PR #151.
-
-**Discussion highlights.** Filed by jeffpaul with annotated screenshots; no comments yet.
-
-### #815 — Connector Approvals doesn't immediately flag need to grant AI plugin access to a provider
-**Status:** In progress *(moved To do → In progress, 2026-07-09)* · **Milestone:** 1.2.0 · **Labels:** [Type] Bug, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-01 · **Comments:** 0 · *(board-new, filed 2026-07-01)*
-**Link:** https://github.com/WordPress/ai/issues/815
-
-**Problem / goal.** Originally reported on the WPORG support forum ("Enabling Experimental Features Breaks Open AI Connector"). When Connector Approvals is first enabled, **no admin notice** tells the user they must approve the AI plugin's access to a connected provider plugin. The gap only surfaces later as a "no available connector" error when they try to use an AI feature — after which the notice does appear. Lightly related to #660 (ambiguous "blocked by Connector Approvals" editor error).
-
-**Proposed approach.** Surface the "grant the AI plugin access to your provider(s)" admin notice immediately on enabling Connector Approvals, rather than only after a failed generation.
-
-**Open decisions / blockers.** —
-
-**Dependencies.** The Connector Approvals flow and its admin-notice logic; overlaps #660.
-
-**Discussion highlights.** Filed by jeffpaul from a WPORG support report (@vfontjr); no comments yet.
+**Discussion highlights.** Filed by jeffpaul; Help Wanted. dkotter picked it up and opened PR #855, moving it Backlog → In progress.
 
 ---
 
-## Backlog (9)
+## Backlog (8)
 
-*Planned, not yet started. The new-experiment proposals and the agentic/site-agent direction concentrate here. (Board-new this refresh: experiment proposals #844 semantic search in wp-admin + #845 Markdown feeds, both Future Release. Earlier: #192/#732 → In progress 2026-06-25; #190 → To do 2026-07-02.)*
+*Planned, not yet started. The new-experiment proposals and the agentic/site-agent direction concentrate here. (This refresh: **#845** Markdown feeds moved Backlog → In progress as implementing PR #855 opened, leaving **#844** semantic search in wp-admin as the newest Backlog experiment. Earlier: #192/#732 → In progress 2026-06-25; #190 → To do 2026-07-02.)*
 
 ### #142 — Frontend chat agent powered by site content ⭐
 **Status:** Backlog · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Needs Design · **Assignee(s):** — · **Updated:** 2025-12-08 · **Comments:** 0
@@ -763,20 +733,6 @@
 
 **Discussion highlights.** Filed by jeffpaul as the admin-side counterpart to #683; no comments yet.
 
-### #845 — New Experiment: Markdown feeds (powered by `html-to-md`)
-**Status:** Backlog · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-08 · **Comments:** 0 · *(board-new, filed 2026-07-08)*
-**Link:** https://github.com/WordPress/ai/issues/845
-
-**Problem / goal.** Markdown output makes content easier for AI tools, agents, search/indexing workflows, static exports, and plaintext-preferring readers to consume. A prior implementation (#194) explored the surface — Markdown feed output, singular Markdown views, autodiscovery links, `Accept: text/markdown` support, settings toggles, filters, and tests — but maintained its own converter.
-
-**Proposed approach.** A new **Markdown Feeds** experiment exposing content as Markdown, using [`dmsnell/html-to-md`](https://github.com/dmsnell/html-to-md) as the conversion layer rather than a bespoke converter, revisiting the #194 direction.
-
-**Open decisions / blockers.** Which parts of the #194 surface (feeds vs. singular views vs. `Accept`-header negotiation) make the first cut; reliance on the external `html-to-md` library.
-
-**Dependencies.** `dmsnell/html-to-md`; prior art in #194; WP feed / REST plumbing.
-
-**Discussion highlights.** Filed by jeffpaul; Help Wanted. No comments yet.
-
 ---
 
 ## To do (6)
@@ -886,7 +842,7 @@
 
 ## Triage (2)
 
-*Newly arrived / unsorted: the foundational Core Abilities platform issue (#40) — plus a **spam issue (#848)** that landed 2026-07-09 and should be removed from the board. (#793 "Customize experiments" and #815 Connector-Approvals notice both moved To do → In progress on 2026-07-09 — their dossiers are now in [In progress](#in-progress-19).)*
+*Newly arrived / unsorted: the foundational Core Abilities platform issue (#40) — plus a board-new bug **#853** (Generate_Image ability uses a hardcoded timeout) filed 2026-07-10. (The prior spam card #848 was **closed board-Done** this refresh — its entry now sits under [Recently board-Done](#recently-board-done-since-the-2026-06-15-snapshot).)*
 
 ### #40 — WordPress Core Abilities ⭐
 **Status:** Triage · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** gziolo, jorgefilipecosta · **Updated:** 2026-05-07 · **Comments:** 37
@@ -906,17 +862,23 @@
 
 **Discussion highlights.** swissspidy mapped the CP-vs-MCP tension (granular "Create a new page" for humans, one `create_post` tool for machines) and flagged i18n issues with string concatenation. JasonTheAdams shared TEC/GiveWP MCP findings — single CRUD tools fared poorly, settling on read/create-update/delete. johnbillion sharply questioned shipping `show_in_abilities` into 7.0 beta without API-design review. justlevine and jorgefilipecosta debated core-first vs. Experiments-first process. gziolo initially favored curated settings abilities, then reversed to broad-first after consulting Automattic AI experts, preserving `core/get-site-info` for back-compat.
 
-### #848 — [Spam] "How AI-Powered Cloud Services in India Are Transforming Modern Enterprises" ⚠️
-**Status:** Triage · **Milestone:** — · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-07-09 · **Comments:** 0 · *(board-new, filed 2026-07-09)*
-**Link:** https://github.com/WordPress/ai/issues/848
+### #853 — Generate_Image Ability uses a hardcoded timeout value
+**Status:** Triage · **Milestone:** — · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-07-10 · **Comments:** 0 · *(board-new, filed 2026-07-10)*
+**Link:** https://github.com/WordPress/ai/issues/853
 
-**Problem / goal.** None — this is **SEO / link spam**, not a roadmap item. The body is promotional copy ("As businesses accelerate their digital transformation journeys, AI-powered cloud services in India…") linking to an external commercial site (`prodevans.com`), filed by a throwaway account (`keywordcoded-glitch`) with no labels or milestone.
+**Problem / goal.** The Image Generation ability issues its provider request with a fixed, hardcoded timeout rather than a configurable/filterable value. Slow image models (or constrained hosts) can exceed the hardcoded window and fail even when the generation would otherwise have succeeded, with no supported way to raise the limit.
 
-**Recommended action.** Close as spam and remove the card from Project #240 — it currently inflates the Triage bucket and the open-issue count (57). Tracked here only so the board↔doc counts reconcile; it should disappear on the next refresh once maintainers delete it.
+**Proposed approach.** None finalized (Triage). Likely expose the timeout as a filterable value and/or align it with the provider / AI-Client request-timeout configuration so site owners on slower models can extend it.
+
+**Open decisions / blockers.** Not yet triaged to a milestone; exact configuration surface (constant vs. filter vs. per-provider) undecided.
+
+**Dependencies.** The Image Generation experiment/ability; provider request-timeout handling in the WP AI Client / provider plugins.
+
+**Discussion highlights.** — (board-new; no comments yet.)
 
 ---
 
-## Needs review (2)
+## Needs review (1)
 
 *Implementation submitted; PR open and awaiting review.*
 
@@ -936,27 +898,11 @@
 
 **Discussion highlights.** yogeshbhutkar shared a working PoC. dkotter questioned the block-level use case and suggested starting with full-article translation or folding block translation into Content Resizing. yogeshbhutkar refactored toward full-article, batch-style processing and opened PR #747 for review.
 
-### #508 — New Experiment: "Suggest Reply" for Comments and Activity widget
-**Status:** Needs review · **Milestone:** 1.2.0 *(moved In progress → Needs review, Future Release → 1.2.0, 2026-06-30)* · **Labels:** [Type] Enhancement · **Assignee(s):** dkotter · **Updated:** 2026-06-30 · **Comments:** 4 · *(moved from Backlog, 2026-06-16)*
-**Link:** https://github.com/WordPress/ai/issues/508
-
-**Problem / goal.** #155 removed the "Reply with AI" action from the Comments screen over UX/placement concerns, yet moderators/editors still benefit from assisted replies — especially when responses should align with Guidelines, post context matters, and tone/consistency matter.
-
-**Proposed approach.** A new Experiment adding a "Suggest reply" capability integrated into the Comments screen (row action/inline UI) and the Activity dashboard widget. Generates a suggested response from the comment content, associated post content, and Guidelines; lets users review/insert/edit before replying (**not** automated reply); includes "Regenerate reply."
-
-**Open decisions / blockers.**
-- Tone selection should occur **before** generation (avoid an extra request).
-- Whether other pre-generation options are wanted in the modal.
-
-**Dependencies.** Guidelines layer; post content context; supersedes the removed #155 action. Implemented in **PR #724** (now Needs review).
-
-**Discussion highlights.** Infinite-Null built a POC (video) for the Comments-screen row action, generating from comment + post title + Guidelines; volunteered to implement. dkotter approved the direction but asked the modal open first, letting the user set Tone, then click Generate. Infinite-Null updated the flow accordingly and opened PR #724 for review, adding pre-generation Tone, a Guidelines field, and UI polish.
-
 ---
 
 ## Recently board-Done (since the 2026-06-15 snapshot)
 
-*Closed or moved to board-Done after the snapshot — retained for reference, not counted in the open totals above. **v1.1.0 shipped 2026-07-01**, so the 1.1.0-milestone items below are now in a public release (#699 shipped earlier, in 1.0.2). The 2026-07-02 refresh added **#197** and **#805** here (16 retained). **2026-07-03:** five of these — **#390/#391/#571/#578/#678** — were de-carded from Project #240 (along with #589 and the 1.0.2 release-tracker #727, which were never dossiered here); they remain closed/shipped and are kept below purely as reference.*
+*Closed or moved to board-Done after the snapshot — retained for reference, not counted in the open totals above. **v1.1.0 shipped 2026-07-01**, so the 1.1.0-milestone items below are now in a public release (#699 shipped earlier, in 1.0.2). **2026-07-12 added 5 entries — #508, #793, #809, #815, and the closed spam card #848 — for 26 retained.** (Earlier: the 2026-07-02 refresh added #197/#805; on 2026-07-03 five items — #390/#391/#571/#578/#678 — were de-carded from Project #240 along with #589/#727, remaining closed/shipped and kept below purely as reference.)*
 
 ### #145 — Rename experiment register() method to better reflect initialization
 **Status:** Done · **Milestone:** — *(was 1.1.0)* · **Labels:** [Type] Enhancement · **Assignee(s):** juanmaguitar · **Updated:** 2026-06-30 · **Comments:** 4 · *(board-Done / closed 2026-06-30)*
@@ -1134,6 +1080,46 @@
 
 **Resolution / retained context.** Corrected the overlay anchoring / placeholder handling; closed board-Done under 1.2.0 on 2026-07-09. Filed by yogeshbhutkar with screen recordings.
 
+### #508 — New Experiment: "Suggest Reply" for Comments and Activity widget
+**Status:** Done · **Milestone:** 1.2.0 · **Labels:** [Type] Enhancement · **Assignee(s):** dkotter · **Updated:** 2026-07-10 · **Comments:** 4 · *(board-Done / closed 2026-07-10 via PR #724; moved Backlog → In progress → Needs review → Done)*
+**Link:** https://github.com/WordPress/ai/issues/508
+
+**Problem / goal.** #155 removed the "Reply with AI" action from the Comments screen over UX/placement concerns, yet moderators/editors still benefit from assisted replies aligned with Guidelines and post context. A new Experiment adds a "Suggest reply" capability on the Comments screen (row action) and the Activity dashboard widget — a reviewable suggestion generated from the comment + associated post + Guidelines (human review/insert/edit; **not** auto-reply).
+
+**Resolution / retained context.** Merged as **PR #724** (Infinite-Null) on 2026-07-10 and closed board-Done under **1.2.0** — the 1.2.0 lane's first genuinely new *experiment* (vs. hardening). The shipped flow opens the modal first for a pre-generation Tone selector + a Guidelines field, then Generate (per dkotter's review); supersedes the removed #155 action.
+
+### #793 — New Developer Tool: Customize experiments
+**Status:** Done · **Milestone:** 1.2.0 · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-10 · **Comments:** 0 · *(board-Done / closed 2026-07-10 via PR #842; moved To do → In progress → Done)*
+**Link:** https://github.com/WordPress/ai/issues/793
+
+**Problem / goal.** Enabling some experiments immediately surfaced advanced settings (e.g. Content Classification's taxonomy strategy / maximum suggestions), adding cognitive load for the non-technical site owners the plugin targets. Added a **"Customize experiments"** toggle under the Developer Tools (⋮) menu — disabled by default — keeping advanced per-experiment settings hidden until opted in.
+
+**Resolution / retained context.** Merged as **PR #842** ("Add Advanced Settings toggle to Developer Tools menu", which also re-surfaces the Type Ahead settings from #151) and closed board-Done under **1.2.0** on 2026-07-10.
+
+### #809 — Enhancement/Fix: Content Summarization block found inside nested blocks
+**Status:** Done · **Milestone:** — · **Labels:** — · **Assignee(s):** Intenzi · **Updated:** 2026-07-10 · **Comments:** 0 · *(board-Done / closed 2026-07-10 via PR #810; unmilestoned)*
+**Link:** https://github.com/WordPress/ai/issues/809
+
+**Problem / goal.** The Content Summarization "Regenerate Summary" flow only scanned **top-level** blocks for the existing `ai-generated-summary` group, so a summary moved inside a nested Group/Column wasn't found and a **second** summary block was inserted instead of updating the existing one.
+
+**Resolution / retained context.** Fixed by recursing into `innerBlocks` when detecting the existing summary group; merged as **PR #810** (Intenzi, *Closes #809*) and closed board-Done on 2026-07-10. Remained **unmilestoned** through close.
+
+### #815 — Connector Approvals doesn't immediately flag need to grant AI plugin access to a provider
+**Status:** Done · **Milestone:** 1.2.0 · **Labels:** [Type] Bug, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-10 · **Comments:** 0 · *(board-Done / closed 2026-07-10 via PR #830; moved To do → In progress → Done)*
+**Link:** https://github.com/WordPress/ai/issues/815
+
+**Problem / goal.** When Connector Approvals was first enabled, **no admin notice** told the user they must approve the AI plugin's access to a connected provider — the gap only surfaced later as a "no available connector" error when using an AI feature (a WPORG support report; lightly related to #660).
+
+**Resolution / retained context.** Surfaced the "grant the AI plugin access to your provider(s)" notice immediately on enabling Connector Approvals; merged as **PR #830** ("Fix/815 grant ai plugin access") and closed board-Done under **1.2.0** on 2026-07-10.
+
+### #848 — [Spam, closed] "How AI-Powered Cloud Services in India Are Transforming Modern Enterprises"
+**Status:** Done *(closed as "completed")* · **Milestone:** — · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-07-10 · **Comments:** 0 · *(board-Done / closed 2026-07-10)*
+**Link:** https://github.com/WordPress/ai/issues/848
+
+**Problem / goal.** Not a roadmap item — **SEO / link spam** (promotional copy linking `prodevans.com`, filed by throwaway account `keywordcoded-glitch`). It landed in Triage 2026-07-09 and inflated the open-issue count.
+
+**Resolution / retained context.** **Closed 2026-07-10** (state reason "completed"), so it now shows as a board-Done card rather than being removed from Project #240 — no longer inflating the Triage bucket or the open-issue count. Retained here only so the board↔doc counts reconcile.
+
 ---
 
 ## Removed from Project #240 (reference)
@@ -1184,3 +1170,4 @@ gh issue view WordPress/ai#<N> --json number,title,body,state,labels,milestone,a
 | 2026-07-03 | Live Project #240 refresh. Open issues **55 → 56**: In progress **17 → 19**, Triage **2 → 1** (In discussion 19, Backlog 7, To do 8, Needs review 2 unchanged). **#816** (Type-Ahead front-end `wp-editor`/WooCommerce regression) moved **Triage → In progress** (fix PR #820) — dossier relocated accordingly. **Dossiered 1 board-new open issue:** #818 (missing alt text on the AI Home feature-card `<img>`; In progress, unmilestoned, PR #819). **7 already-Done issues de-carded from the board** (#390/#391/#571/#578/#678 from 1.1.0, #589/#727 from 1.0.2) — the five previously dossiered here are retained for reference. Board totals **271 → 265**; Done **196 → 189**; non-Done PR cards hold at **20**. `WordPress/ai` open issues 54 → 55 (+ #23 on `ai-provider-for-google`). |
 | 2026-07-02 | Live Project #240 refresh. Open issues **54 → 55**: Backlog **8 → 7**, To do **7 → 8**, Triage **1 → 2** (In discussion 19, In progress 17, Needs review 2 unchanged). **v1.1.0 shipped 2026-07-01** — moved **#197** (credentials gate; closed board-Done with off-board PR #799 closed **unmerged**, so not in the 1.1.0 payload) and **#805** (release tracker) to **Recently board-Done** (14 → **16** retained). Dossiered **3 board-new open issues** — #809 (Content-Summary nested-block detection, In progress, off-board PR #810), #815 (Connector-Approvals access-notice gap, To do / 1.2.0), #816 (Type-Ahead front-end `wp-editor` load breaks WooCommerce block checkout, Triage — post-1.1.0 regression). **#190** moved Backlog → To do. Board totals **269 → 271**; Done **195 → 196**; non-Done PR cards hold at **20**. `WordPress/ai` open issues 53 → 54 (+ #23 on `ai-provider-for-google`). |
 | 2026-07-09 | Live Project #240 refresh. Open issues **56 → 57**: Backlog **7 → 9**, To do **8 → 6**, Triage **1 → 2** (In discussion 19, In progress 19, Needs review 2 unchanged). **v1.2.0 opened its first board-Done batch:** moved **#816** (Type-Ahead front-end/WooCommerce regression) and **#818** (AI-Home alt-text a11y) from In progress → **Recently board-Done**, and added three board-new-and-closed bug dossiers there — **#833** (Title-Generation MutationObserver crash), **#839** (Type-Ahead Escape-restart), **#846** (Type-Ahead ghost-text overlap) — so retained board-Done **16 → 21**. **#793** ("Customize experiments") and **#815** (Connector-Approvals notice) moved To do → **In progress**. **Dossiered 2 board-new Backlog experiments:** #844 (semantic search in wp-admin, blocked on #683) and #845 (Markdown feeds via `html-to-md`). **Flagged spam:** #848 (Triage) — SEO/link spam pending board removal. **5 already-Done issues de-carded** from Project #240: #750/#755/#763/#768 (1.1.0) + #752 (no-milestone) — #750/#752 remain retained. Board totals **265 → 277**; Done **189 → 200**; non-Done PR cards hold at **20**. `WordPress/ai` open issues 55 → 56 (+ #23 on `ai-provider-for-google`). |
+| 2026-07-12 | Live Project #240 refresh. Open issues **57 → 53**: In progress **19 → 17**, Backlog **9 → 8**, Needs review **2 → 1** (In discussion 19, To do 6, Triage 2 unchanged). **Moved 4 open issues to Recently board-Done** — **#508** "Suggest Reply" experiment (Needs review → Done, PR #724), **#793** Customize-experiments tool (In progress → Done, PR #842), **#815** Connector-Approvals notice (In progress → Done, PR #830), and **#809** nested-block fix (In progress → Done, PR #810) — plus the closed **spam #848** (Triage → Done, "completed"); retained board-Done **21 → 26**. **#845** (Markdown feeds) moved **Backlog → In progress** (implementing PR #855). **Dossiered 1 board-new Triage bug:** #853 (Generate_Image hardcoded timeout, no milestone). Board totals **277 → 279**; Done **200 → 206**; non-Done PR cards hold at **20**. `WordPress/ai` open issues 56 → 52 (+ #23 on `ai-provider-for-google`). |

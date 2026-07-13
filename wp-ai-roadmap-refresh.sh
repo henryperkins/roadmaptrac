@@ -414,14 +414,18 @@ fetch_dependencies() {
     else
       pr="null"
     fi
-    jq -n \
+    # $issue/$pr are piped in as one JSON object on stdin, not passed via
+    # --argjson: a large payload on the command line overflows the argv length
+    # limit on Windows (Git Bash), aborting the census with "Argument list too
+    # long". printf is a shell builtin, so building the object bypasses argv
+    # entirely and behaves identically on every platform.
+    printf '{"issue":%s,"pr":%s}' "$issue" "$pr" | jq \
       --arg spec "$spec" \
       --arg repo "$repo" \
       --arg theme "$theme" \
       --arg ai_refs "$ai_refs" \
-      --arg note "$note" \
-      --argjson issue "$issue" \
-      --argjson pr "$pr" '
+      --arg note "$note" '
+        .issue as $issue | .pr as $pr |
         def norm_state:
           if $pr != null and ($pr.merged == true) then "MERGED"
           else (($issue.state // "unknown") | ascii_upcase)
