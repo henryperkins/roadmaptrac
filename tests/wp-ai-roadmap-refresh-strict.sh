@@ -76,6 +76,43 @@ jq -e . "$TMP_DIR/normal.json" >/dev/null
 after_count="$(find "$TEST_SNAP_DIR" -maxdepth 1 -type f | wc -l)"
 [ "$after_count" -eq "$((before_count + 4))" ]
 
+# First run (no baselines yet) must honor the strict gate: a red audit
+# establishes nothing and exits 2 with parseable JSON.
+FIRST_SNAP_DIR="$TMP_DIR/first-snapshots"
+mkdir -p "$FIRST_SNAP_DIR"
+set +e
+PATH="$MOCK_BIN:$PATH" \
+WP_AI_SNAP_DIR="$FIRST_SNAP_DIR" \
+WP_AI_DOC_DIR="$TEST_DOC_DIR" \
+WP_AI_DEPS_FILE="$TEST_REGISTRY" \
+WP_AI_TEST_STATE_DIR="$STATE_DIR" \
+WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
+WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
+WP_AI_TEST_RELEASES="$RELEASES" \
+  "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --strict --json \
+  >"$TMP_DIR/first-strict.json" 2>"$TMP_DIR/first-strict.err"
+first_strict_status=$?
+set -e
+[ "$first_strict_status" -eq 2 ]
+jq -e '(.validation.ok|not)' "$TMP_DIR/first-strict.json" >/dev/null
+[ "$(find "$FIRST_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 0 ]
+rg 'persistence skipped' "$TMP_DIR/first-strict.err" >/dev/null
+
+# Normal-mode first run still establishes all four baselines and emits pure JSON.
+PATH="$MOCK_BIN:$PATH" \
+WP_AI_SNAP_DIR="$FIRST_SNAP_DIR" \
+WP_AI_DOC_DIR="$TEST_DOC_DIR" \
+WP_AI_DEPS_FILE="$TEST_REGISTRY" \
+WP_AI_TEST_STATE_DIR="$STATE_DIR" \
+WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
+WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
+WP_AI_TEST_RELEASES="$RELEASES" \
+  "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --json \
+  >"$TMP_DIR/first-normal.json" 2>"$TMP_DIR/first-normal.err"
+jq -e '(keys | sort)==["board","dependencies","repo","validation"]' "$TMP_DIR/first-normal.json" >/dev/null
+[ "$(find "$FIRST_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 4 ]
+rg 'Baseline established' "$TMP_DIR/first-normal.err" >/dev/null
+
 set +e
 "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --not-a-real-option >/dev/null 2>&1
 invalid_status=$?

@@ -1080,26 +1080,20 @@ fi
 BASELINE="$BASELINE_OVERRIDE"
 [ -n "$BASELINE" ] || BASELINE="$(latest_snap "proj$PROJECT")"
 
-# first run: establish baseline(s) and exit
+# First run (no board baseline yet): run the full pipeline against a self-diff
+# so the report, validation, and strict gate all apply, then establish the
+# baselines in the shared persistence block below.
+FIRST_RUN=0
 if [ -z "$BASELINE" ]; then
-  TS="$(date -u +%Y%m%dT%H%M%SZ)"
-  cp "$TMP_CUR" "$SNAP_DIR/proj$PROJECT-$TS.json"
-  echo "Baseline established: $SNAP_DIR/proj$PROJECT-$TS.json ($(jq length "$TMP_CUR") items)."
-  if [ "$DO_REPO" = 1 ]; then
-    cp "$TMP_PRS" "$SNAP_DIR/prs-$REPO_SLUG-$TS.json"
-    cp "$TMP_REL" "$SNAP_DIR/releases-$REPO_SLUG-$TS.json"
-    echo "Repo baselines established: prs-$REPO_SLUG-$TS.json, releases-$REPO_SLUG-$TS.json."
-  fi
-  if [ "$DO_DEPS" = 1 ]; then
-    jq '.items' "$TMP_DEPS" > "$SNAP_DIR/$DEPS_SLUG-$TS.json"
-    echo "Dependency baseline established: $DEPS_SLUG-$TS.json."
-  fi
-  echo "Re-run later to see changes."
-  exit 0
+  FIRST_RUN=1
+  BASE_LABEL="(first run)"
+  BASELINE="$TMP_CUR"
+else
+  BASE_LABEL="$(basename "$BASELINE")"
 fi
 
 DIFF_FILE="$(mktemp)"
-compute_diff "$BASELINE" "$TMP_CUR" "$(basename "$BASELINE")" "$CUR_LABEL" > "$DIFF_FILE"
+compute_diff "$BASELINE" "$TMP_CUR" "$BASE_LABEL" "$CUR_LABEL" > "$DIFF_FILE"
 
 # assemble the repo report (gap is live; PR/release diffs only when a sibling baseline exists)
 REPO_JSON=""; REPO_EXTRA=""; DEPS_JSON=""; DEPS_EXTRA=""
@@ -1184,30 +1178,35 @@ jq -r '
   (.warnings[] | "validation warning: \(.code): \(.message) \(.context|tostring)")
 ' "$AGG_FILE" >&2
 
-# Strict gate: report first, then refuse all persistence on audit violations.
+# Strict gate: report first, then refuse all persistence (including first-run
+# baseline establishment) on audit violations.
 if [ "$STRICT" = 1 ] && [ "$VALIDATION_OK" != true ]; then
-  [ "$SAVE" = 0 ] || printf 'persistence skipped: strict validation failed\n' >&2
+  if [ "$SAVE" = 1 ] || [ "$FIRST_RUN" = 1 ]; then
+    printf 'persistence skipped: strict validation failed\n' >&2
+  fi
   [ "$UPDATE_CHANGELOG" = 0 ] || printf 'changelog skipped: strict validation failed\n' >&2
   exit 2
 fi
 
-[ "$UPDATE_CHANGELOG" = 1 ] && append_changelog "$DIFF_FILE" "$(basename "$BASELINE")" "$REPO_EXTRA$DEPS_EXTRA"
+[ "$UPDATE_CHANGELOG" = 1 ] && append_changelog "$DIFF_FILE" "$BASE_LABEL" "$REPO_EXTRA$DEPS_EXTRA"
 
-if [ "$SAVE" = 1 ]; then
+if [ "$SAVE" = 1 ] || [ "$FIRST_RUN" = 1 ]; then
   TS="$(date -u +%Y%m%dT%H%M%SZ)"
+  SNAP_VERB="Saved snapshot"
+  [ "$FIRST_RUN" = 0 ] || SNAP_VERB="Baseline established"
   DEST="$SNAP_DIR/proj$PROJECT-$TS.json"; cp "$TMP_CUR" "$DEST"
   # Status messages go to stderr so stdout stays pure report/JSON — otherwise
   # `--json --save` appends these plain-text lines after the JSON and any
   # downstream `jq` consumer chokes on the trailing garbage.
-  echo "Saved snapshot: $DEST (now the baseline for next run)." >&2
+  echo "$SNAP_VERB: $DEST (now the baseline for next run)." >&2
   if [ "$DO_REPO" = 1 ]; then
     cp "$TMP_PRS" "$SNAP_DIR/prs-$REPO_SLUG-$TS.json"
     cp "$TMP_REL" "$SNAP_DIR/releases-$REPO_SLUG-$TS.json"
-    echo "Saved repo snapshots: prs-$REPO_SLUG-$TS.json, releases-$REPO_SLUG-$TS.json." >&2
+    echo "$SNAP_VERB (repo): prs-$REPO_SLUG-$TS.json, releases-$REPO_SLUG-$TS.json." >&2
   fi
   if [ "$DO_DEPS" = 1 ]; then
     jq '.items' "$TMP_DEPS" > "$SNAP_DIR/$DEPS_SLUG-$TS.json"
-    echo "Saved dependency snapshot: $DEPS_SLUG-$TS.json." >&2
+    echo "$SNAP_VERB (dependencies): $DEPS_SLUG-$TS.json." >&2
   fi
 fi
 
