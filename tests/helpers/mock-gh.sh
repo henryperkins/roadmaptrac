@@ -6,6 +6,12 @@ mode="${WP_AI_TEST_DEP_MODE:-all-ok}"
 mkdir -p "$state_dir"
 
 if [ "${1:-}" = api ] && [ "${2:-}" = graphql ] \
+  && [[ "$*" == *projectV2* ]]; then
+  cat "${WP_AI_TEST_BOARD_PAGES:?}"
+  exit 0
+fi
+
+if [ "${1:-}" = api ] && [ "${2:-}" = graphql ] \
   && [[ "$*" == *pullRequests* ]]; then
   cat "${WP_AI_TEST_PR_PAGES:?}"
   exit 0

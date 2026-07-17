@@ -13,6 +13,8 @@
 #                                              #   (board + repo PR/release census; first run: establishes baselines)
 #   ./wp-ai-roadmap-refresh.sh --save          # ...and persist the new snapshots (board + repo) as the next baseline
 #   ./wp-ai-roadmap-refresh.sh --update-changelog  # ...and append a dated row to the planned-work doc
+#   ./wp-ai-roadmap-refresh.sh --strict        # read-only audit: exit 2 (after the report) on any
+#                                              #   validation error; suppresses --save/--update-changelog
 #   ./wp-ai-roadmap-refresh.sh --no-repo       # board only — skip the repo PR/release census
 #   ./wp-ai-roadmap-refresh.sh --no-deps       # skip the Gutenberg / abilities-api dependency watchlist
 #   ./wp-ai-roadmap-refresh.sh --markdown      # report as Markdown (default is the same, terminal-friendly)
@@ -775,16 +777,30 @@ board_pr_gap() { # board_file prs_file -> gap JSON
 diff_prs()      { jq -n --slurpfile base "$1" --slurpfile cur "$2" "$PRDIFF_JQ"; }
 diff_releases() { jq -n --slurpfile base "$1" --slurpfile cur "$2" "$RELDIFF_JQ"; }
 
-build_repo_json() { # gap_file prdiff_file(or "") reldiff_file(or "") relcur_file -> combined repo JSON
+build_repo_json() { # gap_file prdiff_file(or "") reldiff_file(or "") relcur_file census_file -> combined repo JSON
+  # repo.validation is the deterministic union of the PR census validation and
+  # the board<->PR coverage validation.
   jq -n \
      --slurpfile gap "$1" \
      --slurpfile relcur "$4" \
+     --slurpfile census "$5" \
      --argjson prd "$([ -n "$2" ] && cat "$2" || echo null)" \
      --argjson rld "$([ -n "$3" ] && cat "$3" || echo null)" \
-     '{ gap: $gap[0],
-       pr_diff: $prd,
-        rel: { latest_shipped: ([ $relcur[0][] | select((.isDraft|not) and (.isPrerelease|not)) ] | sort_by(.publishedAt // "") | last),
-               new_releases: ($rld.new_releases // []) } }'
+     '
+      def norm($v): ($v // {ok:true, errors:[], warnings:[]});
+      (norm($census[0].validation)) as $cv
+      | (norm($gap[0].validation)) as $gv
+      | ([$cv.errors[], $gv.errors[]]
+          | unique_by([.code,(.context|tostring)])
+          | sort_by(.code,(.context|tostring))) as $errors
+      | ([$cv.warnings[], $gv.warnings[]]
+          | unique_by([.code,(.context|tostring)])
+          | sort_by(.code,(.context|tostring))) as $warnings
+      | { gap: $gap[0],
+          pr_diff: $prd,
+          rel: { latest_shipped: ([ $relcur[0][] | select((.isDraft|not) and (.isPrerelease|not)) ] | sort_by(.publishedAt // "") | last),
+                 new_releases: ($rld.new_releases // []) },
+          validation: {ok:(($errors|length)==0), errors:$errors, warnings:$warnings} }'
 }
 
 # Fetch ENDPOINT via `gh api`, allowing MAX_ATTEMPTS tries (required items get
@@ -843,7 +859,7 @@ unknown_dependency_record() { # item_json repo number endpoint attempts err_file
 
 fetch_dependencies() { # -> {items,validation}; every registry entry emits a record
   local registry
-  registry="$(load_dependency_registry "$DEPS_FILE")"
+  registry="$(load_dependency_registry "$DEPS_FILE")" || return 1
   if ! jq -e '.validation.ok' >/dev/null 2>&1 <<<"$registry"; then
     # Invalid registry: make no GitHub requests; emit its diagnostics as-is.
     printf '%s\n' "$registry"
@@ -1015,6 +1031,7 @@ while [ $# -gt 0 ]; do
   case "$1" in
     --save) SAVE=1 ;;
     --update-changelog) UPDATE_CHANGELOG=1 ;;
+    --strict) STRICT=1 ;;
     --markdown|--md) OUT_MODE=markdown ;;
     --json) OUT_MODE=json ;;
     --no-repo) DO_REPO=0 ;;
@@ -1030,8 +1047,9 @@ done
 need gh; need jq
 mkdir -p "$SNAP_DIR"
 
-TMP_CUR=""; DIFF_FILE=""; TMP_PRS=""; TMP_REL=""; TMP_DEPS=""; TMP_REPO_DIR=""
-cleanup() { rm -f "$TMP_CUR" "$DIFF_FILE" "$TMP_PRS" "$TMP_REL" "$TMP_DEPS"; [ -n "$TMP_REPO_DIR" ] && rm -rf "$TMP_REPO_DIR"; return 0; }
+TMP_CUR=""; DIFF_FILE=""; TMP_PR_CENSUS=""; TMP_PRS=""; TMP_REL=""; TMP_DEPS=""; TMP_REPO_DIR=""
+REPO_FAILED=0; DEPS_FAILED=0
+cleanup() { rm -f "$TMP_CUR" "$DIFF_FILE" "$TMP_PR_CENSUS" "$TMP_PRS" "$TMP_REL" "$TMP_DEPS"; [ -n "$TMP_REPO_DIR" ] && rm -rf "$TMP_REPO_DIR"; return 0; }
 trap cleanup EXIT
 
 TMP_CUR="$(mktemp)"
@@ -1040,10 +1058,13 @@ CUR_LABEL="live@$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 # repo census (default-on; fail-soft so the board pipeline never regresses)
 if [ "$DO_REPO" = 1 ]; then
-  TMP_PRS="$(mktemp)"; TMP_REL="$(mktemp)"
-  if fetch_open_prs > "$TMP_PRS" 2>/dev/null && fetch_releases > "$TMP_REL" 2>/dev/null; then :; else
-    echo "warning: repo census (gh pr/release list for $REPO) failed — continuing with board report only." >&2
-    DO_REPO=0; rm -f "$TMP_PRS" "$TMP_REL"; TMP_PRS=""; TMP_REL=""
+  TMP_PR_CENSUS="$(mktemp)"; TMP_PRS="$(mktemp)"; TMP_REL="$(mktemp)"
+  if fetch_pr_census > "$TMP_PR_CENSUS" 2>/dev/null && fetch_releases > "$TMP_REL" 2>/dev/null; then
+    jq '.items' "$TMP_PR_CENSUS" > "$TMP_PRS"
+  else
+    echo "warning: repo census (PR GraphQL / release list for $REPO) failed — continuing with board report only." >&2
+    DO_REPO=0; REPO_FAILED=1
+    rm -f "$TMP_PR_CENSUS" "$TMP_PRS" "$TMP_REL"; TMP_PR_CENSUS=""; TMP_PRS=""; TMP_REL=""
   fi
 fi
 
@@ -1052,7 +1073,7 @@ if [ "$DO_DEPS" = 1 ]; then
   TMP_DEPS="$(mktemp)"
   if fetch_dependencies > "$TMP_DEPS" 2>/dev/null; then :; else
     echo "warning: dependency watchlist fetch failed — continuing with board report only." >&2
-    DO_DEPS=0; rm -f "$TMP_DEPS"; TMP_DEPS=""
+    DO_DEPS=0; DEPS_FAILED=1; rm -f "$TMP_DEPS"; TMP_DEPS=""
   fi
 fi
 
@@ -1090,7 +1111,7 @@ if [ "$DO_REPO" = 1 ]; then
   REL_BASE="$(latest_snap "releases-$REPO_SLUG")"
   if [ -n "$PRS_BASE" ]; then diff_prs      "$PRS_BASE" "$TMP_PRS" > "$TMP_REPO_DIR/prdiff.json";  PRDF="$TMP_REPO_DIR/prdiff.json"; fi
   if [ -n "$REL_BASE" ]; then diff_releases "$REL_BASE" "$TMP_REL" > "$TMP_REPO_DIR/reldiff.json"; RLDF="$TMP_REPO_DIR/reldiff.json"; fi
-  build_repo_json "$TMP_REPO_DIR/gap.json" "$PRDF" "$RLDF" "$TMP_REL" > "$TMP_REPO_DIR/repo.json"
+  build_repo_json "$TMP_REPO_DIR/gap.json" "$PRDF" "$RLDF" "$TMP_REL" "$TMP_PR_CENSUS" > "$TMP_REPO_DIR/repo.json"
   REPO_JSON="$TMP_REPO_DIR/repo.json"
   REPO_EXTRA="$(jq -r '", \(.gap.substantive|length) untracked PRs" + (if (.rel.new_releases|length)>0 then ", \(.rel.new_releases|length) new releases" else "" end)' "$REPO_JSON")"
 fi
@@ -1109,22 +1130,66 @@ if [ "$DO_DEPS" = 1 ]; then
   DEPS_EXTRA="$(jq -r 'if .diff == null then ", dependency watchlist baseline missing" else ", \((.diff.state_changed|length)+(.diff.added|length)+(.diff.removed|length)) dependency state/list changes" end' "$DEPS_JSON")"
 fi
 
+# Aggregate validation: deterministic union of the repo and dependency
+# subsystem diagnostics, plus a stable marker when a fail-soft subsystem
+# was unavailable entirely.
+[ -n "$TMP_REPO_DIR" ] || TMP_REPO_DIR="$(mktemp -d)"
+UNAVAILABLE="[]"
+if [ "$REPO_FAILED" = 1 ]; then
+  UNAVAILABLE="$(jq -c '. + [{code:"repo-subsystem-unavailable",message:"Repository PR/release census unavailable",context:{}}]' <<<"$UNAVAILABLE")"
+fi
+if [ "$DEPS_FAILED" = 1 ]; then
+  UNAVAILABLE="$(jq -c '. + [{code:"dependency-subsystem-unavailable",message:"Dependency watchlist unavailable",context:{}}]' <<<"$UNAVAILABLE")"
+fi
+AGG_FILE="$TMP_REPO_DIR/validation.json"
+jq -n \
+  --slurpfile r "${REPO_JSON:-/dev/null}" \
+  --slurpfile d "${DEPS_JSON:-/dev/null}" \
+  --argjson extra "$UNAVAILABLE" '
+  def diagnostics($object):
+    ($object.validation // {errors:[],warnings:[]});
+  [diagnostics($r[0] // {}), diagnostics($d[0] // {})] as $parts
+  | {
+      errors: (([$parts[].errors[]] + $extra)
+        | unique_by([.code,(.context|tostring)])
+        | sort_by(.code,(.context|tostring))),
+      warnings: ([$parts[].warnings[]]
+        | unique_by([.code,(.context|tostring)])
+        | sort_by(.code,(.context|tostring)))
+    }
+  | .ok=(.errors|length==0)
+' > "$AGG_FILE"
+VALIDATION_OK="$(jq -r '.ok' "$AGG_FILE")"
+
 case "$OUT_MODE" in
   json)
-    if [ -n "$REPO_JSON" ] || [ -n "$DEPS_JSON" ]; then
-      jq -n \
-        --slurpfile b "$DIFF_FILE" \
-        --slurpfile r "${REPO_JSON:-/dev/null}" \
-        --slurpfile d "${DEPS_JSON:-/dev/null}" \
-        '{board:$b[0]} + (if ($r|length)>0 then {repo:$r[0]} else {} end) + (if ($d|length)>0 then {dependencies:$d[0]} else {} end)'
-    else
-      cat "$DIFF_FILE"
-    fi ;;
+    jq -n \
+      --slurpfile b "$DIFF_FILE" \
+      --slurpfile r "${REPO_JSON:-/dev/null}" \
+      --slurpfile d "${DEPS_JSON:-/dev/null}" \
+      --slurpfile v "$AGG_FILE" \
+      '{board:$b[0]}
+       + (if ($r|length)>0 then {repo:$r[0]} else {} end)
+       + (if ($d|length)>0 then {dependencies:$d[0]} else {} end)
+       + {validation:$v[0]}' ;;
   *)
     jq -r "$RENDER_JQ" "$DIFF_FILE"
     if [ -n "$REPO_JSON" ]; then jq -r "$RENDER_REPO_JQ" "$REPO_JSON"; fi
     if [ -n "$DEPS_JSON" ]; then jq -r "$RENDER_DEPS_JQ" "$DEPS_JSON"; fi ;;
 esac
+
+# Human diagnostics go to stderr so stdout stays a pure report/JSON stream.
+jq -r '
+  (.errors[] | "validation error: \(.code): \(.message) \(.context|tostring)"),
+  (.warnings[] | "validation warning: \(.code): \(.message) \(.context|tostring)")
+' "$AGG_FILE" >&2
+
+# Strict gate: report first, then refuse all persistence on audit violations.
+if [ "$STRICT" = 1 ] && [ "$VALIDATION_OK" != true ]; then
+  [ "$SAVE" = 0 ] || printf 'persistence skipped: strict validation failed\n' >&2
+  [ "$UPDATE_CHANGELOG" = 0 ] || printf 'changelog skipped: strict validation failed\n' >&2
+  exit 2
+fi
 
 [ "$UPDATE_CHANGELOG" = 1 ] && append_changelog "$DIFF_FILE" "$(basename "$BASELINE")" "$REPO_EXTRA$DEPS_EXTRA"
 
