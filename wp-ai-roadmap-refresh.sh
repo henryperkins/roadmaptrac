@@ -18,7 +18,8 @@
 #   ./wp-ai-roadmap-refresh.sh --no-repo       # board only — skip the repo PR/release census
 #   ./wp-ai-roadmap-refresh.sh --no-deps       # skip the Gutenberg / abilities-api dependency watchlist
 #   ./wp-ai-roadmap-refresh.sh --markdown      # report as Markdown (default is the same, terminal-friendly)
-#   ./wp-ai-roadmap-refresh.sh --json          # emit the raw diff as JSON ({board,repo,dependencies})
+#   ./wp-ai-roadmap-refresh.sh --json          # emit the raw diff as JSON ({board,repo,dependencies,validation};
+#                                              #   --no-repo/--no-deps drop their keys, validation always present)
 #   ./wp-ai-roadmap-refresh.sh --baseline F    # diff live against snapshot file F instead of the latest
 #   ./wp-ai-roadmap-refresh.sh fetch           # print a normalized board snapshot to stdout
 #   ./wp-ai-roadmap-refresh.sh census          # print the repo {open_prs, releases, validation} census to stdout
@@ -474,6 +475,7 @@ RELDIFF_JQ='
 # Order: what changed -> already underway -> uncovered work -> routine count.
 RENDER_REPO_JQ='
   def fmt(a; f): [ a[] | f ] | join("\n");
+  def show: if . == null then "—" else tostring end;
   def age_days:
     if . == null then null
     else (try (((now - fromdateiso8601) / 86400) | floor) catch null) end;
@@ -513,7 +515,7 @@ RENDER_REPO_JQ='
           "Readiness changes:\n" + fmt(.pr_diff.readiness_changed;
             "- #\(.number) \(.title // ""): "
             + ([ .changes | to_entries[]
-                 | "\(.key) \(.value.from // "—") → \(.value.to // "—")" ] | join(", ")))
+                 | "\(.key) \(.value.from|show) → \(.value.to|show)" ] | join(", ")))
         else empty end ),
       ( if ((.pr_diff.newly_opened|length)==0 and (.pr_diff.no_longer_open|length)==0
             and ((.pr_diff.readiness_changed // [])|length)==0)
@@ -712,8 +714,12 @@ RENDER_DEPS_JQ='
     else empty end ),
   "",
   "### Open dependencies",
-  ( fmt([ .items[] | select(.state == "OPEN") ];
-      "- `\(.id)` (\(.type)) — \(.title)  _[\(.theme); AI refs: \(.aiRefs|ai_refs)]_") // "_(none)_" )'
+  ( [ .items[] | select(.state == "OPEN") ] as $open
+    | if ($open|length) > 0
+      then fmt($open;
+        "- `\(.id)` (\(.type)) — \(.title)  _[\(.theme); AI refs: \(.aiRefs|ai_refs)]_")
+      else "_(none)_"
+      end )'
 
 fetch_normalized() {
   local raw err
@@ -758,10 +764,6 @@ fetch_pr_census() { # -> {items,validation} for open PRs in $REPO
   rm -f "$err"
   [ -n "$raw" ] || { printf 'error: PR census returned no data\n' >&2; return 1; }
   printf '%s' "$raw" | jq -s --arg repo "$REPO" "$PR_CENSUS_JQ"
-}
-
-fetch_open_prs() { # -> normalized open-PR array for $REPO (snapshot shape)
-  fetch_pr_census | jq '.items'
 }
 
 fetch_releases() { # -> normalized release array for $REPO
@@ -870,7 +872,7 @@ fetch_dependencies() { # -> {items,validation}; every registry entry emits a rec
   reg_file="$(mktemp)"; items_file="$(mktemp)"; err_file="$(mktemp)"
   printf '%s\n' "$registry" > "$reg_file"
 
-  local item id repo number required max_attempts endpoint issue pr
+  local item id repo number max_attempts endpoint issue pr
   while IFS= read -r item; do
     id="$(jq -r '.id' <<<"$item")"
     repo="${id%#*}"
@@ -925,8 +927,10 @@ fetch_dependencies() { # -> {items,validation}; every registry entry emits a rec
         }' >> "$items_file"
   done < <(jq -c '.items[]' <<<"$registry")
 
-  jq -s --slurpfile registry "$reg_file" "$DEPS_VALIDATE_JQ" "$items_file"
+  local merge_status=0
+  jq -s --slurpfile registry "$reg_file" "$DEPS_VALIDATE_JQ" "$items_file" || merge_status=$?
   rm -f "$reg_file" "$items_file" "$err_file"
+  return "$merge_status"
 }
 
 compute_dependency_diff() { # baseline_file current_file base_label cur_label
@@ -1002,6 +1006,12 @@ case "${1:-}" in
       json) printf '%s\n' "$dep_json" ;;
       markdown) jq -r "$RENDER_DEPS_JQ" <<<"$dep_json" ;;
     esac
+    # Human diagnostics go to stderr in every output mode; markdown otherwise
+    # exits 2 with no stated reason.
+    jq -r '
+      (.validation.errors[]? | "validation error: \(.code): \(.message) \(.context|tostring)"),
+      (.validation.warnings[]? | "validation warning: \(.code): \(.message) \(.context|tostring)")
+    ' <<<"$dep_json" >&2
     if [ "$STRICT" = 1 ] && ! jq -e '.validation.ok' >/dev/null <<<"$dep_json"; then
       exit 2
     fi

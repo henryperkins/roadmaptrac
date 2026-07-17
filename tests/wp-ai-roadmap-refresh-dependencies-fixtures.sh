@@ -114,6 +114,34 @@ set -e
 [ "$malformed_normal_status" -eq 0 ]
 jq -e '(.validation.ok|not)' "$TMP_DIR/malformed-normal.out"
 
+# Markdown strict mode must name the failure on stderr — exit 2 with a
+# blank stderr leaves the operator with no stated reason.
+set +e
+PATH="$MOCK_BIN:$PATH" WP_AI_TEST_STATE_DIR="$STATE_DIR" \
+WP_AI_DEPS_FILE="$TMP_DIR/malformed.json" \
+  "$ROOT_DIR/wp-ai-roadmap-refresh.sh" dependencies --strict \
+  >"$TMP_DIR/malformed-md.out" 2>"$TMP_DIR/malformed-md.err"
+malformed_md_status=$?
+set -e
+[ "$malformed_md_status" -eq 2 ]
+rg 'dependency-registry-invalid' "$TMP_DIR/malformed-md.err" >/dev/null
+
+# An empty Open-dependencies list renders the explicit "_(none)_" marker.
+jq -n '{
+  schemaVersion:1,
+  items:[{
+    id:"Example/deps#2", theme:"Optional", aiRefs:[430],
+    note:"Optional fixture dependency", required:false
+  }]
+}' >"$TMP_DIR/optional-only.json"
+rm -rf "$STATE_DIR"; mkdir -p "$STATE_DIR"
+PATH="$MOCK_BIN:$PATH" WP_AI_TEST_STATE_DIR="$STATE_DIR" \
+WP_AI_TEST_DEP_MODE=optional-fail \
+WP_AI_DEPS_FILE="$TMP_DIR/optional-only.json" \
+  "$ROOT_DIR/wp-ai-roadmap-refresh.sh" dependencies --markdown \
+  >"$TMP_DIR/none.md" 2>/dev/null
+rg -F '_(none)_' "$TMP_DIR/none.md" >/dev/null
+
 jq '.items += [.items[0]]' "$TEST_REGISTRY" >"$TMP_DIR/duplicate.json"
 set +e
 PATH="$MOCK_BIN:$PATH" WP_AI_TEST_STATE_DIR="$STATE_DIR" \

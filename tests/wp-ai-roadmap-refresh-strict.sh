@@ -133,6 +133,23 @@ dep_count_after="$(find "$TEST_SNAP_DIR" -maxdepth 1 -type f -name 'wordpress-ai
 [ "$dep_count_after" -eq "$dep_count_before" ]
 rg 'dependency snapshot skipped' "$TMP_DIR/broken-save.err" >/dev/null
 
+# Readiness rendering must print boolean values verbatim: a draft PR going
+# ready is "isDraft true → false", never "true → —".
+latest_prs="$(find "$TEST_SNAP_DIR" -maxdepth 1 -type f -name 'prs-WordPress-ai-*' | sort | tail -1)"
+jq 'map(if .number==101 then .isDraft=true else . end)' "$latest_prs" \
+  >"$TEST_SNAP_DIR/prs-WordPress-ai-20990101T000000Z.json"
+PATH="$MOCK_BIN:$PATH" \
+WP_AI_SNAP_DIR="$TEST_SNAP_DIR" \
+WP_AI_DOC_DIR="$TEST_DOC_DIR" \
+WP_AI_DEPS_FILE="$TEST_REGISTRY" \
+WP_AI_TEST_STATE_DIR="$STATE_DIR" \
+WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
+WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
+WP_AI_TEST_RELEASES="$RELEASES" \
+  "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --markdown \
+  >"$TMP_DIR/radar.md" 2>/dev/null
+rg -F 'isDraft true → false' "$TMP_DIR/radar.md" >/dev/null
+
 set +e
 "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --not-a-real-option >/dev/null 2>&1
 invalid_status=$?
