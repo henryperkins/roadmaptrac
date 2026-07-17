@@ -113,6 +113,26 @@ jq -e '(keys | sort)==["board","dependencies","repo","validation"]' "$TMP_DIR/fi
 [ "$(find "$FIRST_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 4 ]
 rg 'Baseline established' "$TMP_DIR/first-normal.err" >/dev/null
 
+# An invalid registry must never produce a dependency snapshot: a normal-mode
+# --save run still saves board/PR/release snapshots but skips the dependency
+# baseline instead of wiping the watchlist history with [].
+printf '{broken\n' >"$TMP_DIR/broken-registry.json"
+dep_count_before="$(find "$TEST_SNAP_DIR" -maxdepth 1 -type f -name 'wordpress-ai-cross-repo-dependencies-*' | wc -l)"
+PATH="$MOCK_BIN:$PATH" \
+WP_AI_SNAP_DIR="$TEST_SNAP_DIR" \
+WP_AI_DOC_DIR="$TEST_DOC_DIR" \
+WP_AI_DEPS_FILE="$TMP_DIR/broken-registry.json" \
+WP_AI_TEST_STATE_DIR="$STATE_DIR" \
+WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
+WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
+WP_AI_TEST_RELEASES="$RELEASES" \
+  "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --json --save \
+  >"$TMP_DIR/broken-save.json" 2>"$TMP_DIR/broken-save.err"
+jq -e '.dependencies.validation.ok|not' "$TMP_DIR/broken-save.json" >/dev/null
+dep_count_after="$(find "$TEST_SNAP_DIR" -maxdepth 1 -type f -name 'wordpress-ai-cross-repo-dependencies-*' | wc -l)"
+[ "$dep_count_after" -eq "$dep_count_before" ]
+rg 'dependency snapshot skipped' "$TMP_DIR/broken-save.err" >/dev/null
+
 set +e
 "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --not-a-real-option >/dev/null 2>&1
 invalid_status=$?

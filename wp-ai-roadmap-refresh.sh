@@ -1205,8 +1205,16 @@ if [ "$SAVE" = 1 ] || [ "$FIRST_RUN" = 1 ]; then
     echo "$SNAP_VERB (repo): prs-$REPO_SLUG-$TS.json, releases-$REPO_SLUG-$TS.json." >&2
   fi
   if [ "$DO_DEPS" = 1 ]; then
-    jq '.items' "$TMP_DEPS" > "$SNAP_DIR/$DEPS_SLUG-$TS.json"
-    echo "$SNAP_VERB (dependencies): $DEPS_SLUG-$TS.json." >&2
+    # Registry removal is the only thing that may remove a dependency from
+    # history: an invalid registry yields items:[], and persisting that would
+    # wipe the watchlist baseline. UNKNOWN placeholders (complete item set)
+    # remain saveable per the design.
+    if jq -e '[.validation.errors[]?.code] | index("dependency-registry-invalid") == null' "$TMP_DEPS" >/dev/null; then
+      jq '.items' "$TMP_DEPS" > "$SNAP_DIR/$DEPS_SLUG-$TS.json"
+      echo "$SNAP_VERB (dependencies): $DEPS_SLUG-$TS.json." >&2
+    else
+      echo "dependency snapshot skipped: registry invalid — keeping the previous baseline." >&2
+    fi
   fi
 fi
 
