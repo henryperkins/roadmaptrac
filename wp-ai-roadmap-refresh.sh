@@ -309,32 +309,129 @@ REL_NORMALIZE_JQ='
   | sort_by(.publishedAt // "")'
 
 # board snapshot ($board[0]) + normalized PRs ($prs[0]) -> board<->repo gap.
+# Board cards and issue links join on canonical repository#number keys; legacy
+# bare `issues` numbers are interpreted as $repo. Every open PR gets exactly
+# one of five classifications, and coverage errors name the non-routine PRs
+# with no board representation.
 GAP_JQ='
-  ($board[0]) as $B | ($prs[0]) as $P
+  def key($repo; $number): $repo + "#" + ($number|tostring);
+  def legacy_links($pr):
+    [$pr.issues[]? | {repo:$repo,number:.,source:"legacy"}];
+  def links($pr):
+    if ($pr.issueLinks // [] | length)>0
+    then $pr.issueLinks
+    else legacy_links($pr)
+    end;
+  ($board[0]) as $B
+  | ($prs[0]) as $P
   | ([ $B[] | select(.type=="PullRequest" and .repo==$repo) ]) as $boardprs
-  | ([ $boardprs[] | .number ]) as $boardpr
-  | ([ $boardprs[] | select(.state=="OPEN") | .number ]) as $board_open_pr
-  | ([ $boardprs[] | select(.status!="Done") | .number ]) as $board_non_done_pr
-  | (reduce ($B[] | select(.type=="Issue" and .repo==$repo)) as $i
-       ({}; .[$i.number|tostring] = {status:$i.status, milestone:$i.milestone})) as $iss
+  | (reduce ($B[] | select(.type=="Issue")) as $item
+      ({}; .[key($item.repo;$item.number)]={
+        status:$item.status,
+        milestone:$item.milestone,
+        assignees:($item.assignees // [])
+      })) as $board_issues
+  | (reduce ($B[] | select(.type=="PullRequest")) as $item
+      ({}; .[key($item.repo;$item.number)]=$item)) as $board_prs
+  | [$P[] as $pr
+      | (links($pr) | unique_by([.repo,.number,.source])
+          | sort_by(.repo,.number,.source)) as $links
+      | [$links[]
+          | . as $link
+          | ($board_issues[key($link.repo;$link.number)] // null) as $board
+          | $link + {
+              onBoard:($board!=null),
+              status:$board.status,
+              milestone:$board.milestone,
+              assignees:($board.assignees // [])
+            }] as $mapped
+      | (($pr.repo // $repo) as $pr_repo
+          | $board_prs[key($pr_repo;$pr.number)] != null) as $direct
+      | ([$mapped[] | select(.onBoard and .source=="closing")] | length>0)
+          as $authoritative_board
+      | ([$mapped[] | select(.onBoard)] | length>0) as $any_board
+      | (if $direct then "direct-board-pr"
+         elif $authoritative_board then "linked-board-issue"
+         elif ($pr.routine // false) then "routine"
+         elif $any_board then "linked-board-issue"
+         elif ($links|length)>0 then "linked-off-board-issue"
+         else "unexplained"
+         end) as $classification
+      | $pr + {
+          repo:($pr.repo // $repo),
+          issueLinks:$links,
+          mappedIssues:$mapped,
+          classification:$classification
+        }
+    ] as $classified
+  | (reduce $classified[] as $pr
+      ({
+        "direct-board-pr":[],
+        "linked-board-issue":[],
+        "routine":[],
+        "linked-off-board-issue":[],
+        "unexplained":[]
+      };
+      .[$pr.classification] += [$pr])) as $classes
   | {
-      repo: $repo,
-      open_total: ($P|length),
-      board_pr_cards_total: ($boardpr|length),
-      board_pr_cards: ($board_open_pr|length),
-      board_non_done_pr_cards: ($board_non_done_pr|length),
-      untracked: [ $P[]
-        | select(.number as $n | ($boardpr|index($n)) == null)
-        | { id, number, title, isDraft, routine,
-            issues: [ .issues[]
-              | { number: .,
-                  onBoard: ($iss[(.|tostring)] != null),
-                  status: ($iss[(.|tostring)]|.status?),
-                  milestone: ($iss[(.|tostring)]|.milestone?) } ] } ]
+      repo:$repo,
+      open_total:($classified|length),
+      board_pr_cards_total: ($boardprs|length),
+      board_pr_cards: ([ $boardprs[] | select(.state=="OPEN") ]|length),
+      board_non_done_pr_cards: ([ $boardprs[] | select(.status!="Done") ]|length),
+      classifications:$classes,
+      classification_counts:($classes|with_entries(.value=(.value|length))),
+      untracked:[$classified[]|select(.classification!="direct-board-pr")],
+      substantive:[
+        $classified[]
+        | select(.classification!="direct-board-pr" and ((.routine // false)|not))
+      ],
+      routine_count:([
+        $classified[]
+        | select(.classification!="direct-board-pr" and (.routine // false))
+      ]|length),
+      tracked_open:([$classified[]|select(.classification=="direct-board-pr")]|length)
     }
-  | .substantive = [ .untracked[] | select(.routine|not) ]
-  | .routine_count = ([ .untracked[] | select(.routine) ] | length)
-  | .tracked_open = (.open_total - (.untracked|length))'
+  | . as $out
+  | ([
+      ($classified[]
+        | select((.classification=="linked-off-board-issue" or .classification=="unexplained")
+                 and ((.routine // false)|not))
+        | {code:"pr-roadmap-coverage-missing",
+           message:"Substantive open PR has no roadmap board representation",
+           context:{id:.id, number:.number, classification:.classification}})
+    ]) as $coverage_errors
+  | ([
+      (if (($out.classification_counts | [.[]] | add) // 0) != $out.open_total
+        then {code:"validation-inconsistent",
+              message:"classification counts do not sum to open_total",
+              context:{sum:(($out.classification_counts | [.[]] | add) // 0),
+                       open_total:$out.open_total}}
+        else empty end),
+      (if ($out.tracked_open + ($out.untracked|length)) != $out.open_total
+        then {code:"validation-inconsistent",
+              message:"tracked plus untracked does not equal open_total",
+              context:{tracked_open:$out.tracked_open,
+                       untracked:($out.untracked|length),
+                       open_total:$out.open_total}}
+        else empty end),
+      (if ($out.routine_count + ($out.substantive|length)) != ($out.untracked|length)
+        then {code:"validation-inconsistent",
+              message:"routine plus substantive does not equal untracked",
+              context:{routine_count:$out.routine_count,
+                       substantive:($out.substantive|length),
+                       untracked:($out.untracked|length)}}
+        else empty end),
+      (if ([$out.classifications[][].number] | sort) != ([$classified[].number] | sort)
+        then {code:"validation-inconsistent",
+              message:"classification membership does not partition the open PRs",
+              context:{classified:([$out.classifications[][].number] | sort),
+                       open:([$classified[].number] | sort)}}
+        else empty end)
+    ]) as $invariant_errors
+  | (($coverage_errors + $invariant_errors)
+      | sort_by(.code, (.context|tostring))) as $errors
+  | $out + {validation:{ok:(($errors|length)==0), errors:$errors, warnings:[]}}'
 
 # diff two normalized PR arrays -> opened / no-longer-open.
 PRDIFF_JQ='
@@ -353,7 +450,7 @@ RELDIFF_JQ='
 # render the combined repo report object -> text sections + copy-paste block.
 RENDER_REPO_JQ='
   def fmt(a; f): [ a[] | f ] | join("\n");
-  def imap(iss): [ iss[] | "#\(.number)" + (if .onBoard then " (board: \(.status // "—")/\(.milestone // "—"))" else " (not on board)" end) ] | join(", ");
+  def imap(iss): [ iss[] | "\(.repo)#\(.number)" + (if .onBoard then " (board: \(.status // "—")/\(.milestone // "—"))" else " (not on board)" end) ] | join(", ");
   "",
   "## 📦 Releases (repo: \(.gap.repo))",
   ( if .rel.latest_shipped then "Latest shipped: **\(.rel.latest_shipped.tag)** (\((.rel.latest_shipped.publishedAt // "")[0:10]))" else "Latest shipped: (none found)" end ),
@@ -361,7 +458,7 @@ RENDER_REPO_JQ='
   "",
   "## 🔌 Repo open PRs not on board: \(.gap.untracked|length) of \(.gap.open_total) open (\(.gap.substantive|length) substantive + \(.gap.routine_count) routine; \(.gap.tracked_open) board-tracked)",
   ( if (.gap.substantive|length)>0
-     then fmt(.gap.substantive; "- " + (if .isDraft then "(draft) " else "" end) + "#\(.number) \(.title)" + (if (.issues|length)>0 then " → " + imap(.issues) else " → (no issue ref parsed)" end))
+     then fmt(.gap.substantive; "- " + (if .isDraft then "(draft) " else "" end) + "#\(.number) \(.title)" + (if ((.mappedIssues // [])|length)>0 then " → " + imap(.mappedIssues) else " → (no issue link)" end))
      else "_(none — board covers all substantive open PRs)_" end ),
   ( if (.pr_diff != null) and (((.pr_diff.newly_opened|length)>0) or ((.pr_diff.no_longer_open|length)>0))
      then "",
@@ -378,8 +475,8 @@ RENDER_REPO_JQ='
   "|---|---|---|",
   fmt(.gap.substantive;
       "| #\(.number)" + (if .isDraft then " (draft)" else "" end) + " \(.title) | "
-      + (if (.issues|length)>0 then ([ .issues[] | "#\(.number)" ] | join(", ")) else "—" end) + " | "
-      + (if (.issues|length)>0 then ([ .issues[] | (if .onBoard then "\(.status // "—")/\(.milestone // "—")" else "not on board" end) ] | join("; ")) else "—" end)
+      + (if ((.mappedIssues // [])|length)>0 then ([ .mappedIssues[] | "\(.repo)#\(.number)" ] | join(", ")) else "—" end) + " | "
+      + (if ((.mappedIssues // [])|length)>0 then ([ .mappedIssues[] | (if .onBoard then "\(.status // "—")/\(.milestone // "—")" else "not on board" end) ] | join("; ")) else "—" end)
       + " |"),
   "```"'
 
@@ -815,9 +912,16 @@ case "${1:-}" in
     fi
     exit 0 ;;
   gap) need jq
-    [ $# -eq 3 ] || die "usage: $0 gap <board.json> <prs.json>"
-    [ -f "$2" ] || die "no such file: $2"; [ -f "$3" ] || die "no such file: $3"
-    board_pr_gap "$2" "$3"; exit 0 ;;
+    shift
+    if [ "${1:-}" = "--strict" ]; then STRICT=1; shift; fi
+    [ $# -eq 2 ] || die "usage: $0 gap [--strict] <board.json> <prs.json>"
+    [ -f "$1" ] || die "no such file: $1"; [ -f "$2" ] || die "no such file: $2"
+    gap_json="$(board_pr_gap "$1" "$2")" || die "gap: could not read board/PR snapshots"
+    printf '%s\n' "$gap_json"
+    if [ "$STRICT" = 1 ] && ! jq -e '.validation.ok' >/dev/null <<<"$gap_json"; then
+      exit 2
+    fi
+    exit 0 ;;
   prdiff) need jq
     [ $# -eq 3 ] || die "usage: $0 prdiff <base-prs.json> <cur-prs.json>"
     [ -f "$2" ] || die "no such file: $2"; [ -f "$3" ] || die "no such file: $3"

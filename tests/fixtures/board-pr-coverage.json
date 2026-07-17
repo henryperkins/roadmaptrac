@@ -1,0 +1,6 @@
+[
+  {"id":"WordPress/ai#200","type":"PullRequest","number":200,"title":"Direct PR","repo":"WordPress/ai","state":"OPEN","status":"In progress","milestone":"1.3.0","assignees":["alice"]},
+  {"id":"WordPress/ai#40","type":"Issue","number":40,"title":"Core abilities","repo":"WordPress/ai","state":"OPEN","status":"In progress","milestone":"1.3.0","assignees":["bob"]},
+  {"id":"WordPress/ai#514","type":"Issue","number":514,"title":"Comment score","repo":"WordPress/ai","state":"OPEN","status":"Needs review","milestone":"1.3.0","assignees":["carol"]},
+  {"id":"Other/repo#999","type":"Issue","number":999,"title":"Collision fixture","repo":"Other/repo","state":"OPEN","status":"To do","milestone":"Future Release","assignees":[]}
+]
