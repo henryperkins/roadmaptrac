@@ -1525,7 +1525,7 @@ git commit -m "Refresh roadmap with PR and dependency coverage"
 **Interfaces:**
 - Produces: evidence that implementation matches the design and that the repository remains usable for live WordPress AI tracking.
 
-- [ ] **Step 1: Run the complete verification matrix**
+- [x] **Step 1: Run the complete verification matrix**
 
 ```bash
 bash -n wp-ai-roadmap-refresh.sh tests/*.sh tests/helpers/mock-gh.sh
@@ -1542,7 +1542,7 @@ git status --short
 
 Expected: syntax and all five tests pass; live census/dependencies validate; no unintended uncommitted files remain.
 
-- [ ] **Step 2: Audit the implementation against every spec section**
+- [x] **Step 2: Audit the implementation against every spec section**
 
 Check:
 
@@ -1553,7 +1553,7 @@ rg -n 'WP_AI_DEPS_FILE|closingIssuesReferences|routine|issueLinks|readiness_chan
 
 Match each design requirement to code plus at least one deterministic test. Correct any gap with a new failing test before changing implementation.
 
-- [ ] **Step 3: Review commit scope and history**
+- [x] **Step 3: Review commit scope and history**
 
 ```bash
 git log --oneline --decorate -10
@@ -1563,6 +1563,6 @@ git status --short
 
 Expected: focused commits for registry, resilient dependencies, GraphQL PRs, coverage, readiness, strict integration, and docs; no unrelated changes.
 
-- [ ] **Step 4: Request code review**
+- [x] **Step 4: Request code review**
 
 Invoke `superpowers:requesting-code-review` against the complete diff from `704a06e` through `HEAD`. Resolve any verified blocking finding with a failing regression test and a focused follow-up commit.
