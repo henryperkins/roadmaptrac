@@ -5,6 +5,21 @@ state_dir="${WP_AI_TEST_STATE_DIR:?}"
 mode="${WP_AI_TEST_DEP_MODE:-all-ok}"
 mkdir -p "$state_dir"
 
+if [ "${1:-}" = api ] && [ "${2:-}" = graphql ] \
+  && [[ "$*" == *pullRequests* ]]; then
+  cat "${WP_AI_TEST_PR_PAGES:?}"
+  exit 0
+fi
+
+if [ "${1:-}" = release ] && [ "${2:-}" = list ]; then
+  if [ -n "${WP_AI_TEST_RELEASES:-}" ]; then
+    cat "$WP_AI_TEST_RELEASES"
+  else
+    printf '[]\n'
+  fi
+  exit 0
+fi
+
 if [ "${1:-}" = api ] && [[ "${2:-}" == repos/*/issues/* ]]; then
   endpoint="$2"
   number="${endpoint##*/}"

@@ -19,7 +19,8 @@
 #   ./wp-ai-roadmap-refresh.sh --json          # emit the raw diff as JSON ({board,repo,dependencies})
 #   ./wp-ai-roadmap-refresh.sh --baseline F    # diff live against snapshot file F instead of the latest
 #   ./wp-ai-roadmap-refresh.sh fetch           # print a normalized board snapshot to stdout
-#   ./wp-ai-roadmap-refresh.sh census          # print the repo {open_prs, releases} census to stdout
+#   ./wp-ai-roadmap-refresh.sh census          # print the repo {open_prs, releases, validation} census to stdout
+#   ./wp-ai-roadmap-refresh.sh census --strict # exit 2 if the PR fetch is incomplete or malformed
 #   ./wp-ai-roadmap-refresh.sh dependencies    # print the Gutenberg / abilities-api dependency watchlist
 #   ./wp-ai-roadmap-refresh.sh dependencies --json
 #   ./wp-ai-roadmap-refresh.sh dependencies --strict --json   # exit 2 if a required dependency is UNKNOWN
@@ -157,23 +158,150 @@ RENDER_JQ='
   ( if total==0 then "\n_No changes since baseline._" else empty end )'
 
 # --------------- repo census: jq programs (open PRs + releases) --------------
-# Normalize `gh pr list --json ...` -> compact records; parse referenced issues
-# from title + body + branch name (#NNN, "issue NNN", "issue-NNN", "issue #NNN").
-PR_NORMALIZE_JQ='
-  def refs($s): [ $s | match("(?i)(?:(?:^|[^\\w/-])#|\\b(?:issue|feature|feat)[ :_#-]*)(\\d+)"; "g") | .captures[0].string | tonumber ];
-  map({
-    id: ($repo + "#" + (.number|tostring)),
-    number: .number,
-    title: .title,
-    isDraft: .isDraft,
-    author: (.author.login // "?"),
-    isBot: (.author.is_bot // false),
-    routine: ( (.author.is_bot // false)
-               or ((.author.login // "") | test("dependabot"; "i"))
-               or ((.title // "") | test("^(fix\\(deps\\)|build\\(deps\\)|chore\\(deps\\)|ci:)"; "i")) ),
-    issues: ( refs( ((.title // "") + " " + (.body // "") + " " + (.headRefName // "")) ) | unique ),
-    updatedAt: .updatedAt
-  }) | sort_by(.number)'
+# Paginated open-PR query. closingIssuesReferences is authoritative; fallback
+# parsing (exact grammar below) applies only to substantive PRs.
+PR_GQL_QUERY='query($owner: String!, $name: String!, $endCursor: String) {
+  repository(owner: $owner, name: $name) {
+    pullRequests(first: 100, after: $endCursor, states: OPEN) {
+      totalCount
+      pageInfo { hasNextPage endCursor }
+      nodes {
+        number title url body isDraft headRefName updatedAt
+        reviewDecision mergeStateStatus
+        author { __typename login }
+        commits(last: 1) {
+          nodes { commit { statusCheckRollup { state } } }
+        }
+        closingIssuesReferences(first: 20) {
+          totalCount
+          nodes { number repository { nameWithOwner } }
+        }
+      }
+    }
+  }
+}'
+
+# Normalize slurped PR GraphQL pages -> {items,validation}. Links merge with
+# source precedence closing > fallback-title > fallback-body > fallback-branch
+# > legacy, unique by repo+number, deterministically sorted.
+PR_CENSUS_JQ='
+  def source_rank:
+    {"closing":0,"fallback-title":1,"fallback-body":2,"fallback-branch":3,"legacy":4}[.source];
+  def unique_links:
+    group_by([.repo,.number])
+    | map(sort_by(source_rank) | first)
+    | sort_by(.repo,.number);
+  def is_routine:
+    (.author.__typename=="Bot")
+    or ((.author.login // "") | test("dependabot";"i"))
+    or ((.title // "") | test("^(fix\\(deps\\)|build\\(deps\\)|chore\\(deps\\)|ci:)";"i"));
+
+  def title_links($text; $repo):
+    ([
+      ($text // "")
+      | match("(?:^|[^A-Za-z0-9_/-])#([1-9][0-9]*)(?=$|[^0-9])";"gi")
+      | {repo:$repo,number:(.captures[0].string|tonumber),source:"fallback-title"}
+    ] + [
+      ($text // "")
+      | match("\\b(?:issue|feat|feature)[ :_#-]+([1-9][0-9]*)(?=$|[^0-9])";"gi")
+      | {repo:$repo,number:(.captures[0].string|tonumber),source:"fallback-title"}
+    ]);
+
+  def branch_links($text; $repo): [
+    ($text // "")
+    | match("(?:^|/)(?:issue|feat|feature)[/_-]#?([1-9][0-9]*)(?:$|[/_-])";"gi")
+    | {repo:$repo,number:(.captures[0].string|tonumber),source:"fallback-branch"}
+  ];
+
+  def relationship:
+    "\\b(?:fix|fixes|fixed|close|closes|closed|resolve|resolves|resolved|implement|implements|implemented|track|tracks|tracked|relates[ ]+to|related[ ]+to|issue)[\\t ]*:?[\\t ]+";
+
+  def body_links($text; $repo):
+    ([
+      ($text // "")
+      | match(relationship + "https://github\\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)/issues/([1-9][0-9]*)";"gi")
+      | {
+          repo:(.captures[0].string + "/" + .captures[1].string),
+          number:(.captures[2].string|tonumber),
+          source:"fallback-body"
+        }
+    ] + [
+      ($text // "")
+      | match(relationship + "([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)#([1-9][0-9]*)";"gi")
+      | {
+          repo:.captures[0].string,
+          number:(.captures[1].string|tonumber),
+          source:"fallback-body"
+        }
+    ] + [
+      ($text // "")
+      | match(relationship + "#([1-9][0-9]*)";"gi")
+      | {repo:$repo,number:(.captures[0].string|tonumber),source:"fallback-body"}
+    ]);
+
+  def normalize_pr($repo):
+    . as $pr
+    | is_routine as $routine
+    | ([ .closingIssuesReferences.nodes[]?
+         | {repo:.repository.nameWithOwner, number:.number, source:"closing"} ]) as $closing
+    | (($closing
+        + (if $routine then []
+           else title_links($pr.title; $repo)
+                + body_links($pr.body; $repo)
+                + branch_links($pr.headRefName; $repo)
+           end))
+       | unique_links) as $links
+    | {
+        id: ($repo + "#" + (.number|tostring)),
+        repo: $repo,
+        number: .number,
+        title: .title,
+        url: .url,
+        isDraft: .isDraft,
+        author: (.author.login // "?"),
+        isBot: (.author.__typename == "Bot"),
+        routine: $routine,
+        reviewDecision: .reviewDecision,
+        mergeStateStatus: .mergeStateStatus,
+        checkState: (.commits.nodes[0].commit.statusCheckRollup.state // null),
+        updatedAt: .updatedAt,
+        issueLinks: $links,
+        issues: ($links | map(select(.repo == $repo) | .number) | unique)
+      };
+
+  . as $pages
+  | [ $pages[] | .data.repository.pullRequests.nodes[]? ] as $nodes
+  | ([ $pages[] | .data.repository.pullRequests.totalCount ] | unique) as $totals
+  | ($nodes | map(.number)) as $numbers
+  | ([
+      (($numbers | group_by(.) | map(select(length > 1) | .[0]))[]
+        | {code:"pr-duplicate",
+           message:"Duplicate PR number across pages",
+           context:{number:.}}),
+      (if ($pages | last | .data.repository.pullRequests.pageInfo.hasNextPage) == true
+        then {code:"pr-pagination-incomplete",
+              message:"PR pagination did not reach the final page",
+              context:{pages:($pages|length)}}
+        else empty end),
+      (if (($totals|length) != 1) or ($totals[0] != ($numbers|unique|length))
+        then {code:"pr-total-mismatch",
+              message:"Reported PR total does not equal unique normalized nodes",
+              context:{totals:$totals, nodes:($numbers|unique|length)}}
+        else empty end),
+      ($nodes[]
+        | select(((.closingIssuesReferences.totalCount // 0) > 20)
+                 or ((.closingIssuesReferences.totalCount // 0)
+                     != ((.closingIssuesReferences.nodes // [])|length)))
+        | {code:"pr-closing-refs-truncated",
+           message:"closingIssuesReferences truncated or count mismatch",
+           context:{number:.number,
+                    totalCount:.closingIssuesReferences.totalCount,
+                    returned:((.closingIssuesReferences.nodes // [])|length)}})
+    ] | sort_by(.code, (.context|tostring))) as $errors
+  | {
+      items: ([ $nodes[] | normalize_pr($repo) ] | sort_by(.number)),
+      validation: {ok:(($errors|length)==0), errors:$errors, warnings:[]}
+    }'
 
 # Normalize `gh release list --json ...` -> compact records (oldest..newest).
 REL_NORMALIZE_JQ='
@@ -443,10 +571,19 @@ append_changelog() { # diff_json_file base_label [repo_extra]
 }
 
 # --------------------- repo: open-PR + release census ------------------------
-fetch_open_prs() { # -> normalized open-PR array for $REPO
-  gh pr list --repo "$REPO" --state open \
-     --json number,title,isDraft,author,headRefName,labels,body,updatedAt --limit 300 \
-  | jq --arg repo "$REPO" "$PR_NORMALIZE_JQ"
+fetch_pr_census() { # -> {items,validation} for open PRs in $REPO
+  local owner name raw err
+  owner="${REPO%%/*}"; name="${REPO#*/}"
+  err="$(mktemp)"
+  raw="$(gh api graphql --paginate -f query="$PR_GQL_QUERY" -F owner="$owner" -F name="$name" 2>"$err")" || {
+    printf 'error: PR census query failed:\n' >&2; cat "$err" >&2; rm -f "$err"; return 1; }
+  rm -f "$err"
+  [ -n "$raw" ] || { printf 'error: PR census returned no data\n' >&2; return 1; }
+  printf '%s' "$raw" | jq -s --arg repo "$REPO" "$PR_CENSUS_JQ"
+}
+
+fetch_open_prs() { # -> normalized open-PR array for $REPO (snapshot shape)
+  fetch_pr_census | jq '.items'
 }
 
 fetch_releases() { # -> normalized release array for $REPO
@@ -634,10 +771,25 @@ case "${1:-}" in
     compute_diff "$2" "$3" "$(basename "$2")" "$(basename "$3")" | jq -r "$RENDER_JQ"
     exit 0 ;;
   census) need gh; need jq
+    shift
+    while [ $# -gt 0 ]; do
+      case "$1" in
+        --strict) STRICT=1 ;;
+        *) die "usage: $0 census [--strict]" ;;
+      esac
+      shift
+    done
     tp="$(mktemp)"; tl="$(mktemp)"
-    fetch_open_prs > "$tp"; fetch_releases > "$tl"
-    jq -n --slurpfile p "$tp" --slurpfile r "$tl" '{open_prs:$p[0], releases:$r[0]}'
-    rm -f "$tp" "$tl"; exit 0 ;;
+    fetch_pr_census > "$tp"
+    fetch_releases > "$tl"
+    census_json="$(jq -n --slurpfile p "$tp" --slurpfile r "$tl" \
+      '{open_prs:$p[0].items, releases:$r[0], validation:$p[0].validation}')"
+    rm -f "$tp" "$tl"
+    printf '%s\n' "$census_json"
+    if [ "$STRICT" = 1 ] && ! jq -e '.validation.ok' >/dev/null <<<"$census_json"; then
+      exit 2
+    fi
+    exit 0 ;;
   dependencies) need gh; need jq
     shift
     DEP_OUT=markdown
