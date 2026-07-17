@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-json="$("$ROOT_DIR/wp-ai-roadmap-refresh.sh" dependencies --json)"
+json="$("$ROOT_DIR/wp-ai-roadmap-refresh.sh" dependencies --strict --json)"
 
 jq -e '
   [
@@ -35,6 +35,10 @@ jq -e '
     and (.summary.total == ($items | length))
     and (.summary.by_repo == $by_repo)
     and (.summary.by_state == $by_state)
+    and .validation.ok
+    and (.validation.errors | length == 0)
+    and ([.items[] | select(.required and .state=="UNKNOWN")] | length == 0)
+    and all(.items[].aiRefs[]; type=="number")
 ' <<<"$json" >/dev/null
 
 printf 'dependency smoke test passed\n'

@@ -1,0 +1,438 @@
+[
+  {
+    "id": "WordPress/ai#211",
+    "number": 211,
+    "title": "Add Service Account experiment",
+    "isDraft": true,
+    "author": "Jameswlepage",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-02-05T19:33:30Z"
+  },
+  {
+    "id": "WordPress/ai#224",
+    "number": 224,
+    "title": "Add WebMCP adapter experiment",
+    "isDraft": true,
+    "author": "Jameswlepage",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-11T01:41:23Z"
+  },
+  {
+    "id": "WordPress/ai#459",
+    "number": 459,
+    "title": "Add C2PA Monitor experiment",
+    "isDraft": false,
+    "author": "lnispel",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-16T20:22:21Z"
+  },
+  {
+    "id": "WordPress/ai#494",
+    "number": 494,
+    "title": "[Feature]: Issue 238 | Focus-aware crop suggestions",
+    "isDraft": false,
+    "author": "TylerB24890",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      238
+    ],
+    "updatedAt": "2026-05-07T19:56:54Z"
+  },
+  {
+    "id": "WordPress/ai#621",
+    "number": 621,
+    "title": "Fix alt text upload URL matching",
+    "isDraft": false,
+    "author": "1d0u",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-13T18:08:58Z"
+  },
+  {
+    "id": "WordPress/ai#633",
+    "number": 633,
+    "title": "Content Classification: improve relevance of taxonomy suggestions",
+    "isDraft": false,
+    "author": "saarnilauri",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      452
+    ],
+    "updatedAt": "2026-07-13T18:11:49Z"
+  },
+  {
+    "id": "WordPress/ai#681",
+    "number": 681,
+    "title": "Feat 514: add comment value score",
+    "isDraft": false,
+    "author": "priyanshuhaldar007",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      514
+    ],
+    "updatedAt": "2026-07-17T06:57:42Z"
+  },
+  {
+    "id": "WordPress/ai#683",
+    "number": 683,
+    "title": "Add native vector search",
+    "isDraft": true,
+    "author": "artpi",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-15T07:55:09Z"
+  },
+  {
+    "id": "WordPress/ai#692",
+    "number": 692,
+    "title": "Feature: Cleanup plugin data on plugin uninstall",
+    "isDraft": false,
+    "author": "hbhalodia",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      690
+    ],
+    "updatedAt": "2026-07-17T05:14:14Z"
+  },
+  {
+    "id": "WordPress/ai#695",
+    "number": 695,
+    "title": "Add: AI-assisted payload generation to the Ability Explorer - Test Ability Screen",
+    "isDraft": true,
+    "author": "Arkenon",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-14T08:36:45Z"
+  },
+  {
+    "id": "WordPress/ai#734",
+    "number": 734,
+    "title": "feat: add settings import/export functionality",
+    "isDraft": false,
+    "author": "coderGtm",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      191
+    ],
+    "updatedAt": "2026-07-13T19:07:09Z"
+  },
+  {
+    "id": "WordPress/ai#735",
+    "number": 735,
+    "title": "Logging: replace \"Purge All Logs\" with age-based delete control",
+    "isDraft": false,
+    "author": "i-anubhav-anand",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      689
+    ],
+    "updatedAt": "2026-06-18T14:51:14Z"
+  },
+  {
+    "id": "WordPress/ai#747",
+    "number": 747,
+    "title": "Feat[Experiment]: Add AI-Powered Content Translation",
+    "isDraft": false,
+    "author": "yogeshbhutkar",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-17T10:19:49Z"
+  },
+  {
+    "id": "WordPress/ai#749",
+    "number": 749,
+    "title": "Feat/add role user access controls",
+    "isDraft": false,
+    "author": "Infinite-Null",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      736
+    ],
+    "updatedAt": "2026-07-17T18:43:56Z"
+  },
+  {
+    "id": "WordPress/ai#757",
+    "number": 757,
+    "title": "fix(logging): capture generations that bypass the SDK HTTP transporter",
+    "isDraft": false,
+    "author": "i-anubhav-anand",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      732
+    ],
+    "updatedAt": "2026-07-15T18:52:43Z"
+  },
+  {
+    "id": "WordPress/ai#759",
+    "number": 759,
+    "title": "[issue #660] feat: Update generalised error message for all features",
+    "isDraft": false,
+    "author": "SohamPatel46",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      660
+    ],
+    "updatedAt": "2026-07-13T18:20:11Z"
+  },
+  {
+    "id": "WordPress/ai#760",
+    "number": 760,
+    "title": "PoC: Basic integration with Chrome DevTools for agents",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-06-30T09:28:42Z"
+  },
+  {
+    "id": "WordPress/ai#764",
+    "number": 764,
+    "title": "Add a core/manage-settings ability",
+    "isDraft": false,
+    "author": "jorgefilipecosta",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      691
+    ],
+    "updatedAt": "2026-07-16T16:59:26Z"
+  },
+  {
+    "id": "WordPress/ai#765",
+    "number": 765,
+    "title": "Add Repo Automator action",
+    "isDraft": false,
+    "author": "jeffpaul",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-08T19:39:29Z"
+  },
+  {
+    "id": "WordPress/ai#770",
+    "number": 770,
+    "title": "Prompt template extension points",
+    "isDraft": false,
+    "author": "the-hercules",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      192
+    ],
+    "updatedAt": "2026-07-14T14:20:54Z"
+  },
+  {
+    "id": "WordPress/ai#777",
+    "number": 777,
+    "title": "dev: Update Composer deps and remediate PHPStan smells",
+    "isDraft": true,
+    "author": "justlevine",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-13T18:22:17Z"
+  },
+  {
+    "id": "WordPress/ai#789",
+    "number": 789,
+    "title": "Update bundled wp deps (theme, ui, dataviews, admin-ui)",
+    "isDraft": false,
+    "author": "simison",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-15T20:13:33Z"
+  },
+  {
+    "id": "WordPress/ai#798",
+    "number": 798,
+    "title": "Clarify global AI toggle as a master switch (#600)",
+    "isDraft": false,
+    "author": "dhrupo",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      600,
+      617
+    ],
+    "updatedAt": "2026-07-15T20:13:57Z"
+  },
+  {
+    "id": "WordPress/ai#832",
+    "number": 832,
+    "title": "chore(deps): drop @wordpress dependencies to wp-7.0 versions",
+    "isDraft": true,
+    "author": "justlevine",
+    "isBot": false,
+    "routine": true,
+    "issues": [],
+    "updatedAt": "2026-07-13T18:24:20Z"
+  },
+  {
+    "id": "WordPress/ai#851",
+    "number": 851,
+    "title": "PoC: Test upcoming embedding changes",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-14T23:11:21Z"
+  },
+  {
+    "id": "WordPress/ai#855",
+    "number": 855,
+    "title": "Markdown feeds experiment",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      845
+    ],
+    "updatedAt": "2026-07-14T21:24:30Z"
+  },
+  {
+    "id": "WordPress/ai#858",
+    "number": 858,
+    "title": "Abilities API: add core/read-nav-menus ability",
+    "isDraft": false,
+    "author": "Builder106",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-13T17:17:40Z"
+  },
+  {
+    "id": "WordPress/ai#861",
+    "number": 861,
+    "title": "Link Editorial Updates success notice to visual revisions",
+    "isDraft": false,
+    "author": "zeus2611",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      507
+    ],
+    "updatedAt": "2026-07-14T14:19:13Z"
+  },
+  {
+    "id": "WordPress/ai#867",
+    "number": 867,
+    "title": "Fix: Bug Inconsistency: Standardize post meta key naming with the `wpai_` prefix",
+    "isDraft": false,
+    "author": "hbhalodia",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      866
+    ],
+    "updatedAt": "2026-07-17T08:43:01Z"
+  },
+  {
+    "id": "WordPress/ai#877",
+    "number": 877,
+    "title": "Fix: Focus inline reply textarea after generating suggestion",
+    "isDraft": false,
+    "author": "Infinite-Null",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-17T04:38:28Z"
+  },
+  {
+    "id": "WordPress/ai#878",
+    "number": 878,
+    "title": "Code Quality: Clean up unnecessary `any` type casts",
+    "isDraft": false,
+    "author": "yogeshbhutkar",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-17T08:10:01Z"
+  },
+  {
+    "id": "WordPress/ai#879",
+    "number": 879,
+    "title": "fix(deps-dev): bump the composer-dev-minor-patch group with 2 updates",
+    "isDraft": false,
+    "author": "app/dependabot",
+    "isBot": true,
+    "routine": true,
+    "issues": [
+      312,
+      313
+    ],
+    "updatedAt": "2026-07-17T11:50:51Z"
+  },
+  {
+    "id": "WordPress/ai#880",
+    "number": 880,
+    "title": "fix(deps): bump the npm-prod-minor-patch group with 2 updates",
+    "isDraft": false,
+    "author": "app/dependabot",
+    "isBot": true,
+    "routine": true,
+    "issues": [
+      78820,
+      78823,
+      78901,
+      78958,
+      79093,
+      79095,
+      79124,
+      79143,
+      79278,
+      79320,
+      79432,
+      79458,
+      79620,
+      79821
+    ],
+    "updatedAt": "2026-07-17T07:25:39Z"
+  },
+  {
+    "id": "WordPress/ai#881",
+    "number": 881,
+    "title": "Feature: Nex Experiment Abilities Toggle",
+    "isDraft": true,
+    "author": "hbhalodia",
+    "isBot": false,
+    "routine": false,
+    "issues": [
+      863
+    ],
+    "updatedAt": "2026-07-17T10:32:00Z"
+  },
+  {
+    "id": "WordPress/ai#882",
+    "number": 882,
+    "title": "Add/sr screenshot",
+    "isDraft": false,
+    "author": "jeffpaul",
+    "isBot": false,
+    "routine": false,
+    "issues": [],
+    "updatedAt": "2026-07-17T19:58:37Z"
+  }
+]
