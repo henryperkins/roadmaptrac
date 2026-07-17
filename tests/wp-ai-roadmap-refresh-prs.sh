@@ -73,4 +73,52 @@ mutate_pages '.[0].data.repository.pullRequests.nodes[1].closingIssuesReferences
   "$TMP_DIR/closing.jsonl"
 assert_census_error "$TMP_DIR/closing.jsonl" pr-closing-refs-truncated
 
+BASE="$TMP_DIR/pr-base.json"
+CUR="$TMP_DIR/pr-current.json"
+
+jq -n '[
+  {
+    number:1,title:"Readiness change",isDraft:false,
+    reviewDecision:null,mergeStateStatus:"CLEAN",checkState:"PENDING",
+    updatedAt:"2026-07-16T00:00:00Z"
+  },
+  {
+    number:2,title:"Activity only",isDraft:false,
+    reviewDecision:"APPROVED",mergeStateStatus:"CLEAN",checkState:"SUCCESS",
+    updatedAt:"2026-07-16T00:00:00Z"
+  },
+  {number:4,title:"No longer open",updatedAt:"2026-07-16T00:00:00Z"},
+  {number:5,title:"Legacy fields absent",updatedAt:"2026-07-16T00:00:00Z"}
+]' >"$BASE"
+
+jq -n '[
+  {
+    number:1,title:"Readiness change",isDraft:false,
+    reviewDecision:"APPROVED",mergeStateStatus:"CLEAN",checkState:"SUCCESS",
+    updatedAt:"2026-07-17T00:00:00Z"
+  },
+  {
+    number:2,title:"Activity only",isDraft:false,
+    reviewDecision:"APPROVED",mergeStateStatus:"CLEAN",checkState:"SUCCESS",
+    updatedAt:"2026-07-17T00:00:00Z"
+  },
+  {number:3,title:"Newly open",updatedAt:"2026-07-17T00:00:00Z"},
+  {
+    number:5,title:"Legacy fields now present",isDraft:false,
+    reviewDecision:"REVIEW_REQUIRED",mergeStateStatus:"BLOCKED",
+    checkState:"PENDING",updatedAt:"2026-07-17T00:00:00Z"
+  }
+]' >"$CUR"
+
+diff_json="$("$ROOT_DIR/wp-ai-roadmap-refresh.sh" prdiff "$BASE" "$CUR")"
+jq -e '
+  [.newly_opened[].number]==[3]
+  and [.no_longer_open[].number]==[4]
+  and [.readiness_changed[].number]==[1]
+  and .readiness_changed[0].changes=={
+    reviewDecision:{from:null,to:"APPROVED"},
+    checkState:{from:"PENDING",to:"SUCCESS"}
+  }
+' <<<"$diff_json" >/dev/null
+
 printf 'PR census fixture tests passed\n'

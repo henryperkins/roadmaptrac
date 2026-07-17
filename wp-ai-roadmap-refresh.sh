@@ -433,12 +433,33 @@ GAP_JQ='
       | sort_by(.code, (.context|tostring))) as $errors
   | $out + {validation:{ok:(($errors|length)==0), errors:$errors, warnings:[]}}'
 
-# diff two normalized PR arrays -> opened / no-longer-open.
+# diff two normalized PR arrays -> opened / no-longer-open / readiness changes.
+# Readiness compares isDraft, reviewDecision, mergeStateStatus, and checkState,
+# each only when both records have the key, so legacy snapshots produce no
+# schema-migration noise. An updatedAt change alone is not a readiness change.
 PRDIFF_JQ='
+  def change($b; $c; $key):
+    if ($b|has($key)) and ($c|has($key)) and ($b[$key] != $c[$key])
+    then {($key):{from:$b[$key],to:$c[$key]}}
+    else {}
+    end;
   ($base[0]) as $B | ($cur[0]) as $C
   | ([ $B[].number ]) as $bn | ([ $C[].number ]) as $cn
+  | (reduce $B[] as $x ({}; .[$x.number|tostring] = $x)) as $bidx
   | { newly_opened:   [ $C[] | select(.number as $n | ($bn|index($n))==null) | {number,title,isDraft} ],
-      no_longer_open: [ $B[] | select(.number as $n | ($cn|index($n))==null) | {number,title} ] }'
+      no_longer_open: [ $B[] | select(.number as $n | ($cn|index($n))==null) | {number,title} ],
+      readiness_changed: ([
+        $C[]
+        | . as $c
+        | ($bidx[$c.number|tostring] // null) as $b
+        | select($b != null)
+        | (change($b; $c; "isDraft")
+           * change($b; $c; "reviewDecision")
+           * change($b; $c; "mergeStateStatus")
+           * change($b; $c; "checkState")) as $changes
+        | select(($changes|length) > 0)
+        | {number:$c.number, title:$c.title, changes:$changes}
+      ] | sort_by(.number)) }'
 
 # diff two normalized release arrays -> new releases.
 RELDIFF_JQ='
@@ -447,25 +468,83 @@ RELDIFF_JQ='
   | { new_releases: [ $C[] | select(.tag as $t | ($bt|index($t))==null)
                       | {tag,name,publishedAt,isDraft,isPrerelease} ] }'
 
-# render the combined repo report object -> text sections + copy-paste block.
+# render the combined repo report object -> developer radar + copy-paste block.
+# Order: what changed -> already underway -> uncovered work -> routine count.
 RENDER_REPO_JQ='
   def fmt(a; f): [ a[] | f ] | join("\n");
-  def imap(iss): [ iss[] | "\(.repo)#\(.number)" + (if .onBoard then " (board: \(.status // "—")/\(.milestone // "—"))" else " (not on board)" end) ] | join(", ");
-  "",
+  def age_days:
+    if . == null then null
+    else (try (((now - fromdateiso8601) / 86400) | floor) catch null) end;
+  def state_bits:
+    [ "Review: \(.reviewDecision // "—")",
+      "Merge: \(.mergeStateStatus // "—")",
+      "Checks: \(.checkState // "—")",
+      ((.updatedAt | age_days) as $d
+        | if $d == null then empty else "Active: \($d)d ago" end)
+    ] | join(" · ");
+  def issue_map(iss):
+    [ iss[] | "\(.repo)#\(.number) [\(.source)]"
+      + (if .onBoard
+         then " (board: \(.status // "—") / \(.milestone // "—")"
+              + (if ((.assignees // [])|length)>0
+                 then " / " + ((.assignees // [])|join(", ")) else "" end)
+              + ")"
+         else " (not on board)" end) ] | join(", ");
+  def pr_line:
+    "- " + (if .isDraft then "(draft) " else "" end)
+    + "#\(.number) \(.title) — @\(.author // "?")\n  \(state_bits)"
+    + (if ((.mappedIssues // [])|length)>0
+       then "\n  → " + issue_map(.mappedIssues) else "" end);
+  (.gap.classifications // {}) as $classes
+  | (.gap.classification_counts // {}) as $counts
+  | "",
   "## 📦 Releases (repo: \(.gap.repo))",
   ( if .rel.latest_shipped then "Latest shipped: **\(.rel.latest_shipped.tag)** (\((.rel.latest_shipped.publishedAt // "")[0:10]))" else "Latest shipped: (none found)" end ),
   ( if (.rel.new_releases|length)>0 then "New since baseline: " + ([ .rel.new_releases[] | "\(.tag) (\((.publishedAt // "")[0:10]))" ] | join(", ")) else empty end ),
   "",
-  "## 🔌 Repo open PRs not on board: \(.gap.untracked|length) of \(.gap.open_total) open (\(.gap.substantive|length) substantive + \(.gap.routine_count) routine; \(.gap.tracked_open) board-tracked)",
-  ( if (.gap.substantive|length)>0
-     then fmt(.gap.substantive; "- " + (if .isDraft then "(draft) " else "" end) + "#\(.number) \(.title)" + (if ((.mappedIssues // [])|length)>0 then " → " + imap(.mappedIssues) else " → (no issue link)" end))
-     else "_(none — board covers all substantive open PRs)_" end ),
-  ( if (.pr_diff != null) and (((.pr_diff.newly_opened|length)>0) or ((.pr_diff.no_longer_open|length)>0))
-     then "",
-          "## 🆕 PR census changes",
-          ( if (.pr_diff.newly_opened|length)>0   then "Newly opened: "                  + ([ .pr_diff.newly_opened[]   | "#\(.number)" ] | join(", ")) else empty end ),
-          ( if (.pr_diff.no_longer_open|length)>0 then "No longer open (merged/closed): " + ([ .pr_diff.no_longer_open[] | "#\(.number)" ] | join(", ")) else empty end )
-     else empty end ),
+  "## 🔀 What changed (open PRs)",
+  ( if .pr_diff == null then "_(no PR baseline yet)_"
+    else (
+      ( if (.pr_diff.newly_opened|length)>0 then "Newly opened: " + ([ .pr_diff.newly_opened[] | "#\(.number)" ] | join(", ")) else empty end ),
+      ( if (.pr_diff.no_longer_open|length)>0 then "No longer open (merged/closed): " + ([ .pr_diff.no_longer_open[] | "#\(.number)" ] | join(", ")) else empty end ),
+      ( if ((.pr_diff.readiness_changed // [])|length)>0 then
+          "Readiness changes:\n" + fmt(.pr_diff.readiness_changed;
+            "- #\(.number) \(.title // ""): "
+            + ([ .changes | to_entries[]
+                 | "\(.key) \(.value.from // "—") → \(.value.to // "—")" ] | join(", ")))
+        else empty end ),
+      ( if ((.pr_diff.newly_opened|length)==0 and (.pr_diff.no_longer_open|length)==0
+            and ((.pr_diff.readiness_changed // [])|length)==0)
+        then "_(no PR census changes since baseline)_" else empty end )
+    ) end ),
+  "",
+  "## 🚧 Already underway (\((($counts["direct-board-pr"] // 0) + ($counts["linked-board-issue"] // 0))) of \(.gap.open_total) open PRs board-tracked)",
+  ( if (($classes["direct-board-pr"] // [])|length)>0 then
+      "\n### Direct board PR cards (\($counts["direct-board-pr"] // 0))\n"
+      + fmt($classes["direct-board-pr"]; pr_line)
+    else empty end ),
+  ( if (($classes["linked-board-issue"] // [])|length)>0 then
+      "\n### Linked to board issues (\($counts["linked-board-issue"] // 0))\n"
+      + fmt($classes["linked-board-issue"]; pr_line)
+    else empty end ),
+  ( if ((($classes["direct-board-pr"] // [])|length)==0
+        and (($classes["linked-board-issue"] // [])|length)==0)
+    then "_(none)_" else empty end ),
+  "",
+  "## 🔍 Not represented on the board (\((($counts["linked-off-board-issue"] // 0) + ($counts["unexplained"] // 0))) substantive PRs)",
+  ( if (($classes["linked-off-board-issue"] // [])|length)>0 then
+      "\n### Linked only to off-board issues (\($counts["linked-off-board-issue"] // 0))\n"
+      + fmt($classes["linked-off-board-issue"]; pr_line)
+    else empty end ),
+  ( if (($classes["unexplained"] // [])|length)>0 then
+      "\n### Unexplained open PRs (\($counts["unexplained"] // 0))\n"
+      + fmt($classes["unexplained"]; pr_line)
+    else empty end ),
+  ( if ((($counts["linked-off-board-issue"] // 0) + ($counts["unexplained"] // 0))==0)
+    then "_(none — every substantive open PR is represented on the board)_" else empty end ),
+  ( if (.gap.routine_count // 0)>0
+    then "\n## 🔁 Routine PRs: \(.gap.routine_count) (dependency/bot maintenance; roadmap-exempt)"
+    else empty end ),
   "",
   "## 📋 Copy-paste block (for wordpress-ai-planned-work.md)",
   "```markdown",
@@ -475,7 +554,7 @@ RENDER_REPO_JQ='
   "|---|---|---|",
   fmt(.gap.substantive;
       "| #\(.number)" + (if .isDraft then " (draft)" else "" end) + " \(.title) | "
-      + (if ((.mappedIssues // [])|length)>0 then ([ .mappedIssues[] | "\(.repo)#\(.number)" ] | join(", ")) else "—" end) + " | "
+      + (if ((.mappedIssues // [])|length)>0 then ([ .mappedIssues[] | "\(.repo)#\(.number) [\(.source)]" ] | join(", ")) else "—" end) + " | "
       + (if ((.mappedIssues // [])|length)>0 then ([ .mappedIssues[] | (if .onBoard then "\(.status // "—")/\(.milestone // "—")" else "not on board" end) ] | join("; ")) else "—" end)
       + " |"),
   "```"'
