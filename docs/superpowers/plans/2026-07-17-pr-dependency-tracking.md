@@ -60,7 +60,7 @@
 - Produces: `load_dependency_registry FILE`, which prints `{"items":[...],"validation":{"ok":BOOL,"errors":[],"warnings":[]}}` and returns `0` for a readable file even when schema errors are present; a missing/unreadable file uses operational exit `1`.
 - Produces: registry items with `id`, `theme`, integer `aiRefs`, `note`, and Boolean `required`.
 
-- [ ] **Step 1: Write the failing registry contract test**
+- [x] **Step 1: Write the failing registry contract test**
 
 Create the initial `tests/wp-ai-roadmap-refresh-dependencies-fixtures.sh` with:
 
@@ -99,7 +99,7 @@ Set its executable mode:
 chmod +x tests/wp-ai-roadmap-refresh-dependencies-fixtures.sh
 ```
 
-- [ ] **Step 2: Run the new test to prove the registry is absent**
+- [x] **Step 2: Run the new test to prove the registry is absent**
 
 Run:
 
@@ -110,7 +110,7 @@ bash -n tests/wp-ai-roadmap-refresh-dependencies-fixtures.sh
 
 Expected: syntax passes; direct execution fails with `FAIL: dependency registry is missing`.
 
-- [ ] **Step 3: Add the complete 16-item registry**
+- [x] **Step 3: Add the complete 16-item registry**
 
 Create `wp-ai-roadmap-dependencies.json` with exactly:
 
@@ -138,7 +138,7 @@ Create `wp-ai-roadmap-dependencies.json` with exactly:
 }
 ```
 
-- [ ] **Step 4: Add registry configuration and schema loading**
+- [x] **Step 4: Add registry configuration and schema loading**
 
 In the configuration block add:
 
@@ -228,7 +228,7 @@ dependency_watchlist() {
 
 Task 2 will replace this transitional adapter when `required` and structured fetch errors become part of every emitted item. Keep the existing stdin-to-jq REST payload normalization unchanged in this task.
 
-- [ ] **Step 5: Run the registry contract and existing live smoke test**
+- [x] **Step 5: Run the registry contract and existing live smoke test**
 
 Run:
 
@@ -241,7 +241,7 @@ git diff --check
 
 Expected: both dependency tests pass; Bash syntax and whitespace checks exit `0`.
 
-- [ ] **Step 6: Commit the registry slice**
+- [x] **Step 6: Commit the registry slice**
 
 ```bash
 git add wp-ai-roadmap-dependencies.json \
@@ -266,7 +266,7 @@ git commit -m "Add declarative roadmap dependency registry"
 - Produces: dependency result `{items,summary,diff,validation}`.
 - Produces: `dependencies [--strict] [--json|--markdown]` with exit `2` only after output when required items remain unknown.
 
-- [ ] **Step 1: Add a deterministic GitHub CLI mock**
+- [x] **Step 1: Add a deterministic GitHub CLI mock**
 
 Create executable `tests/helpers/mock-gh.sh`. Its dependency branch must parse `gh api repos/OWNER/REPO/issues/NUMBER`, persist attempt counts under `WP_AI_TEST_STATE_DIR`, and support `all-ok`, `required-fail-once`, `required-fail`, and `optional-fail`:
 
@@ -309,7 +309,7 @@ Set the helper executable:
 chmod +x tests/helpers/mock-gh.sh
 ```
 
-- [ ] **Step 2: Extend the fixture test with RED cases**
+- [x] **Step 2: Extend the fixture test with RED cases**
 
 Append this setup to `tests/wp-ai-roadmap-refresh-dependencies-fixtures.sh` after the committed-registry assertion:
 
@@ -436,13 +436,13 @@ printf 'dependency fixture tests passed\n'
 
 Move the Task 1 `dependency registry contract passed` print to this final position so the script never reports success before retry and strict assertions finish.
 
-- [ ] **Step 3: Run the dependency fixture test and verify RED**
+- [x] **Step 3: Run the dependency fixture test and verify RED**
 
 Run `./tests/wp-ai-roadmap-refresh-dependencies-fixtures.sh`.
 
 Expected: fail because `dependencies --strict` and UNKNOWN placeholder validation do not exist yet.
 
-- [ ] **Step 4: Implement bounded fetches and validation**
+- [x] **Step 4: Implement bounded fetches and validation**
 
 Add `fetch_dependency_endpoint ITEM ENDPOINT`. It makes one request for optional items and two for required items, captures the final stderr text, and returns a structured failure without dropping the item.
 
@@ -515,7 +515,7 @@ Replace every dependency `aiRefs|join(", ")` expression with `aiRefs|ai_refs`. D
 
 Add subcommand option parsing for `dependencies --strict --json` in either option order. Emit the result first, then return `2` when `STRICT=1` and `validation.ok=false`.
 
-- [ ] **Step 5: Verify dependency retry, strict, and summary invariants**
+- [x] **Step 5: Verify dependency retry, strict, and summary invariants**
 
 Run:
 
@@ -527,7 +527,7 @@ git diff --check
 
 Expected: fixture test reports registry, retry-success, required-UNKNOWN, optional-UNKNOWN, and summary checks passed.
 
-- [ ] **Step 6: Commit resilient dependency tracking**
+- [x] **Step 6: Commit resilient dependency tracking**
 
 ```bash
 git add wp-ai-roadmap-refresh.sh \
@@ -552,7 +552,7 @@ git commit -m "Make roadmap dependency tracking resilient"
 - Each normalized PR adds `repo:WP_AI_REPO` and preserves `issues:[NUMBER...]` for local links while adding `issueLinks:[{repo,number,source}]`, `isBot`, `routine`, `reviewDecision`, `mergeStateStatus`, and `checkState`.
 - `census` produces `{open_prs,releases,validation}`; `census --strict` validates PR fetch/schema only.
 
-- [ ] **Step 1: Create two GraphQL fixture pages**
+- [x] **Step 1: Create two GraphQL fixture pages**
 
 Create `tests/fixtures/pr-graphql-pages.jsonl` with these exact two JSON lines:
 
@@ -561,7 +561,7 @@ Create `tests/fixtures/pr-graphql-pages.jsonl` with these exact two JSON lines:
 {"data":{"repository":{"pullRequests":{"totalCount":5,"pageInfo":{"hasNextPage":false,"endCursor":null},"nodes":[{"number":103,"title":"Add guidelines support","url":"https://github.com/WordPress/ai/pull/103","body":"","isDraft":false,"headRefName":"feature/430-fix","updatedAt":"2026-07-17T03:00:00Z","reviewDecision":null,"mergeStateStatus":"DIRTY","author":{"__typename":"User","login":"carol"},"commits":{"nodes":[{"commit":{"statusCheckRollup":{"state":"FAILURE"}}}]},"closingIssuesReferences":{"totalCount":0,"nodes":[]}},{"number":104,"title":"Improve global toggle","url":"https://github.com/WordPress/ai/pull/104","body":"Related to WordPress/ai#600. Changelog (#999).","isDraft":false,"headRefName":"update-php-8.2-compat","updatedAt":"2026-07-17T04:00:00Z","reviewDecision":"CHANGES_REQUESTED","mergeStateStatus":"UNSTABLE","author":{"__typename":"User","login":"dana"},"commits":{"nodes":[{"commit":{"statusCheckRollup":{"state":"ERROR"}}}]},"closingIssuesReferences":{"totalCount":0,"nodes":[]}}]}}}}
 ```
 
-- [ ] **Step 2: Write the failing PR census test**
+- [x] **Step 2: Write the failing PR census test**
 
 Extend `tests/helpers/mock-gh.sh` before its dependency branch:
 
@@ -681,13 +681,13 @@ mutate_pages '.[0].data.repository.pullRequests.nodes[1].closingIssuesReferences
 assert_census_error "$TMP_DIR/closing.jsonl" pr-closing-refs-truncated
 ```
 
-- [ ] **Step 3: Run the PR test and verify RED**
+- [x] **Step 3: Run the PR test and verify RED**
 
 Run `./tests/wp-ai-roadmap-refresh-prs.sh`.
 
 Expected: fail because `census` still uses `gh pr list`, lacks enriched fields, and the mock rejects that invocation.
 
-- [ ] **Step 4: Add the paginated PR GraphQL query**
+- [x] **Step 4: Add the paginated PR GraphQL query**
 
 Add `PR_GQL_QUERY` using repository owner/name derived from `WP_AI_REPO`:
 
@@ -716,7 +716,7 @@ query($owner: String!, $name: String!, $endCursor: String) {
 
 Call `gh api graphql --paginate` and slurp its page objects. Treat a failed whole query as operational failure `1` for standalone `census`.
 
-- [ ] **Step 5: Implement deterministic normalization**
+- [x] **Step 5: Implement deterministic normalization**
 
 Replace the broad `refs()` parser. Implement exact source functions matching the spec and merge links with this rank:
 
@@ -784,7 +784,7 @@ Build closing links before checking `routine`. When routine is true, concatenate
 
 Normalize `checkState` from the latest commit's `statusCheckRollup.state`. Validate unique PR numbers, repeated total count, last-page completion, total node count, and every nested closing-reference count. Sort diagnostics by `code` then serialized `context`.
 
-- [ ] **Step 6: Make `census` expose strict validation without board coverage**
+- [x] **Step 6: Make `census` expose strict validation without board coverage**
 
 Parse `census [--strict]`. Return:
 
@@ -798,7 +798,7 @@ Parse `census [--strict]`. Return:
 
 Exit `2` after JSON only when `--strict` is present and census validation has errors.
 
-- [ ] **Step 7: Verify and commit authoritative PR census**
+- [x] **Step 7: Verify and commit authoritative PR census**
 
 Run:
 
@@ -839,7 +839,7 @@ git commit -m "Use authoritative PR roadmap relationships"
 - Produces: `validation` with exact coverage invariants.
 - `gap BOARD PRS` exits `0`; `gap --strict BOARD PRS` emits identical JSON and exits `2` when coverage errors exist.
 
-- [ ] **Step 1: Create complete coverage fixtures**
+- [x] **Step 1: Create complete coverage fixtures**
 
 Create `tests/fixtures/board-pr-coverage.json`:
 
@@ -867,7 +867,7 @@ Create `tests/fixtures/prs-pr-coverage.json`:
 
 Expected counts are direct `1`, linked-board `2`, routine `1`, linked-off-board `1`, unexplained `1`, and open total `6`.
 
-- [ ] **Step 2: Write the failing gap test**
+- [x] **Step 2: Write the failing gap test**
 
 Create `tests/wp-ai-roadmap-refresh-gap.sh` that runs both modes and asserts:
 
@@ -924,13 +924,13 @@ End the script with:
 printf 'PR coverage fixture tests passed\n'
 ```
 
-- [ ] **Step 3: Run the gap test and verify RED**
+- [x] **Step 3: Run the gap test and verify RED**
 
 Run `./tests/wp-ai-roadmap-refresh-gap.sh`.
 
 Expected: current `gap` rejects `--strict` and joins only local bare issue numbers.
 
-- [ ] **Step 4: Replace the gap join with canonical keys**
+- [x] **Step 4: Replace the gap join with canonical keys**
 
 In `GAP_JQ`:
 
@@ -1020,7 +1020,7 @@ Add the existing board-card totals to this object. Build `untracked` and `substa
 
 Build stable `pr-roadmap-coverage-missing` errors for every non-routine linked-off-board or unexplained PR. Then assert the exact classification, total, tracked/untracked, and routine/substantive invariants; add `validation-inconsistent` when a derived invariant fails.
 
-- [ ] **Step 5: Parse both gap forms and enforce exit semantics**
+- [x] **Step 5: Parse both gap forms and enforce exit semantics**
 
 Accept:
 
@@ -1031,7 +1031,7 @@ gap --strict BOARD.json PRS.json
 
 Missing/unreadable/malformed input exits `1`. Coverage errors exit `0` normally or `2` under strict, after JSON is printed.
 
-- [ ] **Step 6: Verify and commit coverage classification**
+- [x] **Step 6: Verify and commit coverage classification**
 
 Run:
 
@@ -1066,7 +1066,7 @@ git commit -m "Classify roadmap PR coverage by repository"
 - Produces: `prdiff` with `newly_opened`, `no_longer_open`, and `readiness_changed`.
 - Produces: repo report ordered as changes, underway work, then uncovered work, with board issue assignees and mapping source.
 
-- [ ] **Step 1: Add failing readiness-diff fixtures inline**
+- [x] **Step 1: Add failing readiness-diff fixtures inline**
 
 In the PR test, create these exact baseline/current arrays:
 
@@ -1124,13 +1124,13 @@ jq -e '
 ' <<<"$diff_json" >/dev/null
 ```
 
-- [ ] **Step 2: Run the focused PR test and verify RED**
+- [x] **Step 2: Run the focused PR test and verify RED**
 
 Run `./tests/wp-ai-roadmap-refresh-prs.sh`.
 
 Expected: fail because `readiness_changed` is absent.
 
-- [ ] **Step 3: Implement readiness comparison**
+- [x] **Step 3: Implement readiness comparison**
 
 Extend `PRDIFF_JQ`. Compare `isDraft`, `reviewDecision`, `mergeStateStatus`, and `checkState` only when both objects have the key. Emit only changed keys:
 
@@ -1144,7 +1144,7 @@ def change($b; $c; $key):
 
 Merge the four objects with `*`, discard empty `changes`, and sort by PR number.
 
-- [ ] **Step 4: Update repo JSON and Markdown rendering**
+- [x] **Step 4: Update repo JSON and Markdown rendering**
 
 Render in this order:
 
@@ -1155,7 +1155,7 @@ Render in this order:
 
 For every mapped on-board issue show `repo#number`, mapping `source`, board status, milestone, and assignees. Show PR author, draft/review/merge/check state, and whole-day activity age. Render age only; do not make it a validation failure.
 
-- [ ] **Step 5: Verify output and commit**
+- [x] **Step 5: Verify output and commit**
 
 Run:
 
@@ -1190,7 +1190,7 @@ git commit -m "Report PR readiness and roadmap coverage"
 - Produces: aggregate validation as the deterministic union of subsystem diagnostics.
 - Enforces: exit `2` after a complete strict report; no snapshot or changelog mutation on strict failure.
 
-- [ ] **Step 1: Write the failing full-path strict test**
+- [x] **Step 1: Write the failing full-path strict test**
 
 Create `tests/fixtures/board-graphql-page.json`:
 
@@ -1327,13 +1327,13 @@ diff -u "$TMP_DIR/real-snapshots.before" "$TMP_DIR/real-snapshots.after"
 printf 'strict CLI fixture tests passed\n'
 ```
 
-- [ ] **Step 2: Run the strict test and verify RED**
+- [x] **Step 2: Run the strict test and verify RED**
 
 Run `./tests/wp-ai-roadmap-refresh-strict.sh`.
 
 Expected: fail because the full parser does not recognize `--strict` and persistence is unconditional.
 
-- [ ] **Step 3: Add global strict parsing and aggregate validation**
+- [x] **Step 3: Add global strict parsing and aggregate validation**
 
 Parse `--strict` in the main option loop without changing other options. Build:
 
@@ -1354,7 +1354,7 @@ def diagnostics($object):
 
 If a fail-soft subsystem is unavailable, add a stable `repo-subsystem-unavailable` or `dependency-subsystem-unavailable` diagnostic to the aggregate.
 
-- [ ] **Step 4: Gate all persistence after report emission**
+- [x] **Step 4: Gate all persistence after report emission**
 
 Compute final strict status only after rendering stdout. If `STRICT=1` and aggregate `ok=false`:
 
@@ -1368,7 +1368,7 @@ fi
 
 Move `append_changelog` and snapshot copies after this gate. Normal mode retains warning-only save behavior, including UNKNOWN placeholders.
 
-- [ ] **Step 5: Verify output purity, exit codes, and snapshot isolation**
+- [x] **Step 5: Verify output purity, exit codes, and snapshot isolation**
 
 Run:
 
@@ -1383,7 +1383,7 @@ git diff --check
 
 Expected: all deterministic tests pass; every strict `2` stdout file parses with jq; real snapshot hashes remain unchanged.
 
-- [ ] **Step 6: Commit strict integration**
+- [x] **Step 6: Commit strict integration**
 
 ```bash
 git add wp-ai-roadmap-refresh.sh tests/helpers/mock-gh.sh \
@@ -1406,7 +1406,7 @@ git commit -m "Add strict roadmap audit mode"
 - Consumes: completed CLI and live read-only GitHub data.
 - Produces: exact live dependency smoke validation and current developer-facing Markdown.
 
-- [ ] **Step 1: Make the live dependency test require strict success**
+- [x] **Step 1: Make the live dependency test require strict success**
 
 Change its fetch line to:
 
@@ -1423,7 +1423,7 @@ and ([.items[] | select(.required and .state=="UNKNOWN")] | length == 0)
 and all(.items[].aiRefs[]; type=="number")
 ```
 
-- [ ] **Step 2: Run every deterministic and live test**
+- [x] **Step 2: Run every deterministic and live test**
 
 Run:
 
@@ -1437,7 +1437,7 @@ Run:
 
 Expected: five passing test messages; live dependencies contain the exact 16 IDs with no required UNKNOWN item.
 
-- [ ] **Step 3: Run live normal and strict audits without saving**
+- [x] **Step 3: Run live normal and strict audits without saving**
 
 Run:
 
@@ -1457,7 +1457,7 @@ printf 'normal=%s strict=%s\n' "$normal_status" "$strict_status"
 
 Expected: normal exit `0`. Strict exit is `0` if every substantive PR is represented, otherwise `2` with exact coverage errors; either outcome must match `.validation.ok`.
 
-- [ ] **Step 4: Save one enriched normal-mode baseline**
+- [x] **Step 4: Save one enriched normal-mode baseline**
 
 Run:
 
@@ -1470,7 +1470,7 @@ rm -f "$saved_json"
 
 Expected: one new board, PR, release, and dependency snapshot generation. Do not delete or overwrite the four pre-existing untracked 2026-07-17 snapshots.
 
-- [ ] **Step 5: Reconcile the roadmap documents with live output**
+- [x] **Step 5: Reconcile the roadmap documents with live output**
 
 Update:
 
@@ -1482,7 +1482,7 @@ Update:
 
 Preserve and build on the existing uncommitted 2026-07-17 edits; do not regenerate unrelated narrative sections from scratch.
 
-- [ ] **Step 6: Verify documentation and snapshot invariants**
+- [x] **Step 6: Verify documentation and snapshot invariants**
 
 Run:
 
@@ -1500,7 +1500,7 @@ git status --short
 
 Inspect live counts in the JSON and assert the same values appear in the relevant document summary/table. Confirm every new snapshot parses with jq and PR snapshot records retain `issues` plus `issueLinks`.
 
-- [ ] **Step 7: Commit the live test and documentation refresh**
+- [x] **Step 7: Commit the live test and documentation refresh**
 
 Stage only the live test, five reviewed documents, and intended snapshot generations:
 
