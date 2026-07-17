@@ -39,6 +39,7 @@
 #   WP_AI_SNAP_DIR (default <script dir>/.wp-ai-roadmap-snapshots)
 #   WP_AI_DOC_DIR  (default <script dir>; where the *.md docs live)
 #   WP_AI_DEPS_SLUG (default wordpress-ai-cross-repo-dependencies; snapshot filename prefix)
+#   WP_AI_DEPS_FILE (default <script dir>/wp-ai-roadmap-dependencies.json; dependency registry)
 #
 set -euo pipefail
 
@@ -52,6 +53,8 @@ PLANNED_DOC="$DOC_DIR/wordpress-ai-planned-work.md"
 REPO="${WP_AI_REPO:-WordPress/ai}"     # primary repo for the PR/release census
 REPO_SLUG="${REPO//\//-}"              # WordPress/ai -> WordPress-ai (used in snapshot filenames)
 DEPS_SLUG="${WP_AI_DEPS_SLUG:-wordpress-ai-cross-repo-dependencies}"
+DEPS_FILE="${WP_AI_DEPS_FILE:-$SCRIPT_DIR/wp-ai-roadmap-dependencies.json}"
+STRICT=0
 
 SAVE=0
 UPDATE_CHANGELOG=0
@@ -252,27 +255,78 @@ RENDER_REPO_JQ='
   "```"'
 
 # Cross-repo dependency watchlist for roadmap-critical Gutenberg and
-# abilities-api items. Whole-repo Gutenberg tracking is intentionally avoided:
-# that repository is too broad for a useful roadmap signal.
+# abilities-api items, declared in $DEPS_FILE (wp-ai-roadmap-dependencies.json).
+# Whole-repo Gutenberg tracking is intentionally avoided: that repository is
+# too broad for a useful roadmap signal.
+load_dependency_registry() {
+  local file="$1"
+  [ -r "$file" ] || die "dependency registry not readable: $file"
+
+  if ! jq -e . "$file" >/dev/null 2>&1; then
+    jq -n --arg file "$file" '{
+      items: [],
+      validation: {
+        ok: false,
+        errors: [{
+          code: "dependency-registry-invalid",
+          message: "Dependency registry is not valid JSON",
+          context: {file:$file}
+        }],
+        warnings: []
+      }
+    }'
+    return 0
+  fi
+
+  jq '
+    def diagnostic($message; $context): {
+      code:"dependency-registry-invalid",
+      message:$message,
+      context:$context
+    };
+    . as $registry
+    | ([
+        if (.schemaVersion != 1)
+          then diagnostic("schemaVersion must equal 1"; {actual:.schemaVersion}) else empty end,
+        if ((.items | type) != "array" or (.items | length) == 0)
+          then diagnostic("items must be a nonempty array"; {}) else empty end,
+        ([.items[]?.id] | group_by(.) | map(select(length > 1) | .[0]))[]?
+          | diagnostic("dependency IDs must be unique"; {id:.}),
+        .items[]? as $item
+          | if (
+              ($item.id | type) != "string"
+              or ($item.id | test("^[^/]+/[^#]+#[1-9][0-9]*$") | not)
+              or ($item.theme | type) != "string" or ($item.theme | length) == 0
+              or ($item.note | type) != "string" or ($item.note | length) == 0
+              or ($item.required | type) != "boolean"
+              or ($item.aiRefs | type) != "array"
+              or ([$item.aiRefs[]? | select(type != "number" or . <= 0 or floor != .)] | length) > 0
+              or (($item.aiRefs | unique | length) != ($item.aiRefs | length))
+            )
+            then diagnostic("dependency item does not match schema"; {id:($item.id // null)})
+            else empty
+            end
+      ] | sort_by(.code, (.context|tostring))) as $errors
+    | {
+        items: (if ($errors|length)==0 then $registry.items else [] end),
+        validation: {ok:($errors|length==0), errors:$errors, warnings:[]}
+      }
+  ' "$file"
+}
+
 dependency_watchlist() {
-  cat <<'EOF'
-WordPress/gutenberg#70710|Platform / workflows|#21,#40,#430|Abilities and Workflows overview for Command Palette and AI tool surfaces
-WordPress/gutenberg#74234|Platform / core abilities|#40|Core post-management abilities implementation
-WordPress/gutenberg#77230|Skills / Guidelines|#430|Guidelines CPT evolution toward skills, memory, and plans
-WordPress/gutenberg#77643|Skills / Guidelines|#430|Guidelines public API extraction
-WordPress/gutenberg#75221|Media / focal point|#238|Media-level focal point selector for AI crop suggestions
-WordPress/gutenberg#72734|Media Editor|#325|Dedicated media editor foundation
-WordPress/gutenberg#73771|Media Editor|#238,#325|Media Editor modal task tracking and extension surface
-WordPress/gutenberg#77994|Media Editor|#325|Media Editor route and modal component refactor
-WordPress/gutenberg#74572|Admin UX / DataViews|#741|DataViews flicker fix used as a reference for AI admin flicker
-WordPress/gutenberg#16549|Admin UX / accessibility|#699|Snackbar accessibility caveat for copy-feedback UI
-WordPress/gutenberg#77816|Admin UX / toast component|#699|Toast component direction related to snackbar replacement
-WordPress/abilities-api#38|Ability registry filtering|#21,#354|Filter registered abilities by namespace, category, and metadata
-WordPress/abilities-api#62|Ability safety metadata|#40|Hints for destructive, read-only, and idempotent abilities
-WordPress/abilities-api#84|Core CRUD abilities|#40|CRUD abilities that work across post types
-WordPress/abilities-api#105|Core abilities scope|#40|Core Abilities for WordPress 6.9
-WordPress/abilities-api#106|Ability metadata|#40|Determine what belongs in Ability meta
-EOF
+  local loaded
+  loaded="$(load_dependency_registry "$DEPS_FILE")"
+  jq -r '
+    .items[]
+    | [
+        .id,
+        .theme,
+        (.aiRefs | map("#" + tostring) | join(",")),
+        .note
+      ]
+    | join("|")
+  ' <<<"$loaded"
 }
 
 DEPS_DIFF_JQ='

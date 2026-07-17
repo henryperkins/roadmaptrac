@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {"id":"WordPress/gutenberg#70710","theme":"Platform / workflows","aiRefs":[21,40,430],"note":"Abilities and Workflows overview for Command Palette and AI tool surfaces","required":true},
+    {"id":"WordPress/gutenberg#74234","theme":"Platform / core abilities","aiRefs":[40],"note":"Core post-management abilities implementation","required":true},
+    {"id":"WordPress/gutenberg#77230","theme":"Skills / Guidelines","aiRefs":[430],"note":"Guidelines CPT evolution toward skills, memory, and plans","required":true},
+    {"id":"WordPress/gutenberg#77643","theme":"Skills / Guidelines","aiRefs":[430],"note":"Guidelines public API extraction","required":true},
+    {"id":"WordPress/gutenberg#75221","theme":"Media / focal point","aiRefs":[238],"note":"Media-level focal point selector for AI crop suggestions","required":true},
+    {"id":"WordPress/gutenberg#72734","theme":"Media Editor","aiRefs":[325],"note":"Dedicated media editor foundation","required":true},
+    {"id":"WordPress/gutenberg#73771","theme":"Media Editor","aiRefs":[238,325],"note":"Media Editor modal task tracking and extension surface","required":true},
+    {"id":"WordPress/gutenberg#77994","theme":"Media Editor","aiRefs":[325],"note":"Media Editor route and modal component refactor","required":true},
+    {"id":"WordPress/gutenberg#74572","theme":"Admin UX / DataViews","aiRefs":[741],"note":"DataViews flicker fix used as a reference for AI admin flicker","required":true},
+    {"id":"WordPress/gutenberg#16549","theme":"Admin UX / accessibility","aiRefs":[699],"note":"Snackbar accessibility caveat for copy-feedback UI","required":true},
+    {"id":"WordPress/gutenberg#77816","theme":"Admin UX / toast component","aiRefs":[699],"note":"Toast component direction related to snackbar replacement","required":true},
+    {"id":"WordPress/abilities-api#38","theme":"Ability registry filtering","aiRefs":[21,354],"note":"Filter registered abilities by namespace, category, and metadata","required":true},
+    {"id":"WordPress/abilities-api#62","theme":"Ability safety metadata","aiRefs":[40],"note":"Hints for destructive, read-only, and idempotent abilities","required":true},
+    {"id":"WordPress/abilities-api#84","theme":"Core CRUD abilities","aiRefs":[40],"note":"CRUD abilities that work across post types","required":true},
+    {"id":"WordPress/abilities-api#105","theme":"Core abilities scope","aiRefs":[40],"note":"Core Abilities for WordPress 6.9","required":true},
+    {"id":"WordPress/abilities-api#106","theme":"Ability metadata","aiRefs":[40],"note":"Determine what belongs in Ability meta","required":true}
+  ]
+}
