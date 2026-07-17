@@ -22,6 +22,7 @@
 #   ./wp-ai-roadmap-refresh.sh census          # print the repo {open_prs, releases} census to stdout
 #   ./wp-ai-roadmap-refresh.sh dependencies    # print the Gutenberg / abilities-api dependency watchlist
 #   ./wp-ai-roadmap-refresh.sh dependencies --json
+#   ./wp-ai-roadmap-refresh.sh dependencies --strict --json   # exit 2 if a required dependency is UNKNOWN
 #   ./wp-ai-roadmap-refresh.sh diff A.json B.json      # diff two board snapshots (offline; for testing)
 #   ./wp-ai-roadmap-refresh.sh gap B.json P.json       # board<->repo PR gap from board + prs snapshots (offline)
 #   ./wp-ai-roadmap-refresh.sh prdiff A.json B.json    # diff two prs snapshots (offline)
@@ -290,9 +291,9 @@ load_dependency_registry() {
           then diagnostic("schemaVersion must equal 1"; {actual:.schemaVersion}) else empty end,
         if ((.items | type) != "array" or (.items | length) == 0)
           then diagnostic("items must be a nonempty array"; {}) else empty end,
-        ([.items[]?.id] | group_by(.) | map(select(length > 1) | .[0]))[]?
-          | diagnostic("dependency IDs must be unique"; {id:.}),
-        .items[]? as $item
+        (([.items[]?.id] | group_by(.) | map(select(length > 1) | .[0]))[]?
+          | diagnostic("dependency IDs must be unique"; {id:.})),
+        (.items[]? as $item
           | if (
               ($item.id | type) != "string"
               or ($item.id | test("^[^/]+/[^#]+#[1-9][0-9]*$") | not)
@@ -305,7 +306,7 @@ load_dependency_registry() {
             )
             then diagnostic("dependency item does not match schema"; {id:($item.id // null)})
             else empty
-            end
+            end)
       ] | sort_by(.code, (.context|tostring))) as $errors
     | {
         items: (if ($errors|length)==0 then $registry.items else [] end),
@@ -314,20 +315,44 @@ load_dependency_registry() {
   ' "$file"
 }
 
-dependency_watchlist() {
-  local loaded
-  loaded="$(load_dependency_registry "$DEPS_FILE")"
-  jq -r '
-    .items[]
-    | [
-        .id,
-        .theme,
-        (.aiRefs | map("#" + tostring) | join(",")),
-        .note
-      ]
-    | join("|")
-  ' <<<"$loaded"
-}
+# Merge fetched dependency records with registry diagnostics -> {items,validation}.
+# Emitted IDs must equal the validated registry IDs exactly (UNKNOWN placeholders
+# included); a required UNKNOWN item is an error, an optional one a warning.
+DEPS_VALIDATE_JQ='
+  def diagnostic($code; $message; $item): {
+    code:$code,
+    message:$message,
+    context:{id:$item.id, endpoint:$item.fetchError.endpoint}
+  };
+  . as $items
+  | ($registry[0]) as $reg
+  | [
+      $items[]
+      | select(.state=="UNKNOWN")
+      | if .required
+          then diagnostic("dependency-required-unreachable"; "Required dependency is unreachable"; .)
+          else diagnostic("dependency-optional-unreachable"; "Optional dependency is unreachable"; .)
+        end
+    ] as $unknown
+  | ([$reg.items[].id] | sort) as $expected_ids
+  | ([$items[].id] | sort) as $emitted_ids
+  | (if $expected_ids == $emitted_ids then [] else [{
+        code:"dependency-validation-inconsistent",
+        message:"Emitted dependency IDs do not match the validated registry",
+        context:{expected:$expected_ids, emitted:$emitted_ids}
+      }] end) as $inconsistent
+  | ($reg.validation.errors + $inconsistent
+     + [$unknown[]|select(.code=="dependency-required-unreachable")]) as $errors
+  | ($reg.validation.warnings
+     + [$unknown[]|select(.code=="dependency-optional-unreachable")]) as $warnings
+  | {
+      items: ($items | sort_by(.repo, .number)),
+      validation: {
+        ok: (($errors|length)==0),
+        errors: ($errors | sort_by(.code, (.context|tostring))),
+        warnings: ($warnings | sort_by(.code, (.context|tostring)))
+      }
+    }'
 
 DEPS_DIFF_JQ='
   def byid: reduce .[] as $x ({}; .[$x.id] = $x);
@@ -357,6 +382,10 @@ DEPS_DIFF_JQ='
 RENDER_DEPS_JQ='
   def entries(o): [ o | to_entries[] | "\(.key) \(.value)" ] | join(" · ");
   def fmt(a; f): [ a[] | f ] | join("\n");
+  def ai_ref:
+    tostring | if startswith("#") then . else "#" + . end;
+  def ai_refs:
+    [.[] | ai_ref] | join(", ");
   "",
   "## Cross-repo dependency watchlist",
   "Tracked dependencies: \(.summary.total) (" + entries(.summary.by_repo) + ")",
@@ -378,7 +407,7 @@ RENDER_DEPS_JQ='
   "",
   "### Open dependencies",
   ( fmt([ .items[] | select(.state == "OPEN") ];
-      "- `\(.id)` (\(.type)) — \(.title)  _[\(.theme); AI refs: \(.aiRefs|join(", "))]_") // "_(none)_" )'
+      "- `\(.id)` (\(.type)) — \(.title)  _[\(.theme); AI refs: \(.aiRefs|ai_refs)]_") // "_(none)_" )'
 
 fetch_normalized() {
   local raw err
@@ -445,24 +474,91 @@ build_repo_json() { # gap_file prdiff_file(or "") reldiff_file(or "") relcur_fil
                new_releases: ($rld.new_releases // []) } }'
 }
 
-fetch_dependencies() {
-  local spec theme ai_refs note repo number issue pr
-  while IFS='|' read -r spec theme ai_refs note; do
-    [ -n "${spec:-}" ] || continue
-    case "$spec" in \#*) continue ;; esac
-    repo="${spec%#*}"
-    number="${spec##*#}"
-    # Tolerate a rotten pin: a watchlist issue that was deleted/transferred (404)
-    # or a transient gh failure drops only itself (with a warning), instead of
-    # aborting the whole census (dependencies subcommand) or silently vanishing
-    # from the report (default run, where set -e is suppressed by the if-guard).
-    if ! issue="$(gh api "repos/$repo/issues/$number" 2>/dev/null)"; then
-      printf 'warning: watchlist item %s unreachable — skipping\n' "$spec" >&2
+# Fetch ENDPOINT via `gh api`, allowing MAX_ATTEMPTS tries (required items get
+# two, optional items one). Prints the response JSON on success; on exhaustion
+# returns 1 with the final attempt's stderr text left in ERR_FILE.
+fetch_dependency_endpoint() { # endpoint max_attempts err_file
+  local endpoint="$1" max="$2" err_file="$3"
+  local attempt=1 out
+  while :; do
+    if out="$(gh api "$endpoint" 2>"$err_file")"; then
+      printf '%s' "$out"
+      return 0
+    fi
+    [ "$attempt" -lt "$max" ] || return 1
+    attempt=$((attempt + 1))
+  done
+}
+
+# Build the UNKNOWN placeholder for an unreachable registry item, preserving
+# its configured metadata plus a structured fetchError.
+unknown_dependency_record() { # item_json repo number endpoint attempts err_file
+  local item="$1" repo="$2" number="$3" endpoint="$4" attempts="$5" err_file="$6"
+  local message
+  message="$(cat "$err_file" 2>/dev/null || true)"
+  printf '%s' "$item" | jq -c \
+    --arg repo "$repo" \
+    --argjson number "$number" \
+    --arg endpoint "$endpoint" \
+    --argjson attempts "$attempts" \
+    --arg message "$message" '
+      {
+        id: .id,
+        repo: $repo,
+        number: $number,
+        type: "Unknown",
+        title: "(unreachable dependency)",
+        state: "UNKNOWN",
+        isDraft: null,
+        mergedAt: null,
+        milestone: null,
+        updatedAt: null,
+        labels: [],
+        url: ("https://github.com/" + $repo + "/issues/" + ($number|tostring)),
+        theme: .theme,
+        aiRefs: .aiRefs,
+        note: .note,
+        required: .required,
+        fetchError: {
+          code: "github-fetch-failed",
+          endpoint: $endpoint,
+          attempts: $attempts,
+          message: $message
+        }
+      }'
+}
+
+fetch_dependencies() { # -> {items,validation}; every registry entry emits a record
+  local registry
+  registry="$(load_dependency_registry "$DEPS_FILE")"
+  if ! jq -e '.validation.ok' >/dev/null 2>&1 <<<"$registry"; then
+    # Invalid registry: make no GitHub requests; emit its diagnostics as-is.
+    printf '%s\n' "$registry"
+    return 0
+  fi
+
+  local reg_file items_file err_file
+  reg_file="$(mktemp)"; items_file="$(mktemp)"; err_file="$(mktemp)"
+  printf '%s\n' "$registry" > "$reg_file"
+
+  local item id repo number required max_attempts endpoint issue pr
+  while IFS= read -r item; do
+    id="$(jq -r '.id' <<<"$item")"
+    repo="${id%#*}"
+    number="${id##*#}"
+    if [ "$(jq -r '.required' <<<"$item")" = true ]; then max_attempts=2; else max_attempts=1; fi
+
+    endpoint="repos/$repo/issues/$number"
+    if ! issue="$(fetch_dependency_endpoint "$endpoint" "$max_attempts" "$err_file")"; then
+      printf 'warning: dependency %s unreachable (%s) — recording UNKNOWN\n' "$id" "$endpoint" >&2
+      unknown_dependency_record "$item" "$repo" "$number" "$endpoint" "$max_attempts" "$err_file" >> "$items_file"
       continue
     fi
     if jq -e 'has("pull_request")' >/dev/null <<<"$issue"; then
-      if ! pr="$(gh api "repos/$repo/pulls/$number" 2>/dev/null)"; then
-        printf 'warning: watchlist item %s (PR) unreachable — skipping\n' "$spec" >&2
+      endpoint="repos/$repo/pulls/$number"
+      if ! pr="$(fetch_dependency_endpoint "$endpoint" "$max_attempts" "$err_file")"; then
+        printf 'warning: dependency %s unreachable (%s) — recording UNKNOWN\n' "$id" "$endpoint" >&2
+        unknown_dependency_record "$item" "$repo" "$number" "$endpoint" "$max_attempts" "$err_file" >> "$items_file"
         continue
       fi
     else
@@ -473,19 +569,15 @@ fetch_dependencies() {
     # limit on Windows (Git Bash), aborting the census with "Argument list too
     # long". printf is a shell builtin, so building the object bypasses argv
     # entirely and behaves identically on every platform.
-    printf '{"issue":%s,"pr":%s}' "$issue" "$pr" | jq \
-      --arg spec "$spec" \
-      --arg repo "$repo" \
-      --arg theme "$theme" \
-      --arg ai_refs "$ai_refs" \
-      --arg note "$note" '
-        .issue as $issue | .pr as $pr |
+    printf '{"issue":%s,"pr":%s,"item":%s}' "$issue" "$pr" "$item" | jq -c \
+      --arg repo "$repo" '
+        .issue as $issue | .pr as $pr | .item as $it |
         def norm_state:
           if $pr != null and ($pr.merged == true) then "MERGED"
           else (($issue.state // "unknown") | ascii_upcase)
           end;
         {
-          id: $spec,
+          id: $it.id,
           repo: $repo,
           number: ($issue.number | tonumber),
           type: (if $pr != null then "PullRequest" else "Issue" end),
@@ -497,11 +589,15 @@ fetch_dependencies() {
           updatedAt: $issue.updated_at,
           labels: [ $issue.labels[]?.name ],
           url: $issue.html_url,
-          theme: $theme,
-          aiRefs: ($ai_refs | split(",") | map(select(length > 0))),
-          note: $note
-        }'
-  done < <(dependency_watchlist) | jq -s 'sort_by(.repo, .number)'
+          theme: $it.theme,
+          aiRefs: $it.aiRefs,
+          note: $it.note,
+          required: $it.required
+        }' >> "$items_file"
+  done < <(jq -c '.items[]' <<<"$registry")
+
+  jq -s --slurpfile registry "$reg_file" "$DEPS_VALIDATE_JQ" "$items_file"
+  rm -f "$reg_file" "$items_file" "$err_file"
 }
 
 compute_dependency_diff() { # baseline_file current_file base_label cur_label
@@ -509,11 +605,10 @@ compute_dependency_diff() { # baseline_file current_file base_label cur_label
         --slurpfile base "$1" --slurpfile cur "$2" "$DEPS_DIFF_JQ"
 }
 
-build_dependency_json() { # current_file diff_file(or "")
-  jq -n \
-    --slurpfile cur "$1" \
+build_dependency_json() { # result_file({items,validation}) diff_file(or "")
+  jq \
     --argjson diff "$([ -n "$2" ] && cat "$2" || echo null)" '
-      ($cur[0]) as $items
+      .items as $items
       | {
           items: $items,
           summary: {
@@ -521,8 +616,9 @@ build_dependency_json() { # current_file diff_file(or "")
             by_repo: (reduce $items[] as $d ({}; .[$d.repo] = ((.[$d.repo] // 0) + 1))),
             by_state: (reduce $items[] as $d ({}; .[$d.state] = ((.[$d.state] // 0) + 1)))
           },
-          diff: $diff
-        }'
+          diff: $diff,
+          validation: .validation
+        }' "$1"
 }
 
 latest_snap() { ls -1 "$SNAP_DIR/$1"-*.json 2>/dev/null | sort | tail -1 || true; }
@@ -543,15 +639,28 @@ case "${1:-}" in
     jq -n --slurpfile p "$tp" --slurpfile r "$tl" '{open_prs:$p[0], releases:$r[0]}'
     rm -f "$tp" "$tl"; exit 0 ;;
   dependencies) need gh; need jq
+    shift
+    DEP_OUT=markdown
+    while [ $# -gt 0 ]; do
+      case "$1" in
+        --strict) STRICT=1 ;;
+        --json) DEP_OUT=json ;;
+        --markdown|--md) DEP_OUT=markdown ;;
+        *) die "usage: $0 dependencies [--strict] [--json|--markdown]" ;;
+      esac
+      shift
+    done
     td="$(mktemp)"
     fetch_dependencies > "$td"
     dep_json="$(build_dependency_json "$td" "")"
     rm -f "$td"
-    case "${2:-}" in
-      --json) printf '%s\n' "$dep_json" ;;
-      ""|--markdown|--md) jq -r "$RENDER_DEPS_JQ" <<<"$dep_json" ;;
-      *) die "usage: $0 dependencies [--json|--markdown]" ;;
+    case "$DEP_OUT" in
+      json) printf '%s\n' "$dep_json" ;;
+      markdown) jq -r "$RENDER_DEPS_JQ" <<<"$dep_json" ;;
     esac
+    if [ "$STRICT" = 1 ] && ! jq -e '.validation.ok' >/dev/null <<<"$dep_json"; then
+      exit 2
+    fi
     exit 0 ;;
   gap) need jq
     [ $# -eq 3 ] || die "usage: $0 gap <board.json> <prs.json>"
@@ -626,7 +735,7 @@ if [ -z "$BASELINE" ]; then
     echo "Repo baselines established: prs-$REPO_SLUG-$TS.json, releases-$REPO_SLUG-$TS.json."
   fi
   if [ "$DO_DEPS" = 1 ]; then
-    cp "$TMP_DEPS" "$SNAP_DIR/$DEPS_SLUG-$TS.json"
+    jq '.items' "$TMP_DEPS" > "$SNAP_DIR/$DEPS_SLUG-$TS.json"
     echo "Dependency baseline established: $DEPS_SLUG-$TS.json."
   fi
   echo "Re-run later to see changes."
@@ -653,10 +762,11 @@ fi
 
 if [ "$DO_DEPS" = 1 ]; then
   [ -n "$TMP_REPO_DIR" ] || TMP_REPO_DIR="$(mktemp -d)"
+  jq '.items' "$TMP_DEPS" > "$TMP_REPO_DIR/dependencies-items.json"
   DEPS_BASE="$(latest_snap "$DEPS_SLUG")"
   DEPS_DIFF=""
   if [ -n "$DEPS_BASE" ]; then
-    compute_dependency_diff "$DEPS_BASE" "$TMP_DEPS" "$(basename "$DEPS_BASE")" "$CUR_LABEL" > "$TMP_REPO_DIR/dependencies-diff.json"
+    compute_dependency_diff "$DEPS_BASE" "$TMP_REPO_DIR/dependencies-items.json" "$(basename "$DEPS_BASE")" "$CUR_LABEL" > "$TMP_REPO_DIR/dependencies-diff.json"
     DEPS_DIFF="$TMP_REPO_DIR/dependencies-diff.json"
   fi
   build_dependency_json "$TMP_DEPS" "$DEPS_DIFF" > "$TMP_REPO_DIR/dependencies.json"
@@ -696,7 +806,7 @@ if [ "$SAVE" = 1 ]; then
     echo "Saved repo snapshots: prs-$REPO_SLUG-$TS.json, releases-$REPO_SLUG-$TS.json." >&2
   fi
   if [ "$DO_DEPS" = 1 ]; then
-    cp "$TMP_DEPS" "$SNAP_DIR/$DEPS_SLUG-$TS.json"
+    jq '.items' "$TMP_DEPS" > "$SNAP_DIR/$DEPS_SLUG-$TS.json"
     echo "Saved dependency snapshot: $DEPS_SLUG-$TS.json." >&2
   fi
 fi
