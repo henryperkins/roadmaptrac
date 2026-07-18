@@ -5,8 +5,8 @@
 #
 # Companion to wordpress-ai-roadmap.md / -open-issues.md / -planned-work.md.
 #
-# Also runs a repo-level census (open PRs + releases) so drift the board doesn't
-# track — open PRs not on the board, new releases — is surfaced automatically.
+# Also runs repository-level censuses (open PRs + releases) so drift the board
+# doesn't track — open PRs not on the board, new releases — is surfaced.
 #
 # USAGE
 #   ./wp-ai-roadmap-refresh.sh                 # fetch live, diff vs latest snapshot, print report
@@ -15,15 +15,15 @@
 #   ./wp-ai-roadmap-refresh.sh --update-changelog  # ...and append a dated row to the planned-work doc
 #   ./wp-ai-roadmap-refresh.sh --strict        # read-only audit: exit 2 (after the report) on any
 #                                              #   validation error; suppresses --save/--update-changelog
-#   ./wp-ai-roadmap-refresh.sh --no-repo       # board only — skip the repo PR/release census
+#   ./wp-ai-roadmap-refresh.sh --no-repo       # board only — skip all repository PR/release censuses
 #   ./wp-ai-roadmap-refresh.sh --no-deps       # skip the Gutenberg / abilities-api dependency watchlist
 #   ./wp-ai-roadmap-refresh.sh --markdown      # report as Markdown (default is the same, terminal-friendly)
-#   ./wp-ai-roadmap-refresh.sh --json          # emit the raw diff as JSON ({board,repo,dependencies,validation};
+#   ./wp-ai-roadmap-refresh.sh --json          # emit JSON ({board,repo,repositories,dependencies,validation};
 #                                              #   --no-repo/--no-deps drop their keys, validation always present)
 #   ./wp-ai-roadmap-refresh.sh --baseline F    # diff live against snapshot file F instead of the latest
 #   ./wp-ai-roadmap-refresh.sh fetch           # print a normalized board snapshot to stdout
-#   ./wp-ai-roadmap-refresh.sh census          # print the repo {open_prs, releases, validation} census to stdout
-#   ./wp-ai-roadmap-refresh.sh census --strict # exit 2 if the PR fetch is incomplete or malformed
+#   ./wp-ai-roadmap-refresh.sh census          # print the primary repo census plus all tracked repositories
+#   ./wp-ai-roadmap-refresh.sh census --strict # exit 2 if any tracked PR fetch is incomplete or malformed
 #   ./wp-ai-roadmap-refresh.sh dependencies    # print the Gutenberg / abilities-api dependency watchlist
 #   ./wp-ai-roadmap-refresh.sh dependencies --json
 #   ./wp-ai-roadmap-refresh.sh dependencies --strict --json   # exit 2 if a required dependency is UNKNOWN
@@ -35,12 +35,14 @@
 #
 # REQUIREMENTS
 #   gh (authenticated) and jq. The board query needs the `read:project` scope;
-#   the repo census (gh pr/release list) needs only normal `repo` read.
+#   repository censuses (GraphQL PR reads + release list) need normal `repo` read.
 #     Grant project scope once with:  gh auth refresh -h github.com -s read:project
 #
 # ENV OVERRIDES
 #   WP_AI_ORG (default WordPress)  WP_AI_PROJECT (default 240)
 #   WP_AI_REPO (default WordPress/ai; primary repo for the PR/release census)
+#   WP_AI_REPOS_FILE (default <script dir>/wp-ai-roadmap-repositories.json;
+#                     additional full-repository PR/release census registry)
 #   WP_AI_SNAP_DIR (default <script dir>/.wp-ai-roadmap-snapshots)
 #   WP_AI_DOC_DIR  (default <script dir>; where the *.md docs live)
 #   WP_AI_DEPS_SLUG (default wordpress-ai-cross-repo-dependencies; snapshot filename prefix)
@@ -57,6 +59,7 @@ DOC_DIR="${WP_AI_DOC_DIR:-$SCRIPT_DIR}"
 PLANNED_DOC="$DOC_DIR/wordpress-ai-planned-work.md"
 REPO="${WP_AI_REPO:-WordPress/ai}"     # primary repo for the PR/release census
 REPO_SLUG="${REPO//\//-}"              # WordPress/ai -> WordPress-ai (used in snapshot filenames)
+REPOS_FILE="${WP_AI_REPOS_FILE:-$SCRIPT_DIR/wp-ai-roadmap-repositories.json}"
 DEPS_SLUG="${WP_AI_DEPS_SLUG:-wordpress-ai-cross-repo-dependencies}"
 DEPS_FILE="${WP_AI_DEPS_FILE:-$SCRIPT_DIR/wp-ai-roadmap-dependencies.json}"
 STRICT=0
@@ -65,7 +68,7 @@ SAVE=0
 UPDATE_CHANGELOG=0
 OUT_MODE=text          # text | markdown | json
 BASELINE_OVERRIDE=""
-DO_REPO=1              # repo PR/release census runs by default; --no-repo disables it
+DO_REPO=1              # all repository PR/release censuses run by default
 DO_DEPS=1              # cross-repo dependency watchlist runs by default; --no-deps disables it
 
 # ----------------------------- helpers --------------------------------------
@@ -563,6 +566,38 @@ RENDER_REPO_JQ='
       + " |"),
   "```"'
 
+# Render the primary plus additional repository censuses as a compact radar.
+# Project #240 coverage remains in RENDER_REPO_JQ for the primary repository;
+# this section reports PR/release activity without imposing board coverage on
+# the two upstream repositories.
+RENDER_REPOSITORIES_JQ='
+  def latest:
+    if .latest_shipped == null then "—"
+    else "`\(.latest_shipped.tag)` (\((.latest_shipped.publishedAt // "")[0:10]))"
+    end;
+  def changes:
+    if (.available | not) then "unavailable"
+    elif .pr_diff == null then "baseline missing"
+    else
+      "+\(.pr_diff.newly_opened|length) opened · "
+      + "-\(.pr_diff.no_longer_open|length) no longer open · "
+      + "\((.pr_diff.readiness_changed // [])|length) readiness"
+    end;
+  def release_changes:
+    if (.available | not) then "unavailable"
+    elif .release_diff == null then "baseline missing"
+    elif (.release_diff.new_releases|length)==0 then "none"
+    else ([.release_diff.new_releases[].tag] | join(", "))
+    end;
+  "",
+  "## Tracked repository PR/release census",
+  "",
+  "Project #240 coverage validation applies only to the primary `\($primary)` repository.",
+  "",
+  "| Repository | Open PRs | Latest release | PR changes | New releases |",
+  "|---|---:|---|---|---|",
+  (.[] | "| `\(.repo)` | \(.open_prs|length) | \(latest) | \(changes) | \(release_changes) |")'
+
 # Cross-repo dependency watchlist for roadmap-critical Gutenberg and
 # abilities-api items, declared in $DEPS_FILE (wp-ai-roadmap-dependencies.json).
 # Whole-repo Gutenberg tracking is intentionally avoided: that repository is
@@ -755,21 +790,197 @@ append_changelog() { # diff_json_file base_label [repo_extra]
 }
 
 # --------------------- repo: open-PR + release census ------------------------
-fetch_pr_census() { # -> {items,validation} for open PRs in $REPO
-  local owner name raw err
-  owner="${REPO%%/*}"; name="${REPO#*/}"
-  err="$(mktemp)"
-  raw="$(gh api graphql --paginate -f query="$PR_GQL_QUERY" -F owner="$owner" -F name="$name" 2>"$err")" || {
-    printf 'error: PR census query failed:\n' >&2; cat "$err" >&2; rm -f "$err"; return 1; }
-  rm -f "$err"
-  [ -n "$raw" ] || { printf 'error: PR census returned no data\n' >&2; return 1; }
-  printf '%s' "$raw" | jq -s --arg repo "$REPO" "$PR_CENSUS_JQ"
+load_repository_registry() {
+  local file="$1"
+  if [ ! -r "$file" ]; then
+    jq -n --arg file "$file" --arg primary "$REPO" '{
+      repositories:[$primary],
+      validation:{
+        ok:false,
+        errors:[{
+          code:"repository-registry-invalid",
+          message:"Repository registry is not readable",
+          context:{file:$file}
+        }],
+        warnings:[]
+      }
+    }'
+    return 0
+  fi
+
+  if ! jq -e . "$file" >/dev/null 2>&1; then
+    jq -n --arg file "$file" --arg primary "$REPO" '{
+      repositories:[$primary],
+      validation:{
+        ok:false,
+        errors:[{
+          code:"repository-registry-invalid",
+          message:"Repository registry is not valid JSON",
+          context:{file:$file}
+        }],
+        warnings:[]
+      }
+    }'
+    return 0
+  fi
+
+  jq --arg primary "$REPO" '
+    def diagnostic($message; $context): {
+      code:"repository-registry-invalid",
+      message:$message,
+      context:$context
+    };
+    . as $registry
+    | ([
+        if .schemaVersion != 1
+          then diagnostic("schemaVersion must equal 1"; {actual:.schemaVersion})
+          else empty end,
+        if (.repositories | type) != "array"
+          then diagnostic("repositories must be an array"; {})
+          else empty end,
+        (.repositories[]?
+          | select((type != "string") or (test("^[^/[:space:]]+/[^/[:space:]]+$") | not))
+          | diagnostic("repository must use owner/name form"; {repo:.})),
+        (([.repositories[]?] | group_by(.) | map(select(length > 1) | .[0]))[]?
+          | diagnostic("repositories must be unique"; {repo:.})),
+        (.repositories[]? | select(. == $primary)
+          | diagnostic("additional repositories must not repeat the primary repository"; {repo:.}))
+      ] | sort_by(.code, (.context|tostring))) as $errors
+    | {
+        repositories: ([$primary] + (if ($errors|length)==0 then $registry.repositories else [] end)),
+        validation:{
+          ok:(($errors|length)==0),
+          errors:$errors,
+          warnings:[]
+        }
+      }
+  ' "$file"
 }
 
-fetch_releases() { # -> normalized release array for $REPO
-  gh release list --repo "$REPO" \
+fetch_pr_census() { # repository -> {items,validation} for open PRs
+  local repo="${1:-$REPO}" owner name raw err
+  owner="${repo%%/*}"; name="${repo#*/}"
+  err="$(mktemp)"
+  raw="$(gh api graphql --paginate -f query="$PR_GQL_QUERY" -F owner="$owner" -F name="$name" 2>"$err")" || {
+    printf 'error: PR census query failed for %s:\n' "$repo" >&2; cat "$err" >&2; rm -f "$err"; return 1; }
+  rm -f "$err"
+  [ -n "$raw" ] || { printf 'error: PR census returned no data for %s\n' "$repo" >&2; return 1; }
+  printf '%s' "$raw" | jq -s --arg repo "$repo" "$PR_CENSUS_JQ"
+}
+
+fetch_releases() { # repository -> normalized release array
+  local repo="${1:-$REPO}"
+  gh release list --repo "$repo" \
      --json tagName,name,isDraft,isPrerelease,publishedAt --limit 30 \
   | jq "$REL_NORMALIZE_JQ"
+}
+
+fetch_repository_census_entry() { # repository -> fail-soft census entry
+  local repo="$1" prs releases
+  prs="$(mktemp)"; releases="$(mktemp)"
+  if fetch_pr_census "$repo" >"$prs" && fetch_releases "$repo" >"$releases"; then
+    jq -n --arg repo "$repo" --slurpfile p "$prs" --slurpfile r "$releases" '
+      ($p[0].validation // {ok:true,errors:[],warnings:[]}) as $validation
+      | {
+          repo:$repo,
+          available:true,
+          open_prs:$p[0].items,
+          releases:$r[0],
+          validation:($validation
+            | .errors |= map(.context=((.context // {}) + {repo:$repo}))
+            | .warnings |= map(.context=((.context // {}) + {repo:$repo})))
+        }'
+  else
+    jq -n --arg repo "$repo" '{
+      repo:$repo,
+      available:false,
+      open_prs:[],
+      releases:[],
+      validation:{
+        ok:false,
+        errors:[{
+          code:"repository-census-unavailable",
+          message:"Repository PR/release census is unavailable",
+          context:{repo:$repo}
+        }],
+        warnings:[]
+      }
+    }'
+  fi
+  rm -f "$prs" "$releases"
+}
+
+fetch_repository_censuses() { # -> {repositories,validation}
+  local registry registry_file entries_file repo
+  registry="$(load_repository_registry "$REPOS_FILE")"
+  registry_file="$(mktemp)"; entries_file="$(mktemp)"
+  printf '%s\n' "$registry" >"$registry_file"
+
+  while IFS= read -r repo; do
+    fetch_repository_census_entry "$repo" >>"$entries_file"
+  done < <(jq -r '.repositories[]' <<<"$registry")
+
+  jq -n --slurpfile registry "$registry_file" --slurpfile entries "$entries_file" '
+    ($registry[0].validation // {ok:true,errors:[],warnings:[]}) as $rv
+    | ([$rv.errors[], $entries[].validation.errors[]]
+        | unique_by([.code,(.context|tostring)])
+        | sort_by(.code,(.context|tostring))) as $errors
+    | ([$rv.warnings[], $entries[].validation.warnings[]]
+        | unique_by([.code,(.context|tostring)])
+        | sort_by(.code,(.context|tostring))) as $warnings
+    | {
+        repositories:$entries,
+        validation:{ok:(($errors|length)==0),errors:$errors,warnings:$warnings}
+      }'
+  rm -f "$registry_file" "$entries_file"
+}
+
+build_repository_reports() { # census_file temp_dir -> enriched repository array
+  local census_file="$1" temp_dir="$2"
+  local reports_file repo slug entry prs_file releases_file
+  local prs_base releases_base prdiff_file reldiff_file prdiff_json reldiff_json
+  reports_file="$temp_dir/repository-reports.jsonl"
+  : >"$reports_file"
+
+  while IFS= read -r entry; do
+    repo="$(jq -r '.repo' <<<"$entry")"
+    slug="${repo//\//-}"
+    prs_file="$temp_dir/prs-$slug-current.json"
+    releases_file="$temp_dir/releases-$slug-current.json"
+    prdiff_file="$temp_dir/prdiff-$slug.json"
+    reldiff_file="$temp_dir/reldiff-$slug.json"
+    prdiff_json=null
+    reldiff_json=null
+
+    if jq -e '.available' >/dev/null <<<"$entry"; then
+      jq '.open_prs' <<<"$entry" >"$prs_file"
+      jq '.releases' <<<"$entry" >"$releases_file"
+      prs_base="$(latest_snap "prs-$slug")"
+      releases_base="$(latest_snap "releases-$slug")"
+      if [ -n "$prs_base" ]; then
+        diff_prs "$prs_base" "$prs_file" >"$prdiff_file"
+        prdiff_json="$(<"$prdiff_file")"
+      fi
+      if [ -n "$releases_base" ]; then
+        diff_releases "$releases_base" "$releases_file" >"$reldiff_file"
+        reldiff_json="$(<"$reldiff_file")"
+      fi
+    fi
+
+    jq -c \
+      --argjson prdiff "$prdiff_json" \
+      --argjson reldiff "$reldiff_json" '
+      . + {
+        pr_diff:$prdiff,
+        release_diff:$reldiff,
+        latest_shipped:([
+          .releases[]
+          | select((.isDraft|not) and (.isPrerelease|not))
+        ] | sort_by(.publishedAt // "") | last)
+      }' <<<"$entry" >>"$reports_file"
+  done < <(jq -c '.repositories[]' "$census_file")
+
+  jq -s '.' "$reports_file"
 }
 
 board_pr_gap() { # board_file prs_file -> gap JSON
@@ -975,12 +1186,17 @@ case "${1:-}" in
       esac
       shift
     done
-    tp="$(mktemp)"; tl="$(mktemp)"
-    fetch_pr_census > "$tp"
-    fetch_releases > "$tl"
-    census_json="$(jq -n --slurpfile p "$tp" --slurpfile r "$tl" \
-      '{open_prs:$p[0].items, releases:$r[0], validation:$p[0].validation}')"
-    rm -f "$tp" "$tl"
+    tr="$(mktemp)"
+    fetch_repository_censuses >"$tr"
+    census_json="$(jq -n --arg primary "$REPO" --slurpfile c "$tr" '
+      ($c[0].repositories | map(select(.repo==$primary)) | first) as $primary_census
+      | {
+          open_prs:($primary_census.open_prs // []),
+          releases:($primary_census.releases // []),
+          repositories:$c[0].repositories,
+          validation:$c[0].validation
+        }')"
+    rm -f "$tr"
     printf '%s\n' "$census_json"
     if [ "$STRICT" = 1 ] && ! jq -e '.validation.ok' >/dev/null <<<"$census_json"; then
       exit 2
@@ -1057,24 +1273,47 @@ done
 need gh; need jq
 mkdir -p "$SNAP_DIR"
 
-TMP_CUR=""; DIFF_FILE=""; TMP_PR_CENSUS=""; TMP_PRS=""; TMP_REL=""; TMP_DEPS=""; TMP_REPO_DIR=""
+TMP_CUR=""; DIFF_FILE=""; TMP_PR_CENSUS=""; TMP_PRS=""; TMP_REL=""; TMP_DEPS=""
+TMP_REPOSITORY_CENSUS=""; TMP_REPO_DIR=""; REPOSITORIES_JSON=""
+PRIMARY_REPO_AVAILABLE=0
 REPO_FAILED=0; DEPS_FAILED=0
-cleanup() { rm -f "$TMP_CUR" "$DIFF_FILE" "$TMP_PR_CENSUS" "$TMP_PRS" "$TMP_REL" "$TMP_DEPS"; [ -n "$TMP_REPO_DIR" ] && rm -rf "$TMP_REPO_DIR"; return 0; }
+cleanup() { rm -f "$TMP_CUR" "$DIFF_FILE" "$TMP_PR_CENSUS" "$TMP_PRS" "$TMP_REL" "$TMP_DEPS" "$TMP_REPOSITORY_CENSUS"; [ -n "$TMP_REPO_DIR" ] && rm -rf "$TMP_REPO_DIR"; return 0; }
 trap cleanup EXIT
 
+TMP_REPO_DIR="$(mktemp -d)"
 TMP_CUR="$(mktemp)"
 fetch_normalized > "$TMP_CUR"
 CUR_LABEL="live@$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-# repo census (default-on; fail-soft so the board pipeline never regresses)
+# Repository censuses are fetched independently and fail soft. Only the primary
+# repository is joined to Project #240; auxiliary repositories are activity
+# radars and never create roadmap-coverage errors.
 if [ "$DO_REPO" = 1 ]; then
-  TMP_PR_CENSUS="$(mktemp)"; TMP_PRS="$(mktemp)"; TMP_REL="$(mktemp)"
-  if fetch_pr_census > "$TMP_PR_CENSUS" 2>/dev/null && fetch_releases > "$TMP_REL" 2>/dev/null; then
-    jq '.items' "$TMP_PR_CENSUS" > "$TMP_PRS"
+  TMP_REPOSITORY_CENSUS="$(mktemp)"
+  if fetch_repository_censuses >"$TMP_REPOSITORY_CENSUS" 2>/dev/null; then
+    build_repository_reports "$TMP_REPOSITORY_CENSUS" "$TMP_REPO_DIR" \
+      >"$TMP_REPO_DIR/repositories.json"
+    REPOSITORIES_JSON="$TMP_REPO_DIR/repositories.json"
+    if jq -e --arg repo "$REPO" \
+      '.repositories[] | select(.repo==$repo and .available)' \
+      "$TMP_REPOSITORY_CENSUS" >/dev/null; then
+      PRIMARY_REPO_AVAILABLE=1
+      TMP_PRS="$TMP_REPO_DIR/prs-$REPO_SLUG-current.json"
+      TMP_REL="$TMP_REPO_DIR/releases-$REPO_SLUG-current.json"
+      TMP_PR_CENSUS="$(mktemp)"
+      jq --arg repo "$REPO" '
+        .repositories[] | select(.repo==$repo)
+        | {items:.open_prs,validation:.validation}
+      ' "$TMP_REPOSITORY_CENSUS" >"$TMP_PR_CENSUS"
+    else
+      echo "warning: primary repository census for $REPO is unavailable — continuing with other repository reports." >&2
+    fi
   else
-    echo "warning: repo census (PR GraphQL / release list for $REPO) failed — continuing with board report only." >&2
-    DO_REPO=0; REPO_FAILED=1
-    rm -f "$TMP_PR_CENSUS" "$TMP_PRS" "$TMP_REL"; TMP_PR_CENSUS=""; TMP_PRS=""; TMP_REL=""
+    echo "warning: repository censuses failed — continuing with board report only." >&2
+    DO_REPO=0
+    REPO_FAILED=1
+    rm -f "$TMP_REPOSITORY_CENSUS"
+    TMP_REPOSITORY_CENSUS=""
   fi
 fi
 
@@ -1107,21 +1346,17 @@ compute_diff "$BASELINE" "$TMP_CUR" "$BASE_LABEL" "$CUR_LABEL" > "$DIFF_FILE"
 
 # assemble the repo report (gap is live; PR/release diffs only when a sibling baseline exists)
 REPO_JSON=""; REPO_EXTRA=""; DEPS_JSON=""; DEPS_EXTRA=""
-if [ "$DO_REPO" = 1 ]; then
-  TMP_REPO_DIR="$(mktemp -d)"
+if [ "$PRIMARY_REPO_AVAILABLE" = 1 ]; then
   board_pr_gap "$TMP_CUR" "$TMP_PRS" > "$TMP_REPO_DIR/gap.json"
   PRDF=""; RLDF=""
-  PRS_BASE="$(latest_snap "prs-$REPO_SLUG")"
-  REL_BASE="$(latest_snap "releases-$REPO_SLUG")"
-  if [ -n "$PRS_BASE" ]; then diff_prs      "$PRS_BASE" "$TMP_PRS" > "$TMP_REPO_DIR/prdiff.json";  PRDF="$TMP_REPO_DIR/prdiff.json"; fi
-  if [ -n "$REL_BASE" ]; then diff_releases "$REL_BASE" "$TMP_REL" > "$TMP_REPO_DIR/reldiff.json"; RLDF="$TMP_REPO_DIR/reldiff.json"; fi
+  [ ! -f "$TMP_REPO_DIR/prdiff-$REPO_SLUG.json" ] || PRDF="$TMP_REPO_DIR/prdiff-$REPO_SLUG.json"
+  [ ! -f "$TMP_REPO_DIR/reldiff-$REPO_SLUG.json" ] || RLDF="$TMP_REPO_DIR/reldiff-$REPO_SLUG.json"
   build_repo_json "$TMP_REPO_DIR/gap.json" "$PRDF" "$RLDF" "$TMP_REL" "$TMP_PR_CENSUS" > "$TMP_REPO_DIR/repo.json"
   REPO_JSON="$TMP_REPO_DIR/repo.json"
   REPO_EXTRA="$(jq -r '", \(.gap.substantive|length) untracked PRs" + (if (.rel.new_releases|length)>0 then ", \(.rel.new_releases|length) new releases" else "" end)' "$REPO_JSON")"
 fi
 
 if [ "$DO_DEPS" = 1 ]; then
-  [ -n "$TMP_REPO_DIR" ] || TMP_REPO_DIR="$(mktemp -d)"
   jq '.items' "$TMP_DEPS" > "$TMP_REPO_DIR/dependencies-items.json"
   DEPS_BASE="$(latest_snap "$DEPS_SLUG")"
   DEPS_DIFF=""
@@ -1137,10 +1372,9 @@ fi
 # Aggregate validation: deterministic union of the repo and dependency
 # subsystem diagnostics, plus a stable marker when a fail-soft subsystem
 # was unavailable entirely.
-[ -n "$TMP_REPO_DIR" ] || TMP_REPO_DIR="$(mktemp -d)"
 UNAVAILABLE="[]"
 if [ "$REPO_FAILED" = 1 ]; then
-  UNAVAILABLE="$(jq -c '. + [{code:"repo-subsystem-unavailable",message:"Repository PR/release census unavailable",context:{}}]' <<<"$UNAVAILABLE")"
+  UNAVAILABLE="$(jq -c --arg repo "$REPO" '. + [{code:"repo-subsystem-unavailable",message:"Repository PR/release census unavailable",context:{repo:$repo}}]' <<<"$UNAVAILABLE")"
 fi
 if [ "$DEPS_FAILED" = 1 ]; then
   UNAVAILABLE="$(jq -c '. + [{code:"dependency-subsystem-unavailable",message:"Dependency watchlist unavailable",context:{}}]' <<<"$UNAVAILABLE")"
@@ -1148,11 +1382,12 @@ fi
 AGG_FILE="$TMP_REPO_DIR/validation.json"
 jq -n \
   --slurpfile r "${REPO_JSON:-/dev/null}" \
+  --slurpfile c "${TMP_REPOSITORY_CENSUS:-/dev/null}" \
   --slurpfile d "${DEPS_JSON:-/dev/null}" \
   --argjson extra "$UNAVAILABLE" '
   def diagnostics($object):
     ($object.validation // {errors:[],warnings:[]});
-  [diagnostics($r[0] // {}), diagnostics($d[0] // {})] as $parts
+  [diagnostics($r[0] // {}), diagnostics($c[0] // {}), diagnostics($d[0] // {})] as $parts
   | {
       errors: (([$parts[].errors[]] + $extra)
         | unique_by([.code,(.context|tostring)])
@@ -1170,15 +1405,18 @@ case "$OUT_MODE" in
     jq -n \
       --slurpfile b "$DIFF_FILE" \
       --slurpfile r "${REPO_JSON:-/dev/null}" \
+      --slurpfile repos "${REPOSITORIES_JSON:-/dev/null}" \
       --slurpfile d "${DEPS_JSON:-/dev/null}" \
       --slurpfile v "$AGG_FILE" \
       '{board:$b[0]}
        + (if ($r|length)>0 then {repo:$r[0]} else {} end)
+       + (if ($repos|length)>0 then {repositories:$repos[0]} else {} end)
        + (if ($d|length)>0 then {dependencies:$d[0]} else {} end)
        + {validation:$v[0]}' ;;
   *)
     jq -r "$RENDER_JQ" "$DIFF_FILE"
     if [ -n "$REPO_JSON" ]; then jq -r "$RENDER_REPO_JQ" "$REPO_JSON"; fi
+    if [ -n "$REPOSITORIES_JSON" ]; then jq -r --arg primary "$REPO" "$RENDER_REPOSITORIES_JQ" "$REPOSITORIES_JSON"; fi
     if [ -n "$DEPS_JSON" ]; then jq -r "$RENDER_DEPS_JQ" "$DEPS_JSON"; fi ;;
 esac
 
@@ -1209,10 +1447,13 @@ if [ "$SAVE" = 1 ] || [ "$FIRST_RUN" = 1 ]; then
   # `--json --save` appends these plain-text lines after the JSON and any
   # downstream `jq` consumer chokes on the trailing garbage.
   echo "$SNAP_VERB: $DEST (now the baseline for next run)." >&2
-  if [ "$DO_REPO" = 1 ]; then
-    cp "$TMP_PRS" "$SNAP_DIR/prs-$REPO_SLUG-$TS.json"
-    cp "$TMP_REL" "$SNAP_DIR/releases-$REPO_SLUG-$TS.json"
-    echo "$SNAP_VERB (repo): prs-$REPO_SLUG-$TS.json, releases-$REPO_SLUG-$TS.json." >&2
+  if [ -n "$REPOSITORIES_JSON" ]; then
+    while IFS= read -r tracked_repo; do
+      tracked_slug="${tracked_repo//\//-}"
+      cp "$TMP_REPO_DIR/prs-$tracked_slug-current.json" "$SNAP_DIR/prs-$tracked_slug-$TS.json"
+      cp "$TMP_REPO_DIR/releases-$tracked_slug-current.json" "$SNAP_DIR/releases-$tracked_slug-$TS.json"
+      echo "$SNAP_VERB (repo): prs-$tracked_slug-$TS.json, releases-$tracked_slug-$TS.json." >&2
+    done < <(jq -r '.[] | select(.available) | .repo' "$REPOSITORIES_JSON")
   fi
   if [ "$DO_DEPS" = 1 ]; then
     # Registry removal is the only thing that may remove a dependency from

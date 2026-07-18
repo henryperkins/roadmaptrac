@@ -1,16 +1,17 @@
-# WordPress AI — Cross-Repo Dependencies
+# WordPress AI — Cross-Repo Dependencies & Repository Radar
 
-> Live watchlist for roadmap-critical Gutenberg and Abilities API work that affects the `WordPress/ai` roadmap but is not counted in Project #240 totals.
+> Live cross-repository signals that affect the `WordPress/ai` roadmap but are not counted in Project #240 totals: a curated Gutenberg/Abilities dependency watchlist plus full PR/release censuses for the PHP AI Client and MCP Adapter.
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-17 |
-> | **Scope** | 16 tracked dependencies = 11 Gutenberg items + 5 abilities-api items |
+> | **Data snapshot** | 2026-07-18 |
+> | **Scope** | 16 tracked dependencies = 11 Gutenberg items + 5 abilities-api items; full repository census for `WordPress/php-ai-client` and `WordPress/mcp-adapter` |
 > | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs 2026-07-09)* |
 > | **Membership source** | `wp-ai-roadmap-dependencies.json` (versioned registry; `WP_AI_DEPS_FILE` overrides) |
-> | **Source command** | `./wp-ai-roadmap-refresh.sh dependencies --json` (audit: `dependencies --strict --json`) |
+> | **Repository source** | `wp-ai-roadmap-repositories.json` (additional full-census repositories; `WP_AI_REPOS_FILE` overrides) |
+> | **Source commands** | `./wp-ai-roadmap-refresh.sh census --strict` · `./wp-ai-roadmap-refresh.sh dependencies --strict --json` |
 
-This document intentionally tracks a **curated dependency watchlist**, not every open Gutenberg or abilities-api issue. Gutenberg is too broad for whole-repo tracking to be useful here; the watchlist follows only items that are explicitly referenced by the WordPress AI roadmap, issue dossiers, or planned-work risk notes.
+The dependency section intentionally tracks a **curated watchlist**, not every open Gutenberg or abilities-api issue. Gutenberg is too broad for whole-repo tracking to be useful here; the watchlist follows only items explicitly referenced by the WordPress AI roadmap, issue dossiers, or planned-work risk notes. The PHP AI Client and MCP Adapter are narrower foundational repositories, so they receive a separate **full open-PR/release census** without importing their issue backlogs or imposing Project #240 coverage rules.
 
 Watchlist **membership lives in `wp-ai-roadmap-dependencies.json`**, not in shell code. Each registry item declares `id` (`owner/repo#number`), `theme`, `aiRefs` (the WordPress AI issue numbers it affects, stored as integers), `note`, and `required`. Adding or removing a dependency is a reviewable JSON data change; the schema is validated on every run (`schemaVersion` 1, unique IDs, positive-integer `aiRefs`).
 
@@ -20,6 +21,17 @@ Project #240 is still the canonical source for `WordPress/ai` roadmap counts. Th
 
 - **Gutenberg**: Abilities and workflows, Guidelines/Skills, Media Editor, focal-point/media APIs, DataViews/admin UX, snackbar/toast accessibility.
 - **abilities-api**: ability filtering, safety metadata, post-type CRUD abilities, core abilities scope, and ability meta.
+
+## Full-Repository PR/Release Census
+
+The refresh script enumerates every open PR and the release stream for these repositories on every normal/full census. Records include draft/review/merge/check state, activity timestamps, authoritative closing-issue references, PR/release diffs, per-repository validation, and independent snapshots.
+
+| Repository | Open PRs | Latest shipped | Roadmap relevance |
+|---|---:|---|---|
+| [`WordPress/php-ai-client`](https://github.com/WordPress/php-ai-client) | **20** | **1.4.0** (2026-07-15) | Uniform provider-agnostic PHP client beneath WordPress AI features; changes to models, modalities, schemas, streaming, embeddings, and provider selection can alter the plugin's implementation path. |
+| [`WordPress/mcp-adapter`](https://github.com/WordPress/mcp-adapter) | **12** | **v0.5.0** (2026-04-15) | Abilities-to-MCP bridge; transport, exposure, approval, session, schema, and server-registration changes can alter external-agent integrations. |
+
+Project #240 coverage validation remains exclusive to the primary `WordPress/ai` repository. A PHP AI Client or MCP Adapter PR may be important upstream work without requiring a Project #240 PR card.
 
 ## Dependency Watchlist
 
@@ -58,7 +70,14 @@ Run the dependency-only path when you only need the cross-repo state:
 ./wp-ai-roadmap-refresh.sh dependencies --strict --json   # audit mode
 ```
 
-Use `--save` on the normal refresh to persist a dependency snapshot under `.wp-ai-roadmap-snapshots/wordpress-ai-cross-repo-dependencies-*.json`, so later runs can report state/list changes.
+Run the repository-only path for all three full PR/release censuses:
+
+```bash
+./wp-ai-roadmap-refresh.sh census
+./wp-ai-roadmap-refresh.sh census --strict
+```
+
+Use `--save` on the normal refresh to persist the dependency snapshot plus independent `prs-<owner>-<repo>-*.json` and `releases-<owner>-<repo>-*.json` baselines for every available repository, so later runs can report state, readiness, and release changes.
 
 ### Fetch behavior, UNKNOWN placeholders, and strict mode
 
@@ -72,6 +91,7 @@ Use `--save` on the normal refresh to persist a dependency snapshot under `.wp-a
 
 | Date | Change |
 |---|---|
+| 2026-07-18 | **Added full PR/release census tracking for two foundational repositories.** `WordPress/php-ai-client` starts at **20 open PRs / release 1.4.0 (2026-07-15)**; `WordPress/mcp-adapter` starts at **12 / v0.5.0 (2026-04-15)**. Membership lives in `wp-ai-roadmap-repositories.json`; both receive validation, diffs, rendering, and independent snapshots. They remain census-only and do not affect Project #240 coverage or the 16-item dependency watchlist. |
 | 2026-07-17 | **Tooling: watchlist membership moved to the `wp-ai-roadmap-dependencies.json` registry** (schema-validated; `required` flag per item; integer `aiRefs`). Fetches are now resilient — required items retry once and unreachable items surface as `UNKNOWN` placeholders with a `fetchError` instead of vanishing — and `dependencies --strict --json` exits `2` when a required item is unreachable or the registry is invalid. Watchlist data itself unchanged (16 dependencies; 10 open · 3 closed · 3 merged). |
 | 2026-07-17 | Live refresh vs the 2026-07-13 baseline snapshot. **No state, milestone, or list changes** — watchlist remains 16 dependencies (10 open · 3 closed · 3 merged; abilities-api 5, Gutenberg 11). `WordPress/gutenberg#73771` was retitled "Media Editor Modal task tracking" → "WordPress 7.1 Iteration: Media Editor Modal task tracking" and its Updated cell advanced 2026-07-08 → 2026-07-17. |
 | 2026-07-12 | Live refresh vs the 2026-07-09 baseline snapshot. **No state, milestone, or list changes** — watchlist holds at 16 dependencies (10 open · 3 closed · 3 merged; abilities-api 5, Gutenberg 11). **1 title change + 1 activity bump**, both on `WordPress/gutenberg#77230`: retitled "Guidelines built on Knowledge in WordPress **7.1**" → "…WordPress **7.2**", and its Updated cell bumped 2026-07-01 → 2026-07-11. Context: the `WordPress/ai` **v1.2.0** lane advanced (6 more board-Done, incl. the #508 "Suggest Reply" experiment) and two more core-ability PRs opened upstream-adjacent (#856 `core/read-settings` snapshot ordering, #858 `core/read-nav-menus`), but no watchlisted Gutenberg/abilities-api dependency changed state. |

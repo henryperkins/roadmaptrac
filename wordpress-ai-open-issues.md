@@ -1,13 +1,13 @@
 # WordPress AI — Open Issues Dossier (Companion Reference)
 
-> Deep per-issue documentation for all **56 open issues** (status current to 2026-07-17) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
+> Deep per-issue documentation for all **56 open issues** (status rechecked 2026-07-18) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
 > Companion to [`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md) and [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md). Each dossier records the problem, approach, open decisions, dependencies, and discussion.
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-17 |
-> | **Scope** | 56 current open-issue dossiers + 1 removed-board reference (#84) + 33 recently board-Done dossiers retained for reference. Excludes 17 non-Done PR cards and the rest of the 209 Done cards. |
-> | **Repos** | `WordPress/ai` (55 open issues) · `WordPress/ai-provider-for-google` (#23). `WordPress/abilities-api` #84 remains an upstream dependency but is not on Project #240. |
+> | **Data snapshot** | 2026-07-18 |
+> | **Scope** | 56 current open-issue dossiers + 1 removed-board reference (#84) + 33 recently board-Done dossiers retained for reference. Excludes 17 non-Done PR cards, the rest of the 209 Done cards, and census-only upstream issues. |
+> | **Repos** | Board dossiers: `WordPress/ai` (55 open issues) · `WordPress/ai-provider-for-google` (#23). Removed-board reference: `WordPress/abilities-api` #84. `WordPress/php-ai-client` and `WordPress/mcp-adapter` are tracked separately as full PR/release censuses, not imported as issue dossiers. |
 > | **Each dossier** | Status · Milestone · Labels · Assignees · Last updated · Comment count · Link, then Problem → Approach → Open decisions → Dependencies → Discussion |
 
 **Grouped by board status:** [In discussion / Needs decision (22)](#in-discussion--needs-decision-22) · [In progress (14)](#in-progress-14) · [Backlog (8)](#backlog-8) · [To do (6)](#to-do-6) · [Triage (3)](#triage-3) · [Needs review (3)](#needs-review-3) · [Recently board-Done (33 retained)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
@@ -1292,10 +1292,13 @@ gh issue view WordPress/ai#<N> --json number,title,body,state,labels,milestone,a
 
 (`#23` → `WordPress/ai-provider-for-google`; #84 is retained only as a removed-board reference from `WordPress/abilities-api`.)
 
+The full `WordPress/php-ai-client` and `WordPress/mcp-adapter` repository censuses intentionally do not add their issue backlogs here. Their open PR and release activity is summarized in [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md) and emitted in full by `./wp-ai-roadmap-refresh.sh census`.
+
 **Changelog**
 
 | Date | Change |
 |---|---|
+| 2026-07-18 | Rechecked Project #240: dossier membership and board counts are unchanged. Clarified that the new full `WordPress/php-ai-client` and `WordPress/mcp-adapter` tracking is PR/release census-only; their issue backlogs are not imported into this board-scoped dossier. |
 | 2026-07-17 | Authoritative PR-mapping pass (GitHub closing references now drive the refresh tooling): recorded open PR **#798** as the closing PR on the **#600** dossier and noted that its previously tabulated #617 link was parser noise. No other dossier's PR relationships changed (#187↔#747 was already recorded). |
 | 2026-07-17 | Live Project #240 refresh. Open issues **53 → 56**: In discussion **19 → 22**, In progress **17 → 14**, Backlog 8, To do 6, Triage **2 → 3**, Needs review **1 → 3**. Moved #600 to In discussion; #507/#660 to Needs review; #614/#778/#853 to Recently board-Done. Added six open dossiers (#863/#866/#869/#874/#875/#876) and four board-new Done dossiers (#864/#865/#870/#872), taking retained Done references **26 → 33**. v1.2.0 shipped; active milestones reorganized around 1.3.0/1.4.0. Board **279 → 282**, Done **206 → 209**, non-Done PR cards **20 → 17**. |
 | 2026-06-15 | Initial dossier — full deep-read of all 58 open issues (body + comments) across 6 thematic agent passes. |

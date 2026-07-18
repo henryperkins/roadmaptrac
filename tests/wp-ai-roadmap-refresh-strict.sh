@@ -9,6 +9,7 @@ STATE_DIR="$TMP_DIR/state"
 TEST_SNAP_DIR="$TMP_DIR/snapshots"
 TEST_DOC_DIR="$TMP_DIR/docs"
 TEST_REGISTRY="$TMP_DIR/dependencies.json"
+TEST_REPOS_FILE="$TMP_DIR/repositories.json"
 RELEASES="$TMP_DIR/releases.json"
 OUT="$TMP_DIR/out.json"
 ERR="$TMP_DIR/err.txt"
@@ -27,6 +28,7 @@ jq -n '{
     note:"Full-path dependency", required:true
   }]
 }' >"$TEST_REGISTRY"
+jq -n '{schemaVersion:1,repositories:[]}' >"$TEST_REPOS_FILE"
 
 find "$ROOT_DIR/.wp-ai-roadmap-snapshots" -maxdepth 1 -type f \
   -exec sha256sum {} + | sort >"$TMP_DIR/real-snapshots.before"
@@ -40,6 +42,7 @@ PATH="$MOCK_BIN:$PATH" \
 WP_AI_SNAP_DIR="$TEST_SNAP_DIR" \
 WP_AI_DOC_DIR="$TEST_DOC_DIR" \
 WP_AI_DEPS_FILE="$TEST_REGISTRY" \
+WP_AI_REPOS_FILE="$TEST_REPOS_FILE" \
 WP_AI_TEST_STATE_DIR="$STATE_DIR" \
 WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
 WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
@@ -51,7 +54,7 @@ set -e
 
 [ "$status" -eq 2 ]
 jq -e '
-  (keys | sort)==["board","dependencies","repo","validation"]
+  (keys | sort)==["board","dependencies","repo","repositories","validation"]
   and (.validation.ok|not)
   and ([.validation.errors[].code] | index("pr-roadmap-coverage-missing") != null)
 ' "$OUT"
@@ -66,6 +69,7 @@ PATH="$MOCK_BIN:$PATH" \
 WP_AI_SNAP_DIR="$TEST_SNAP_DIR" \
 WP_AI_DOC_DIR="$TEST_DOC_DIR" \
 WP_AI_DEPS_FILE="$TEST_REGISTRY" \
+WP_AI_REPOS_FILE="$TEST_REPOS_FILE" \
 WP_AI_TEST_STATE_DIR="$STATE_DIR" \
 WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
 WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
@@ -85,6 +89,7 @@ PATH="$MOCK_BIN:$PATH" \
 WP_AI_SNAP_DIR="$FIRST_SNAP_DIR" \
 WP_AI_DOC_DIR="$TEST_DOC_DIR" \
 WP_AI_DEPS_FILE="$TEST_REGISTRY" \
+WP_AI_REPOS_FILE="$TEST_REPOS_FILE" \
 WP_AI_TEST_STATE_DIR="$STATE_DIR" \
 WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
 WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
@@ -103,13 +108,14 @@ PATH="$MOCK_BIN:$PATH" \
 WP_AI_SNAP_DIR="$FIRST_SNAP_DIR" \
 WP_AI_DOC_DIR="$TEST_DOC_DIR" \
 WP_AI_DEPS_FILE="$TEST_REGISTRY" \
+WP_AI_REPOS_FILE="$TEST_REPOS_FILE" \
 WP_AI_TEST_STATE_DIR="$STATE_DIR" \
 WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
 WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
 WP_AI_TEST_RELEASES="$RELEASES" \
   "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --json \
   >"$TMP_DIR/first-normal.json" 2>"$TMP_DIR/first-normal.err"
-jq -e '(keys | sort)==["board","dependencies","repo","validation"]' "$TMP_DIR/first-normal.json" >/dev/null
+jq -e '(keys | sort)==["board","dependencies","repo","repositories","validation"]' "$TMP_DIR/first-normal.json" >/dev/null
 [ "$(find "$FIRST_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 4 ]
 rg 'Baseline established' "$TMP_DIR/first-normal.err" >/dev/null
 
@@ -122,6 +128,7 @@ PATH="$MOCK_BIN:$PATH" \
 WP_AI_SNAP_DIR="$TEST_SNAP_DIR" \
 WP_AI_DOC_DIR="$TEST_DOC_DIR" \
 WP_AI_DEPS_FILE="$TMP_DIR/broken-registry.json" \
+WP_AI_REPOS_FILE="$TEST_REPOS_FILE" \
 WP_AI_TEST_STATE_DIR="$STATE_DIR" \
 WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
 WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
@@ -142,6 +149,7 @@ PATH="$MOCK_BIN:$PATH" \
 WP_AI_SNAP_DIR="$TEST_SNAP_DIR" \
 WP_AI_DOC_DIR="$TEST_DOC_DIR" \
 WP_AI_DEPS_FILE="$TEST_REGISTRY" \
+WP_AI_REPOS_FILE="$TEST_REPOS_FILE" \
 WP_AI_TEST_STATE_DIR="$STATE_DIR" \
 WP_AI_TEST_BOARD_PAGES="$ROOT_DIR/tests/fixtures/board-graphql-page.json" \
 WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \

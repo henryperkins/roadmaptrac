@@ -13,12 +13,36 @@ fi
 
 if [ "${1:-}" = api ] && [ "${2:-}" = graphql ] \
   && [[ "$*" == *pullRequests* ]]; then
-  cat "${WP_AI_TEST_PR_PAGES:?}"
+  if [ -n "${WP_AI_TEST_PR_PAGES_DIR:-}" ]; then
+    owner=""
+    name=""
+    previous=""
+    for argument in "$@"; do
+      if [ "$previous" = "-F" ]; then
+        case "$argument" in
+          owner=*) owner="${argument#owner=}" ;;
+          name=*) name="${argument#name=}" ;;
+        esac
+      fi
+      previous="$argument"
+    done
+    cat "$WP_AI_TEST_PR_PAGES_DIR/$owner-$name.jsonl"
+  else
+    cat "${WP_AI_TEST_PR_PAGES:?}"
+  fi
   exit 0
 fi
 
 if [ "${1:-}" = release ] && [ "${2:-}" = list ]; then
-  if [ -n "${WP_AI_TEST_RELEASES:-}" ]; then
+  if [ -n "${WP_AI_TEST_RELEASES_DIR:-}" ]; then
+    repo=""
+    previous=""
+    for argument in "$@"; do
+      if [ "$previous" = "--repo" ]; then repo="$argument"; fi
+      previous="$argument"
+    done
+    cat "$WP_AI_TEST_RELEASES_DIR/${repo//\//-}.json"
+  elif [ -n "${WP_AI_TEST_RELEASES:-}" ]; then
     cat "$WP_AI_TEST_RELEASES"
   else
     printf '[]\n'

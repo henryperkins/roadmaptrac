@@ -5,7 +5,7 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-17 (latest item activity: 2026-07-17) |
+> | **Data snapshot** | 2026-07-18 (latest board-item activity: 2026-07-17) |
 > | **Items captured** | 282 (full board, via GraphQL Projects API) |
 > | **Plugin** | [`WordPress/ai`](https://github.com/WordPress/ai) — the official "AI" Showcase Plugin on WordPress.org |
 > | **Latest shipped** | **v1.2.0** (shipped 2026-07-14) — 18th release; release issue [#864](https://github.com/WordPress/ai/issues/864) closed after plugin checks, tests, local testing, GitHub release, and WordPress.org deployment |
@@ -18,7 +18,7 @@
 > 1. **This file** — strategy, board composition, release cadence, and the at-a-glance open-issue tracker.
 > 2. **[`wordpress-ai-open-issues.md`](./wordpress-ai-open-issues.md)** — deep per-issue dossiers, grouped by status. *(Current to 2026-07-17: all 56 board-open issues, plus #84 as a removed-board reference and 33 recently board-Done issues retained for reference.)*
 > 3. **[`wordpress-ai-planned-work.md`](./wordpress-ai-planned-work.md)** — the release-ordered delivery plan for all 73 non-Done cards, including 16 open board-tracked PRs and stale merged PR #484.
-> 4. **[`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md)** — the 16-item Gutenberg + abilities-api dependency watchlist (11 + 5).
+> 4. **[`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md)** — the 16-item Gutenberg + abilities-api dependency watchlist (11 + 5), plus full PR/release censuses for `WordPress/php-ai-client` and `WordPress/mcp-adapter`.
 
 ### Status legend (board's own taxonomy)
 `Triage` → unsorted/new · `In discussion / Needs decision` → debated, **not** committed · `Backlog` / `To do` → planned · `In progress` → being built · `Needs review` → review-ready · `Done` → shipped/merged
@@ -33,6 +33,8 @@ The major change in this window is a release transition: **v1.2.0 shipped on 202
 
 The forward roadmap still converges on four bets: (A) Abilities as the universal tool layer, now including opt-in controls for standalone abilities; (B) a provider-agnostic Connectors ecosystem; (C) an editorial lifecycle that expands from single-field generators into review, linking, slugs, translation, and agentic refinement; and (D) conversational/site-agent and semantic-search surfaces. The near-term delivery lane is **v1.3.0 (22 non-Done cards)**, followed by **v1.4.0 (4 discussion-stage issues)**; **Future Release remains 43 cards**.
 
+The repository radar now covers the full open-PR and release streams for the two foundational upstream repositories alongside `WordPress/ai`: **`WordPress/php-ai-client` has 20 open PRs and latest release 1.4.0 (2026-07-15); `WordPress/mcp-adapter` has 12 open PRs and latest release v0.5.0 (2026-04-15)**. These are census-only signals: their PRs are not required to appear on Project #240 and do not create roadmap-coverage failures.
+
 ---
 
 ## 1. Board composition
@@ -44,6 +46,7 @@ The forward roadmap still converges on four bets: (A) Abilities as the universal
 | **Open work** | **73 non-Done cards** = 56 open issues + 17 PR cards *(16 open; #484 is merged but still board-Needs review)* |
 | **By repo** | `WordPress/ai` **281** · `WordPress/ai-provider-for-google` **1** (#23). `WordPress/abilities-api` #84 is not on Project #240. |
 | **Cross-repo dependency scope** | Separate watchlist: **16** dependencies (10 open, 3 closed, 3 merged), tracked in [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md). |
+| **Full repository census** | `WordPress/ai`: **35** open PRs / release **1.2.0** · `WordPress/php-ai-client`: **20** / **1.4.0** · `WordPress/mcp-adapter`: **12** / **v0.5.0**. Project #240 coverage applies only to `WordPress/ai`. |
 | **"Team" field** | No Team values are returned in the current Projects API snapshot; use repo + labels/status for classification. |
 | **"Priority" field** | Barely used; prioritization is expressed through Status + Milestone. |
 | **Board views** | Prioritized backlog · AI plugin · Status board · Roadmap (timeline) · Bugs 🐛 · My items |
@@ -120,6 +123,8 @@ The active build wave is now **v1.3.0**: 22 non-Done cards (14 issues + 8 PRs). 
 Two new unmilestoned bugs remain in Triage: #869 reports provider data appearing only in the block-editor iframe in one environment, and #874 documents Yoast meta-description interoperability failures across post types and when Yoast AI is disabled. Both need scope/root-cause decisions before scheduling.
 
 The repo has **35 open PRs**: 16 are represented by open board PR cards, while 19 are untracked by a PR card (17 substantive + 2 routine dependency updates). Several untracked PRs implement board issues, so board status must not be read as the complete code-in-flight view.
+
+Two additional full-repository censuses expose upstream implementation and release movement without folding it into Project #240: **20 open PRs in `WordPress/php-ai-client`** and **12 in `WordPress/mcp-adapter`**. Their complete normalized PR records, readiness fields, releases, diffs, and independent snapshots are emitted by `wp-ai-roadmap-refresh.sh`; only the primary `WordPress/ai` census is joined to the roadmap board.
 
 *(Full per-issue detail is in [§9](#9-appendix--full-open-issue-tracker-56).)*
 
@@ -302,7 +307,7 @@ Grouped by current board status. Theme tags are editorial aids; Status and Miles
 
 ## 10. How to refresh this document
 
-> ⚙️ **Automated path:** [`wp-ai-roadmap-refresh.sh`](./wp-ai-roadmap-refresh.sh) does everything below in one command — re-pulls the board, diffs against the last snapshot (added / newly-Done / merged / status & milestone moves / removed), and can append a changelog row (`--update-changelog`). Run with no args for a read-only report; add `--save` to roll the baseline forward. The manual recipe below is what it automates.
+> ⚙️ **Automated path:** [`wp-ai-roadmap-refresh.sh`](./wp-ai-roadmap-refresh.sh) does everything below in one command — re-pulls the board, diffs against the last snapshot (added / newly-Done / merged / status & milestone moves / removed), fetches the full PR/release census for all repositories declared through [`wp-ai-roadmap-repositories.json`](./wp-ai-roadmap-repositories.json), refreshes the curated dependency watchlist, and can append a changelog row (`--update-changelog`). Run with no args for a read-only report; add `--save` to roll all board, repository, release, and dependency baselines forward. The manual recipe below is what it automates.
 >
 > **Normal vs. strict refresh.** The default (normal) refresh is *warning-only*: any data-quality or coverage problem — an unreachable dependency, a substantive open PR with no board representation — is reported in the output (`.validation` in JSON, stderr lines otherwise) but never blocks the board report, and the run exits `0`. `./wp-ai-roadmap-refresh.sh --strict [--json]` runs the same read-only pipeline as an **audit**: it emits the complete report first, then exits `2` when any validation error remains (exit `1` is reserved for operational failures that prevented a report at all). A strict failure also suppresses `--save` and `--update-changelog` ("persistence skipped"), so a red audit never rolls the baseline forward.
 >
@@ -378,6 +383,7 @@ When refreshing: update the **Data snapshot** date in the header, re-check the �
 
 | Date | Change |
 |---|---|
+| 2026-07-18 | **Expanded full-repository tracking.** Added declarative PR/release censuses for `WordPress/php-ai-client` (**20 open PRs; latest 1.4.0, 2026-07-15**) and `WordPress/mcp-adapter` (**12 open PRs; latest v0.5.0, 2026-04-15**) alongside the existing `WordPress/ai` census (**35; 1.2.0**). The new repositories receive normalized PR data, validation, diffs, Markdown summaries, and independent snapshots, but no Project #240 coverage requirement. Live board and dependency counts are unchanged: 282 items / 209 Done / 73 non-Done; dependency watchlist 16 (10 open / 3 closed / 3 merged). |
 | 2026-07-17 | **Tracker upgrade: authoritative PR relationships + strict audit mode.** The refresh script now reads open PRs via paginated GraphQL with GitHub `closingIssuesReferences` as the authoritative PR→issue link source (fallback title/body/branch parsing is grammar-restricted and disabled for routine PRs), classifies every open PR into one of five coverage buckets (direct-board-pr / linked-board-issue / routine / linked-off-board-issue / unexplained), tracks PR readiness changes (draft/review/merge/checks), and moves the dependency watchlist into the `wp-ai-roadmap-dependencies.json` registry with resilient UNKNOWN-placeholder fetches. New `--strict` audit exits `2` on coverage/data errors after emitting the report and suppresses persistence. Live coverage at upgrade: 35 open PRs = 16 direct + 15 issue-linked + 2 routine + **2 unexplained (#877, #878)**. |
 | 2026-07-17 | **Live board + repo refresh vs 2026-07-13 baseline.** Board **279 → 282**; Done **206 → 209**; non-Done remains **73**, now **56 issues + 17 PR cards** (16 open + stale merged #484). **v1.2.0 shipped 2026-07-14**; unfinished work reorganized into **1.3.0 (22 open)** and **1.4.0 (4 open)**. Added 13 cards, removed 10 already-Done cards, and moved nine baseline cards to Done. Repo census: **35 open PRs**, 19 untracked by PR card (17 substantive + 2 routine). Dependency watchlist remains 16 (10 open / 3 closed / 3 merged); Gutenberg #73771 was retitled and updated. |
 | 2026-06-15 | Initial creation. Snapshot of all 245 board items; deep-read of all 58 open issues. Latest shipped v1.0.1; v1.1.0 in flight (due ~2026-06-25). |
