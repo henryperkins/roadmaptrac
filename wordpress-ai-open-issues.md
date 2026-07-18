@@ -1,16 +1,16 @@
 # WordPress AI — Open Issues Dossier (Companion Reference)
 
-> Deep per-issue documentation for all **56 open issues** (status rechecked 2026-07-18) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
+> Deep per-issue documentation for all **57 open issues** (status rechecked 2026-07-18) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
 > Companion to [`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md) and [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md). Each dossier records the problem, approach, open decisions, dependencies, and discussion.
 >
 > | | |
 > |---|---|
 > | **Data snapshot** | 2026-07-18 |
-> | **Scope** | 56 current open-issue dossiers + 1 removed-board reference (#84) + 33 recently board-Done dossiers retained for reference. Excludes 17 non-Done PR cards, the rest of the 209 Done cards, and census-only upstream issues. |
-> | **Repos** | Board dossiers: `WordPress/ai` (55 open issues) · `WordPress/ai-provider-for-google` (#23). Removed-board reference: `WordPress/abilities-api` #84. `WordPress/php-ai-client` and `WordPress/mcp-adapter` are tracked separately as full PR/release censuses, not imported as issue dossiers. |
+> | **Scope** | 57 current open-issue dossiers + 1 removed-board reference (#84) + 33 recently board-Done dossiers retained for reference. Excludes 17 non-Done PR cards, the rest of the 209 Done cards, and census-only upstream issues. |
+> | **Repos** | Board dossiers: `WordPress/ai` (56 open issues) · `WordPress/ai-provider-for-google` (#23). Removed-board reference: `WordPress/abilities-api` #84. `WordPress/php-ai-client` and `WordPress/mcp-adapter` are tracked separately as full PR/release censuses, not imported as issue dossiers. |
 > | **Each dossier** | Status · Milestone · Labels · Assignees · Last updated · Comment count · Link, then Problem → Approach → Open decisions → Dependencies → Discussion |
 
-**Grouped by board status:** [In discussion / Needs decision (22)](#in-discussion--needs-decision-22) · [In progress (14)](#in-progress-14) · [Backlog (8)](#backlog-8) · [To do (6)](#to-do-6) · [Triage (3)](#triage-3) · [Needs review (3)](#needs-review-3) · [Recently board-Done (33 retained)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
+**Grouped by board status:** [In discussion / Needs decision (22)](#in-discussion--needs-decision-22) · [In progress (15)](#in-progress-15) · [Backlog (8)](#backlog-8) · [To do (6)](#to-do-6) · [Triage (3)](#triage-3) · [Needs review (3)](#needs-review-3) · [Recently board-Done (33 retained)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
 
 > ⭐ = major strategic bet · ⚠️ = notable risk / live regression. "Status" reflects the board; "Milestone" is the release target.
 
@@ -207,15 +207,16 @@
 
 **Problem / goal.** Move the Alt Text generation button closer to the Alt Text field. On the Edit Media page and Attachment details view, place it just under the "Alternative Text" textarea and remove the redundant standalone Alt Text metabox.
 
-**Proposed approach.** Reposition the button inline beneath the alt-text field in both surfaces and delete the duplicate control. **Blocker:** core exposes no hook to inject content near the Backbone-rendered textarea, so only JS insertion works. Contributors filed core tickets to add proper hooks: **Trac #65086** and **wordpress-develop PR #11748** (action hooks for the media-modal attachment view); once merged, the button renders cleanly.
+**Proposed approach.** Reposition the button inline beneath the alt-text field in both surfaces and delete the duplicate control. **Blocker:** core exposes no hook to inject content near the Backbone-rendered textarea, so only JS insertion works. Contributors filed core tickets to add proper hooks: **Trac #65086** and **wordpress-develop PR #11748** (action hooks for the media-modal attachment view); once merged, the button renders cleanly. Open `WordPress/ai` PR **#885** attempts the placement update, but GitHub exposes no closing reference: the refresh can associate it only through `fallback-title`, so it is candidate implementation evidence rather than an authoritative issue correction.
 
 **Open decisions / blockers.**
 - **[Status] Blocked**: awaiting Trac #65086 / wordpress-develop#11748.
 - Button copy stays explicit (jeffpaul rejected icon-only/tooltip except in the block toolbar).
+- Candidate PR #885 is BLOCKED and currently has failing Plugin Check and JavaScript-quality jobs; it needs both relationship clarification and implementation review.
 
-**Dependencies.** WordPress core media templates/hooks (Trac #65086, wordpress-develop#11748).
+**Dependencies.** WordPress core media templates/hooks (Trac #65086, wordpress-develop#11748); candidate plugin PR #885 (`fallback-title`, not `closing`).
 
-**Discussion highlights.** CacheMeOwside flagged the missing hook; dhruvang21 suggested an AI beaker icon + loading animation; jeffpaul preferred explicit button copy and proposed animating the plugin icon instead; dhruvang21 opened PR #11748.
+**Discussion highlights.** CacheMeOwside flagged the missing hook; dhruvang21 suggested an AI beaker icon + loading animation; jeffpaul preferred explicit button copy and proposed animating the plugin icon instead; dhruvang21 opened PR #11748. PR #885 arrived on 2026-07-18 without updating the issue thread or declaring a closing relationship.
 
 ### #430 — Skills in a WordPress admin context
 **Status:** In discussion / Needs decision · **Milestone:** Future Release · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-04-27 · **Comments:** 9
@@ -380,7 +381,7 @@
 
 ---
 
-## In progress (14)
+## In progress (15)
 
 *Actively being implemented or investigated.*
 
@@ -597,6 +598,20 @@
 **Dependencies.** Post/comment meta registration, REST schemas, editor data, upgrade classes, uninstall cleanup, and PR #867.
 
 **Discussion highlights.** No issue comments; the issue body provides the migration and acceptance checklist.
+
+### #883 — Abilities Explorer: provider filter dropdown doesn't include custom providers
+**Status:** In progress · **Milestone:** — · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-18 · **Comments:** 1
+**Link:** https://github.com/WordPress/ai/issues/883
+
+**Problem / goal.** The Abilities Explorer already recognizes an ability's custom `meta['provider']` label in its Provider column and `?provider=` query handling, but the visible filter is hard-coded to Core/Plugin/Theme. Users therefore cannot select a custom provider in the UI. The overview statistics have a related defect: custom provider labels can make plugin abilities disappear from every origin card even though the Total remains correct.
+
+**Proposed approach.** Build provider options dynamically from the fetched abilities, preserving Core/Plugin/Theme first and appending custom providers alphabetically. Separate **provider label** from **origin**: `meta['provider']` remains the display/filter value, while prefix-derived Core/Plugin/Theme origin drives the fixed three overview cards. Authoritative closing PR **#884** implements this with `get_unique_providers()`, `detect_origin()`, a normalized `origin` field, and integration tests.
+
+**Open decisions / blockers.** PR #884 is open and GitHub reports it BLOCKED pending review/merge eligibility, although its checks are currently successful. Review must confirm the new origin/provider split preserves existing consumers and that dynamic options remain usable when many plugins declare distinct provider labels.
+
+**Dependencies.** `Ability_Table::extra_tablenav()` and statistics; `Ability_Handler::detect_provider()` / `get_provider_label()`; the dynamic-category-filter pattern from #344/#355.
+
+**Discussion highlights.** azizulhasan expanded the initial filter-only proposal after finding that the same hard-coded provider buckets caused statistics drift. The chosen design keeps exactly three origin cards while allowing any number of provider filter values; the author reports a live test with 112 abilities, including 82 under a custom provider.
 
 ---
 
@@ -1298,6 +1313,7 @@ The full `WordPress/php-ai-client` and `WordPress/mcp-adapter` repository census
 
 | Date | Change |
 |---|---|
+| 2026-07-18 | Same-day live Project #240 refresh. Open issues **56 → 57** and In progress **14 → 15** with new unmilestoned dossier **#883** (Abilities Explorer custom-provider filtering/statistics), authoritatively implemented by PR #884. Board totals **282 → 283**; Done stays 209; non-Done PR cards stay 17. Re-read #425 and recorded PR #885 only as `fallback-title` candidate evidence because it has no GitHub closing reference. |
 | 2026-07-18 | Rechecked Project #240: dossier membership and board counts are unchanged. Clarified that the new full `WordPress/php-ai-client` and `WordPress/mcp-adapter` tracking is PR/release census-only; their issue backlogs are not imported into this board-scoped dossier. |
 | 2026-07-17 | Authoritative PR-mapping pass (GitHub closing references now drive the refresh tooling): recorded open PR **#798** as the closing PR on the **#600** dossier and noted that its previously tabulated #617 link was parser noise. No other dossier's PR relationships changed (#187↔#747 was already recorded). |
 | 2026-07-17 | Live Project #240 refresh. Open issues **53 → 56**: In discussion **19 → 22**, In progress **17 → 14**, Backlog 8, To do 6, Triage **2 → 3**, Needs review **1 → 3**. Moved #600 to In discussion; #507/#660 to Needs review; #614/#778/#853 to Recently board-Done. Added six open dossiers (#863/#866/#869/#874/#875/#876) and four board-new Done dossiers (#864/#865/#870/#872), taking retained Done references **26 → 33**. v1.2.0 shipped; active milestones reorganized around 1.3.0/1.4.0. Board **279 → 282**, Done **206 → 209**, non-Done PR cards **20 → 17**. |

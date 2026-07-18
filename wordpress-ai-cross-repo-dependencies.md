@@ -6,7 +6,7 @@
 > |---|---|
 > | **Data snapshot** | 2026-07-18 |
 > | **Scope** | 16 tracked dependencies = 11 Gutenberg items + 5 abilities-api items; full repository census for `WordPress/php-ai-client` and `WordPress/mcp-adapter` |
-> | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs 2026-07-09)* |
+> | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs the 2026-07-18 02:20 UTC baseline)* |
 > | **Membership source** | `wp-ai-roadmap-dependencies.json` (versioned registry; `WP_AI_DEPS_FILE` overrides) |
 > | **Repository source** | `wp-ai-roadmap-repositories.json` (additional full-census repositories; `WP_AI_REPOS_FILE` overrides) |
 > | **Source commands** | `./wp-ai-roadmap-refresh.sh census --strict` · `./wp-ai-roadmap-refresh.sh dependencies --strict --json` |
@@ -91,6 +91,7 @@ Use `--save` on the normal refresh to persist the dependency snapshot plus indep
 
 | Date | Change |
 |---|---|
+| 2026-07-18 | **Same-day live recheck vs the 2026-07-18 02:20 UTC baseline.** No dependency membership, state, milestone, title, or activity changes: the watchlist remains 16 (10 open · 3 closed · 3 merged; 11 Gutenberg + 5 abilities-api), with no required item UNKNOWN. The upstream repository radar is also unchanged at `WordPress/php-ai-client` **20 / 1.4.0** and `WordPress/mcp-adapter` **12 / v0.5.0**. Primary `WordPress/ai` movement is documented in the roadmap and planned-work files rather than counted as cross-repo drift. |
 | 2026-07-18 | **Added full PR/release census tracking for two foundational repositories.** `WordPress/php-ai-client` starts at **20 open PRs / release 1.4.0 (2026-07-15)**; `WordPress/mcp-adapter` starts at **12 / v0.5.0 (2026-04-15)**. Membership lives in `wp-ai-roadmap-repositories.json`; both receive validation, diffs, rendering, and independent snapshots. They remain census-only and do not affect Project #240 coverage or the 16-item dependency watchlist. |
 | 2026-07-17 | **Tooling: watchlist membership moved to the `wp-ai-roadmap-dependencies.json` registry** (schema-validated; `required` flag per item; integer `aiRefs`). Fetches are now resilient — required items retry once and unreachable items surface as `UNKNOWN` placeholders with a `fetchError` instead of vanishing — and `dependencies --strict --json` exits `2` when a required item is unreachable or the registry is invalid. Watchlist data itself unchanged (16 dependencies; 10 open · 3 closed · 3 merged). |
 | 2026-07-17 | Live refresh vs the 2026-07-13 baseline snapshot. **No state, milestone, or list changes** — watchlist remains 16 dependencies (10 open · 3 closed · 3 merged; abilities-api 5, Gutenberg 11). `WordPress/gutenberg#73771` was retitled "Media Editor Modal task tracking" → "WordPress 7.1 Iteration: Media Editor Modal task tracking" and its Updated cell advanced 2026-07-08 → 2026-07-17. |

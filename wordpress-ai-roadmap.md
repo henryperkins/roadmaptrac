@@ -5,19 +5,19 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-18 (latest board-item activity: 2026-07-17) |
-> | **Items captured** | 282 (full board, via GraphQL Projects API) |
+> | **Data snapshot** | 2026-07-18 (latest board-item activity: 2026-07-18) |
+> | **Items captured** | 283 (full board, via GraphQL Projects API) |
 > | **Plugin** | [`WordPress/ai`](https://github.com/WordPress/ai) — the official "AI" Showcase Plugin on WordPress.org |
 > | **Latest shipped** | **v1.2.0** (shipped 2026-07-14) — 18th release; release issue [#864](https://github.com/WordPress/ai/issues/864) closed after plugin checks, tests, local testing, GitHub release, and WordPress.org deployment |
 > | **In active development** | **v1.3.0** (22 open / 3 Done; 25 carded; no due date) · **Next:** v1.4.0 (4 discussion-stage issues) · **Backlog:** Future Release (43 open) |
 > | **Maintained by** | _(you)_ — see [§10 How to refresh](#10-how-to-refresh-this-document) to regenerate the data |
 
-**How to read this doc:** [§1 Composition](#1-board-composition) · [§2 Releases](#2-release-cadence) · [§3 Product model](#3-product-architecture) · [§4 Shipped](#4-shipped-done) · [§5 In progress](#5-in-progress) · [§6 Roadmap bets](#6-planned-roadmap--strategic-bets) · [§7 Undecided/blocked](#7-unplanned--undecided--blocked) · [§8 Strategic read & risks](#8-strategic-read--risks) · [§9 Full open-issue tracker](#9-appendix--full-open-issue-tracker-56) · [§10 Refresh](#10-how-to-refresh-this-document) · [§11 Changelog](#11-changelog)
+**How to read this doc:** [§1 Composition](#1-board-composition) · [§2 Releases](#2-release-cadence) · [§3 Product model](#3-product-architecture) · [§4 Shipped](#4-shipped-done) · [§5 In progress](#5-in-progress) · [§6 Roadmap bets](#6-planned-roadmap--strategic-bets) · [§7 Undecided/blocked](#7-unplanned--undecided--blocked) · [§8 Strategic read & risks](#8-strategic-read--risks) · [§9 Full open-issue tracker](#9-appendix--full-open-issue-tracker-57) · [§10 Refresh](#10-how-to-refresh-this-document) · [§11 Changelog](#11-changelog)
 
 > **📚 Companion documents (4-doc set):**
 > 1. **This file** — strategy, board composition, release cadence, and the at-a-glance open-issue tracker.
-> 2. **[`wordpress-ai-open-issues.md`](./wordpress-ai-open-issues.md)** — deep per-issue dossiers, grouped by status. *(Current to 2026-07-17: all 56 board-open issues, plus #84 as a removed-board reference and 33 recently board-Done issues retained for reference.)*
-> 3. **[`wordpress-ai-planned-work.md`](./wordpress-ai-planned-work.md)** — the release-ordered delivery plan for all 73 non-Done cards, including 16 open board-tracked PRs and stale merged PR #484.
+> 2. **[`wordpress-ai-open-issues.md`](./wordpress-ai-open-issues.md)** — deep per-issue dossiers, grouped by status. *(Current to 2026-07-18: all 57 board-open issues, plus #84 as a removed-board reference and 33 recently board-Done issues retained for reference.)*
+> 3. **[`wordpress-ai-planned-work.md`](./wordpress-ai-planned-work.md)** — the release-ordered delivery plan for all 74 non-Done cards, including 16 open board-tracked PRs and stale merged PR #484.
 > 4. **[`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md)** — the 16-item Gutenberg + abilities-api dependency watchlist (11 + 5), plus full PR/release censuses for `WordPress/php-ai-client` and `WordPress/mcp-adapter`.
 
 ### Status legend (board's own taxonomy)
@@ -27,9 +27,11 @@
 
 ## Executive summary
 
-Project #240 remains the operational tracker for the [`WordPress/ai`](https://github.com/WordPress/ai) Showcase Plugin (281 of 282 cards; the other card is Google-provider issue #23). The plugin continues to organize user-facing AI capabilities as toggleable experiments over shared Connectors, AI Client, Abilities API, MCP, and request-log infrastructure.
+Project #240 remains the operational tracker for the [`WordPress/ai`](https://github.com/WordPress/ai) Showcase Plugin (282 of 283 cards; the other card is Google-provider issue #23). The plugin continues to organize user-facing AI capabilities as toggleable experiments over shared Connectors, AI Client, Abilities API, MCP, and request-log infrastructure.
 
 The major change in this window is a release transition: **v1.2.0 shipped on 2026-07-14**, and most unfinished work moved to **v1.3.0**. Nine baseline cards moved to Done, including bulk summaries (#614), E2E locator hardening (#778), the configurable image-generation timeout (#853), and merged PRs #739/#758/#857. Four new cards arrived already Done (#864/#865/#870/#872), while six new open issues entered the roadmap: the Abilities toggle (#863), meta-key normalization (#866), two unmilestoned compatibility bugs (#869/#874), and two 1.4.0 editorial experiments (#875/#876).
+
+A same-day follow-up refresh added unmilestoned In-progress issue **#883** (custom providers are absent from the Abilities Explorer filter and statistics) and two off-board implementation PRs. **#884 authoritatively closes #883**; **#885 only title-matches #425 through fallback parsing**, so it is tracked as non-authoritative relationship evidence. The board is now 283 cards, and the primary repository census is 37 open PRs.
 
 The forward roadmap still converges on four bets: (A) Abilities as the universal tool layer, now including opt-in controls for standalone abilities; (B) a provider-agnostic Connectors ecosystem; (C) an editorial lifecycle that expands from single-field generators into review, linking, slugs, translation, and agentic refinement; and (D) conversational/site-agent and semantic-search surfaces. The near-term delivery lane is **v1.3.0 (22 non-Done cards)**, followed by **v1.4.0 (4 discussion-stage issues)**; **Future Release remains 43 cards**.
 
@@ -41,17 +43,17 @@ The repository radar now covers the full open-PR and release streams for the two
 
 | Dimension | Breakdown |
 |---|---|
-| **Total items** | **282** = 209 PRs + 73 issues |
-| **By status** | Done **209** · In progress **25** · In discussion/Needs decision **24** · Backlog **8** · Needs review **7** · To do **6** · Triage **3** |
-| **Open work** | **73 non-Done cards** = 56 open issues + 17 PR cards *(16 open; #484 is merged but still board-Needs review)* |
-| **By repo** | `WordPress/ai` **281** · `WordPress/ai-provider-for-google` **1** (#23). `WordPress/abilities-api` #84 is not on Project #240. |
+| **Total items** | **283** = 209 PRs + 74 issues |
+| **By status** | Done **209** · In progress **26** · In discussion/Needs decision **24** · Backlog **8** · Needs review **7** · To do **6** · Triage **3** |
+| **Open work** | **74 non-Done cards** = 57 open issues + 17 PR cards *(16 open; #484 is merged but still board-Needs review)* |
+| **By repo** | `WordPress/ai` **282** · `WordPress/ai-provider-for-google` **1** (#23). `WordPress/abilities-api` #84 is not on Project #240. |
 | **Cross-repo dependency scope** | Separate watchlist: **16** dependencies (10 open, 3 closed, 3 merged), tracked in [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md). |
-| **Full repository census** | `WordPress/ai`: **35** open PRs / release **1.2.0** · `WordPress/php-ai-client`: **20** / **1.4.0** · `WordPress/mcp-adapter`: **12** / **v0.5.0**. Project #240 coverage applies only to `WordPress/ai`. |
+| **Full repository census** | `WordPress/ai`: **37** open PRs / release **1.2.0** · `WordPress/php-ai-client`: **20** / **1.4.0** · `WordPress/mcp-adapter`: **12** / **v0.5.0**. Project #240 coverage applies only to `WordPress/ai`. |
 | **"Team" field** | No Team values are returned in the current Projects API snapshot; use repo + labels/status for classification. |
 | **"Priority" field** | Barely used; prioritization is expressed through Status + Milestone. |
 | **Board views** | Prioritized backlog · AI plugin · Status board · Roadmap (timeline) · Bugs 🐛 · My items |
 
-**Caveat for maintainers:** "Done" (**209**) is overwhelmingly merged PRs; the forward-looking signal lives in the **56 open issues** and **17 non-Done PR cards**.
+**Caveat for maintainers:** "Done" (**209**) is overwhelmingly merged PRs; the forward-looking signal lives in the **57 open issues** and **17 non-Done PR cards**.
 
 ---
 
@@ -70,9 +72,9 @@ The plugin has shipped **18 releases**, most recently **v1.2.0 on 2026-07-14**. 
 | **1.3.0** | 25 | 🚧 3 Done / 22 open | **Active lane:** 14 issues + 8 open PRs. No due date. |
 | **1.4.0** | 4 | 💬 4 open | Next editorial-experiment lane: #27, #324, #875, #876; all are In discussion. |
 | **Future Release** | 45 | 📋 2 Done / 43 open | Long-range backlog: 35 issues + 8 PRs remain non-Done. |
-| _(no milestone)_ | 28 | 26 Done / 2 open | New triage bugs #869 and #874. |
+| _(no milestone)_ | 29 | 26 Done / 3 open | Triage bugs #869/#874 plus In-progress Abilities Explorer enhancement #883. |
 
-*Sums to 282 cards.*
+*Sums to 283 cards.*
 
 ---
 
@@ -120,13 +122,13 @@ The active build wave is now **v1.3.0**: 22 non-Done cards (14 issues + 8 PRs). 
 - **Reliability and lifecycle:** provider-approval error copy (#660), plugin uninstall cleanup (#690), non-SDK request logging (#732), and admin-page flicker (#741).
 - **Maintenance:** dependency alignment (#777/#832), alt-text URL matching (#621), and a Suggest Reply screencast update (#882).
 
-Two new unmilestoned bugs remain in Triage: #869 reports provider data appearing only in the block-editor iframe in one environment, and #874 documents Yoast meta-description interoperability failures across post types and when Yoast AI is disabled. Both need scope/root-cause decisions before scheduling.
+Two unmilestoned bugs remain in Triage: #869 reports provider data appearing only in the block-editor iframe in one environment, and #874 documents Yoast meta-description interoperability failures across post types and when Yoast AI is disabled. Unmilestoned issue #883 is already In progress through authoritative closing PR #884, which adds dynamic custom-provider filtering and corrects statistics to count abilities by origin.
 
-The repo has **35 open PRs**: 16 are represented by open board PR cards, while 19 are untracked by a PR card (17 substantive + 2 routine dependency updates). Several untracked PRs implement board issues, so board status must not be read as the complete code-in-flight view.
+The repo has **37 open PRs**: 16 are represented by open board PR cards, while 21 are untracked by a PR card (19 substantive + 2 routine dependency updates). The two additions are #884 (authoritative closing link to #883) and #885 (fallback-title link to #425). Several untracked PRs implement board issues, so board status must not be read as the complete code-in-flight view.
 
 Two additional full-repository censuses expose upstream implementation and release movement without folding it into Project #240: **20 open PRs in `WordPress/php-ai-client`** and **12 in `WordPress/mcp-adapter`**. Their complete normalized PR records, readiness fields, releases, diffs, and independent snapshots are emitted by `wp-ai-roadmap-refresh.sh`; only the primary `WordPress/ai` census is joined to the roadmap board.
 
-*(Full per-issue detail is in [§9](#9-appendix--full-open-issue-tracker-56).)*
+*(Full per-issue detail is in [§9](#9-appendix--full-open-issue-tracker-57).)*
 
 ---
 
@@ -204,14 +206,14 @@ The biggest **directional shift** — from single-task helpers to a conversation
 2. **Governance before write abilities** — #863 makes the safety question concrete: standalone/read abilities are currently always registered, while future write abilities need deliberate enablement and discoverability controls.
 3. **Backlog-to-commitment gap** — Future Release still contains 43 non-Done cards, but 1.3.0 now provides a defined 22-card active lane and 1.4.0 a four-issue next lane.
 4. **Compatibility regressions** — #869 needs a clean-environment reproduction; #874 may require a Yoast-specific data-store integration because the generic REST-meta path is post-type-limited.
-5. **Board ≠ repo** — 19 of 35 open PRs lack a PR card. Issue cards often carry the roadmap intent while implementing PRs remain off-board.
+5. **Board ≠ repo** — 21 of 37 open PRs lack a PR card. Issue cards often carry the roadmap intent while implementing PRs remain off-board.
 6. **Stale/closed cards** — #484 remains non-Done despite being merged; newly added cards can also arrive already Done, so counts require state + board-status reconciliation.
 
 ---
 
-## 9. Appendix — full open-issue tracker (56)
+## 9. Appendix — full open-issue tracker (57)
 
-> 📄 Deep dossiers live in [`wordpress-ai-open-issues.md`](./wordpress-ai-open-issues.md). The current scope is **56 board-open issues**: 55 in `WordPress/ai` plus Google-provider issue #23. PR cards are tracked separately in [`wordpress-ai-planned-work.md`](./wordpress-ai-planned-work.md).
+> 📄 Deep dossiers live in [`wordpress-ai-open-issues.md`](./wordpress-ai-open-issues.md). The current scope is **57 board-open issues**: 56 in `WordPress/ai` plus Google-provider issue #23. PR cards are tracked separately in [`wordpress-ai-planned-work.md`](./wordpress-ai-planned-work.md).
 
 Grouped by current board status. Theme tags are editorial aids; Status and Milestone come from Project #240.
 
@@ -242,7 +244,7 @@ Grouped by current board status. Theme tags are editorial aids; Status and Miles
 | [#875](https://github.com/WordPress/ai/issues/875) | 1.4.0 | Content | — | New Experiment: Suggest internal links within post content |
 | [#876](https://github.com/WordPress/ai/issues/876) | 1.4.0 | Content | — | New Experiment: Suggest permalink slugs |
 
-### In progress (14)
+### In progress (15)
 
 | # | Milestone | Theme | Assignee | Summary |
 |---|---|---|---|---|
@@ -260,6 +262,7 @@ Grouped by current board status. Theme tags are editorial aids; Status and Miles
 | [#736](https://github.com/WordPress/ai/issues/736) | 1.3.0 | Platform | — | Expose role/user access controls per feature/experiment |
 | [#845](https://github.com/WordPress/ai/issues/845) | 1.3.0 | Infra | dkotter | New Experiment: Markdown feeds (powered by `html-to-md`) |
 | [#866](https://github.com/WordPress/ai/issues/866) | 1.3.0 | Bug/Infra | hbhalodia | Bug Inconsistency: Standardize post meta key naming with the `wpai_` prefix |
+| [#883](https://github.com/WordPress/ai/issues/883) | — | Platform | — | Abilities Explorer: provider filter dropdown doesn't include custom providers |
 
 ### Backlog (8)
 
@@ -311,7 +314,7 @@ Grouped by current board status. Theme tags are editorial aids; Status and Miles
 >
 > **Normal vs. strict refresh.** The default (normal) refresh is *warning-only*: any data-quality or coverage problem — an unreachable dependency, a substantive open PR with no board representation — is reported in the output (`.validation` in JSON, stderr lines otherwise) but never blocks the board report, and the run exits `0`. `./wp-ai-roadmap-refresh.sh --strict [--json]` runs the same read-only pipeline as an **audit**: it emits the complete report first, then exits `2` when any validation error remains (exit `1` is reserved for operational failures that prevented a report at all). A strict failure also suppresses `--save` and `--update-changelog` ("persistence skipped"), so a red audit never rolls the baseline forward.
 >
-> Strict is a **scheduled visibility audit, not a merge gate**: whether every substantive `WordPress/ai` PR is linked to Project #240 depends on upstream contributor behavior, so a persistent red result means *unresolved roadmap visibility* (work in flight that the board doesn't show), not a broken tracker. Point-in-time coverage: 35 open PRs = 16 direct board PR cards + 15 linked to board issues via GitHub closing references + 2 routine dependency PRs + 2 unexplained (#877, #878 — the current strict-audit failures).
+> Strict is a **scheduled visibility audit, not a merge gate**: whether every substantive `WordPress/ai` PR is linked to Project #240 depends on upstream contributor behavior, so a persistent red result means *unresolved roadmap visibility* (work in flight that the board doesn't show), not a broken tracker. Point-in-time coverage: 37 open PRs = 16 direct board PR cards + 17 linked to board issues (15 authoritative closing references + 2 source-labeled fallbacks) + 2 routine dependency PRs + 2 unexplained (#877, #878 — the current strict-audit failures).
 
 **Prerequisite:** a `gh` login whose token has the `read:project` scope (fine-grained PATs scoped to a personal account **cannot** read the WordPress org project — even though it's public; use a classic-token login):
 
@@ -383,6 +386,7 @@ When refreshing: update the **Data snapshot** date in the header, re-check the �
 
 | Date | Change |
 |---|---|
+| 2026-07-18 | **Same-day live refresh vs the 2026-07-18 02:20 UTC baseline.** Board **282 → 283**; Done holds at **209**; non-Done **73 → 74** with new unmilestoned In-progress issue **#883**. `WordPress/ai` open PRs **35 → 37** with #884 (authoritatively closes #883) and #885 (fallback-title match to #425); coverage is now 16 direct + 17 linked + 2 routine + 0 linked-off-board + 2 unexplained. The strict audit still exits 2 only for #877/#878. Upstream repository censuses and the 16-item dependency watchlist are unchanged. |
 | 2026-07-18 | **Expanded full-repository tracking.** Added declarative PR/release censuses for `WordPress/php-ai-client` (**20 open PRs; latest 1.4.0, 2026-07-15**) and `WordPress/mcp-adapter` (**12 open PRs; latest v0.5.0, 2026-04-15**) alongside the existing `WordPress/ai` census (**35; 1.2.0**). The new repositories receive normalized PR data, validation, diffs, Markdown summaries, and independent snapshots, but no Project #240 coverage requirement. Live board and dependency counts are unchanged: 282 items / 209 Done / 73 non-Done; dependency watchlist 16 (10 open / 3 closed / 3 merged). |
 | 2026-07-17 | **Tracker upgrade: authoritative PR relationships + strict audit mode.** The refresh script now reads open PRs via paginated GraphQL with GitHub `closingIssuesReferences` as the authoritative PR→issue link source (fallback title/body/branch parsing is grammar-restricted and disabled for routine PRs), classifies every open PR into one of five coverage buckets (direct-board-pr / linked-board-issue / routine / linked-off-board-issue / unexplained), tracks PR readiness changes (draft/review/merge/checks), and moves the dependency watchlist into the `wp-ai-roadmap-dependencies.json` registry with resilient UNKNOWN-placeholder fetches. New `--strict` audit exits `2` on coverage/data errors after emitting the report and suppresses persistence. Live coverage at upgrade: 35 open PRs = 16 direct + 15 issue-linked + 2 routine + **2 unexplained (#877, #878)**. |
 | 2026-07-17 | **Live board + repo refresh vs 2026-07-13 baseline.** Board **279 → 282**; Done **206 → 209**; non-Done remains **73**, now **56 issues + 17 PR cards** (16 open + stale merged #484). **v1.2.0 shipped 2026-07-14**; unfinished work reorganized into **1.3.0 (22 open)** and **1.4.0 (4 open)**. Added 13 cards, removed 10 already-Done cards, and moved nine baseline cards to Done. Repo census: **35 open PRs**, 19 untracked by PR card (17 substantive + 2 routine). Dependency watchlist remains 16 (10 open / 3 closed / 3 merged); Gutenberg #73771 was retitled and updated. |
@@ -405,7 +409,7 @@ When refreshing: update the **Data snapshot** date in the header, re-check the �
 
 <!--
 MAINTENANCE NOTES (not rendered):
-- "WordPress AI" board == the WordPress/ai Showcase Plugin in practice (281/282 items).
+- "WordPress AI" board == the WordPress/ai Showcase Plugin in practice (282/283 items).
 - Roadmap signal = open ISSUES plus the non-Done PR lane; PRs are most of the 209 Done cards.
 - Priority field is barely used; track via Status + Milestone.
 - Strategic bets (⭐): #348, #40, #430, #297, #324, #338, #189, #282. Risk (⚠️): #448 (WebMCP), #643 (live regression).
