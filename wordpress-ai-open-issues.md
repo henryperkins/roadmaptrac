@@ -1,22 +1,22 @@
 # WordPress AI — Open Issues Dossier (Companion Reference)
 
-> Deep per-issue documentation for all **57 open issues** (status rechecked 2026-07-20) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
+> Deep per-issue documentation for all **52 open issues** (status rechecked 2026-07-27) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
 > Companion to [`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md) and [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md). Each dossier records the problem, approach, open decisions, dependencies, and discussion.
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-20 |
-> | **Scope** | 57 current open-issue dossiers + 1 removed-board reference (#84) + 33 recently board-Done dossiers retained for reference. Excludes 17 non-Done PR cards, the rest of the 209 Done cards, and census-only upstream issues. |
-> | **Repos** | Board dossiers: `WordPress/ai` (56 open issues) · `WordPress/ai-provider-for-google` (#23). Removed-board reference: `WordPress/abilities-api` #84. `WordPress/php-ai-client` and `WordPress/mcp-adapter` are tracked separately as full PR/release censuses, not imported as issue dossiers. |
+> | **Data snapshot** | 2026-07-27 |
+> | **Scope** | 52 current open-issue dossiers + 1 removed-board reference (#84) + 39 recently board-Done dossiers retained for reference. Excludes 15 non-Done PR cards, the rest of the 207 Done cards, and census-only upstream issues. |
+> | **Repos** | Board dossiers: `WordPress/ai` (51 open issues) · `WordPress/ai-provider-for-google` (#23). Removed-board reference: `WordPress/abilities-api` #84. `WordPress/php-ai-client` and `WordPress/mcp-adapter` are tracked separately as full PR/release censuses, not imported as issue dossiers. |
 > | **Each dossier** | Status · Milestone · Labels · Assignees · Last updated · Comment count · Link, then Problem → Approach → Open decisions → Dependencies → Discussion |
 
-**Grouped by board status:** [In discussion / Needs decision (22)](#in-discussion--needs-decision-22) · [In progress (15)](#in-progress-15) · [Backlog (8)](#backlog-8) · [To do (6)](#to-do-6) · [Triage (3)](#triage-3) · [Needs review (3)](#needs-review-3) · [Recently board-Done (33 retained)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
+**Grouped by board status:** [In discussion / Needs decision (20)](#in-discussion--needs-decision-20) · [In progress (16)](#in-progress-16) · [Backlog (7)](#backlog-7) · [To do (4)](#to-do-4) · [Triage (3)](#triage-3) · [Needs review (2)](#needs-review-2) · [Recently board-Done (39 retained)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
 
 > ⭐ = major strategic bet · ⚠️ = notable risk / live regression. "Status" reflects the board; "Milestone" is the release target.
 
 ---
 
-## In discussion / Needs decision (22)
+## In discussion / Needs decision (20)
 
 *The genuinely uncommitted questions — debated, not promised. Most platform-level bets live here.*
 
@@ -351,67 +351,11 @@
 
 **Discussion highlights.** Opened by jeffpaul off the #151 review discussion as a "let's watch and see" enhancement; no comments yet.
 
-### #875 — New Experiment: Suggest internal links within post content
-**Status:** In discussion / Needs decision · **Milestone:** 1.4.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-16 · **Comments:** 0
-**Link:** https://github.com/WordPress/ai/issues/875
-
-**Problem / goal.** Authors miss useful internal links because they cannot manually recall all related site content, weakening navigation, engagement, and SEO.
-
-**Proposed approach.** Suggest up to five review-only in-content links, using the post's own anchor text and existing posts/pages. Support a pre-publish flow plus an on-demand Notes-style flow; never auto-insert links.
-
-**Open decisions / blockers.** Reuse Editorial Notes/Updates plumbing or create a separate experiment; determine whether a site index is required; handle paragraph-level Notes on WP 6.9–7.0 vs inline Notes on 7.1+; decide whether to show rationale.
-
-**Dependencies.** Content discovery/indexing, Editorial Notes/Updates patterns, inline Notes availability, AI Client.
-
-**Discussion highlights.** Board-new; no comments yet.
-
-### #876 — New Experiment: Suggest permalink slugs
-**Status:** In discussion / Needs decision · **Milestone:** 1.4.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-20 · **Comments:** 0
-**Link:** https://github.com/WordPress/ai/issues/876
-
-**Problem / goal.** Auto-generated or casually edited permalink slugs miss an easy SEO/readability improvement opportunity.
-
-**Proposed approach.** Add a review-and-select slug experiment based on title/content, following Title Generation's one-click pattern. v1 would return one or several suggestions, never overwrite without user action, and expose filters for suggestion count/content gating.
-
-**Open decisions / blockers.** Choose sidebar, pre-publish, or both; decide whether to check existing URLs for near-duplicates; decide whether a WP-CLI bulk-review command belongs in scope.
-
-**Dependencies.** Post permalink editing UI, pre-publish panel, content-length gating, AI Client.
-
-**Discussion highlights.** Board-new; no comments yet.
-
 ---
 
-## In progress (15)
+## In progress (16)
 
 *Actively being implemented or investigated.*
-
-### #191 — Add import/export support for AI settings and provider configuration
-**Status:** In progress · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement · **Assignee(s):** coderGtm · **Updated:** 2026-07-13 · **Comments:** 7
-**Link:** https://github.com/WordPress/ai/issues/191
-
-**Problem / goal.** Provide import/export of AI settings and provider configuration for portability across environments — valuable for agencies, hosts, and multisite. Security and credential handling must be carefully considered.
-
-**Proposed approach.** Consensus: export only **non-sensitive** configuration (no API keys), letting secrets resolve from env vars/host/settings, so the export is a simple unencrypted JSON file reusable across dev/staging/prod. Import: choose file → "Are you sure?" confirmation before applying (a full preview screen deemed overkill for v1). Integrate non-sensitive details into WordPress Site Health export/status checks.
-
-**Open decisions / blockers.** Spec settled to three items: (1) import/export non-sensitive config, (2) Site Health checks, (3) confirm-before-apply import. No remaining blockers; dkotter approved.
-
-**Dependencies.** WordPress Site Health; WP-managed API key storage (keys are managed by WP/AI Client, not the plugin).
-
-**Discussion highlights.** coderGtm (assignee) argued against bundling keys (security + per-env replacement friction); dkotter agreed, endorsed Site Health integration, and preferred a simple confirm dialog over a preview.
-
-### #192 — Add extension points for custom prompt templates
-**Status:** In progress · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** the-hercules · **Updated:** 2026-06-26 · **Comments:** 1
-**Link:** https://github.com/WordPress/ai/issues/192
-
-**Problem / goal.** Introduce extension points letting developers define, override, or extend the prompt templates used by experiments — customization without forking. Target: developers.
-
-**Proposed approach.** No specific hook design yet; acceptance: prompt templates extendable/overridable via hooks; scoped and predictable; works across multiple experiments; documented. Implementation now in flight as **PR #770** ("Prompt template extension points").
-
-**Open decisions / blockers.** Specific hook/filter API being defined in PR #770.
-
-**Dependencies.** AI experiment prompt-assembly layer. Enables/complements customization in agentic experiments (#189, #282, #142 "developer mode").
-
-**Discussion highlights.** —
 
 ### #203 — Add extensibility hook for custom Ability Table columns
 **Status:** In progress · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Help Wanted, [Experiment] Abilities Explorer · **Assignee(s):** — · **Updated:** 2026-07-15 · **Comments:** 1
@@ -427,6 +371,22 @@
 **Dependencies.** `Ability_Table.php`, `Ability_Handler.php`, the admin page; future DataViews/DataForms migration.
 
 **Discussion highlights.** jeffpaul said the next Abilities Explorer iteration focuses on TypeScript + DataViews/DataForms and suggested folding this extensibility into that work — effectively deferring the standalone filter.
+
+### #233 — Refactor experiments to leverage AI_Service layer
+**Status:** In progress *(was To do)* · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Help Wanted, [Experiment] Abilities Explorer, [Experiment] Excerpt Generation, [Experiment] Alt Text Generation, [Experiment] Image Generation, [Experiment] Content Summarization, [Experiment] Title Generation · **Assignee(s):** — · **Updated:** 2026-04-23 · **Comments:** 1
+**Link:** https://github.com/WordPress/ai/issues/233
+
+**Problem / goal.** With #101 merged in 0.2.1 (introducing the shared `AI_Service` layer), the existing Experiments should be refactored to route through it for consistency, rather than each calling the AI client independently.
+
+**Proposed approach.** Checklist to migrate each experiment onto `AI_Service`: Abilities Explorer, Alt Text, Content Summarization, Excerpt, Image, Title. Implementation is now in flight as **PR #898** ("Refactor experiments to leverage ai service layer", theaminulai) — a deliberately small +91/-6 change across 8 files, which reads as an incremental migration rather than a big-bang refactor.
+
+**Open decisions / blockers.**
+- Whether to keep `AI_Service` at all: jeffpaul questioned whether, since it isn't used by newer experiments/PRs, it should instead be refactored **out** as a breaking change before WP 7.0. **PR #898 answers this by adoption rather than by decision** — the strategic question has not been formally resolved in the issue thread, so review should settle direction before the migration spreads further.
+- PR #898 is BLOCKED in GitHub's merge-state signal with no review decision recorded (checks green).
+
+**Dependencies.** #101 (AI_Service, shipped 0.2.1); the six tagged experiments.
+
+**Discussion highlights.** The issue's only comment is jeffpaul raising the strategic doubt — flipping it from "adopt the layer everywhere" to "possibly remove the layer." The issue itself has had no new discussion since 2026-04-23; what changed this window is that an authoritative closing PR appeared against it.
 
 ### #238 — Add focus-aware crop suggestions
 **Status:** In progress · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Needs Design, [Experiment] Image Generation · **Assignee(s):** TylerB24890 · **Updated:** 2026-05-19 · **Comments:** 1
@@ -478,19 +438,23 @@
 
 **Discussion highlights.** andrewserong: too early for stable extension points; don't treat experiments as stable API. ramonjd: extensions should target the image surface/source state, not crop UI; crop stays a native core tool; documented a programmatic crop pipeline for AI-agent integration. jeffpaul confirmed AI-side integrations stay Experiments to drive testing.
 
-### #452 — Content Classification: Improve relevance of taxonomy suggestions
-**Status:** In progress · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** saarnilauri · **Updated:** 2026-07-13 · **Comments:** 1
-**Link:** https://github.com/WordPress/ai/issues/452
+### #421 — WordPress should detect C2PA manifests on upload
+**Status:** In progress *(was To do)* · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-20 · **Comments:** 4
+**Link:** https://github.com/WordPress/ai/issues/421
 
-**Problem / goal.** Category/tag suggestions from the Content Classification experiment are frequently irrelevant. Surfaced via Miriam Schwab (Elementor) feedback. As dkotter notes, this is one of the newest experiments and likely the first feedback, so there's room to adjust. Goal: improve real-world relevance and use the issue as a running feedback collector.
+**Problem / goal.** WP extracts EXIF/IPTC/partial XMP at upload via `wp_read_image_metadata()` but doesn't detect **C2PA Content Credentials**. C2PA manifests now ship from AI generators (DALL-E 3, Firefly, Gemini, Copilot), cameras (Pixel, Galaxy S25, Leica, Sony, Nikon), and providers (Cloudflare Images), carrying machine-readable provenance. WP's GD/Imagick pipeline destroys manifests during subsize generation, so the only read window is at upload, before processing.
 
-**Proposed approach.** Audit the classification prompt and explore built-in tuning/prompt improvements. saarnilauri opened a PR proposing a fix.
+**Proposed approach.** A read-only experiment via `Abstract_Feature`, toggleable. At upload it hooks the attachment pipeline, reads the original via `wp_get_original_image_path()`, and captures a structured postmeta record (`_wpai_monitor_record`): curated EXIF/IPTC/XMP; C2PA presence (JPEG APP11, PNG `caBX`, WebP RIFF `C2PA`); and a C2PA claim summary (claim generator, digital source type, action history) decoded from the JUMBF manifest store. Introduces shared **JUMBF box-reading + CBOR-decoding** utilities (none exist today), reusable by other C2PA experiments (ref #294).
 
-**Open decisions / blockers.** Pending review of the proposed PR.
+**Open decisions / blockers.**
+- Constraints: read-only; fail-open (upload always succeeds); no external deps/HTTP; <500ms median on <15MB images.
+- Out of scope: signing/verification, preserving manifests through processing, display UI.
+- Display UI / `cr` overlay deferred (requires passing C2PA conformance first).
+- Board PR **#459** ("Add C2PA Monitor experiment", lnispel) carries CHANGES_REQUESTED from dkotter: set `capability` to `none`, move the README under `docs/experiments`, reset `@since`, translate error strings, and reconsider sidecar security (an `.htaccess` guard only protects Apache).
 
-**Dependencies.** —
+**Dependencies.** WP attachment pipeline; new JUMBF + CBOR utilities; reference implementations in #294.
 
-**Discussion highlights.** Feedback from Elementor's Miriam Schwab; dkotter framed it as early, expected feedback; saarnilauri offered a candidate fix.
+**Discussion highlights.** jeffpaul wants a fast-follow adding display UI with the `cr` overlay. lukenispel: reading/storing/displaying is straightforward, but the CR icon needs a conformant validator/generator first; offered to draft the display work, gated on conformance. **Relationship correction (2026-07-27):** PR #459 is now confirmed as this issue's **authoritative `closing` PR** via GitHub's `closingIssuesReferences`, not merely a conceptual sibling as earlier docs recorded — which is why the card moved To do → In progress. The signing PRs #294/#302 remain closed unmerged, so read-only detection is the whole live C2PA path.
 
 ### #514 — Add comment value / relevance to Comment Moderation experiment
 **Status:** In progress · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-14 · **Comments:** 0
@@ -571,6 +535,23 @@
 
 **Discussion highlights.** Infinite-Null shared an initial implementation and demo with per-feature role/user controls in AI settings, now open as **draft PR #749** (+893/−106, 18 files). dkotter said the direction looked correct and requested save-state UX, snackbar feedback, and possibly checkboxes for roles.
 
+### #844 — New Experiment: Semantic search in wp admin
+**Status:** In progress *(was Backlog)* · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-21 · **Comments:** 1
+**Link:** https://github.com/WordPress/ai/issues/844
+
+**Problem / goal.** The built-in wp-admin posts search matches exact words, so recalling "that post about pricing changes" when the post was titled "Updates to our plans" returns nothing — a small daily friction that compounds on sites with hundreds of posts. The in-progress native vector search (#683) solves this for **front-end visitors**, but site managers hit the same wall inside wp-admin.
+
+**Proposed approach.** A new admin-side semantic-search experiment reusing the embeddings/index built for #683, applied to the posts list in wp-admin. Implementation is now in flight as **PR #891** ("Feat: Add semantic search experiment to AI plugin", priyanshuhaldar007) — +1,757 lines across 9 files, an authoritative `closing` reference.
+
+**Open decisions / blockers.**
+- The issue was filed as **blocked on #683** (native vector search) landing first, since #683 was to provide the embedding pipeline. **PR #891 opened anyway, ahead of #683**, which is still a draft with a DIRTY branch. Review should establish whether #891 carries its own embedding path or is expected to rebase onto #683's — otherwise the two experiments risk shipping duplicate indexing machinery.
+- PR #891 is BLOCKED with failing checks.
+- Off-board PR **#892** (PHP AI Client embeddings vendored behind an `SDK_Overlay`) is the third moving part in this area and has no board card at all.
+
+**Dependencies.** #683 (native vector search experiment) and its embedding store; the wp-admin posts list table; increasingly, the embedding support brought over in #892.
+
+**Discussion highlights.** Filed by jeffpaul as the admin-side counterpart to #683.
+
 ### #845 — New Experiment: Markdown feeds (powered by `html-to-md`)
 **Status:** In progress · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** dkotter · **Updated:** 2026-07-14 · **Comments:** 0
 **Link:** https://github.com/WordPress/ai/issues/845
@@ -599,23 +580,37 @@
 
 **Discussion highlights.** No issue comments; the issue body provides the migration and acceptance checklist.
 
-### #883 — Abilities Explorer: provider filter dropdown doesn't include custom providers
-**Status:** In progress · **Milestone:** — · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-18 · **Comments:** 1
-**Link:** https://github.com/WordPress/ai/issues/883
+### #875 — New Experiment: Suggest internal links within post content
+**Status:** In progress *(was In discussion / Needs decision)* · **Milestone:** 1.4.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-27 · **Comments:** 2
+**Link:** https://github.com/WordPress/ai/issues/875
 
-**Problem / goal.** The Abilities Explorer already recognizes an ability's custom `meta['provider']` label in its Provider column and `?provider=` query handling, but the visible filter is hard-coded to Core/Plugin/Theme. Users therefore cannot select a custom provider in the UI. The overview statistics have a related defect: custom provider labels can make plugin abilities disappear from every origin card even though the Total remains correct.
+**Problem / goal.** Authors miss useful internal links because they cannot manually recall all related site content, weakening navigation, engagement, and SEO.
 
-**Proposed approach.** Build provider options dynamically from the fetched abilities, preserving Core/Plugin/Theme first and appending custom providers alphabetically. Separate **provider label** from **origin**: `meta['provider']` remains the display/filter value, while prefix-derived Core/Plugin/Theme origin drives the fixed three overview cards. Authoritative closing PR **#884** implements this with `get_unique_providers()`, `detect_origin()`, a normalized `origin` field, and integration tests.
+**Proposed approach.** Suggest up to five review-only in-content links, using the post's own anchor text and existing posts/pages. Support a pre-publish flow plus an on-demand Notes-style flow; never auto-insert links. Implementation is now in flight as **PR #887** ("Experiment: Add Internal link suggestions", Infinite-Null) — +2,050 lines across 15 files, an authoritative `closing` reference.
 
-**Open decisions / blockers.** PR #884 is open and GitHub reports it BLOCKED pending review/merge eligibility, although its checks are currently successful. Review must confirm the new origin/provider split preserves existing consumers and that dynamic options remain usable when many plugins declare distinct provider labels.
+**Open decisions / blockers.** The product questions that kept this In discussion are **not yet closed by the PR**: whether to reuse Editorial Notes/Updates plumbing or build a separate experiment; whether a site index is required; how to handle paragraph-level Notes on WP 6.9–7.0 vs inline Notes on 7.1+; and whether to show rationale for each suggestion. PR #887 is BLOCKED with no review decision recorded (checks green) — review is where those choices get settled.
 
-**Dependencies.** `Ability_Table::extra_tablenav()` and statistics; `Ability_Handler::detect_provider()` / `get_provider_label()`; the dynamic-category-filter pattern from #344/#355.
+**Dependencies.** Content discovery/indexing, Editorial Notes/Updates patterns, inline Notes availability, AI Client.
 
-**Discussion highlights.** azizulhasan expanded the initial filter-only proposal after finding that the same hard-coded provider buckets caused statistics drift. The chosen design keeps exactly three origin cards while allowing any number of provider filter values; the author reports a live test with 112 abilities, including 82 under a custom provider.
+**Discussion highlights.** Filed board-new on 2026-07-17 with no comments; two comments and the implementation PR arrived in this window, and it is the most recently touched card on the whole board (2026-07-27).
+
+### #876 — New Experiment: Suggest permalink slugs
+**Status:** In progress *(was In discussion / Needs decision)* · **Milestone:** 1.4.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-24 · **Comments:** 2
+**Link:** https://github.com/WordPress/ai/issues/876
+
+**Problem / goal.** Auto-generated or casually edited permalink slugs miss an easy SEO/readability improvement opportunity.
+
+**Proposed approach.** Add a review-and-select slug experiment based on title/content, following Title Generation's one-click pattern. v1 would return one or several suggestions, never overwrite without user action, and expose filters for suggestion count/content gating. Implementation is now in flight as **PR #897** ("Prototype : Implement slug generation feature with UI and tests", milindmore22) — +2,000 lines across 15 files, an authoritative `closing` reference, and explicitly framed as a prototype.
+
+**Open decisions / blockers.** Placement (sidebar, pre-publish, or both), whether to check existing URLs for near-duplicates, and whether a WP-CLI bulk-review command is in scope all remain open. PR #897 is BLOCKED with no review decision recorded (checks green).
+
+**Dependencies.** Post permalink editing UI, pre-publish panel, content-length gating, AI Client.
+
+**Discussion highlights.** Filed board-new on 2026-07-17; picked up quickly, with a prototype PR seven days later.
 
 ---
 
-## Backlog (8)
+## Backlog (7)
 
 *Accepted direction, not yet scheduled for active delivery.*
 
@@ -732,23 +727,9 @@
 
 **Discussion highlights.** Product definition by linawiezkowiak, lwoodmansee, rachaelcortellessa; technical review by dkotter. jeffpaul tentatively assigned karmatosed for mockups.
 
-### #844 — New Experiment: Semantic search in wp admin
-**Status:** Backlog · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-08 · **Comments:** 0
-**Link:** https://github.com/WordPress/ai/issues/844
-
-**Problem / goal.** The built-in wp-admin posts search matches exact words, so recalling "that post about pricing changes" when the post was titled "Updates to our plans" returns nothing — a small daily friction that compounds on sites with hundreds of posts. The in-progress native vector search (#683) solves this for **front-end visitors**, but site managers hit the same wall inside wp-admin.
-
-**Proposed approach.** A new admin-side semantic-search experiment reusing the embeddings/index built for #683, applied to the posts list in wp-admin.
-
-**Open decisions / blockers.** Explicitly **blocked on #683** (native vector search) landing first — it provides the embedding pipeline this depends on.
-
-**Dependencies.** #683 (native vector search experiment) and its embedding store; the wp-admin posts list table.
-
-**Discussion highlights.** Filed by jeffpaul as the admin-side counterpart to #683; no comments yet.
-
 ---
 
-## To do (6)
+## To do (4)
 
 *Queued work with a defined next action.*
 
@@ -786,21 +767,6 @@
 
 **Discussion highlights.** yogeshbhutkar shared a high-fidelity mockup and proposed metadata-driven insight verticals. dkotter liked the concept and design direction, while noting usefulness needs validation and v1 should probably trim the number of insight types.
 
-### #233 — Refactor experiments to leverage AI_Service layer
-**Status:** To do · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Help Wanted, [Experiment] Abilities Explorer, [Experiment] Excerpt Generation, [Experiment] Alt Text Generation, [Experiment] Image Generation, [Experiment] Content Summarization, [Experiment] Title Generation · **Assignee(s):** — · **Updated:** 2026-04-23 · **Comments:** 1
-**Link:** https://github.com/WordPress/ai/issues/233
-
-**Problem / goal.** With #101 merged in 0.2.1 (introducing the shared `AI_Service` layer), the existing Experiments should be refactored to route through it for consistency, rather than each calling the AI client independently.
-
-**Proposed approach.** Checklist to migrate each experiment onto `AI_Service`: Abilities Explorer, Alt Text, Content Summarization, Excerpt, Image, Title.
-
-**Open decisions / blockers.**
-- Whether to keep `AI_Service` at all: jeffpaul questioned whether, since it isn't used by newer experiments/PRs, it should instead be refactored **out** as a breaking change before WP 7.0.
-
-**Dependencies.** #101 (AI_Service, shipped 0.2.1); the six tagged experiments.
-
-**Discussion highlights.** Only comment is jeffpaul raising the strategic doubt — flipping the issue from "adopt the layer everywhere" to "possibly remove the layer." Direction unresolved.
-
 ### #339 — AI 0.6 + WP7RC1 + Gutenberg 22.7.1 : can't keep connection alive within the AI plugin
 **Status:** To do · **Milestone:** Future Release · **Labels:** [Type] Bug · **Assignee(s):** — · **Updated:** 2026-05-07 · **Comments:** 6
 **Link:** https://github.com/WordPress/ai/issues/339
@@ -817,23 +783,6 @@
 **Dependencies.** AI Client (owns the model check); AI Provider plugins (Google ≥1.0.3, Anthropic ≥1.0.2); Gutenberg; WP 7.0; possibly Gemini model support.
 
 **Discussion highlights.** Mismatched-error symptom (image action → text_generation error); possibly environment-specific. dkotter cc'd felixarntz; awaiting confirmation it still reproduces.
-
-### #421 — WordPress should detect C2PA manifests on upload
-**Status:** To do · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-13 · **Comments:** 2
-**Link:** https://github.com/WordPress/ai/issues/421
-
-**Problem / goal.** WP extracts EXIF/IPTC/partial XMP at upload via `wp_read_image_metadata()` but doesn't detect **C2PA Content Credentials**. C2PA manifests now ship from AI generators (DALL-E 3, Firefly, Gemini, Copilot), cameras (Pixel, Galaxy S25, Leica, Sony, Nikon), and providers (Cloudflare Images), carrying machine-readable provenance. WP's GD/Imagick pipeline destroys manifests during subsize generation, so the only read window is at upload, before processing.
-
-**Proposed approach.** A read-only experiment via `Abstract_Feature`, toggleable. At upload it hooks the attachment pipeline, reads the original via `wp_get_original_image_path()`, and captures a structured postmeta record (`_wpai_monitor_record`): curated EXIF/IPTC/XMP; C2PA presence (JPEG APP11, PNG `caBX`, WebP RIFF `C2PA`); and a C2PA claim summary (claim generator, digital source type, action history) decoded from the JUMBF manifest store. Introduces shared **JUMBF box-reading + CBOR-decoding** utilities (none exist today), reusable by other C2PA experiments (ref #294).
-
-**Open decisions / blockers.**
-- Constraints: read-only; fail-open (upload always succeeds); no external deps/HTTP; <500ms median on <15MB images.
-- Out of scope: signing/verification, preserving manifests through processing, display UI.
-- Display UI / `cr` overlay deferred (requires passing C2PA conformance first).
-
-**Dependencies.** WP attachment pipeline; new JUMBF + CBOR utilities; reference implementations in #294.
-
-**Discussion highlights.** jeffpaul wants a fast-follow adding display UI with the `cr` overlay. lukenispel: reading/storing/displaying is straightforward, but the CR icon needs a conformant validator/generator first; offered to draft the display work, gated on conformance.
 
 ### #863 — New Experiment: Abilities toggle
 **Status:** To do · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-17 · **Comments:** 4
@@ -887,23 +836,23 @@
 
 **Discussion highlights.** A maintainer observed the reverse behavior on `develop`. The reporter could not retest before vacation and invited closure until a reproducible case is available.
 
-### #874 — Meta Description: Issue with Yoast plugin for Meta Description experiment
-**Status:** Triage · **Milestone:** — · **Labels:** [Type] Bug · **Assignee(s):** — · **Updated:** 2026-07-16 · **Comments:** 4
-**Link:** https://github.com/WordPress/ai/issues/874
+### #890 — Add mobile right sidebar display component
+**Status:** Triage · **Milestone:** — · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-07-23 · **Comments:** 0
+**Link:** https://github.com/WordPress/ai/issues/890
 
-**Problem / goal.** The Meta Description experiment conflicts with Yoast SEO: updates work for posts but not pages/CPTs, and can stop working for posts when Yoast AI is disabled.
+**Problem / goal.** Filed by aabhishekchuobey-ops on 2026-07-23: mobile users lack a functional, responsive right-sidebar surface for the plugin's AI features, so there is no mobile-optimized way to reach the information and navigation the desktop sidebar provides.
 
-**Proposed approach.** Investigation points to `yoast-seo/editor` as Yoast's UI/save source of truth. A direct store integration can update all supported post types, while the generic `core/editor` REST-meta path cannot because Yoast exposes those keys only for the `post` subtype.
+**Proposed approach.** A mobile-responsive right-sidebar component that adapts layout by viewport (mobile-first), renders as a collapsible/expandable panel to preserve screen space, retains desktop functionality, and optimizes for touch interaction.
 
-**Open decisions / blockers.** Decide whether to depend on Yoast's internal store, pursue a documented public API, or coordinate an upstream Yoast change. The report was not tested with all non-AI plugins disabled.
+**Open decisions / blockers.** Everything. The issue arrived with no labels, no milestone, no assignee, and no comments, and it does not identify which specific AI surface it targets (AI Home, Connectors, the editor sidebar, the Abilities Explorer, or all of them). It also does not distinguish plugin-owned UI from Gutenberg-owned editor chrome, which determines whether this is even actionable in `WordPress/ai` rather than upstream. Needs triage before it can be scoped.
 
-**Dependencies.** Yoast SEO editor store and metabox save path; WordPress REST meta; upstream Yoast issue #23458.
+**Dependencies.** Undetermined — likely the plugin's admin UI shell and, depending on scope, Gutenberg's editor sidebar behavior on small viewports.
 
-**Discussion highlights.** Four comments document the two-store architecture, the AI-only sync bridge, and the post-type REST limitation. The technical cause is clearer than the supported integration contract.
+**Discussion highlights.** None; board-new this window and the only card added in it.
 
 ---
 
-## Needs review (3)
+## Needs review (2)
 
 *Issue work with an implementation ready for review.*
 
@@ -923,22 +872,6 @@
 
 **Discussion highlights.** yogeshbhutkar shared a working PoC. dkotter questioned the block-level use case and suggested starting with full-article translation or folding block translation into Content Resizing. yogeshbhutkar refactored toward full-article, batch-style processing and opened PR #747 for review.
 
-### #507 — Iterate on Editorial Updates end flow to Visual Revisions
-**Status:** Needs review · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** zeus2611 · **Updated:** 2026-07-14 · **Comments:** 4
-**Link:** https://github.com/WordPress/ai/issues/507
-
-**Problem / goal.** At the end of the "Refine from Notes"/Editorial Updates flow, a toast links to the **legacy** revisions screen. Since the plugin requires WP 7.0, it should instead point to the new **Visual Revisions** screen, improving the AI-applied-changes review experience.
-
-**Proposed approach.** Keep the existing revision lookup and `getRevisionReviewAction()` helper shape. Branch the toast action: if `disableVisualRevisions` is false, dispatch `editorStore.setCurrentRevisionId(lastRevisionId)` to open the visual path; otherwise keep the legacy `revision.php?revision=...` fallback.
-
-**Open decisions / blockers.**
-- The visual path depends on a private-but-stable WP 7.0 editor-store action rather than a public URL.
-- Need to gate correctly on `disableVisualRevisions`.
-
-**Dependencies.** WP 7.0 core Visual Revisions; existing Editorial Updates revision lookup in `useEditorialUpdates.ts`; editor store `setCurrentRevisionId`.
-
-**Discussion highlights.** zeus2611 originally waited for WP 7 to finalize. kiranmagic7 mapped the current source path, and zeus2611 agreed to use `setCurrentRevisionId(lastRevisionId)` behind the `disableVisualRevisions: false` gate instead of waiting for a public URL.
-
 ### #660 — UX: Ambiguous error message in editor when a provider is blocked by Connector Approvals
 **Status:** Needs review · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-13 · **Comments:** 1
 **Link:** https://github.com/WordPress/ai/issues/660
@@ -957,7 +890,7 @@
 
 ## Recently board-Done (since the 2026-06-15 snapshot)
 
-**33 issue dossiers retained for reference.** These are excluded from the 56-open-issue count.
+**39 issue dossiers retained for reference.** These are excluded from the 51-open-issue count. Note that many of these cards have since been **de-carded** from Project #240 in post-release cleanup passes (ten more on 2026-07-27); they are kept here because the work shipped, not because the card still exists.
 
 ### #145 — Rename experiment register() method to better reflect initialization
 **Status:** Done · **Milestone:** — *(was 1.1.0)* · **Labels:** [Type] Enhancement · **Assignee(s):** juanmaguitar · **Updated:** 2026-06-30 · **Comments:** 4 · *(board-Done / closed 2026-06-30)*
@@ -1275,6 +1208,78 @@
 
 **Discussion highlights.** No comments.
 
+### #191 — Add import/export support for AI settings and provider configuration
+**Status:** Done · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement · **Assignee(s):** coderGtm · **Updated:** 2026-07-24 · **Comments:** 7 · *(board-Done / closed 2026-07-24)*
+**Link:** https://github.com/WordPress/ai/issues/191
+
+**Problem / goal.** Provide import/export of AI settings and provider configuration for portability across environments — valuable for agencies, hosts, and multisite. Security and credential handling had to be resolved first.
+
+**Resolution / retained context.** Closed by **PR #734** ("feat: add settings import/export functionality", coderGtm), merged 2026-07-24 under 1.3.0. The shipped spec is the one the thread converged on: export only **non-sensitive** configuration (no API keys), letting secrets resolve from env vars/host/settings so the export is a plain JSON file reusable across dev/staging/prod; import behind a confirm-before-apply dialog rather than a full preview screen; non-sensitive details surfaced through WordPress Site Health. The issue sat In progress for roughly six weeks — the credential-handling debate, not the implementation, was the long pole.
+
+**Dependencies.** WordPress Site Health; WP-managed API key storage (keys are managed by WP/AI Client, not the plugin).
+
+**Discussion highlights.** coderGtm (assignee) argued against bundling keys (security + per-env replacement friction); dkotter agreed, endorsed Site Health integration, and preferred a simple confirm dialog over a preview.
+
+### #192 — Add extension points for custom prompt templates
+**Status:** Done · **Milestone:** 1.3.0 *(was Future Release)* · **Labels:** [Type] Enhancement · **Assignee(s):** the-hercules · **Updated:** 2026-07-20 · **Comments:** 1 · *(board-Done / closed 2026-07-20)*
+**Link:** https://github.com/WordPress/ai/issues/192
+
+**Problem / goal.** Introduce extension points letting developers define, override, or extend the prompt templates used by experiments — customization without forking. Target: developers.
+
+**Resolution / retained context.** Closed by **PR #770** ("Prompt template extension points", the-hercules), merged 2026-07-20. The card was **pulled from Future Release into 1.3.0 as it closed**, which is the tell that the maintainers treated the merged hook API as release-worthy rather than backlog cleanup. Acceptance was met: templates are extendable/overridable via hooks, scoped and predictable, working across multiple experiments.
+
+**Dependencies.** AI experiment prompt-assembly layer. Enables/complements customization in agentic experiments (#189, #282, #142 "developer mode").
+
+**Discussion highlights.** Minimal thread — the hook/filter API was defined in the PR rather than debated in the issue.
+
+### #452 — Content Classification: Improve relevance of taxonomy suggestions
+**Status:** Done · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** saarnilauri · **Updated:** 2026-07-21 · **Comments:** 1 · *(board-Done / closed 2026-07-21)*
+**Link:** https://github.com/WordPress/ai/issues/452
+
+**Problem / goal.** Category/tag suggestions from the Content Classification experiment were frequently irrelevant. Surfaced via Miriam Schwab (Elementor) feedback; dkotter framed it as expected early feedback on one of the newest experiments, and the issue doubled as a running feedback collector.
+
+**Resolution / retained context.** Closed by **PR #633** ("Content Classification: improve relevance of taxonomy suggestions", saarnilauri), merged 2026-07-21 under 1.3.0. The volunteer who reported the candidate fix carried it through to merge. Because the issue was also serving as a feedback collector, further relevance complaints will need a fresh issue.
+
+**Dependencies.** —
+
+**Discussion highlights.** Feedback from Elementor's Miriam Schwab; dkotter framed it as early, expected feedback; saarnilauri offered and landed the fix.
+
+### #507 — Iterate on Editorial Updates end flow to Visual Revisions
+**Status:** Done · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** zeus2611 · **Updated:** 2026-07-24 · **Comments:** 4 · *(board-Done / closed 2026-07-24)*
+**Link:** https://github.com/WordPress/ai/issues/507
+
+**Problem / goal.** At the end of the "Refine from Notes"/Editorial Updates flow, a toast linked to the **legacy** revisions screen. Since the plugin requires WP 7.0, it should instead point to the new **Visual Revisions** screen.
+
+**Resolution / retained context.** Closed by **PR #861** ("Link Editorial Updates success notice to visual revisions", zeus2611), merged 2026-07-24 under 1.3.0. The shipped approach is the one agreed in-thread: keep the existing revision lookup and `getRevisionReviewAction()` shape, then branch the toast — dispatch `editorStore.setCurrentRevisionId(lastRevisionId)` when `disableVisualRevisions` is false, otherwise fall back to `revision.php?revision=...`. **Retained risk:** the visual path depends on a private-but-stable WP 7.0 editor-store action rather than a public URL, so a core change to that action would silently break this flow.
+
+**Dependencies.** WP 7.0 core Visual Revisions; Editorial Updates revision lookup in `useEditorialUpdates.ts`; editor store `setCurrentRevisionId`.
+
+**Discussion highlights.** zeus2611 originally waited for WP 7 to finalize. kiranmagic7 mapped the current source path, and zeus2611 agreed to use `setCurrentRevisionId(lastRevisionId)` behind the `disableVisualRevisions: false` gate instead of waiting for a public URL.
+
+### #874 — Meta Description: Issue with Yoast plugin for Meta Description experiment
+**Status:** Done · **Milestone:** 1.3.0 *(was no milestone)* · **Labels:** [Type] Bug · **Assignee(s):** hbhalodia · **Updated:** 2026-07-20 · **Comments:** 5 · *(board-Done / closed 2026-07-20)*
+**Link:** https://github.com/WordPress/ai/issues/874
+
+**Problem / goal.** The Meta Description experiment conflicted with Yoast SEO: updates worked for posts but not pages/CPTs, and could stop working for posts when Yoast AI was disabled.
+
+**Resolution / retained context.** Closed by **PR #886** ("Fix: Meta Description: Issue with Yoast plugin for Meta Description experiment", hbhalodia), merged 2026-07-20 — four days after filing, and milestoned into 1.3.0 on the way out. The investigation is the durable part: the Yoast meta-description box binds to Yoast's own `yoast-seo/editor` store, **not** `core/editor` post meta, and only Yoast's AI feature mounts a bridge copying `core/editor` meta across — which is why `editPost({ meta })` appeared to work only while Yoast AI was on. Separately, `_yoast_wpseo_*` meta is REST-exposed for the **`post`** post type only; for pages and CPTs it is registered with a sanitize callback and no REST, so `editPost` never round-trips and the value is dropped on save. Both layers share the same `post`-only design decision. The reporter also filed the detail upstream as `Yoast/wordpress-seo#23458`.
+
+**Dependencies.** Yoast SEO editor store and metabox save path; WordPress REST meta; upstream Yoast issue #23458.
+
+**Discussion highlights.** Five comments carry an unusually complete root-cause write-up (two-store architecture, the AI-only sync bridge, the post-type REST limitation) before any code was proposed. Note the contrast with sibling bug #869, which is still in Triage for want of a clean reproduction — #874 closed fast precisely because the reporter did the diagnosis.
+
+### #883 — Abilities Explorer: provider filter dropdown doesn't include custom providers
+**Status:** Done · **Milestone:** — · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-24 · **Comments:** 1 · *(board-Done / closed 2026-07-24)*
+**Link:** https://github.com/WordPress/ai/issues/883
+
+**Problem / goal.** The Abilities Explorer already recognized an ability's custom `meta['provider']` label in its Provider column and `?provider=` query handling, but the visible filter was hard-coded to Core/Plugin/Theme, so users could not select a custom provider. The overview statistics had a related defect: custom provider labels could make plugin abilities disappear from every origin card even though the Total stayed correct.
+
+**Resolution / retained context.** Closed by **PR #884** ("Abilities Explorer: support custom providers in the filter dropdown and statistics", azizulhasan), merged 2026-07-24. The design separates **provider label** from **origin**: `meta['provider']` remains the display/filter value while prefix-derived Core/Plugin/Theme origin drives the fixed three overview cards — so filter options grow with the ecosystem but the stat cards stay at three. Implemented with `get_unique_providers()`, `detect_origin()`, a normalized `origin` field, and integration tests. The issue lived its whole life unmilestoned and closed that way, six days after being filed.
+
+**Dependencies.** `Ability_Table::extra_tablenav()` and statistics; `Ability_Handler::detect_provider()` / `get_provider_label()`; the dynamic-category-filter pattern from #344/#355.
+
+**Discussion highlights.** azizulhasan expanded the initial filter-only proposal after finding that the same hard-coded provider buckets caused statistics drift — the scope grew because the root cause was shared. The author reported a live test with 112 abilities, 82 of them under a custom provider.
+
 ---
 
 ## Removed from Project #240 (reference)
@@ -1313,6 +1318,7 @@ The full `WordPress/php-ai-client` and `WordPress/mcp-adapter` repository census
 
 | Date | Change |
 |---|---|
+| 2026-07-27 | Live Project #240 refresh — the largest dossier reshuffle since the 1.2.0 transition. Open issues **57 → 52**: In discussion **22 → 20**, In progress **15 → 16**, Backlog **8 → 7**, To do **6 → 4**, Needs review **3 → 2**, Triage **3** (membership changed). **Moved 6 dossiers to Recently board-Done** (33 → **39** retained), all closed by merged PRs: **#191** (settings import/export, PR #734, 2026-07-24 — the credential-handling debate, not the code, was the six-week long pole), **#192** (prompt-template extension points, PR #770, 2026-07-20 — pulled Future Release → 1.3.0 *as* it closed), **#452** (taxonomy relevance, PR #633, 2026-07-21), **#507** (Editorial Updates → Visual Revisions, PR #861, 2026-07-24 — retains a dependency on a private WP 7.0 editor-store action), **#874** (Yoast meta-description interop, PR #886, 2026-07-20, milestoned — → 1.3.0 on close; the dossier keeps the full two-store/REST-subtype root cause and upstream `Yoast/wordpress-seo#23458`), and **#883** (Abilities Explorer custom providers + statistics, PR #884, 2026-07-24). **5 dossiers relocated into In progress** as authoritative closing PRs opened against them: **#233** (To do → In progress, PR #898), **#421** (To do → In progress; **relationship correction** — PR #459 is confirmed as its `closing` PR, not the conceptual sibling earlier docs described), **#844** (Backlog → In progress, PR #891 — opened *ahead of* its stated #683 blocker, flagged as a duplicate-indexing risk), **#875** and **#876** (both In discussion → In progress, PRs #887/#897; their product questions remain open, so the moves reflect code starting, not decisions closing). **Dossiered 1 board-new Triage issue:** **#890** (mobile right-sidebar component — no labels, milestone, assignee, comments, or target surface; needs triage before scoping). Board totals **283 → 274**; Done **209 → 207**; non-Done PR cards **17 → 15**. **10 already-Done cards de-carded** from Project #240 (#508/#793/#809/#815/#816/#818/#833/#839/#846 + spam #848) — all previously dossiered here and all retained, with a note added to the Recently board-Done heading explaining that retained ≠ still carded. `WordPress/ai` open issues 56 → 51 (+ #23 on `ai-provider-for-google`). |
 | 2026-07-20 | Live Project #240 recheck: dossier membership and board counts unchanged — **57 open issues** (In discussion 22, In progress 15, Backlog 8, To do 6, Triage 3, Needs review 3), Done 209, non-Done PR cards 17. No status, milestone, or membership moves since 2026-07-18. Bumped #876's Updated cell to 2026-07-20 (a non-status thread edit; still In discussion / 1.4.0, 0 comments); #883's implementing-PR note (#884) remains current. Cross-repo note: board PR #858 (`core/read-nav-menus`) moved merge DIRTY → BLOCKED, tracked in the planned-work file. |
 | 2026-07-18 | Same-day live Project #240 refresh. Open issues **56 → 57** and In progress **14 → 15** with new unmilestoned dossier **#883** (Abilities Explorer custom-provider filtering/statistics), authoritatively implemented by PR #884. Board totals **282 → 283**; Done stays 209; non-Done PR cards stay 17. Re-read #425 and recorded PR #885 only as `fallback-title` candidate evidence because it has no GitHub closing reference. |
 | 2026-07-18 | Rechecked Project #240: dossier membership and board counts are unchanged. Clarified that the new full `WordPress/php-ai-client` and `WordPress/mcp-adapter` tracking is PR/release census-only; their issue backlogs are not imported into this board-scoped dossier. |

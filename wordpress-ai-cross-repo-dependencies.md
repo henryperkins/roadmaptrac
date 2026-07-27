@@ -4,9 +4,9 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-07-20 |
+> | **Data snapshot** | 2026-07-27 |
 > | **Scope** | 16 tracked dependencies = 11 Gutenberg items + 5 abilities-api items; full repository census for `WordPress/php-ai-client` and `WordPress/mcp-adapter` |
-> | **State split** | 10 open · 3 closed · 3 merged *(unchanged vs the 2026-07-18 16:34 UTC baseline)* |
+> | **State split** | 10 open · 3 closed · 3 merged *(completely unchanged vs the 2026-07-20 06:15 UTC baseline — no membership, state, milestone, title, or activity drift)* |
 > | **Membership source** | `wp-ai-roadmap-dependencies.json` (versioned registry; `WP_AI_DEPS_FILE` overrides) |
 > | **Repository source** | `wp-ai-roadmap-repositories.json` (additional full-census repositories; `WP_AI_REPOS_FILE` overrides) |
 > | **Source commands** | `./wp-ai-roadmap-refresh.sh census --strict` · `./wp-ai-roadmap-refresh.sh dependencies --strict --json` |
@@ -28,8 +28,13 @@ The refresh script enumerates every open PR and the release stream for these rep
 
 | Repository | Open PRs | Latest shipped | Roadmap relevance |
 |---|---:|---|---|
-| [`WordPress/php-ai-client`](https://github.com/WordPress/php-ai-client) | **20** | **1.4.0** (2026-07-15) | Uniform provider-agnostic PHP client beneath WordPress AI features; changes to models, modalities, schemas, streaming, embeddings, and provider selection can alter the plugin's implementation path. |
-| [`WordPress/mcp-adapter`](https://github.com/WordPress/mcp-adapter) | **12** | **v0.5.0** (2026-04-15) | Abilities-to-MCP bridge; transport, exposure, approval, session, schema, and server-registration changes can alter external-agent integrations. |
+| [`WordPress/php-ai-client`](https://github.com/WordPress/php-ai-client) | **21** *(+1)* | **1.4.0** (2026-07-15) | Uniform provider-agnostic PHP client beneath WordPress AI features; changes to models, modalities, schemas, streaming, embeddings, and provider selection can alter the plugin's implementation path. |
+| [`WordPress/mcp-adapter`](https://github.com/WordPress/mcp-adapter) | **16** *(+4)* | **v0.5.0** (2026-04-15) | Abilities-to-MCP bridge; transport, exposure, approval, session, schema, and server-registration changes can alter external-agent integrations. |
+
+**Movement in this window (2026-07-20 → 2026-07-27).** Both upstream repositories gained PRs while neither cut a release:
+
+- **`php-ai-client` +1 → 21.** New: **#264** "Add model context window metadata and proactive token-limit check". Readiness change: **#254** "Distinguish unmet required options from unsupported capabilities in model selection errors". Its shipped **1.4.0 embeddings support** is the direct cause of `WordPress/ai` PR **#892**, which vendors that code into the plugin behind an `SDK_Overlay` rather than waiting for the core route (`wordpress-develop#12530`, slipped WP 7.1 → 7.2).
+- **`mcp-adapter` +4 → 16** — its largest single-window movement since entering this census, against a release stream last cut in **April**: **#251** (prevent concurrent MCP session overwrites), **#252** (websocket-driver 0.7.5), **#254** (inherit public ability exposure for MCP), **#256** (allow successful pre-tool-call completion). #254 is worth watching alongside the plugin-side ability-governance thread (`WordPress/ai#863`/#354), since both concern which abilities get exposed where.
 
 Project #240 coverage validation remains exclusive to the primary `WordPress/ai` repository. A PHP AI Client or MCP Adapter PR may be important upstream work without requiring a Project #240 PR card.
 
@@ -91,6 +96,7 @@ Use `--save` on the normal refresh to persist the dependency snapshot plus indep
 
 | Date | Change |
 |---|---|
+| 2026-07-27 | **Live recheck vs the 2026-07-20 06:15 UTC baseline. Watchlist completely static; repository radar moved.** No dependency membership, state, milestone, title, or activity change: 16 items hold at **10 open · 3 closed · 3 merged** (11 Gutenberg + 5 abilities-api), every `Updated` cell steady, and no required item UNKNOWN — the diff was empty on all six axes, and the deps snapshot was rolled forward only to keep baselines aligned with the board/census files. **The radar is where the movement is:** `WordPress/php-ai-client` **20 → 21** (new **#264**, model context-window metadata + proactive token-limit check; readiness change on **#254**, unmet-required-options vs unsupported-capability errors) and `WordPress/mcp-adapter` **12 → 16** (new **#251** concurrent-session overwrites, **#252** websocket-driver 0.7.5, **#254** inherit public ability exposure, **#256** pre-tool-call completion) — the adapter's biggest single-window jump since joining the census, with no release since v0.5.0 in April. **Cross-repo consequence worth flagging:** php-ai-client's shipped 1.4.0 embeddings support, combined with the WP 7.1 → 7.2 slip of `wordpress-develop#12530`, is why `WordPress/ai` PR **#892** now vendors that embedding code into the plugin behind an `SDK_Overlay` — an upstream release-timing decision reshaping the plugin's own architecture, which is exactly the class of signal this file exists to catch. Primary `WordPress/ai` movement (board 283 → 274, census 37 → 32 open PRs) is recorded in the roadmap and planned-work files, not counted as cross-repo drift. |
 | 2026-07-20 | **Live recheck vs the 2026-07-18 16:34 UTC baseline.** No dependency membership, state, milestone, title, or activity changes: the watchlist holds at **16** (10 open · 3 closed · 3 merged; 11 Gutenberg + 5 abilities-api), every `Updated` cell steady, and no required item UNKNOWN. Upstream repository radar also unchanged — `WordPress/php-ai-client` **20 / 1.4.0** and `WordPress/mcp-adapter` **12 / v0.5.0**. Primary `WordPress/ai` movement (board PR #858 merge DIRTY → BLOCKED) is recorded in the roadmap and planned-work files, not counted as cross-repo drift. |
 | 2026-07-18 | **Same-day live recheck vs the 2026-07-18 02:20 UTC baseline.** No dependency membership, state, milestone, title, or activity changes: the watchlist remains 16 (10 open · 3 closed · 3 merged; 11 Gutenberg + 5 abilities-api), with no required item UNKNOWN. The upstream repository radar is also unchanged at `WordPress/php-ai-client` **20 / 1.4.0** and `WordPress/mcp-adapter` **12 / v0.5.0**. Primary `WordPress/ai` movement is documented in the roadmap and planned-work files rather than counted as cross-repo drift. |
 | 2026-07-18 | **Added full PR/release census tracking for two foundational repositories.** `WordPress/php-ai-client` starts at **20 open PRs / release 1.4.0 (2026-07-15)**; `WordPress/mcp-adapter` starts at **12 / v0.5.0 (2026-04-15)**. Membership lives in `wp-ai-roadmap-repositories.json`; both receive validation, diffs, rendering, and independent snapshots. They remain census-only and do not affect Project #240 coverage or the 16-item dependency watchlist. |

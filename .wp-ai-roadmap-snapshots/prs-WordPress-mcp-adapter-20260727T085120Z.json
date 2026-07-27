@@ -1,0 +1,374 @@
+[
+  {
+    "id": "WordPress/mcp-adapter#171",
+    "repo": "WordPress/mcp-adapter",
+    "number": 171,
+    "title": "fix: pin tag_name so release zip attaches to the correct release",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/171",
+    "isDraft": false,
+    "author": "galatanovidiu",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-04-16T05:27:07Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#173",
+    "repo": "WordPress/mcp-adapter",
+    "number": 173,
+    "title": "Guard DefaultServerFactory against cross-dispatch from other vendored copies",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/173",
+    "isDraft": false,
+    "author": "arunshenoy99",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-03T17:51:45Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 172,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      172
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#184",
+    "repo": "WordPress/mcp-adapter",
+    "number": 184,
+    "title": "feat(admin): add Settings > MCP Adapter page to opt registered abilities into the default server (fixes #183)",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/184",
+    "isDraft": false,
+    "author": "webmyc",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-28T16:14:45Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 183,
+        "source": "fallback-title"
+      }
+    ],
+    "issues": [
+      183
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#196",
+    "repo": "WordPress/mcp-adapter",
+    "number": 196,
+    "title": "fix: handle non-UTF-8 bytes in tool results to prevent transport close",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/196",
+    "isDraft": false,
+    "author": "benjithaimmortal",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-18T12:32:13Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 195,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      195
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#201",
+    "repo": "WordPress/mcp-adapter",
+    "number": 201,
+    "title": "Add mcp_adapter_server_config filter and fix default ability hook timing",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/201",
+    "isDraft": false,
+    "author": "ibrahimhajjaj",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-16T11:28:22Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 117,
+        "source": "closing"
+      },
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 190,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      117,
+      190
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#217",
+    "repo": "WordPress/mcp-adapter",
+    "number": 217,
+    "title": "Add McpAdapter::on_init() helper for safe server registration",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/217",
+    "isDraft": false,
+    "author": "arunshenoy99",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-17T11:15:59Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#218",
+    "repo": "WordPress/mcp-adapter",
+    "number": 218,
+    "title": "fix: guard SchemaTransformer recursion and strip WP-only schema keys (#207)",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/218",
+    "isDraft": false,
+    "author": "i-anubhav-anand",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-23T16:47:14Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 207,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      207
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#222",
+    "repo": "WordPress/mcp-adapter",
+    "number": 222,
+    "title": "Move HttpTransport hook registration to boot()",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/222",
+    "isDraft": false,
+    "author": "mathetos",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-24T18:42:32Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 52,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      52
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#223",
+    "repo": "WordPress/mcp-adapter",
+    "number": 223,
+    "title": "docs: clarify Abilities API is core in 6.9+ (fixes #150)",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/223",
+    "isDraft": false,
+    "author": "mathetos",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-06-25T07:38:20Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 150,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      150
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#231",
+    "repo": "WordPress/mcp-adapter",
+    "number": 231,
+    "title": "feat: map open_world ability annotation to openWorldHint",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/231",
+    "isDraft": false,
+    "author": "jorgefilipecosta",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-07T05:47:47Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#238",
+    "repo": "WordPress/mcp-adapter",
+    "number": 238,
+    "title": "Fix static trait property access deprecation in RequestRouter",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/238",
+    "isDraft": false,
+    "author": "lhero-org",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-10T03:34:23Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 182,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      182
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#244",
+    "repo": "WordPress/mcp-adapter",
+    "number": 244,
+    "title": "Make the built-in discover/get-info/execute tools' MCP exposure check filterable (#243)",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/244",
+    "isDraft": false,
+    "author": "raftaar1191",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-14T23:54:59Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 243,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      243
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#251",
+    "repo": "WordPress/mcp-adapter",
+    "number": 251,
+    "title": "Prevent concurrent MCP session overwrites",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/251",
+    "isDraft": false,
+    "author": "galatanovidiu",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-24T12:12:38Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 239,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      239
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#252",
+    "repo": "WordPress/mcp-adapter",
+    "number": 252,
+    "title": "fix(deps-dev): update websocket-driver to 0.7.5",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/252",
+    "isDraft": false,
+    "author": "robertocyrino",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-22T20:44:36Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#254",
+    "repo": "WordPress/mcp-adapter",
+    "number": 254,
+    "title": "Inherit public ability exposure for MCP",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/254",
+    "isDraft": false,
+    "author": "gziolo",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "APPROVED",
+    "mergeStateStatus": "CLEAN",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-24T11:08:28Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#256",
+    "repo": "WordPress/mcp-adapter",
+    "number": 256,
+    "title": "Allow successful pre-tool-call completion",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/256",
+    "isDraft": true,
+    "author": "chubes4",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-25T00:22:05Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 176,
+        "source": "fallback-body"
+      },
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 255,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      176,
+      255
+    ]
+  }
+]

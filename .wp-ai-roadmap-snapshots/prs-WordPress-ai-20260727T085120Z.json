@@ -1,0 +1,690 @@
+[
+  {
+    "id": "WordPress/ai#211",
+    "repo": "WordPress/ai",
+    "number": 211,
+    "title": "Add Service Account experiment",
+    "url": "https://github.com/WordPress/ai/pull/211",
+    "isDraft": true,
+    "author": "Jameswlepage",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-02-05T19:33:30Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#224",
+    "repo": "WordPress/ai",
+    "number": 224,
+    "title": "Add WebMCP adapter experiment",
+    "url": "https://github.com/WordPress/ai/pull/224",
+    "isDraft": true,
+    "author": "Jameswlepage",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-11T01:41:23Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 448,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      448
+    ]
+  },
+  {
+    "id": "WordPress/ai#459",
+    "repo": "WordPress/ai",
+    "number": 459,
+    "title": "Add C2PA Monitor experiment",
+    "url": "https://github.com/WordPress/ai/pull/459",
+    "isDraft": false,
+    "author": "lnispel",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-16T20:22:21Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 421,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      421
+    ]
+  },
+  {
+    "id": "WordPress/ai#494",
+    "repo": "WordPress/ai",
+    "number": 494,
+    "title": "[Feature]: Issue 238 | Focus-aware crop suggestions",
+    "url": "https://github.com/WordPress/ai/pull/494",
+    "isDraft": false,
+    "author": "TylerB24890",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-05-07T19:56:54Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 238,
+        "source": "fallback-title"
+      }
+    ],
+    "issues": [
+      238
+    ]
+  },
+  {
+    "id": "WordPress/ai#621",
+    "repo": "WordPress/ai",
+    "number": 621,
+    "title": "Fix alt text upload URL matching",
+    "url": "https://github.com/WordPress/ai/pull/621",
+    "isDraft": false,
+    "author": "1d0u",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-13T18:08:58Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#681",
+    "repo": "WordPress/ai",
+    "number": 681,
+    "title": "Feat 514: add comment value score",
+    "url": "https://github.com/WordPress/ai/pull/681",
+    "isDraft": false,
+    "author": "priyanshuhaldar007",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-20T16:56:47Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 514,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      514
+    ]
+  },
+  {
+    "id": "WordPress/ai#683",
+    "repo": "WordPress/ai",
+    "number": 683,
+    "title": "Add native vector search",
+    "url": "https://github.com/WordPress/ai/pull/683",
+    "isDraft": true,
+    "author": "artpi",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-15T07:55:09Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#692",
+    "repo": "WordPress/ai",
+    "number": 692,
+    "title": "Feature: Cleanup plugin data on plugin uninstall",
+    "url": "https://github.com/WordPress/ai/pull/692",
+    "isDraft": false,
+    "author": "hbhalodia",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-21T18:57:04Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 690,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      690
+    ]
+  },
+  {
+    "id": "WordPress/ai#695",
+    "repo": "WordPress/ai",
+    "number": 695,
+    "title": "Add: AI-assisted payload generation to the Ability Explorer - Test Ability Screen",
+    "url": "https://github.com/WordPress/ai/pull/695",
+    "isDraft": false,
+    "author": "Arkenon",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-21T16:28:23Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#735",
+    "repo": "WordPress/ai",
+    "number": 735,
+    "title": "Logging: replace \"Purge All Logs\" with age-based delete control",
+    "url": "https://github.com/WordPress/ai/pull/735",
+    "isDraft": false,
+    "author": "i-anubhav-anand",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-06-18T14:51:14Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 689,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      689
+    ]
+  },
+  {
+    "id": "WordPress/ai#747",
+    "repo": "WordPress/ai",
+    "number": 747,
+    "title": "Feat[Experiment]: Add AI-Powered Content Translation",
+    "url": "https://github.com/WordPress/ai/pull/747",
+    "isDraft": false,
+    "author": "yogeshbhutkar",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-26T05:51:13Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 187,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      187
+    ]
+  },
+  {
+    "id": "WordPress/ai#749",
+    "repo": "WordPress/ai",
+    "number": 749,
+    "title": "Feat/add role user access controls",
+    "url": "https://github.com/WordPress/ai/pull/749",
+    "isDraft": false,
+    "author": "Infinite-Null",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-18T05:52:04Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 736,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      736
+    ]
+  },
+  {
+    "id": "WordPress/ai#757",
+    "repo": "WordPress/ai",
+    "number": 757,
+    "title": "fix(logging): capture generations that bypass the SDK HTTP transporter",
+    "url": "https://github.com/WordPress/ai/pull/757",
+    "isDraft": false,
+    "author": "i-anubhav-anand",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-15T18:52:43Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 732,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      732
+    ]
+  },
+  {
+    "id": "WordPress/ai#759",
+    "repo": "WordPress/ai",
+    "number": 759,
+    "title": "[issue #660] feat: Update generalised error message for all features",
+    "url": "https://github.com/WordPress/ai/pull/759",
+    "isDraft": false,
+    "author": "SohamPatel46",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-13T18:20:11Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 660,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      660
+    ]
+  },
+  {
+    "id": "WordPress/ai#760",
+    "repo": "WordPress/ai",
+    "number": 760,
+    "title": "PoC: Basic integration with Chrome DevTools for agents",
+    "url": "https://github.com/WordPress/ai/pull/760",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-30T09:28:42Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#764",
+    "repo": "WordPress/ai",
+    "number": 764,
+    "title": "Add a core/manage-settings ability",
+    "url": "https://github.com/WordPress/ai/pull/764",
+    "isDraft": false,
+    "author": "jorgefilipecosta",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-16T16:59:26Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#765",
+    "repo": "WordPress/ai",
+    "number": 765,
+    "title": "Add Repo Automator action",
+    "url": "https://github.com/WordPress/ai/pull/765",
+    "isDraft": false,
+    "author": "jeffpaul",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-08T19:39:29Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#777",
+    "repo": "WordPress/ai",
+    "number": 777,
+    "title": "dev: Update Composer deps and remediate PHPStan smells",
+    "url": "https://github.com/WordPress/ai/pull/777",
+    "isDraft": true,
+    "author": "justlevine",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-13T18:22:17Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#789",
+    "repo": "WordPress/ai",
+    "number": 789,
+    "title": "Update bundled wp deps (theme, ui, dataviews, admin-ui)",
+    "url": "https://github.com/WordPress/ai/pull/789",
+    "isDraft": false,
+    "author": "simison",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-15T20:13:33Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#798",
+    "repo": "WordPress/ai",
+    "number": 798,
+    "title": "Clarify global AI toggle as a master switch (#600)",
+    "url": "https://github.com/WordPress/ai/pull/798",
+    "isDraft": false,
+    "author": "dhrupo",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-15T20:13:57Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 600,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      600
+    ]
+  },
+  {
+    "id": "WordPress/ai#832",
+    "repo": "WordPress/ai",
+    "number": 832,
+    "title": "chore(deps): drop @wordpress dependencies to wp-7.0 versions",
+    "url": "https://github.com/WordPress/ai/pull/832",
+    "isDraft": true,
+    "author": "justlevine",
+    "isBot": false,
+    "routine": true,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-13T18:24:20Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#855",
+    "repo": "WordPress/ai",
+    "number": 855,
+    "title": "Markdown feeds experiment",
+    "url": "https://github.com/WordPress/ai/pull/855",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-14T21:24:30Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 845,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      845
+    ]
+  },
+  {
+    "id": "WordPress/ai#858",
+    "repo": "WordPress/ai",
+    "number": 858,
+    "title": "Abilities API: add core/read-nav-menus ability",
+    "url": "https://github.com/WordPress/ai/pull/858",
+    "isDraft": false,
+    "author": "Builder106",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-19T00:32:25Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#867",
+    "repo": "WordPress/ai",
+    "number": 867,
+    "title": "Fix: Bug Inconsistency: Standardize post meta key naming with the `wpai_` prefix",
+    "url": "https://github.com/WordPress/ai/pull/867",
+    "isDraft": false,
+    "author": "hbhalodia",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-21T09:42:30Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 866,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      866
+    ]
+  },
+  {
+    "id": "WordPress/ai#881",
+    "repo": "WordPress/ai",
+    "number": 881,
+    "title": "Feature: Nex Experiment Abilities Toggle",
+    "url": "https://github.com/WordPress/ai/pull/881",
+    "isDraft": true,
+    "author": "hbhalodia",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-17T10:32:00Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 863,
+        "source": "fallback-branch"
+      }
+    ],
+    "issues": [
+      863
+    ]
+  },
+  {
+    "id": "WordPress/ai#887",
+    "repo": "WordPress/ai",
+    "number": 887,
+    "title": "Experiment: Add Internal link suggestions",
+    "url": "https://github.com/WordPress/ai/pull/887",
+    "isDraft": false,
+    "author": "Infinite-Null",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-27T08:10:52Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 875,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      875
+    ]
+  },
+  {
+    "id": "WordPress/ai#888",
+    "repo": "WordPress/ai",
+    "number": 888,
+    "title": "New Text to Speech experiment",
+    "url": "https://github.com/WordPress/ai/pull/888",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-21T21:16:00Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#889",
+    "repo": "WordPress/ai",
+    "number": 889,
+    "title": "Fixed - Improved accessibility and keyboard usability for request logs provider/model details in the WordPress admin",
+    "url": "https://github.com/WordPress/ai/pull/889",
+    "isDraft": false,
+    "author": "murshed",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-22T15:52:37Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#891",
+    "repo": "WordPress/ai",
+    "number": 891,
+    "title": "Feat: Add semantic search experiment to AI plugin",
+    "url": "https://github.com/WordPress/ai/pull/891",
+    "isDraft": false,
+    "author": "priyanshuhaldar007",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-23T16:35:27Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 844,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      844
+    ]
+  },
+  {
+    "id": "WordPress/ai#892",
+    "repo": "WordPress/ai",
+    "number": 892,
+    "title": "Bring over embeddings support from the PHP AI Client",
+    "url": "https://github.com/WordPress/ai/pull/892",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-23T19:43:30Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/ai#897",
+    "repo": "WordPress/ai",
+    "number": 897,
+    "title": "Prototype : Implement slug generation feature with UI and tests",
+    "url": "https://github.com/WordPress/ai/pull/897",
+    "isDraft": false,
+    "author": "milindmore22",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-27T05:34:15Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 876,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      876
+    ]
+  },
+  {
+    "id": "WordPress/ai#898",
+    "repo": "WordPress/ai",
+    "number": 898,
+    "title": "Refactor experiments to leverage ai service layer",
+    "url": "https://github.com/WordPress/ai/pull/898",
+    "isDraft": false,
+    "author": "theaminulai",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-26T02:45:03Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/ai",
+        "number": 233,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      233
+    ]
+  }
+]
