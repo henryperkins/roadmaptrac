@@ -42,6 +42,7 @@ tests/wp-ai-roadmap-refresh-prs.sh
 tests/wp-ai-roadmap-refresh-gap.sh
 tests/wp-ai-roadmap-refresh-strict.sh
 tests/wp-ai-roadmap-refresh-repositories.sh
+tests/wp-ai-roadmap-refresh-crlf.sh           # shims jq to emit CRLF; reproduces the Windows bug on any platform
 tests/wp-ai-roadmap-refresh-dependencies.sh   # live smoke — needs gh auth + network
 ```
 
@@ -81,7 +82,7 @@ tests/wp-ai-roadmap-refresh-dependencies.sh   # live smoke — needs gh auth + n
 
 ## Windows / Git Bash gotchas
 
-- **Native `jq.exe` emits CRLF.** `jq -r` output ends `\r\n`, so `while IFS= read -r x; do ... done < <(jq -r ...)` leaves a trailing `\r` on `$x` (`read` strips `\n`, not `\r`). This currently breaks the multi-repo census on Windows: `fetch_pr_census()` derives `owner`/`name` from the CR-tainted repo string, so `gh api graphql -F name=ai$'\r'` and `gh release list --repo WordPress/ai$'\r'` are wrong, and the `--save` loop copies `prs-WordPress-ai$'\r'-current.json`. Symptom: `tests/wp-ai-roadmap-refresh-{prs,strict,repositories}.sh` fail here while passing on Linux, with paths like `WordPress-ai'$'\r''.jsonl`. Strip CRs from jq output before use (`x="${x%$'\r'}"`) when touching these loops.
+- **Native `jq.exe` emits CRLF — feed `read` loops from `jq_lines`, never bare `jq`.** jq's Windows stdout is text-mode, so `while IFS= read -r x; do ... done < <(jq -r ...)` leaves a trailing `\r` on `$x` (`read` strips `\n`, not `\r`). That broke the multi-repo census: `fetch_pr_census()` derives `owner`/`name` from the repo string, so it asked GitHub for `-F name=ai$'\r'`, and `--save` copied `prs-WordPress-ai$'\r'-current.json`. `jq_lines()` (a `jq … | tr -d '\r'` wrapper) is the fix; all four read loops use it. Note the asymmetry that made this look intermittent: single-line `$(jq …)` strips the CR for you, multi-line `$(jq …)` keeps the *internal* CRs, and a here-string of a capture keeps a CR on every line except the last. CRs inside JSON are harmless (legal whitespace, and jq escapes real ones as `\r`) — only raw values used as filenames or argv break. Regression-tested cross-platform by `tests/wp-ai-roadmap-refresh-crlf.sh`, which shims jq to emit CRLF.
 - Native `jq.exe` cannot open process-substitution paths (`/proc/<pid>/fd/...`), so `<(...)` into `--slurpfile` fails — pass JSON via stdin or real temp files.
 - Never pass large JSON on argv (`--argjson`): Git Bash has a ~32 KB arg-length limit. The script already pipes large GitHub payloads via stdin (`printf ... | jq`) for this reason; preserve that pattern when editing.
 - `core.autocrlf=true` is set system-wide by the Git for Windows installer. `.gitattributes` pins `eol=lf` so checkouts stay LF and match the Linux clones; don't remove it.

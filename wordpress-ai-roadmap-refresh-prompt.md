@@ -32,6 +32,6 @@ Before finishing, verify with fresh live data:
 - per-repository open PR totals and latest releases for WordPress/ai, WordPress/php-ai-client, and WordPress/mcp-adapter
 - dependency watchlist total and state split (16 registry items; required items must not be UNKNOWN)
 - bash -n wp-ai-roadmap-refresh.sh
-- deterministic tests: tests/wp-ai-roadmap-refresh-dependencies-fixtures.sh, -prs.sh, -gap.sh, -strict.sh, and -repositories.sh (offline; mock gh)
+- deterministic tests: tests/wp-ai-roadmap-refresh-dependencies-fixtures.sh, -prs.sh, -gap.sh, -strict.sh, -repositories.sh, and -crlf.sh (offline; mock gh)
 - live smoke test: tests/wp-ai-roadmap-refresh-dependencies.sh (uses dependencies --strict --json)
 ```

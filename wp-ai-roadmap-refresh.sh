@@ -75,6 +75,19 @@ DO_DEPS=1              # cross-repo dependency watchlist runs by default; --no-d
 die() { printf 'error: %s\n' "$*" >&2; exit 1; }
 need() { command -v "$1" >/dev/null 2>&1 || die "'$1' not found in PATH"; }
 
+# Read jq output line-by-line through this, never plain `jq`. The native
+# Windows jq.exe opens stdout in text mode, so every LF it writes becomes CRLF;
+# `while IFS= read -r x` then strips the \n and keeps the \r, silently leaving a
+# control character on the end of every value. That tainted repository slugs
+# used as gh arguments and snapshot filenames (`-F name=ai$'\r'`,
+# `prs-WordPress-ai$'\r'-current.json`), so census/--save/--strict failed on
+# Windows while passing on Linux. Deleting CRs is safe for these callers: they
+# read raw slugs and compact JSON, and jq escapes any real CR inside a string as
+# \r rather than emitting a bare one. No-op where jq already writes LF.
+# `jq -b` also fixes this at the source, but is not relied on here because the
+# flag's availability varies by jq build. See tests/wp-ai-roadmap-refresh-crlf.sh.
+jq_lines() { jq "$@" | tr -d '\r'; }
+
 usage() { awk 'NR==1{next} /^#/{sub(/^# ?/,"");print;next} {exit}' "$0"; exit 0; }
 
 # GraphQL query: paginated full board (same shape as the doc's §10 recipe).
@@ -918,7 +931,7 @@ fetch_repository_censuses() { # -> {repositories,validation}
 
   while IFS= read -r repo; do
     fetch_repository_census_entry "$repo" >>"$entries_file"
-  done < <(jq -r '.repositories[]' <<<"$registry")
+  done < <(jq_lines -r '.repositories[]' <<<"$registry")
 
   jq -n --slurpfile registry "$registry_file" --slurpfile entries "$entries_file" '
     ($registry[0].validation // {ok:true,errors:[],warnings:[]}) as $rv
@@ -978,7 +991,7 @@ build_repository_reports() { # census_file temp_dir -> enriched repository array
           | select((.isDraft|not) and (.isPrerelease|not))
         ] | sort_by(.publishedAt // "") | last)
       }' <<<"$entry" >>"$reports_file"
-  done < <(jq -c '.repositories[]' "$census_file")
+  done < <(jq_lines -c '.repositories[]' "$census_file")
 
   jq -s '.' "$reports_file"
 }
@@ -1136,7 +1149,7 @@ fetch_dependencies() { # -> {items,validation}; every registry entry emits a rec
           note: $it.note,
           required: $it.required
         }' >> "$items_file"
-  done < <(jq -c '.items[]' <<<"$registry")
+  done < <(jq_lines -c '.items[]' <<<"$registry")
 
   local merge_status=0
   jq -s --slurpfile registry "$reg_file" "$DEPS_VALIDATE_JQ" "$items_file" || merge_status=$?
@@ -1453,7 +1466,7 @@ if [ "$SAVE" = 1 ] || [ "$FIRST_RUN" = 1 ]; then
       cp "$TMP_REPO_DIR/prs-$tracked_slug-current.json" "$SNAP_DIR/prs-$tracked_slug-$TS.json"
       cp "$TMP_REPO_DIR/releases-$tracked_slug-current.json" "$SNAP_DIR/releases-$tracked_slug-$TS.json"
       echo "$SNAP_VERB (repo): prs-$tracked_slug-$TS.json, releases-$tracked_slug-$TS.json." >&2
-    done < <(jq -r '.[] | select(.available) | .repo' "$REPOSITORIES_JSON")
+    done < <(jq_lines -r '.[] | select(.available) | .repo' "$REPOSITORIES_JSON")
   fi
   if [ "$DO_DEPS" = 1 ]; then
     # Registry removal is the only thing that may remove a dependency from
