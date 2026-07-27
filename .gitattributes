@@ -1,0 +1,22 @@
+# Pin LF in the working tree, not just in the object store.
+#
+# Git for Windows ships core.autocrlf=true at the system level, so every
+# checkout here was being rewritten to CRLF even though all blobs are stored
+# LF-only. Git Bash's patched bash tolerates CRLF while parsing a script, so
+# this was mostly benign -- but CRs survive inside heredocs and in any data
+# bash reads into a variable, which is a live hazard for the .sh engine and the
+# .jsonl fixtures the offline suite feeds through `read`.
+#
+# eol=lf overrides core.autocrlf per-repo, so the worktree is identical here and
+# on the Linux clones that also refresh these docs.
+#
+# NOTE: this is not the cause of the -prs/-strict/-repositories test failures on
+# Windows. Those come from native jq.exe emitting CRLF, so `while IFS= read -r`
+# over jq output keeps a trailing \r. See the Windows gotchas in CLAUDE.md.
+* text=auto eol=lf
+
+# Explicit for the types that break outright when they carry CRs.
+*.sh    text eol=lf
+*.json  text eol=lf
+*.jsonl text eol=lf
+*.md    text eol=lf
