@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "repositories": [
     "WordPress/php-ai-client",
-    "WordPress/mcp-adapter"
+    "WordPress/mcp-adapter",
+    "WordPress/abilities-api"
   ]
 }

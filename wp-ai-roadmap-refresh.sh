@@ -31,6 +31,7 @@
 #   ./wp-ai-roadmap-refresh.sh gap B.json P.json       # board<->repo PR gap from board + prs snapshots (offline)
 #   ./wp-ai-roadmap-refresh.sh prdiff A.json B.json    # diff two prs snapshots (offline)
 #   ./wp-ai-roadmap-refresh.sh reldiff A.json B.json   # diff two releases snapshots (offline)
+#   ./wp-ai-roadmap-refresh.sh issuediff A.json B.json # diff two issues snapshots (offline)
 #   ./wp-ai-roadmap-refresh.sh -h
 #
 # REQUIREMENTS
@@ -328,6 +329,153 @@ PR_CENSUS_JQ='
       validation: {ok:(($errors|length)==0), errors:$errors, warnings:$warnings}
     }'
 
+# ------------------ issue census: jq programs (open issues) ------------------
+# Peer of the PR census. Open issues only: a closed issue leaves the census as a
+# disappearance, exactly as a merged PR does, so `no_longer_open` covers both.
+ISSUE_GQL_QUERY='query($owner: String!, $name: String!, $endCursor: String) {
+  repository(owner: $owner, name: $name) {
+    issues(first: 100, after: $endCursor, states: OPEN) {
+      totalCount
+      pageInfo { hasNextPage endCursor }
+      nodes {
+        number title url state createdAt updatedAt
+        milestone { title }
+        labels(first: 20) { totalCount nodes { name } }
+        assignees(first: 10) { totalCount nodes { login } }
+        author { __typename login }
+        comments { totalCount }
+      }
+    }
+  }
+}'
+
+# Normalize slurped issue GraphQL pages -> {items,validation}. Records mirror the
+# normalized board shape, so the two join on repo#number without translation.
+ISSUE_CENSUS_JQ='
+  def normalize_issue($repo):
+    {
+      id: ($repo + "#" + (.number|tostring)),
+      repo: $repo,
+      number: .number,
+      title: .title,
+      url: .url,
+      state: .state,
+      milestone: (.milestone.title // null),
+      labels: [ .labels.nodes[]?.name ],
+      assignees: [ .assignees.nodes[]?.login ],
+      author: (.author.login // "?"),
+      isBot: (.author.__typename == "Bot"),
+      comments: (.comments.totalCount // 0),
+      createdAt: .createdAt,
+      updatedAt: .updatedAt
+    };
+
+  . as $pages
+  | [ $pages[] | .data.repository.issues.nodes[]? ] as $nodes
+  | ([ $pages[] | .data.repository.issues.totalCount ] | unique) as $totals
+  | ($nodes | map(.number)) as $numbers
+  | ([
+      (($numbers | group_by(.) | map(select(length > 1) | .[0]))[]
+        | {code:"issue-duplicate",
+           message:"Duplicate issue number across pages",
+           context:{number:.}}),
+      (if ($pages | last | .data.repository.issues.pageInfo.hasNextPage) == true
+        then {code:"issue-pagination-incomplete",
+              message:"Issue pagination did not reach the final page",
+              context:{pages:($pages|length)}}
+        else empty end),
+      (if (($totals|length) != 1) or ($totals[0] != ($numbers|unique|length))
+        then {code:"issue-total-mismatch",
+              message:"Reported issue total does not equal unique normalized nodes",
+              context:{totals:$totals, nodes:($numbers|unique|length)}}
+        else empty end)
+    ] | sort_by(.code, (.context|tostring))) as $errors
+  # Bounded label/assignee connections. Unlike closingIssuesReferences, nothing
+  # here depends on completeness, so truncation is a warning, not an error.
+  | ([ $nodes[]
+       | . as $n
+       | ( if ((.labels.totalCount // 0) > ((.labels.nodes // [])|length))
+             then {code:"issue-connection-truncated",
+                   message:"Issue label connection truncated",
+                   context:{number:$n.number, connection:"labels",
+                            totalCount:$n.labels.totalCount,
+                            returned:((.labels.nodes // [])|length)}}
+             else empty end ),
+         ( if ((.assignees.totalCount // 0) > ((.assignees.nodes // [])|length))
+             then {code:"issue-connection-truncated",
+                   message:"Issue assignee connection truncated",
+                   context:{number:$n.number, connection:"assignees",
+                            totalCount:$n.assignees.totalCount,
+                            returned:((.assignees.nodes // [])|length)}}
+             else empty end )
+     ] | sort_by(.code, (.context|tostring))) as $warnings
+  | {
+      items: ([ $nodes[] | normalize_issue($repo) ] | sort_by(.number)),
+      validation: {ok:(($errors|length)==0), errors:$errors, warnings:$warnings}
+    }'
+
+# diff two normalized issue arrays -> opened / no-longer-open / changed.
+# labels and assignees compare as SETS so reordering is silent, while from/to
+# report the original arrays. Each field is compared only when both records
+# carry it, so older snapshots produce no schema-migration noise, and an
+# updatedAt bump alone is never a change.
+ISSUEDIFF_JQ='
+  def change($b; $c; $key):
+    if ($b|has($key)) and ($c|has($key)) and ($b[$key] != $c[$key])
+    then {($key):{from:$b[$key],to:$c[$key]}}
+    else {}
+    end;
+  def set_change($b; $c; $key):
+    if ($b|has($key)) and ($c|has($key))
+       and ((($b[$key] // []) | sort) != (($c[$key] // []) | sort))
+    then {($key):{from:$b[$key],to:$c[$key]}}
+    else {}
+    end;
+  ($base[0]) as $B | ($cur[0]) as $C
+  | ([ $B[].number ]) as $bn | ([ $C[].number ]) as $cn
+  | (reduce $B[] as $x ({}; .[$x.number|tostring] = $x)) as $bidx
+  | { newly_opened:   [ $C[] | select(.number as $n | ($bn|index($n))==null)
+                        | {number,title,milestone} ],
+      no_longer_open: [ $B[] | select(.number as $n | ($cn|index($n))==null)
+                        | {number,title} ],
+      changed: ([
+        $C[]
+        | . as $c
+        | ($bidx[$c.number|tostring] // null) as $b
+        | select($b != null)
+        | (change($b; $c; "title")
+           * change($b; $c; "milestone")
+           * set_change($b; $c; "labels")
+           * set_change($b; $c; "assignees")) as $changes
+        | select(($changes|length) > 0)
+        | {number:$c.number, title:$c.title, changes:$changes}
+      ] | sort_by(.number)) }'
+
+# board snapshot ($board[0]) + normalized issues ($issues[0]) -> coverage.
+# PRIMARY REPOSITORY ONLY. Enforced at the call site, not here, so an upstream
+# repository can never reach this rule: php-ai-client / mcp-adapter /
+# abilities-api issues are not roadmap cards and must not be reported as
+# missing ones.
+ISSUE_GAP_JQ='
+  def key($repo; $number): $repo + "#" + ($number|tostring);
+  ($board[0]) as $B
+  | ($issues[0]) as $I
+  | (reduce ($B[] | select(.type=="Issue")) as $item
+      ({}; .[key($item.repo;$item.number)]=true)) as $cards
+  | ([ $I[] | select($cards[key(.repo;.number)] == null) ]) as $uncarded
+  | ([ $uncarded[]
+       | {code:"issue-roadmap-coverage-missing",
+          message:"Open issue has no roadmap board card",
+          context:{id:.id, number:.number}} ]
+     | sort_by(.code, (.context|tostring))) as $errors
+  | {
+      repo: $repo,
+      open_total: ($I|length),
+      carded: (($I|length) - ($uncarded|length)),
+      uncarded: ($uncarded | map({id,number,title,url,milestone,updatedAt})),
+      validation: {ok:(($errors|length)==0), errors:$errors, warnings:[]}
+    }'
+
 # Normalize `gh release list --json ...` -> compact records (oldest..newest).
 REL_NORMALIZE_JQ='
   map({ tag: .tagName, name: .name, isDraft: .isDraft, isPrerelease: .isPrerelease, publishedAt: .publishedAt })
@@ -554,6 +702,23 @@ RENDER_REPO_JQ='
         then "_(no PR census changes since baseline)_" else empty end )
     ) end ),
   "",
+  # Issue-side peer of the PR coverage audit. Primary repository only: an
+  # uncarded open issue here is a strict-audit failure, exactly as an uncarded
+  # substantive PR is.
+  ( if .issue_gap == null then empty
+    else (
+      "## 🗂️ Board issue coverage (repo: \(.issue_gap.repo))",
+      "\(.issue_gap.carded) of \(.issue_gap.open_total) open issues have a Project #240 card.",
+      ( if (.issue_gap.uncarded|length)>0
+        then "",
+             "**Uncarded open issues (\(.issue_gap.uncarded|length)):**",
+             fmt(.issue_gap.uncarded;
+               "- #\(.number) \(.title)"
+               + (if .milestone then "  _[\(.milestone)]_" else "" end)
+               + "  \(.url // "")")
+        else "_Every open issue is represented on the board._" end ),
+      ""
+    ) end ),
   "## 🚧 Already underway (\((($counts["direct-board-pr"] // 0) + ($counts["linked-board-issue"] // 0))) of \(.gap.open_total) open PRs board-tracked)",
   ( if (($classes["direct-board-pr"] // [])|length)>0 then
       "\n### Direct board PR cards (\($counts["direct-board-pr"] // 0))\n"
@@ -618,14 +783,45 @@ RENDER_REPOSITORIES_JQ='
     elif (.release_diff.new_releases|length)==0 then "none"
     else ([.release_diff.new_releases[].tag] | join(", "))
     end;
+  def issue_count:
+    if (.issues_available | not) then "—" else (.open_issues|length|tostring) end;
+  def issue_changes:
+    if (.available | not) then "unavailable"
+    elif (.issues_available | not) then "unavailable"
+    elif .issue_diff == null then "baseline missing"
+    else
+      "+\(.issue_diff.newly_opened|length) opened · "
+      + "-\(.issue_diff.no_longer_open|length) no longer open · "
+      + "\((.issue_diff.changed // [])|length) changed"
+    end;
+  def issue_movement:
+    [ .[]
+      | select(.issue_diff != null)
+      | select(((.issue_diff.newly_opened|length)
+                + (.issue_diff.no_longer_open|length)
+                + ((.issue_diff.changed // [])|length)) > 0)
+      | "",
+        "### \(.repo)",
+        ( .issue_diff.newly_opened[]?
+          | "- opened  #\(.number) \(.title)\(if .milestone then "  _[\(.milestone)]_" else "" end)" ),
+        ( .issue_diff.no_longer_open[]?
+          | "- closed  #\(.number) \(.title)" ),
+        ( (.issue_diff.changed // [])[]?
+          | "- changed #\(.number) \(.title) — "
+            + ([.changes | to_entries[] | .key] | join(", ")) )
+    ];
   "",
-  "## Tracked repository PR/release census",
+  "## Tracked repository PR/issue/release census",
   "",
   "Project #240 coverage validation applies only to the primary `\($primary)` repository.",
   "",
-  "| Repository | Open PRs | Latest release | PR changes | New releases |",
-  "|---|---:|---|---|---|",
-  (.[] | "| `\(.repo)` | \(.open_prs|length) | \(latest) | \(changes) | \(release_changes) |")'
+  "| Repository | Open PRs | Open issues | Latest release | PR changes | Issue changes | New releases |",
+  "|---|---:|---:|---|---|---|---|",
+  (.[] | "| `\(.repo)` | \(.open_prs|length) | \(issue_count) | \(latest) | \(changes) | \(issue_changes) | \(release_changes) |"),
+  (issue_movement as $m
+    | if ($m|length)>0
+      then "", "## Issue movement (tracked repositories)", $m[]
+      else empty end)'
 
 # Cross-repo dependency watchlist for roadmap-critical Gutenberg and
 # abilities-api items, declared in $DEPS_FILE (wp-ai-roadmap-dependencies.json).
@@ -924,6 +1120,23 @@ fetch_pr_census() { # repository -> {items,validation} for open PRs
   printf '%s' "$raw" | jq -s --arg repo "$repo" "$PR_CENSUS_JQ"
 }
 
+issue_census_query() { # repository owner name -> raw paginated GraphQL pages
+  local repo="$1" owner="$2" name="$3" raw err
+  err="$(mktemp)"
+  raw="$(gh api graphql --paginate -f query="$ISSUE_GQL_QUERY" -F owner="$owner" -F name="$name" 2>"$err")" || {
+    printf 'error: issue census query failed for %s:\n' "$repo" >&2; cat "$err" >&2; rm -f "$err"; return 1; }
+  rm -f "$err"
+  [ -n "$raw" ] || { printf 'error: issue census returned no data for %s\n' "$repo" >&2; return 1; }
+  printf '%s' "$raw"
+}
+
+fetch_issue_census() { # repository -> {items,validation} for open issues
+  local repo="${1:-$REPO}" owner name raw
+  owner="${repo%%/*}"; name="${repo#*/}"
+  raw="$(issue_census_query "$repo" "$owner" "$name")" || return 1
+  printf '%s' "$raw" | jq -s --arg repo "$repo" "$ISSUE_CENSUS_JQ"
+}
+
 fetch_releases() { # repository -> normalized release array
   local repo="${1:-$REPO}"
   gh release list --repo "$repo" \
@@ -932,25 +1145,55 @@ fetch_releases() { # repository -> normalized release array
 }
 
 fetch_repository_census_entry() { # repository -> fail-soft census entry
-  local repo="$1" prs releases
-  prs="$(mktemp)"; releases="$(mktemp)"
+  local repo="$1" prs releases issues issues_ok
+  prs="$(mktemp)"; releases="$(mktemp)"; issues="$(mktemp)"
   if fetch_pr_census "$repo" >"$prs" && fetch_releases "$repo" >"$releases"; then
-    jq -n --arg repo "$repo" --slurpfile p "$prs" --slurpfile r "$releases" '
-      ($p[0].validation // {ok:true,errors:[],warnings:[]}) as $validation
+    # Issues are fetched independently on purpose: folding them into the
+    # all-or-nothing PR/release contract would let one issue-fetch hiccup blank
+    # PR data that arrived fine. A failure here degrades the issue half only.
+    issues_ok=1
+    fetch_issue_census "$repo" >"$issues" || issues_ok=0
+    if [ "$issues_ok" = 0 ]; then
+      jq -n '{items:[],validation:{ok:true,errors:[],warnings:[]}}' >"$issues"
+    fi
+    jq -n --arg repo "$repo" --argjson issues_ok "$issues_ok" \
+          --slurpfile p "$prs" --slurpfile r "$releases" --slurpfile i "$issues" '
+      ($p[0].validation // {ok:true,errors:[],warnings:[]}) as $pv
+      | ($i[0].validation // {ok:true,errors:[],warnings:[]}) as $iv
+      | (if $issues_ok == 1 then [] else [{
+          code:"issue-census-unavailable",
+          message:"Repository issue census is unavailable",
+          context:{repo:$repo}
+        }] end) as $ierr
+      | (($pv.errors + $iv.errors)
+          | map(.context=((.context // {}) + {repo:$repo}))) as $errors
+      | (($pv.warnings + $iv.warnings)
+          | map(.context=((.context // {}) + {repo:$repo}))) as $warnings
+      | (($errors + $ierr)
+          | unique_by([.code,(.context|tostring)])
+          | sort_by(.code,(.context|tostring))) as $allerrors
       | {
           repo:$repo,
           available:true,
+          issues_available:($issues_ok == 1),
           open_prs:$p[0].items,
+          open_issues:$i[0].items,
           releases:$r[0],
-          validation:($validation
-            | .errors |= map(.context=((.context // {}) + {repo:$repo}))
-            | .warnings |= map(.context=((.context // {}) + {repo:$repo})))
+          validation:{
+            ok:(($allerrors|length)==0),
+            errors:$allerrors,
+            warnings:($warnings | sort_by(.code,(.context|tostring)))
+          }
         }'
   else
+    # The repository-census-unavailable error already says everything is
+    # missing; adding issue-census-unavailable here would double-report it.
     jq -n --arg repo "$repo" '{
       repo:$repo,
       available:false,
+      issues_available:false,
       open_prs:[],
+      open_issues:[],
       releases:[],
       validation:{
         ok:false,
@@ -963,7 +1206,7 @@ fetch_repository_census_entry() { # repository -> fail-soft census entry
       }
     }'
   fi
-  rm -f "$prs" "$releases"
+  rm -f "$prs" "$releases" "$issues"
 }
 
 fetch_repository_censuses() { # -> {repositories,validation}
@@ -993,8 +1236,10 @@ fetch_repository_censuses() { # -> {repositories,validation}
 
 build_repository_reports() { # census_file temp_dir -> enriched repository array
   local census_file="$1" temp_dir="$2"
-  local reports_file repo slug entry prs_file releases_file
-  local prs_base releases_base prdiff_file reldiff_file prdiff_json reldiff_json
+  local reports_file repo slug entry prs_file releases_file issues_file
+  local prs_base releases_base issues_base
+  local prdiff_file reldiff_file issuediff_file
+  local prdiff_json reldiff_json issuediff_json
   reports_file="$temp_dir/repository-reports.jsonl"
   : >"$reports_file"
 
@@ -1003,10 +1248,13 @@ build_repository_reports() { # census_file temp_dir -> enriched repository array
     slug="${repo//\//-}"
     prs_file="$temp_dir/prs-$slug-current.json"
     releases_file="$temp_dir/releases-$slug-current.json"
+    issues_file="$temp_dir/issues-$slug-current.json"
     prdiff_file="$temp_dir/prdiff-$slug.json"
     reldiff_file="$temp_dir/reldiff-$slug.json"
+    issuediff_file="$temp_dir/issuediff-$slug.json"
     prdiff_json=null
     reldiff_json=null
+    issuediff_json=null
 
     if jq -e '.available' >/dev/null <<<"$entry"; then
       jq '.open_prs' <<<"$entry" >"$prs_file"
@@ -1021,14 +1269,26 @@ build_repository_reports() { # census_file temp_dir -> enriched repository array
         diff_releases "$releases_base" "$releases_file" >"$reldiff_file"
         reldiff_json="$(<"$reldiff_file")"
       fi
+      # Only write the issue snapshot candidate when the census succeeded:
+      # persisting [] over a good baseline would report every issue closed.
+      if jq -e '.issues_available' >/dev/null <<<"$entry"; then
+        jq '.open_issues' <<<"$entry" >"$issues_file"
+        issues_base="$(latest_snap "issues-$slug")"
+        if [ -n "$issues_base" ]; then
+          diff_issues "$issues_base" "$issues_file" >"$issuediff_file"
+          issuediff_json="$(<"$issuediff_file")"
+        fi
+      fi
     fi
 
     jq -c \
       --argjson prdiff "$prdiff_json" \
-      --argjson reldiff "$reldiff_json" '
+      --argjson reldiff "$reldiff_json" \
+      --argjson issuediff "$issuediff_json" '
       . + {
         pr_diff:$prdiff,
         release_diff:$reldiff,
+        issue_diff:$issuediff,
         latest_shipped:([
           .releases[]
           | select((.isDraft|not) and (.isPrerelease|not))
@@ -1043,30 +1303,45 @@ board_pr_gap() { # board_file prs_file -> gap JSON
   jq -n --arg repo "$REPO" --slurpfile board "$1" --slurpfile prs "$2" "$GAP_JQ"
 }
 
+# PRIMARY REPOSITORY ONLY. Never call this for a registry repository: upstream
+# issues are not Project #240 cards and must never be reported as missing ones.
+board_issue_gap() { # board_file issues_file -> issue gap JSON
+  jq -n --arg repo "$REPO" --slurpfile board "$1" --slurpfile issues "$2" "$ISSUE_GAP_JQ"
+}
+
 diff_prs()      { jq -n --slurpfile base "$1" --slurpfile cur "$2" "$PRDIFF_JQ"; }
 diff_releases() { jq -n --slurpfile base "$1" --slurpfile cur "$2" "$RELDIFF_JQ"; }
+diff_issues()   { jq -n --slurpfile base "$1" --slurpfile cur "$2" "$ISSUEDIFF_JQ"; }
 
-build_repo_json() { # gap_file prdiff_file(or "") reldiff_file(or "") relcur_file census_file -> combined repo JSON
-  # repo.validation is the deterministic union of the PR census validation and
-  # the board<->PR coverage validation.
+build_repo_json() { # gap_file prdiff_file(or "") reldiff_file(or "") relcur_file census_file issuegap_file(or "") issuediff_file(or "") -> combined repo JSON
+  # repo.validation is the deterministic union of the PR census validation, the
+  # board<->PR coverage validation, and the board<->issue coverage validation.
+  local issuegap_json issuediff_json
+  issuegap_json="$([ -n "${6:-}" ] && cat "$6" || echo null)"
+  issuediff_json="$([ -n "${7:-}" ] && cat "$7" || echo null)"
   jq -n \
      --slurpfile gap "$1" \
      --slurpfile relcur "$4" \
      --slurpfile census "$5" \
      --argjson prd "$([ -n "$2" ] && cat "$2" || echo null)" \
      --argjson rld "$([ -n "$3" ] && cat "$3" || echo null)" \
+     --argjson igap "$issuegap_json" \
+     --argjson idiff "$issuediff_json" \
      '
       def norm($v): ($v // {ok:true, errors:[], warnings:[]});
       (norm($census[0].validation)) as $cv
       | (norm($gap[0].validation)) as $gv
-      | ([$cv.errors[], $gv.errors[]]
+      | (norm($igap.validation)) as $iv
+      | ([$cv.errors[], $gv.errors[], $iv.errors[]]
           | unique_by([.code,(.context|tostring)])
           | sort_by(.code,(.context|tostring))) as $errors
-      | ([$cv.warnings[], $gv.warnings[]]
+      | ([$cv.warnings[], $gv.warnings[], $iv.warnings[]]
           | unique_by([.code,(.context|tostring)])
           | sort_by(.code,(.context|tostring))) as $warnings
       | { gap: $gap[0],
+          issue_gap: $igap,
           pr_diff: $prd,
+          issue_diff: $idiff,
           rel: { latest_shipped: ([ $relcur[0][] | select((.isDraft|not) and (.isPrerelease|not)) ] | sort_by(.publishedAt // "") | last),
                  new_releases: ($rld.new_releases // []) },
           validation: {ok:(($errors|length)==0), errors:$errors, warnings:$warnings} }'
@@ -1307,6 +1582,10 @@ case "${1:-}" in
     [ $# -eq 3 ] || die "usage: $0 reldiff <base-rel.json> <cur-rel.json>"
     [ -f "$2" ] || die "no such file: $2"; [ -f "$3" ] || die "no such file: $3"
     diff_releases "$2" "$3"; exit 0 ;;
+  issuediff) need jq
+    [ $# -eq 3 ] || die "usage: $0 issuediff <base-issues.json> <cur-issues.json>"
+    [ -f "$2" ] || die "no such file: $2"; [ -f "$3" ] || die "no such file: $3"
+    diff_issues "$2" "$3"; exit 0 ;;
 esac
 
 while [ $# -gt 0 ]; do
@@ -1332,6 +1611,7 @@ mkdir -p "$SNAP_DIR"
 TMP_CUR=""; DIFF_FILE=""; TMP_PR_CENSUS=""; TMP_PRS=""; TMP_REL=""; TMP_DEPS=""
 TMP_REPOSITORY_CENSUS=""; TMP_REPO_DIR=""; REPOSITORIES_JSON=""
 PRIMARY_REPO_AVAILABLE=0
+PRIMARY_ISSUES=""
 REPO_FAILED=0; DEPS_FAILED=0
 cleanup() { rm -f "$TMP_CUR" "$DIFF_FILE" "$TMP_PR_CENSUS" "$TMP_PRS" "$TMP_REL" "$TMP_DEPS" "$TMP_REPOSITORY_CENSUS"; [ -n "$TMP_REPO_DIR" ] && rm -rf "$TMP_REPO_DIR"; return 0; }
 trap cleanup EXIT
@@ -1356,6 +1636,10 @@ if [ "$DO_REPO" = 1 ]; then
       PRIMARY_REPO_AVAILABLE=1
       TMP_PRS="$TMP_REPO_DIR/prs-$REPO_SLUG-current.json"
       TMP_REL="$TMP_REPO_DIR/releases-$REPO_SLUG-current.json"
+      # build_repository_reports only writes this when the issue census
+      # succeeded, so its presence is the signal that issue coverage is joinable.
+      [ ! -f "$TMP_REPO_DIR/issues-$REPO_SLUG-current.json" ] \
+        || PRIMARY_ISSUES="$TMP_REPO_DIR/issues-$REPO_SLUG-current.json"
       TMP_PR_CENSUS="$(mktemp)"
       jq --arg repo "$REPO" '
         .repositories[] | select(.repo==$repo)
@@ -1404,10 +1688,18 @@ compute_diff "$BASELINE" "$TMP_CUR" "$BASE_LABEL" "$CUR_LABEL" > "$DIFF_FILE"
 REPO_JSON=""; REPO_EXTRA=""; DEPS_JSON=""; DEPS_EXTRA=""
 if [ "$PRIMARY_REPO_AVAILABLE" = 1 ]; then
   board_pr_gap "$TMP_CUR" "$TMP_PRS" > "$TMP_REPO_DIR/gap.json"
-  PRDF=""; RLDF=""
+  PRDF=""; RLDF=""; IGAP=""; IDIFF=""
   [ ! -f "$TMP_REPO_DIR/prdiff-$REPO_SLUG.json" ] || PRDF="$TMP_REPO_DIR/prdiff-$REPO_SLUG.json"
   [ ! -f "$TMP_REPO_DIR/reldiff-$REPO_SLUG.json" ] || RLDF="$TMP_REPO_DIR/reldiff-$REPO_SLUG.json"
-  build_repo_json "$TMP_REPO_DIR/gap.json" "$PRDF" "$RLDF" "$TMP_REL" "$TMP_PR_CENSUS" > "$TMP_REPO_DIR/repo.json"
+  [ ! -f "$TMP_REPO_DIR/issuediff-$REPO_SLUG.json" ] || IDIFF="$TMP_REPO_DIR/issuediff-$REPO_SLUG.json"
+  # Issue coverage is joined for the primary repository only, and only when its
+  # issue census succeeded — an unavailable census must not read as "no issues
+  # are carded".
+  if [ -n "$PRIMARY_ISSUES" ]; then
+    board_issue_gap "$TMP_CUR" "$PRIMARY_ISSUES" > "$TMP_REPO_DIR/issue-gap.json"
+    IGAP="$TMP_REPO_DIR/issue-gap.json"
+  fi
+  build_repo_json "$TMP_REPO_DIR/gap.json" "$PRDF" "$RLDF" "$TMP_REL" "$TMP_PR_CENSUS" "$IGAP" "$IDIFF" > "$TMP_REPO_DIR/repo.json"
   REPO_JSON="$TMP_REPO_DIR/repo.json"
   REPO_EXTRA="$(jq -r '", \(.gap.substantive|length) untracked PRs" + (if (.rel.new_releases|length)>0 then ", \(.rel.new_releases|length) new releases" else "" end)' "$REPO_JSON")"
 fi
@@ -1508,7 +1800,15 @@ if [ "$SAVE" = 1 ] || [ "$FIRST_RUN" = 1 ]; then
       tracked_slug="${tracked_repo//\//-}"
       cp "$TMP_REPO_DIR/prs-$tracked_slug-current.json" "$SNAP_DIR/prs-$tracked_slug-$TS.json"
       cp "$TMP_REPO_DIR/releases-$tracked_slug-current.json" "$SNAP_DIR/releases-$tracked_slug-$TS.json"
-      echo "$SNAP_VERB (repo): prs-$tracked_slug-$TS.json, releases-$tracked_slug-$TS.json." >&2
+      # An unavailable issue census leaves no current file, so its previous
+      # baseline survives untouched — writing [] over it would report every
+      # issue closed on the next run.
+      if [ -f "$TMP_REPO_DIR/issues-$tracked_slug-current.json" ]; then
+        cp "$TMP_REPO_DIR/issues-$tracked_slug-current.json" "$SNAP_DIR/issues-$tracked_slug-$TS.json"
+        echo "$SNAP_VERB (repo): prs-$tracked_slug-$TS.json, issues-$tracked_slug-$TS.json, releases-$tracked_slug-$TS.json." >&2
+      else
+        echo "$SNAP_VERB (repo): prs-$tracked_slug-$TS.json, releases-$tracked_slug-$TS.json (issue snapshot skipped: census unavailable)." >&2
+      fi
     done < <(jq_lines -r '.[] | select(.available) | .repo' "$REPOSITORIES_JSON")
   fi
   if [ "$DO_DEPS" = 1 ]; then

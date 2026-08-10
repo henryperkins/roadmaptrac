@@ -15,7 +15,8 @@ jq -e '
   .schemaVersion == 1
   and .repositories == [
     "WordPress/php-ai-client",
-    "WordPress/mcp-adapter"
+    "WordPress/mcp-adapter",
+    "WordPress/abilities-api"
   ]
 ' "$ROOT_DIR/wp-ai-roadmap-repositories.json" >/dev/null
 
@@ -25,12 +26,16 @@ cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-php-ai-client.jsonl" \
   "$PR_DIR/WordPress-php-ai-client.jsonl"
 cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-mcp-adapter.jsonl" \
   "$PR_DIR/WordPress-mcp-adapter.jsonl"
+cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-abilities-api.jsonl" \
+  "$PR_DIR/WordPress-abilities-api.jsonl"
 cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-ai-releases.json" \
   "$RELEASE_DIR/WordPress-ai.json"
 cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-php-ai-client-releases.json" \
   "$RELEASE_DIR/WordPress-php-ai-client.json"
 cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-mcp-adapter-releases.json" \
   "$RELEASE_DIR/WordPress-mcp-adapter.json"
+cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-abilities-api-releases.json" \
+  "$RELEASE_DIR/WordPress-abilities-api.json"
 
 run_census() {
   PATH="$MOCK_BIN:$PATH" \
@@ -52,7 +57,8 @@ jq -e '
   })) == [
     {repo:"WordPress/ai", open_prs:5, latest:"1.2.0"},
     {repo:"WordPress/php-ai-client", open_prs:1, latest:"1.4.0"},
-    {repo:"WordPress/mcp-adapter", open_prs:2, latest:"v0.5.0"}
+    {repo:"WordPress/mcp-adapter", open_prs:2, latest:"v0.5.0"},
+    {repo:"WordPress/abilities-api", open_prs:2, latest:null}
   ]
 ' <<<"$json" >/dev/null
 
@@ -104,21 +110,29 @@ jq -e '
   and (.repositories | map(.repo)) == [
     "WordPress/ai",
     "WordPress/php-ai-client",
-    "WordPress/mcp-adapter"
+    "WordPress/mcp-adapter",
+    "WordPress/abilities-api"
   ]
   and all(.repositories[];
-    has("pr_diff") and has("release_diff") and has("latest_shipped"))
+    has("pr_diff") and has("release_diff") and has("issue_diff")
+    and has("latest_shipped") and has("open_issues") and has("issues_available"))
   and all(.validation.errors[]
     | select(.code == "pr-roadmap-coverage-missing");
     (.context.id | startswith("WordPress/ai#")))
 ' "$TMP_DIR/full.json" >/dev/null
 
-[ "$(find "$FULL_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 8 ]
+# 4 repos x (prs, issues, releases) + board + dependencies
+[ "$(find "$FULL_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 14 ]
 for snapshot in \
   prs-WordPress-php-ai-client \
+  issues-WordPress-php-ai-client \
   releases-WordPress-php-ai-client \
   prs-WordPress-mcp-adapter \
-  releases-WordPress-mcp-adapter; do
+  issues-WordPress-mcp-adapter \
+  releases-WordPress-mcp-adapter \
+  prs-WordPress-abilities-api \
+  issues-WordPress-abilities-api \
+  releases-WordPress-abilities-api; do
   find "$FULL_SNAP_DIR" -maxdepth 1 -type f -name "$snapshot-*.json" \
     | grep -q .
 done
@@ -132,10 +146,12 @@ WP_AI_TEST_PR_PAGES_DIR="$PR_DIR" \
 WP_AI_TEST_RELEASES_DIR="$RELEASE_DIR" \
   "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --markdown \
   >"$TMP_DIR/full.md" 2>"$TMP_DIR/full-md.err"
-rg -F '## Tracked repository PR/release census' "$TMP_DIR/full.md" >/dev/null
-rg -F '| `WordPress/php-ai-client` | 1 | `1.4.0` (2026-07-15) |' \
+rg -F '## Tracked repository PR/issue/release census' "$TMP_DIR/full.md" >/dev/null
+# Columns: repo | open PRs | open issues | latest release | ...
+rg -F '| `WordPress/php-ai-client` | 1 | 0 | `1.4.0` (2026-07-15) |' \
   "$TMP_DIR/full.md" >/dev/null
-rg -F '| `WordPress/mcp-adapter` | 2 | `v0.5.0` (2026-04-15) |' \
+rg -F '| `WordPress/mcp-adapter` | 2 | 0 | `v0.5.0` (2026-04-15) |' \
   "$TMP_DIR/full.md" >/dev/null
+rg -F '| `WordPress/abilities-api` | 2 | 0 | — |' "$TMP_DIR/full.md" >/dev/null
 
 printf 'multi-repository census fixture tests passed\n'

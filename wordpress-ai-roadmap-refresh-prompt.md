@@ -12,7 +12,7 @@ Update:
 - wp-ai-roadmap-repositories.json, only when full-repository census membership changes (this registry is the source of truth for additional repositories; do not hard-code additions/removals in shell)
 - wp-ai-roadmap-dependencies.json, only when dependency watchlist membership changes (this JSON registry is the watchlist source of truth; do not edit shell code to add/remove a dependency)
 
-Re-pull GitHub Project #240; the full PR/release censuses for WordPress/ai, WordPress/php-ai-client, and WordPress/mcp-adapter; and the Gutenberg / abilities-api cross-repo dependency watchlist. Do not reuse old counts. Reconcile the board against WordPress/ai open PRs using the five coverage classifications (direct-board-pr, linked-board-issue, routine, linked-off-board-issue, unexplained), update counts/status/milestone groupings, move issue dossiers between status sections as needed, refresh the repository radar and dependency watchlist, and add changelog entries. Do not apply Project #240 coverage requirements to php-ai-client or mcp-adapter.
+Re-pull GitHub Project #240; the full PR/issue/release censuses for WordPress/ai, WordPress/php-ai-client, WordPress/mcp-adapter, and WordPress/abilities-api; and the Gutenberg / abilities-api cross-repo dependency watchlist. Upstream issues are census-level only (counts, states, diffs) — dossiers stay exclusive to WordPress/ai board issues. Do not reuse old counts. Reconcile the board against WordPress/ai open PRs using the five coverage classifications (direct-board-pr, linked-board-issue, routine, linked-off-board-issue, unexplained), update counts/status/milestone groupings, move issue dossiers between status sections as needed, refresh the repository radar and dependency watchlist, and add changelog entries. Do not apply Project #240 coverage requirements to php-ai-client or mcp-adapter.
 
 PR-to-issue mappings come from GitHub closingIssuesReferences (source "closing") first; fallback title/body/branch parsing and legacy bare numbers are lower-precedence and labeled with their source. Treat only "closing" links as authoritative when correcting dossiers.
 
@@ -29,9 +29,10 @@ Before finishing, verify with fresh live data:
 - non-Done PR card count
 - active and next milestone counts
 - WordPress/ai open PR gap and the five classification counts
-- per-repository open PR totals and latest releases for WordPress/ai, WordPress/php-ai-client, and WordPress/mcp-adapter
+- per-repository open PR totals, open ISSUE totals, and latest releases for WordPress/ai, WordPress/php-ai-client, WordPress/mcp-adapter, and WordPress/abilities-api
+- board issue coverage: every open WordPress/ai issue must have a Project #240 card (uncarded = strict error)
 - dependency watchlist total and state split (16 registry items; required items must not be UNKNOWN)
 - bash -n wp-ai-roadmap-refresh.sh
-- deterministic tests: tests/wp-ai-roadmap-refresh-dependencies-fixtures.sh, -prs.sh, -gap.sh, -strict.sh, -repositories.sh, -crlf.sh, and -mergestate.sh (offline; mock gh)
+- deterministic tests: tests/wp-ai-roadmap-refresh-dependencies-fixtures.sh, -prs.sh, -gap.sh, -strict.sh, -repositories.sh, -crlf.sh, -mergestate.sh, and -issues.sh (offline; mock gh)
 - live smoke test: tests/wp-ai-roadmap-refresh-dependencies.sh (uses dependencies --strict --json)
 ```

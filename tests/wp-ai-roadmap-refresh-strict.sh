@@ -78,7 +78,7 @@ WP_AI_TEST_RELEASES="$RELEASES" \
   >"$TMP_DIR/normal.json" 2>"$TMP_DIR/normal.err"
 jq -e . "$TMP_DIR/normal.json" >/dev/null
 after_count="$(find "$TEST_SNAP_DIR" -maxdepth 1 -type f | wc -l)"
-[ "$after_count" -eq "$((before_count + 4))" ]
+[ "$after_count" -eq "$((before_count + 5))" ]  # board + prs + issues + releases + deps
 
 # First run (no baselines yet) must honor the strict gate: a red audit
 # establishes nothing and exits 2 with parseable JSON.
@@ -116,7 +116,7 @@ WP_AI_TEST_RELEASES="$RELEASES" \
   "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --json \
   >"$TMP_DIR/first-normal.json" 2>"$TMP_DIR/first-normal.err"
 jq -e '(keys | sort)==["board","dependencies","repo","repositories","validation"]' "$TMP_DIR/first-normal.json" >/dev/null
-[ "$(find "$FIRST_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 4 ]
+[ "$(find "$FIRST_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 5 ]  # board + prs + issues + releases + deps
 rg 'Baseline established' "$TMP_DIR/first-normal.err" >/dev/null
 
 # An invalid registry must never produce a dependency snapshot: a normal-mode

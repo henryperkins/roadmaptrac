@@ -41,12 +41,16 @@ cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-php-ai-client.jsonl" \
   "$PR_DIR/WordPress-php-ai-client.jsonl"
 cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-mcp-adapter.jsonl" \
   "$PR_DIR/WordPress-mcp-adapter.jsonl"
+cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-abilities-api.jsonl" \
+  "$PR_DIR/WordPress-abilities-api.jsonl"
 cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-ai-releases.json" \
   "$RELEASE_DIR/WordPress-ai.json"
 cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-php-ai-client-releases.json" \
   "$RELEASE_DIR/WordPress-php-ai-client.json"
 cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-mcp-adapter-releases.json" \
   "$RELEASE_DIR/WordPress-mcp-adapter.json"
+cp "$ROOT_DIR/tests/fixtures/repository-census/WordPress-abilities-api-releases.json" \
+  "$RELEASE_DIR/WordPress-abilities-api.json"
 
 DEPS_FILE="$TMP_DIR/dependencies.json"
 "$REAL_JQ" -n '{
@@ -77,7 +81,8 @@ census_json="$(run_with_crlf_jq census)"
   and (.repositories | map({repo, open_prs:(.open_prs|length)})) == [
     {repo:"WordPress/ai", open_prs:5},
     {repo:"WordPress/php-ai-client", open_prs:1},
-    {repo:"WordPress/mcp-adapter", open_prs:2}
+    {repo:"WordPress/mcp-adapter", open_prs:2},
+    {repo:"WordPress/abilities-api", open_prs:2}
   ]
 ' <<<"$census_json" >/dev/null
 
@@ -94,12 +99,13 @@ census_json="$(run_with_crlf_jq census)"
 #    Pre-fix the --save loop copies prs-WordPress-ai$'\r'-current.json and dies.
 run_with_crlf_jq --json >"$TMP_DIR/full.json" 2>"$TMP_DIR/full.err"
 
-[ "$(find "$SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 8 ]
+[ "$(find "$SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 14 ]
 for snapshot in \
   proj240 \
-  prs-WordPress-ai releases-WordPress-ai \
-  prs-WordPress-php-ai-client releases-WordPress-php-ai-client \
-  prs-WordPress-mcp-adapter releases-WordPress-mcp-adapter; do
+  prs-WordPress-ai issues-WordPress-ai releases-WordPress-ai \
+  prs-WordPress-php-ai-client issues-WordPress-php-ai-client releases-WordPress-php-ai-client \
+  prs-WordPress-mcp-adapter issues-WordPress-mcp-adapter releases-WordPress-mcp-adapter \
+  prs-WordPress-abilities-api issues-WordPress-abilities-api releases-WordPress-abilities-api; do
   find "$SNAP_DIR" -maxdepth 1 -type f -name "$snapshot-*.json" | grep -q .
 done
 
@@ -114,7 +120,8 @@ fi
   (.repositories | map(.repo)) == [
     "WordPress/ai",
     "WordPress/php-ai-client",
-    "WordPress/mcp-adapter"
+    "WordPress/mcp-adapter",
+    "WordPress/abilities-api"
   ]
 ' "$TMP_DIR/full.json" >/dev/null
 

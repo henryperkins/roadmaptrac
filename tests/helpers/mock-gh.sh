@@ -46,6 +46,39 @@ if [ "${1:-}" = api ] && [ "${2:-}" = graphql ] \
   exit 0
 fi
 
+# Must come after the pullRequests branch: the PR query carries
+# `closingIssuesReferences(`, which does not contain the lowercase `issues(`
+# marker, so the two selectors stay disjoint.
+if [ "${1:-}" = api ] && [ "${2:-}" = graphql ] \
+  && [[ "$*" == *"issues("* ]]; then
+  if [ -n "${WP_AI_TEST_ISSUE_FAIL:-}" ]; then
+    printf 'mock issue census failure\n' >&2
+    exit 1
+  fi
+  if [ -n "${WP_AI_TEST_ISSUE_PAGES_DIR:-}" ]; then
+    owner=""
+    name=""
+    previous=""
+    for argument in "$@"; do
+      if [ "$previous" = "-F" ]; then
+        case "$argument" in
+          owner=*) owner="${argument#owner=}" ;;
+          name=*) name="${argument#name=}" ;;
+        esac
+      fi
+      previous="$argument"
+    done
+    cat "$WP_AI_TEST_ISSUE_PAGES_DIR/$owner-$name.jsonl"
+  elif [ -n "${WP_AI_TEST_ISSUE_PAGES:-}" ]; then
+    cat "$WP_AI_TEST_ISSUE_PAGES"
+  else
+    # Default: an empty but well-formed census, so suites that predate the
+    # issue census keep passing without carrying issue fixtures.
+    printf '{"data":{"repository":{"issues":{"totalCount":0,"pageInfo":{"hasNextPage":false,"endCursor":null},"nodes":[]}}}}\n'
+  fi
+  exit 0
+fi
+
 if [ "${1:-}" = release ] && [ "${2:-}" = list ]; then
   if [ -n "${WP_AI_TEST_RELEASES_DIR:-}" ]; then
     repo=""
