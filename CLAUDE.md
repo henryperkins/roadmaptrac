@@ -43,6 +43,7 @@ tests/wp-ai-roadmap-refresh-gap.sh
 tests/wp-ai-roadmap-refresh-strict.sh
 tests/wp-ai-roadmap-refresh-repositories.sh
 tests/wp-ai-roadmap-refresh-crlf.sh           # shims jq to emit CRLF; reproduces the Windows bug on any platform
+tests/wp-ai-roadmap-refresh-mergestate.sh     # cold-query mergeStateStatus UNKNOWN: retry + diff suppression
 tests/wp-ai-roadmap-refresh-dependencies.sh   # live smoke — needs gh auth + network
 ```
 
@@ -57,6 +58,7 @@ tests/wp-ai-roadmap-refresh-dependencies.sh   # live smoke — needs gh auth + n
    - Open `WordPress/ai` PRs are bucketed into **five coverage classifications**: `direct-board-pr`, `linked-board-issue`, `routine`, `linked-off-board-issue`, `unexplained`.
    - PR→issue links come from GitHub `closingIssuesReferences` (source `closing`) first; title/body/branch parsing and legacy bare numbers are lower-precedence and labeled with their source. **Only `closing` links are authoritative** when correcting dossiers.
    - Project #240 coverage requirements apply **only** to the primary repo — never to php-ai-client or mcp-adapter.
+   - **`mergeStateStatus: "UNKNOWN"` is "not computed yet", not a state.** GitHub computes PR mergeability lazily and asking is what schedules the job, so a cold census can answer UNKNOWN for PRs nothing has touched. `fetch_pr_census()` re-asks once (`WP_AI_MERGESTATE_RETRY_DELAY`, default 2s) and keeps whichever answer knows more; a still-cold PR gets a `pr-mergestate-unknown` **warning** (never an error — it is not a coverage failure), and `PRDIFF_JQ` ignores transitions into or out of UNKNOWN. Without both halves one cold run reports every open PR as newly unreadable *and* saves that into the baseline, so the next window reports them all again in reverse. Regression-tested by `tests/wp-ai-roadmap-refresh-mergestate.sh`.
 3. **Dependency watchlist**: membership lives in **`wp-ai-roadmap-dependencies.json`**, not in shell code (`schemaVersion` 1; each item has `id`, `theme`, `aiRefs`, `note`, `required`). Adding/removing a tracked Gutenberg/abilities-api dependency is a reviewable JSON data change. The registry is schema-validated every run; items fetch live via `gh api`, and a 404'd pin is skipped with a warning, not fatal.
 
 **Validation & exit codes:** normal runs are warning-only — exit 0, with problems reported under `.validation` and on stderr. `--strict` emits the complete report and *then* exits 2 if any validation error exists (exit 1 means an operational failure prevented the report). A strict failure suppresses `--save` and `--update-changelog` ("persistence skipped"); persist snapshots with a normal-mode `--save` run.

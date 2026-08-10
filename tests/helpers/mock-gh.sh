@@ -27,6 +27,19 @@ if [ "${1:-}" = api ] && [ "${2:-}" = graphql ] \
       previous="$argument"
     done
     cat "$WP_AI_TEST_PR_PAGES_DIR/$owner-$name.jsonl"
+  elif [ -n "${WP_AI_TEST_PR_PAGES_RETRY:-}" ]; then
+    # Serve the cold-query fixture once, then the settled one, so a test can
+    # exercise the mergeStateStatus:UNKNOWN retry.
+    counter="$state_dir/pr-pages.count"
+    attempts=0
+    [ ! -f "$counter" ] || attempts="$(<"$counter")"
+    attempts=$((attempts + 1))
+    printf '%s\n' "$attempts" > "$counter"
+    if [ "$attempts" -eq 1 ]; then
+      cat "${WP_AI_TEST_PR_PAGES:?}"
+    else
+      cat "$WP_AI_TEST_PR_PAGES_RETRY"
+    fi
   else
     cat "${WP_AI_TEST_PR_PAGES:?}"
   fi

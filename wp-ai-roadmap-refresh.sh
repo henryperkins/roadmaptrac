@@ -317,9 +317,15 @@ PR_CENSUS_JQ='
                     totalCount:.closingIssuesReferences.totalCount,
                     returned:((.closingIssuesReferences.nodes // [])|length)}})
     ] | sort_by(.code, (.context|tostring))) as $errors
+  | ([ $nodes[]
+       | select(.mergeStateStatus == "UNKNOWN")
+       | {code:"pr-mergestate-unknown",
+          message:"GitHub has not finished computing mergeability; readiness diff suppressed for this PR",
+          context:{number:.number}} ]
+     | sort_by(.context.number)) as $warnings
   | {
       items: ([ $nodes[] | normalize_pr($repo) ] | sort_by(.number)),
-      validation: {ok:(($errors|length)==0), errors:$errors, warnings:[]}
+      validation: {ok:(($errors|length)==0), errors:$errors, warnings:$warnings}
     }'
 
 # Normalize `gh release list --json ...` -> compact records (oldest..newest).
@@ -462,6 +468,16 @@ PRDIFF_JQ='
     then {($key):{from:$b[$key],to:$c[$key]}}
     else {}
     end;
+  # GitHub computes mergeability lazily and answers UNKNOWN until the background
+  # job lands, so a transition into or out of UNKNOWN records when we asked, not
+  # a change in the PR. Suppress it the way has($key) suppresses schema noise --
+  # otherwise one cold census reports every open PR as newly unreadable, and the
+  # snapshot it saves reports them all again in reverse next window.
+  def merge_change($b; $c):
+    if ($b.mergeStateStatus == "UNKNOWN") or ($c.mergeStateStatus == "UNKNOWN")
+    then {}
+    else change($b; $c; "mergeStateStatus")
+    end;
   ($base[0]) as $B | ($cur[0]) as $C
   | ([ $B[].number ]) as $bn | ([ $C[].number ]) as $cn
   | (reduce $B[] as $x ({}; .[$x.number|tostring] = $x)) as $bidx
@@ -474,7 +490,7 @@ PRDIFF_JQ='
         | select($b != null)
         | (change($b; $c; "isDraft")
            * change($b; $c; "reviewDecision")
-           * change($b; $c; "mergeStateStatus")
+           * merge_change($b; $c)
            * change($b; $c; "checkState")) as $changes
         | select(($changes|length) > 0)
         | {number:$c.number, title:$c.title, changes:$changes}
@@ -870,14 +886,41 @@ load_repository_registry() {
   ' "$file"
 }
 
-fetch_pr_census() { # repository -> {items,validation} for open PRs
-  local repo="${1:-$REPO}" owner name raw err
-  owner="${repo%%/*}"; name="${repo#*/}"
+pr_census_query() { # repository owner name -> raw paginated GraphQL pages
+  local repo="$1" owner="$2" name="$3" raw err
   err="$(mktemp)"
   raw="$(gh api graphql --paginate -f query="$PR_GQL_QUERY" -F owner="$owner" -F name="$name" 2>"$err")" || {
     printf 'error: PR census query failed for %s:\n' "$repo" >&2; cat "$err" >&2; rm -f "$err"; return 1; }
   rm -f "$err"
   [ -n "$raw" ] || { printf 'error: PR census returned no data for %s\n' "$repo" >&2; return 1; }
+  printf '%s' "$raw"
+}
+
+# Count nodes whose mergeability GitHub has not computed yet.
+PR_UNKNOWN_MERGE_JQ='[ .[] | .data.repository.pullRequests.nodes[]?
+  | select(.mergeStateStatus == "UNKNOWN") ] | length'
+
+fetch_pr_census() { # repository -> {items,validation} for open PRs
+  local repo="${1:-$REPO}" owner name raw retry unknown retry_unknown
+  owner="${repo%%/*}"; name="${repo#*/}"
+  raw="$(pr_census_query "$repo" "$owner" "$name")" || return 1
+  # GitHub computes mergeability lazily: asking is what schedules the job, so a
+  # cold query answers UNKNOWN for PRs it has not gotten to yet. Ask a second
+  # time and keep whichever answer knows more -- recording the sentinel would
+  # both misreport readiness and persist into the snapshot as a fake baseline.
+  unknown="$(printf '%s' "$raw" | jq -s "$PR_UNKNOWN_MERGE_JQ")"
+  if [ "$unknown" -gt 0 ]; then
+    sleep "${WP_AI_MERGESTATE_RETRY_DELAY:-2}"
+    if retry="$(pr_census_query "$repo" "$owner" "$name")"; then
+      retry_unknown="$(printf '%s' "$retry" | jq -s "$PR_UNKNOWN_MERGE_JQ")"
+      if [ "$retry_unknown" -lt "$unknown" ]; then
+        raw="$retry"; unknown="$retry_unknown"
+      fi
+    fi
+    [ "$unknown" -eq 0 ] || printf \
+      'warning: %s: %s open PR(s) still report mergeStateStatus UNKNOWN after retry\n' \
+      "$repo" "$unknown" >&2
+  fi
   printf '%s' "$raw" | jq -s --arg repo "$repo" "$PR_CENSUS_JQ"
 }
 
