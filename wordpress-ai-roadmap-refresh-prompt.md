@@ -1,7 +1,7 @@
 # WordPress AI Roadmap Refresh Prompt
 
 ```text
-In /home/henry/roadmaptrac, review wp-ai-roadmap-refresh.sh and refresh the WordPress AI roadmap docs from live GitHub data.
+In the roadmaptrac repo (this checkout), review wp-ai-roadmap-refresh.sh and refresh the WordPress AI roadmap docs from live GitHub data.
 
 Update:
 - wordpress-ai-roadmap.md
