@@ -26,6 +26,7 @@ Modes and exit codes:
 - A strict failure suppresses --save and --update-changelog ("persistence skipped"); persist snapshots with a normal-mode --save run.
 
 Before finishing, verify with fresh live data:
+- board title and short description (snapshots store only the item array, so a project-level rename is invisible to the diff and must be checked by hand)
 - total board items
 - Done/non-Done counts
 - open issue count

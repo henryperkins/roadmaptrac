@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A living-documentation repo that tracks the **WordPress AI Planning & Roadmap board** (GitHub org project `WordPress` #240, which in practice is the dev tracker for the `WordPress/ai` Showcase Plugin). There is no application code. It is:
+A living-documentation repo that tracks the **WordPress AI Roadmap board** (GitHub org project `WordPress` #240, which in practice is the dev tracker for the `WordPress/ai` Showcase Plugin). There is no application code. It is:
 
 - one bash data engine — `wp-ai-roadmap-refresh.sh`
 - two versioned JSON registries — `wp-ai-roadmap-repositories.json` (extra full-census repos: php-ai-client, mcp-adapter, abilities-api) and `wp-ai-roadmap-dependencies.json` (the dependency watchlist)

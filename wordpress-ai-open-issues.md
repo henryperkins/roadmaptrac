@@ -1,6 +1,6 @@
 # WordPress AI — Open Issues Dossier (Companion Reference)
 
-> Deep per-issue documentation for all **48 open issues** (status rechecked 2026-08-14) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
+> Deep per-issue documentation for all **48 open issues** (status rechecked 2026-08-14) on the [WordPress AI Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
 > Companion to [`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md) and [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md). Each dossier records the problem, approach, open decisions, dependencies, and discussion.
 >
 > | | |
@@ -1326,7 +1326,7 @@
 
 **Dependencies.** Parent WordPress/ai#40; `@wordpress/core-data`/entities; WP REST permission callbacks.
 
-**Discussion highlights.** No comments; design points copied from the #40 thread by gziolo as a dedicated implementation-tracking sub-issue. It still appears on a separate "WordPress Abilities API: planning" project item, but no longer on the WordPress AI Planning & Roadmap board (#240).
+**Discussion highlights.** No comments; design points copied from the #40 thread by gziolo as a dedicated implementation-tracking sub-issue. It still appears on a separate "WordPress Abilities API: planning" project item, but no longer on the WordPress AI Roadmap board (#240).
 
 ---
 
