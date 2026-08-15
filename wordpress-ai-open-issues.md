@@ -1,24 +1,24 @@
 # WordPress AI — Open Issues Dossier (Companion Reference)
 
-> Deep per-issue documentation for all **51 open issues** (status rechecked 2026-08-10) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
+> Deep per-issue documentation for all **48 open issues** (status rechecked 2026-08-14) on the [WordPress AI Planning & Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
 > Companion to [`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md) and [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md). Each dossier records the problem, approach, open decisions, dependencies, and discussion.
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-08-10 |
-> | **Scope** | 51 current open-issue dossiers + 1 removed-board reference (#84) + 43 recently board-Done dossiers retained for reference. Excludes 16 non-Done PR cards, the rest of the 202 Done cards, and census-only upstream issues. |
-> | **Repos** | Board dossiers: `WordPress/ai` (50 open issues) · `WordPress/ai-provider-for-google` (#23). Removed-board reference: `WordPress/abilities-api` #84. `WordPress/php-ai-client` and `WordPress/mcp-adapter` are tracked separately as full PR/release censuses, not imported as issue dossiers. |
+> | **Data snapshot** | 2026-08-14 |
+> | **Scope** | 48 current open-issue dossiers + 1 removed-board reference (#84) + 50 recently board-Done dossiers retained for reference. Excludes 17 non-Done PR cards, the rest of the 214 Done cards, and census-only upstream issues. |
+> | **Repos** | Board dossiers: `WordPress/ai` (47 open issues) · `WordPress/ai-provider-for-google` (#23). Removed-board reference: `WordPress/abilities-api` #84. `WordPress/php-ai-client` and `WordPress/mcp-adapter` are tracked separately as full PR/issue/release censuses, not imported as issue dossiers. |
 > | **Each dossier** | Status · Milestone · Labels · Assignees · Last updated · Comment count · Link, then Problem → Approach → Open decisions → Dependencies → Discussion |
 
-**Grouped by board status:** [In discussion / Needs decision (18)](#in-discussion--needs-decision-18) · [In progress (18)](#in-progress-18) · [Backlog (6)](#backlog-6) · [To do (3)](#to-do-3) · [Triage (3)](#triage-3) · [Needs review (3)](#needs-review-3) · [Recently board-Done (43 retained)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
+**Grouped by board status:** [In discussion / Needs decision (19)](#in-discussion--needs-decision-19) · [In progress (13)](#in-progress-13) · [Backlog (6)](#backlog-6) · [To do (4)](#to-do-4) · [Triage (3)](#triage-3) · [Needs review (3)](#needs-review-3) · [Recently board-Done (50 retained)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
 
 > ⭐ = major strategic bet · ⚠️ = notable risk / live regression. "Status" reflects the board; "Milestone" is the release target.
 
-**Movement in the 2026-08-10 window:** #338 and #625 moved In discussion → In progress; #863 moved To do → In progress; #866 and #906 moved In progress → Needs review (#906 also gained milestone 1.3.0); #233, #875 and #876 were re-milestoned into 1.3.0; #193 and #869 closed and moved to *Recently board-Done*; board-new #918 joined Triage. Six already-Done dossiers (#191, #192, #452, #507, #874, #883) were de-carded from Project #240 but are retained below for reference.
+**Movement in the 2026-08-14 window:** the 1.3.0 delivery wave closed seven dossiered issues by merged PRs — **#233** (`AI_Service` deprecation, PR #905), **#690** (uninstall cleanup, #692), **#863** (abilities toggle, #881), **#866** (`wpai_` meta prefix, #867), **#876** (permalink slugs, #897), **#906** (reserved log-type API, #914) — and declined **#307** (`NOT_PLANNED`); all seven moved to *Recently board-Done*. **#514** and **#732** moved In progress → Needs review; **#600** moved In discussion → To do (retitled "Remove `Enable AI` header toggle…" with a Help Wanted label). Board-new dossiers: **#923** (agent users) and **#940** (custom settings endpoint) in In discussion, **#924** (1.3.0 release) and **#933** (connector validity) In progress. #736/#845/#875 re-milestoned 1.3.0 → 1.4.0, #890/#918 → Future Release.
 
 ---
 
-## In discussion / Needs decision (18)
+## In discussion / Needs decision (19)
 
 *The genuinely uncommitted questions — debated, not promised. Most platform-level bets live here.*
 
@@ -253,23 +253,6 @@
 
 **Discussion highlights.** richardmorrison reported the same gap: a greyed-out "Not Available" state is unhelpful; suggests at minimum telling users they must install an AI Connector plugin.
 
-### #600 — `Enable AI` header toggle doesn't reflect aggregate state of sub-features
-**Status:** In discussion / Needs decision · **Milestone:** Future Release · **Labels:** [Type] Bug · **Assignee(s):** — · **Updated:** 2026-07-15 · **Comments:** 5
-**Link:** https://github.com/WordPress/ai/issues/600
-
-**Problem / goal.** The header `Enable AI` toggle is binary and misrepresents partial configuration: when only some sub-features are enabled it still renders fully ON (solid blue), indistinguishable from all-enabled. Repro: enable only a subset (e.g. Alt Text + Meta Description) → header still shows full ON. (WP 7.1, AI 1.0, Safari, block theme.)
-
-**Proposed approach.** **A** — tri-state header toggle (Off / Partial / On); **B (preferred)** — drop the global header toggle and give each section its own master tri-state toggle scoped to that section, pairing with Enable all / Disable all, scaling as experiment groups grow.
-
-**Open decisions / blockers.**
-- Choose A vs B (B preferred).
-- gziolo: toggle is confusing ("why install AI to disable AI?") — reflect "AI enabled" state or rename to "Disable AI".
-- dkotter: ideally distinguish disabling AI features while non-AI features (Abilities Explorer, Request Logging, Connector Approval) stay on.
-
-**Dependencies.** Open **PR [#798](https://github.com/WordPress/ai/pull/798)** ("Clarify global AI toggle as a master switch") authoritatively closes this issue (GitHub closing reference; review state CHANGES_REQUESTED). Earlier tables also credited #798 to #617 — that was parser noise from its changelog text; #600 is its only closing target.
-
-**Discussion highlights.** dkotter explains the toggle is a quick exit path (disliked results, rate/usage thresholds) but concedes manual disable or plugin deactivation is comparable effort. An off-topic comment was triaged out by jeffpaul.
-
 ### #643 — "AI" plugin 1.0.1 – Connectors and AI settings pages load blank (JavaScript error) on WordPress 7.0
 **Status:** In discussion / Needs decision · **Milestone:** Future Release · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-06-18 · **Comments:** 3
 **Link:** https://github.com/WordPress/ai/issues/643
@@ -289,7 +272,7 @@
 **Discussion highlights.** Two self-follow-ups by the reporter (polipsicomorfico) progressively reframe it from a plugin bug to a core/environment JS-dependency problem; jeffpaul asked for further triage and suggested Core Trac may be the right home.
 
 ### #741 — AI Admin Pages Exhibit Visible Flicker During Initial Render
-**Status:** In discussion / Needs decision · **Milestone:** 1.3.0 · **Labels:** [Type] Bug · **Assignee(s):** prasadkarmalkar · **Updated:** 2026-07-14 · **Comments:** 7
+**Status:** In discussion / Needs decision · **Milestone:** 1.4.0 *(was 1.3.0)* · **Labels:** [Type] Bug · **Assignee(s):** prasadkarmalkar · **Updated:** 2026-07-14 · **Comments:** 7
 **Link:** https://github.com/WordPress/ai/issues/741
 
 **Problem / goal.** AI-related admin screens briefly flash to a black/blank state during navigation and initial render. Repro is on AI 1.0.2 in WordPress Playground / Chrome: standard WP admin pages transition normally, but the **AI** and **Connectors** pages show a dark intermediate screen before content renders. Functional behavior still works, but the flash makes the AI screens feel slower and inconsistent with core admin pages.
@@ -319,9 +302,37 @@
 
 **Discussion highlights.** Opened by jeffpaul off the #151 review discussion as a "let's watch and see" enhancement; no comments yet.
 
+### #923 — Introduce agent users to give AI agents an auditable identity
+**Status:** In discussion / Needs decision · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** gziolo · **Updated:** 2026-08-11 · **Comments:** 5
+**Link:** https://github.com/WordPress/ai/issues/923
+
+**Problem / goal.** AI agents currently interact with WordPress only by borrowing a human identity — an application password over MCP, Abilities REST, or WP-CLI `--user` — so every `permission_callback` answers what a *user* may do, never what an *agent* may do, and nothing distinguishes agents from humans in `post_author`, activity logs, or `wp_ability_invoked`. A site owner cannot answer what an agent changed yesterday, or revoke an agent's access without touching a human account. Filed 2026-08-10 off the August core-AI chat's trust-ladder discussion and the February MCP workaround doc.
+
+**Proposed approach.** Extend the user concept rather than invent a parallel identity system: a deliberately provisioned, marked account with **no interactive login** (application passwords or similar), excluded by default from user listings and author dropdowns, whose existing role is the capability ceiling. The current model stays valid; external/autonomous agents get accounts that can be granted, audited, and revoked independently of any human. Builds on shipped primitives: `permission_callback` enforcement, `wp_get_abilities()` filtering, and `wp_ability_invoked` as the audit hook. Explicitly out of scope: credential expiry/OAuth, trust tiers, and approval workflows.
+
+**Open decisions / blockers.** JasonTheAdams' refinement list: authentication (are application passwords sufficient?), keeping user queries backwards-compatible, structuring agent-on-behalf-of-user acting, taking the **min of agent and user capabilities**, flag-vs-polymorphic user type, and whether distinct Agent roles are needed. chubes4 counterproposes a generic `actor` primitive (identity separate from the user account, multiple humans authorized per identity).
+
+**Dependencies.** #354 (unified exposure controls) and #736 (per-feature role/user controls) as the governance siblings; upstream `WordPress/mcp-adapter#176`/`#228` approval/audit workflows; Application Passwords scoping.
+
+**Discussion highlights.** jeffpaul ties it to the RTC direction in #324 (an agent user making content updates inside a conversation). webmyc contributes the strongest evidence: 1,276 production sites, where **50.2% of 241,614 tool calls over 90 days carry no usable agent identifier** — and a shipped lesson that agents must resolve to a real user (capabilities collapse and `wp_kses_post` strips content under `wp_set_current_user(0)`), plus that min-of-caps enforcement drifts when the exposed list and the enforced list live in two places.
+
+### #940 — Introduce new custom endpoint for settings save and bypass core `/wp/v2/settings` endpoint for saving AI options
+**Status:** In discussion / Needs decision · **Milestone:** — · **Labels:** [Type] Bug · **Assignee(s):** — · **Updated:** 2026-08-14 · **Comments:** 2
+**Link:** https://github.com/WordPress/ai/issues/940
+
+**Problem / goal.** Core revalidates stored AI credentials whenever anything POSTs/PUTs to `/wp/v2/settings`; if the provider validation transiently fails (timeout, rate limit), the stored API key is **overwritten with an empty string even though it was never submitted**. Extracted from PR #881's review thread, with upstream `core.trac#65867` and `wordpress-develop#13031` already filed.
+
+**Proposed approach.** Undecided — the issue exists to settle whether the AI plugin should introduce its own settings endpoint and bypass `/wp/v2/settings` for AI options, or wait for the core fix (which cannot land before the next WordPress release).
+
+**Open decisions / blockers.** Custom endpoint vs. in-place mitigation. dkotter reports the bug hits him regularly (the OpenAI models endpoint times out at Core's default 5s), wiping his key on unrelated settings saves — he favors addressing it plugin-side now, and notes a **timeout increase** may be a quicker fix than a new endpoint. This window's latest board-item activity.
+
+**Dependencies.** `/wp/v2/settings` validation path; core.trac#65867 / `wordpress-develop#13031`; Connectors credential storage.
+
+**Discussion highlights.** Filed by hbhalodia (cc jeffpaul/dkotter); dkotter's reply doubles as the reproduction report.
+
 ---
 
-## In progress (18)
+## In progress (13)
 
 *Actively being implemented or investigated.*
 
@@ -340,28 +351,6 @@
 
 **Discussion highlights.** jeffpaul said the next Abilities Explorer iteration focuses on TypeScript + DataViews/DataForms and suggested folding this extensibility into that work — effectively deferring the standalone filter.
 
-### #233 — Refactor experiments to leverage AI_Service layer
-**Status:** In progress · **Milestone:** 1.3.0 *(was Future Release)* · **Labels:** [Type] Enhancement, Help Wanted, [Experiment] Abilities Explorer, [Experiment] Excerpt Generation, [Experiment] Alt Text Generation, [Experiment] Image Generation, [Experiment] Content Summarization, [Experiment] Title Generation · **Assignee(s):** — · **Updated:** 2026-04-23 · **Comments:** 1
-**Link:** https://github.com/WordPress/ai/issues/233
-
-> ⚠️ **This card's premise has been reversed and its title is now stale.** The decision went the other way: `AI_Service` is being **removed**, not adopted. The board has not been updated.
-
-**Problem / goal (as filed).** With #101 merged in 0.2.1 (introducing the shared `AI_Service` layer), the existing Experiments should be refactored to route through it for consistency, rather than each calling the AI client independently.
-
-**What actually happened.** The adoption PR — **#898** ("Refactor experiments to leverage ai service layer", theaminulai), last window's authoritative `closing` reference for this card — was **closed unmerged on 2026-07-27**. Its replacement, **PR [#905](https://github.com/WordPress/ai/pull/905) "Remove unused ai service class"** (same author, +62/-61 across 5 files), deletes `includes/Services/AI_Service.php`, its integration test, and the `get_ai_service()` helper, and strips `AI_Service` from `docs/ARCHITECTURE_OVERVIEW.md` and `docs/experiments/multi-provider-support.md`. The `includes/Services/` folder survives for `Guidelines.php`.
-
-The stated rationale, per jeffpaul's comment on this issue and dkotter's review on #898: the layer was never adopted, newer experiment PRs did not pick it up, and it provides no value over calling `wp_ai_client_prompt()` directly. #905's author confirmed via codebase-wide search that no ability, experiment, or feature calls `AI_Service::get_instance()` or `get_ai_service()`, and that the `ai_experiments_service_initialized` action referenced only by the deleted test was never fired anywhere — so it is a pure removal with no functional change. Checks are green.
-
-**Open decisions / blockers.**
-- **Board hygiene, not engineering.** Only the wording is now unresolved: the card still reads "Refactor experiments to leverage AI_Service layer" while the work is retirement. Retitle it, or close it against #905.
-- ✅ **Tracking resolved (2026-08-10).** #905 now declares an authoritative **`Closes #233`**, so it reclassified `unexplained` → `linked-board-issue`, and the card was re-milestoned **Future Release → 1.3.0**. Last window's complaint — a strategy reversal the board could not see — no longer applies.
-
-**Approach change (2026-08-10).** #905 was also retitled *"Remove unused ai service class"* → **"Deprecate the AI_Service layer"** and rescoped accordingly: the class and the `get_ai_service()` helper are **kept and marked deprecated** rather than deleted, after dkotter pointed out that both are public surface a third-party plugin could already be calling. The engineering conclusion (the layer was never adopted and adds nothing over `wp_ai_client_prompt()`) is unchanged; the removal path became a deprecation path. PR #905 is BLOCKED with green checks and no review.
-
-**Dependencies.** #101 (AI_Service, shipped 0.2.1); the six tagged experiments — all of which turn out never to have depended on it.
-
-**Discussion highlights.** The issue's only comment was jeffpaul raising the strategic doubt, flipping it from "adopt the layer everywhere" to "possibly remove the layer." That question sat unanswered from 2026-04-23 until last window, when it was answered decisively in code — and this window the answer was finally wired back to the card that asked it.
-
 ### #238 — Add focus-aware crop suggestions
 **Status:** In progress · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Needs Design, [Experiment] Image Generation · **Assignee(s):** TylerB24890 · **Updated:** 2026-05-19 · **Comments:** 1
 **Link:** https://github.com/WordPress/ai/issues/238
@@ -377,23 +366,6 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 **Dependencies.** Gutenberg focal point selector (gutenberg#75221); Gutenberg Media Editor; vision-capable model. Related: #325.
 
 **Discussion highlights.** TylerB24890 built the experiment in PR #494 (vision-based suggestions, no UI yet, exercisable through the Abilities Explorer).
-
-### #307 — Add AGENTS.md to streamline contributor onboarding
-**Status:** In progress · **Milestone:** Future Release · **Labels:** — · **Assignee(s):** gziolo · **Updated:** 2026-05-07 · **Comments:** 6
-**Link:** https://github.com/WordPress/ai/issues/307
-
-**Problem / goal.** New contributors must stitch together CONTRIBUTING.md, DEVELOPER_GUIDE.md, ARCHITECTURE_OVERVIEW.md, and package.json before coding. Two pain points: no single entry-point/routing file, and non-obvious command conventions (PHP via `wp-env`/npm scripts like `npm run lint:php`, not `composer lint`). gziolo found onboarding via Claude Code slow without a context file.
-
-**Proposed approach.** Add a short `AGENTS.md` (currently gitignored under "AI files" since #172) that routes to the right doc per task and codifies workflow rules — a table-of-contents serving both humans and AI tools, not a duplication.
-
-**Open decisions / blockers.**
-- Ship `AGENTS.md` vs. first consolidating/improving existing docs (treated as a prerequisite).
-- Committed `AGENTS.md` vs. an `AGENTS.md.example` template.
-- Context-poisoning risk: one-time setup info injected into every session regardless of topic.
-
-**Dependencies.** Doc-cleanup issues #225/#308; acknowledged existing-doc "AI slop" tech debt.
-
-**Discussion highlights.** jeffpaul pushed to consolidate docs for both humans and agents, admitting some existing docs are AI slop. justlevine is on record against committing public `AGENTS.md` to WordPress.org properties (Trac #63901), preferring an `*.example`, but softened — after #225 cleans docs, a minimal `AGENTS.md` could give objective benefit; remains opposed to bringing it into wordpress-develop.
 
 ### #325 — Integrate media features and experiments with Gutenberg's experimental Media Editor
 **Status:** In progress · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** TylerB24890 · **Updated:** 2026-05-19 · **Comments:** 9
@@ -430,7 +402,7 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 **Discussion highlights.** zeus2611 volunteered, proposed the two-sub-issue split + anonymization layer; jeffpaul answered the design questions (Jetpack-first, dashboard widget, skip search-log fallback).
 
-**⚠️ Status-move caveat (2026-08-10).** Moved In discussion → In progress **with no implementing PR and no new comments** — the last activity on the issue is still 2026-07-09. The design questions above are answered, so the move is defensible as "assigned and agreed," but nothing distinguishes it from #625, which moved the same day on the same basis. Do not read In progress here as code in flight.
+**⚠️ Status-move caveat (2026-08-10).** Moved In discussion → In progress **with no implementing PR and no new comments** — the last activity on the issue is still 2026-07-09. The design questions above are answered, so the move is defensible as "assigned and agreed," but nothing distinguishes it from #625, which moved the same day on the same basis. **Update (2026-08-14):** draft PR **#929** ("Content Gap Suggestions: shared `Stats_Provider` layer + dashboard widget (1/2 for #338)", zeus2611) opened — the first code on this card.
 
 ### #421 — WordPress should detect C2PA manifests on upload
 **Status:** In progress *(was To do)* · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-20 · **Comments:** 4
@@ -448,21 +420,7 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 **Dependencies.** WP attachment pipeline; new JUMBF + CBOR utilities; reference implementations in #294.
 
-**Discussion highlights.** jeffpaul wants a fast-follow adding display UI with the `cr` overlay. lukenispel: reading/storing/displaying is straightforward, but the CR icon needs a conformant validator/generator first; offered to draft the display work, gated on conformance. **Relationship correction (2026-07-27):** PR #459 is now confirmed as this issue's **authoritative `closing` PR** via GitHub's `closingIssuesReferences`, not merely a conceptual sibling as earlier docs recorded — which is why the card moved To do → In progress. The signing PRs #294/#302 remain closed unmerged, so read-only detection is the whole live C2PA path.
-
-### #514 — Add comment value / relevance to Comment Moderation experiment
-**Status:** In progress · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-14 · **Comments:** 0
-**Link:** https://github.com/WordPress/ai/issues/514
-
-**Problem / goal.** The Comment Moderation experiment (PR #155) introduced sentiment/toxicity analysis with extensibility hooks. Review discussion surfaced interest in evaluating a comment's overall **value/relevance** — spammy/engagement-bait, off-topic, generic "thanks"/"+1"/low-context comments — to help prioritize moderation and surface high-quality discussion.
-
-**Proposed approach.** Extend Comment Moderation with a "Comment Value / Relevance" analysis on the existing pipeline: store a normalized score; add a Comments-screen column + Activity dashboard pill; allow bulk processing; optionally flag low-value comments; provide filters/hooks for custom scoring and thresholds.
-
-**Open decisions / blockers.** Existing hooks cover system instructions + response schema, but additional JS extensibility may be needed for the full admin experience.
-
-**Dependencies.** Comment Moderation experiment / PR #155 (analysis pipeline, system-instruction and response-schema hooks).
-
-**Discussion highlights.** —
+**Discussion highlights.** jeffpaul wants a fast-follow adding display UI with the `cr` overlay. lukenispel: reading/storing/displaying is straightforward, but the CR icon needs a conformant validator/generator first; offered to draft the display work, gated on conformance. **Relationship correction (2026-07-27):** PR #459 is now confirmed as this issue's **authoritative `closing` PR** via GitHub's `closingIssuesReferences`, not merely a conceptual sibling as earlier docs recorded — which is why the card moved To do → In progress. The signing PRs #294/#302 remain closed unmerged, so read-only detection is the whole live C2PA path. **Movement (2026-08-14):** **PR card #459 was removed from the board** while the PR stays open and still `closing`-linked here, and its checks went FAILURE — this issue is now the only board representation of the C2PA read path, and it is one of the two cards standing between 1.3.0 and its release.
 
 ### #625 — New Experiment: Social Content Generation for platform-specific social posts
 **Status:** In progress *(was In discussion / Needs decision)* · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Needs Design · **Assignee(s):** Malayt04 · **Updated:** 2026-07-16 · **Comments:** 3
@@ -498,40 +456,8 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 **Discussion highlights.** Core tension: product simplicity / hide-developer-controls vs. discoverability. The compromise converged on a manual "delete older than" action; i-anubhav-anand picked it up and opened PR #735.
 
-### #690 — Plugin does not clean up database table and options on uninstall
-**Status:** In progress · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement · **Assignee(s):** hbhalodia · **Updated:** 2026-07-14 · **Comments:** 1
-**Link:** https://github.com/WordPress/ai/issues/690
-
-**Problem / goal.** On deletion the plugin leaves behind its custom table `wp_wpai_request_logs` and all `wpai_*` options permanently — there's no `uninstall.php` or `register_uninstall_hook()`. Because the log table stores request/response previews of user content and AI outputs, this raises **privacy** concerns and violates plugin-directory guidelines requiring data cleanup. Leftover options enumerated (e.g. `wpai_features_enabled`, `wpai_feature_{id}_enabled`, `wpai_version`, `wpai_connector_approvals`, `wpai_request_logs_schema_version`).
-
-**Proposed approach.** Add `uninstall.php` dropping the custom table and removing all `wpai_*` options. Add a "Remove all data on uninstall" checkbox (unchecked by default) so users opt in. Cleanup runs on **uninstall only**, not deactivation.
-
-**Open decisions / blockers.** — (implementation submitted; status moved back Needs review → In progress as review feedback is addressed).
-
-**Dependencies.** WP plugin uninstall-methods guidelines; the Request Logs table/options schema. Implemented in **PR #692**.
-
-**Discussion highlights.** hbhalodia reports the fix is ready for review as **PR #692**.
-
-### #732 — AI Request Logging only captures providers that use the SDK HTTP transporter; sidecar/custom-transport providers are invisible
-**Status:** In progress · **Milestone:** 1.3.0 · **Labels:** Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-13 · **Comments:** 0
-**Link:** https://github.com/WordPress/ai/issues/732
-
-**Problem / goal.** The AI Request Logging experiment taps requests by decorating the SDK's HTTP transporter, so a request is logged **iff** it flows through `HttpTransporter::send()`. Any provider that performs its own HTTP — rather than routing generation through `AiClient`'s transporter — is therefore never logged, despite being a first-class provider reachable via `wp_ai_client_prompt()` and listed in Connectors. The Request Log silently under-reports, which is surprising for something presented as a log of *every* AI request.
-
-**Root cause.** `Logging_Integration::wrap_transporter()` swaps in a `Logging_Http_Transporter` decorator (`includes/Logging/Logging_Integration.php`), and logging lives entirely inside that decorator's `send()`. Provider attribution compounds the gap: `Log_Data_Extractor::detect_provider()` infers the provider from the request **host**, so a provider talking to `127.0.0.1` couldn't be attributed even if its request were seen.
-
-**Proposed approach.** Add a **provider-agnostic fallback** alongside the transporter decorator — also listen to the core generation events, which fire for every provider regardless of transport: `wp_ai_client_before_generate_result` / `wp_ai_client_after_generate_result` (bridged from the SDK's `BeforeGenerateResultEvent` / `AfterGenerateResultEvent`). The after-event exposes everything a row needs — provider (`providerMetadata()->getId()`), model, token usage (`getResult()->getTokenUsage()`), and duration (before → after). To avoid double-logging transporter-based providers (which fire the event *and* pass through the decorator), the listener writes only when the transporter didn't already log the current generation (a flag reset in the before-event, set by `Logging_Http_Transporter::send()`).
-
-**Open decisions / blockers.**
-- **Known limitation:** the SDK's after-event fires on **success only** (no error event), so the fallback captures successful non-transporter generations but not failed ones — failed custom-transport generations stay a separate gap needing an SDK-level error event.
-- Alternatives rejected: provider-side logging (couples every provider to `AI_Request_Log_Manager` internals — the reporter's current stopgap); hooking `pre_http_request` (too broad/noisy, can't reliably attribute the provider).
-
-**Dependencies.** AI Request Logging experiment (`Logging_Integration`, `Logging_Http_Transporter`, `Log_Data_Extractor`, `AI_Request_Log_Manager`); WP AI Client generation events / SDK `Before`/`AfterGenerateResultEvent`. Prior art: #680 (thinking-token undercount — same "logger misses data" spirit).
-
-**Discussion highlights.** — (no comments yet. Filed by henryperkins with a code-level root cause + proposed fix, motivated by a real third-party `codex` provider that brokers requests through a localhost sidecar for ChatGPT-managed auth and is entirely absent from the log; 1 👀.)
-
 ### #736 — Expose role/user access controls per feature/experiment
-**Status:** In progress · **Milestone:** Future Release *(was 1.3.0)* · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-31 · **Comments:** 9
+**Status:** In progress · **Milestone:** 1.4.0 *(was 1.3.0, then Future Release)* · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-31 · **Comments:** 9
 **Link:** https://github.com/WordPress/ai/issues/736
 
 **Problem / goal.** Site owners with many editors have no way to limit AI features to specific roles or users — there are no AI-related capabilities exposed in the role-editor screens. Originates from a wordpress.org support request ("limit-use-to-certain-roles"). Goal: let admins fine-tune which roles/users can access each feature/experiment.
@@ -545,7 +471,7 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 **Dependencies.** Per-experiment settings UI (the provider/model ellipses menu); WP roles/capabilities. Governance-cluster sibling to the unified management layer (#348) and per-surface exposure controls (#354) — at feature/experiment granularity.
 
-**Discussion highlights.** Infinite-Null shared an initial implementation and demo with per-feature role/user controls in AI settings, open as **PR #749** (+893/−106, 18 files). dkotter said the direction looked correct and requested save-state UX, snackbar feedback, and possibly checkboxes for roles. **This window PR #749 picked up CHANGES_REQUESTED and the card was re-milestoned 1.3.0 → Future Release (2026-07-31)** — the requested UX work is what pulled it out of the active release lane.
+**Discussion highlights.** Infinite-Null shared an initial implementation and demo with per-feature role/user controls in AI settings, open as **PR #749** (+893/−106, 18 files). dkotter said the direction looked correct and requested save-state UX, snackbar feedback, and possibly checkboxes for roles. PR #749 picked up CHANGES_REQUESTED and the card was re-milestoned 1.3.0 → Future Release (2026-07-31), then back into the **1.4.0** lane this window as v1.3.0 closed out — the requested UX work is what keeps it from shipping.
 
 ### #844 — New Experiment: Semantic search in wp admin
 **Status:** In progress *(was Backlog)* · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** priyanshuhaldar007 · **Updated:** 2026-07-21 · **Comments:** 1
@@ -565,7 +491,7 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 **Discussion highlights.** Filed by jeffpaul as the admin-side counterpart to #683.
 
 ### #845 — New Experiment: Markdown feeds (powered by `html-to-md`)
-**Status:** In progress · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** dkotter · **Updated:** 2026-07-14 · **Comments:** 0
+**Status:** In progress · **Milestone:** 1.4.0 *(was 1.3.0)* · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** dkotter · **Updated:** 2026-07-14 · **Comments:** 0
 **Link:** https://github.com/WordPress/ai/issues/845
 
 **Problem / goal.** Markdown output makes content easier for AI tools, agents, search/indexing workflows, static exports, and plaintext-preferring readers to consume. A prior implementation (#194) explored the surface — Markdown feed output, singular Markdown views, autodiscovery links, `Accept: text/markdown` support, settings toggles, filters, and tests — but maintained its own converter.
@@ -578,24 +504,8 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 **Discussion highlights.** Filed by jeffpaul; Help Wanted. dkotter picked it up and opened PR #855, moving it Backlog → In progress.
 
-### #863 — New Experiment: Abilities toggle
-**Status:** In progress *(was To do)* · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** hbhalodia · **Updated:** 2026-08-10 · **Comments:** 4
-**Link:** https://github.com/WordPress/ai/issues/863
-
-**Problem / goal.** Feature-backed abilities are already gated by their experiment toggles, but standalone abilities such as `core/read-content`, `core/read-settings`, `core/read-users`, `ai/get-post-details`, and `ai/get-post-terms` register unconditionally. That is increasingly uncomfortable as the surface grows toward write/destructive operations.
-
-**Proposed approach.** Gate the standalone set deliberately. Discussion favors extending the Abilities Explorer with nested enablement controls rather than adding another generic Editor Experiments toggle; the UI work is in PR #881.
-
-**Open decisions / blockers.** Decide whether enablement is one group toggle or per ability/category, what remains visible while disabled, and how defaults evolve as Core adds abilities. **None of these was answered this window** — the card advanced on implementation progress, not on the design questions closing.
-
-**Dependencies.** Abilities Explorer; Abilities API; #40; PR #881.
-
-**Discussion highlights.** Maintainers confirmed the issue is specifically about standalone abilities, not already-gated feature abilities. The current direction is an Abilities Explorer-based control surface.
-
-**Movement (2026-08-10).** Moved **To do → In progress** and assigned to hbhalodia; **PR #881 came out of draft** and its link to this issue was upgraded from branch-name inference to an authoritative `Closes #863`. It is the most-recently-active card on the entire board. Counterweight: #881 is BLOCKED with **failing checks and no review**, and the governance question this issue exists to settle (#354/#348) is still open — so the plugin-side half of ability governance is being built before it is decided, while the upstream half already landed via `mcp-adapter#254`.
-
 ### #875 — New Experiment: Suggest internal links within post content
-**Status:** In progress · **Milestone:** 1.3.0 *(1.4.0 → Future Release → 1.3.0 in two windows)* · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** Infinite-Null · **Updated:** 2026-07-31 · **Comments:** 2
+**Status:** In progress · **Milestone:** 1.4.0 *(1.4.0 → Future Release → 1.3.0 → 1.4.0 in three windows)* · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** Infinite-Null · **Updated:** 2026-07-31 · **Comments:** 2
 **Link:** https://github.com/WordPress/ai/issues/875
 
 **Problem / goal.** Authors miss useful internal links because they cannot manually recall all related site content, weakening navigation, engagement, and SEO.
@@ -606,21 +516,35 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 **Dependencies.** Content discovery/indexing, Editorial Notes/Updates patterns, inline Notes availability, AI Client.
 
-**Discussion highlights.** Filed board-new on 2026-07-17 with no comments; two comments and the implementation PR arrived the following window. **Milestone churn is now the defining feature of this card:** 1.4.0 → Future Release (2026-07-31) → **1.3.0** (this window), two reversals in nine days, while PR #887 never cleared review and in fact regressed to DIRTY. The scheduling has moved three times; the work has not moved at all.
+**Discussion highlights.** Filed board-new on 2026-07-17 with no comments; two comments and the implementation PR arrived the following window. **Milestone churn is the defining feature of this card:** 1.4.0 → Future Release (2026-07-31) → 1.3.0 → **1.4.0** (this window), three reversals, while PR #887 never cleared review and in fact regressed to DIRTY. The scheduling has moved four times; the work has not moved at all.
 
-### #876 — New Experiment: Suggest permalink slugs
-**Status:** In progress · **Milestone:** 1.3.0 *(1.4.0 → Future Release → 1.3.0 in two windows)* · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** milindmore22 · **Updated:** 2026-07-31 · **Comments:** 2
-**Link:** https://github.com/WordPress/ai/issues/876
+### #924 — Release version 1.3.0
+**Status:** In progress · **Milestone:** 1.3.0 · **Labels:** — · **Assignee(s):** dkotter, jeffpaul · **Updated:** 2026-08-13 · **Comments:** 1
+**Link:** https://github.com/WordPress/ai/issues/924
 
-**Problem / goal.** Auto-generated or casually edited permalink slugs miss an easy SEO/readability improvement opportunity.
+**Problem / goal.** The release tracker for v1.3.0, following the standard pre/post-release checklist. **Target release date: 2026-08-17.**
 
-**Proposed approach.** Add a review-and-select slug experiment based on title/content, following Title Generation's one-click pattern. v1 would return one or several suggestions, never overwrite without user action, and expose filters for suggestion count/content gating. Implementation is now in flight as **PR #897** ("Prototype : Implement slug generation feature with UI and tests", milindmore22) — +2,000 lines across 15 files, an authoritative `closing` reference, and explicitly framed as a prototype.
+**Proposed approach.** The board's own release runbook: a pre-release review/punt pass over every 1.3.0 PR, then branch/version/`@since`/changelog/credits/readme work, a no-FF merge into `develop` and `trunk`, build + E2E checks, the GitHub release, and post-release milestone close/punt/announcement.
 
-**Open decisions / blockers.** Placement (sidebar, pre-publish, or both), whether to check existing URLs for near-duplicates, and whether a WP-CLI bulk-review command is in scope all remain open. PR #897 still carries **CHANGES_REQUESTED**. Milestone: 1.4.0 → Future Release (2026-07-31) → **1.3.0** (this window).
+**Open decisions / blockers.** One pre-release item remains unchecked: **"Review and merge/punt #459"** (C2PA Monitor). Everything else is checked — the punts already dispatched #888, #887, #858, #764, #777, #789, #832, #683, #681, #759, #916, #757, #917, #798 to 1.4.0/Future Release, and the merges (#928, #897, #892, #881, #692, #909, #905, #889, #867, #915, #914, #930, #932) are in. None of the actual release steps has started.
 
-**Dependencies.** Post permalink editing UI, pre-publish panel, content-length gating, AI Client.
+**Dependencies.** `docs/RELEASE_INSTRUCTIONS.md`; the release PR; CI/E2E; milestone 22.
 
-**Discussion highlights.** Filed board-new on 2026-07-17; picked up quickly, with a prototype PR seven days later. Like #875, it has now been re-milestoned twice without any of its open questions being answered — the prototype framing in PR #897's own title turned out to be the accurate read.
+**Discussion highlights.** — (one comment; the issue body is the checklist. This is the reason two cards remain in 1.3.0.)
+
+### #933 — Connector validity check assumes text generation, so speech-only and image-only connectors report as invalid
+**Status:** In progress · **Milestone:** 1.4.0 · **Labels:** Help Wanted · **Assignee(s):** whyisjake · **Updated:** 2026-08-13 · **Comments:** 0
+**Link:** https://github.com/WordPress/ai/issues/933
+
+**Problem / goal.** `has_valid_ai_credentials()` decides connector validity by asking a single question — *can it generate text?* — so a site whose only connector is speech- or image-only is told its connectors "may be invalid," when they are correctly configured and working. The UI already distinguishes "no connectors" from "configured but not valid," and a non-text connector lands in the wrong branch: the verdict and the wording mismatch.
+
+**Proposed approach.** Three directions offered, not prescriptive: (1) keep the text gate but reword the notice to name the missing capability; (2) split *valid* (authenticates and registers any capability) from *sufficient for a feature* (decided per feature, the way image generation already is via PRs #679/#748); (3) report per-capability status on the settings screen. **Implementation in flight:** PR **#935** "Fix: make connector validity capability-aware instead of text-only" (whyisjake, authoritative `Closes #933`).
+
+**Open decisions / blockers.** Which of the three directions ships; the reporter volunteered a PR if maintainers pick.
+
+**Dependencies.** `includes/helpers.php` `has_valid_ai_credentials()`; the AI Client SDK capability model (TTS, speech, image, video, embeddings); prior art PRs #679/#748.
+
+**Discussion highlights.** Filed with a complete reproduction against WP 7.0.4 + AI 1.2.0 + an ElevenLabs non-text connector, and a precise pointer to the `is_supported_for_text_generation()` gate. The report also names the widening exposure: non-text connector plugins are just starting to appear.
 
 ---
 
@@ -729,7 +653,7 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 ---
 
-## To do (3)
+## To do (4)
 
 *Queued work with a defined next action.*
 
@@ -784,6 +708,22 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 **Discussion highlights.** Mismatched-error symptom (image action → text_generation error); possibly environment-specific. dkotter cc'd felixarntz; awaiting confirmation it still reproduces.
 
+### #600 — Remove `Enable AI` header toggle, allow feature/experiment toggles (and group toggles) to control plugin functionality
+**Status:** To do *(was In discussion / Needs decision)* · **Milestone:** 1.4.0 *(was Future Release)* · **Labels:** [Type] Bug, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-15 · **Comments:** 5
+**Link:** https://github.com/WordPress/ai/issues/600
+
+**Problem / goal.** The header `Enable AI` toggle is binary and misrepresents partial configuration: when only some sub-features are enabled it still renders fully ON, indistinguishable from all-enabled. **Retitled this window** from a bug report ("header toggle doesn't reflect aggregate state") into a product decision: **remove** the global toggle and let feature/experiment toggles (and group toggles) control plugin functionality.
+
+**Proposed approach.** **A** — tri-state header toggle (Off / Partial / On); **B (now the stated direction)** — drop the global header toggle and give each section its own master tri-state toggle, pairing with Enable all / Disable all.
+
+**Open decisions / blockers.**
+- gziolo: toggle is confusing ("why install AI to disable AI?") — reflect "AI enabled" state or rename to "Disable AI".
+- dkotter: distinguish disabling AI features while non-AI features (Abilities Explorer, Request Logging, Connector Approval) stay on.
+
+**Dependencies.** **PR [#798](https://github.com/WordPress/ai/pull/798)** ("Clarify global AI toggle as a master switch") was its closing PR and is now **closed unmerged**; the retitle supersedes the toggle-as-master-switch approach. The card moved In discussion → To do with a Help Wanted label.
+
+**Discussion highlights.** dkotter explains the toggle is a quick exit path (disliked results, rate/usage thresholds) but concedes manual disable or plugin deactivation is comparable effort. The retitle turns the design question into a scoped, help-wanted task.
+
 ---
 
 ## Triage (3)
@@ -809,7 +749,7 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 **Discussion highlights.** swissspidy mapped the CP-vs-MCP tension (granular "Create a new page" for humans, one `create_post` tool for machines) and flagged i18n issues with string concatenation. JasonTheAdams shared TEC/GiveWP MCP findings — single CRUD tools fared poorly, settling on read/create-update/delete. johnbillion sharply questioned shipping `show_in_abilities` into 7.0 beta without API-design review. justlevine and jorgefilipecosta debated core-first vs. Experiments-first process. gziolo initially favored curated settings abilities, then reversed to broad-first after consulting Automattic AI experts, preserving `core/get-site-info` for back-compat.
 
 ### #918 — Feature: AI-generated `llms.txt` — a curated, LLM-friendly site index served at `/llms.txt`
-**Status:** Triage *(board-new 2026-08-07)* · **Milestone:** — · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-08-07 · **Comments:** 1
+**Status:** Triage · **Milestone:** Future Release *(was unmilestoned)* · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-08-07 · **Comments:** 1
 **Link:** https://github.com/WordPress/ai/issues/918
 
 **Problem / goal.** LLMs and agents reading a site directly have no concise map of what it is about or which pages matter: raw HTML is noisy and token-expensive, and `sitemap.xml` lists every URL with no priority, summary, or context. [`llms.txt`](https://llmstxt.org/) is an emerging convention — a single Markdown file at `/llms.txt` — that does for models what `robots.txt` and `sitemap.xml` did for crawlers. Producing one on WordPress today means hand-maintaining a file that goes stale on the next edit, or adopting an SEO plugin.
@@ -825,7 +765,7 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 **Discussion highlights.** Filed 2026-08-07 by hbhalodia — the same contributor behind #863 and PR #881. One comment, from jeffpaul the same day: *"@justlevine what's the current state of recommendation on this sort of a file being served from sites?"* — i.e. the first maintainer response is a question about whether the **standard itself** is settled enough to build on, which is the right gate and is still unanswered.
 
 ### #890 — Add mobile right sidebar display component
-**Status:** Triage · **Milestone:** — · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-07-23 · **Comments:** 0
+**Status:** Triage · **Milestone:** Future Release *(was unmilestoned)* · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-07-23 · **Comments:** 0
 **Link:** https://github.com/WordPress/ai/issues/890
 
 **Problem / goal.** Filed by aabhishekchuobey-ops on 2026-07-23: mobile users lack a functional, responsive right-sidebar surface for the plugin's AI features, so there is no mobile-optimized way to reach the information and navigation the desktop sidebar provides.
@@ -836,7 +776,7 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 **Dependencies.** Undetermined — likely the plugin's admin UI shell and, depending on scope, Gutenberg's editor sidebar behavior on small viewports.
 
-**Discussion highlights.** None; board-new this window and the only card added in it.
+**Discussion highlights.** None; unchanged for a fourth window except gaining the Future Release milestone.
 
 ---
 
@@ -845,7 +785,7 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 *Issue work with an implementation ready for review.*
 
 ### #660 — UX: Ambiguous error message in editor when a provider is blocked by Connector Approvals
-**Status:** Needs review · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-13 · **Comments:** 1
+**Status:** Needs review · **Milestone:** 1.4.0 *(was 1.3.0)* · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-13 · **Comments:** 1
 **Link:** https://github.com/WordPress/ai/issues/660
 
 **Problem / goal.** When an AI request (e.g., title generation) is blocked by Connector Approvals, the editor error ("Please ensure you have a connected provider that supports text generation") wrongly implies invalid keys / failed connection / unsupported model — when the provider is connected but awaiting administrator authorization.
@@ -858,45 +798,85 @@ The stated rationale, per jeffpaul's comment on this issue and dkotter's review 
 
 **Discussion highlights.** —
 
-### #866 — Bug Inconsistency: Standardize post meta key naming with the `wpai_` prefix
-**Status:** Needs review *(was In progress)* · **Milestone:** 1.3.0 · **Labels:** [Type] Bug · **Assignee(s):** hbhalodia · **Updated:** 2026-07-15 · **Comments:** 0
-**Link:** https://github.com/WordPress/ai/issues/866
+### #514 — Add comment value / relevance to Comment Moderation experiment
+**Status:** Needs review *(was In progress)* · **Milestone:** 1.4.0 *(was 1.3.0)* · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-07-14 · **Comments:** 0
+**Link:** https://github.com/WordPress/ai/issues/514
 
-**Problem / goal.** Plugin-owned post/comment meta mixes `ai_*` and `wpai_*` prefixes, complicating discovery, cleanup, REST fields, and upgrades.
+**Problem / goal.** The Comment Moderation experiment (PR #155) introduced sentiment/toxicity analysis with extensibility hooks. Review discussion surfaced interest in evaluating a comment's overall **value/relevance** — spammy/engagement-bait, off-topic, generic "thanks"/"+1"/low-context comments — to help prioritize moderation and surface high-quality discussion.
 
-**Proposed approach.** Rename `ai_generated`, `ai_generated_summary`, and `ai_note` to `wpai_*` equivalents, updating PHP, editor JavaScript, tests, and uninstall behavior in lockstep. PR #867 implements the change.
+**Proposed approach.** Extend Comment Moderation with a "Comment Value / Relevance" analysis on the existing pipeline: store a normalized score; add a Comments-screen column + Activity dashboard pill; allow bulk processing; optionally flag low-value comments; provide filters/hooks for custom scoring and thresholds.
 
-**Open decisions / blockers.** Exact final names and a safe data migration are required; without migration, existing generated flags/summaries/notes would be orphaned. **PR #867 still carries CHANGES_REQUESTED** (checks green, merge BLOCKED), so the move to Needs review reflects the author considering it ready, not a reviewer clearing it.
+**Open decisions / blockers.** Existing hooks cover system instructions + response schema, but additional JS extensibility may be needed for the full admin experience. Implementing PR **#681** carries CHANGES_REQUESTED.
 
-**Dependencies.** Post/comment meta registration, REST schemas, editor data, upgrade classes, uninstall cleanup, and PR #867.
+**Dependencies.** Comment Moderation experiment / PR #155 (analysis pipeline, system-instruction and response-schema hooks).
 
-**Discussion highlights.** No issue comments; the issue body provides the migration and acceptance checklist. Moved In progress → Needs review this window.
+**Discussion highlights.** — *(moved In progress → Needs review as 1.3.0 closed out, re-milestoned into 1.4.0.)*
 
-### #906 — Request Logging: no public API to record the reserved `mcp_tool` and `ability` log types
-**Status:** Needs review *(was In progress)* · **Milestone:** 1.3.0 *(was unmilestoned)* · **Labels:** [Type] Enhancement · **Assignee(s):** azizulhasan · **Updated:** 2026-07-29 · **Comments:** 1
-**Link:** https://github.com/WordPress/ai/issues/906
+### #732 — AI Request Logging only captures providers that use the SDK HTTP transporter; sidecar/custom-transport providers are invisible
+**Status:** Needs review *(was In progress)* · **Milestone:** 1.4.0 *(was 1.3.0)* · **Labels:** Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-13 · **Comments:** 0
+**Link:** https://github.com/WordPress/ai/issues/732
 
-**Problem / goal.** The AI Request Logging experiment's **read** contract already declares three log types, but only one can ever exist. `AI_Request_Log_Controller::get_collection_params()` exposes `type` with `enum => array( '', 'ai_client', 'mcp_tool', 'ability' )`, and the client mirrors it (`LogEntry.type` is typed `'ai_client' | 'mcp_tool' | 'ability'` in `src/admin/ai-request-logs/types.ts`) — yet the only **writer**, `Log_Data_Extractor::extract_request_data()`, hardcodes `'type' => 'ai_client'`. Nothing in the plugin can produce an `mcp_tool` or `ability` row.
+**Problem / goal.** The AI Request Logging experiment taps requests by decorating the SDK's HTTP transporter, so a request is logged **iff** it flows through `HttpTransporter::send()`. Any provider that performs its own HTTP is therefore never logged, despite being a first-class provider reachable via `wp_ai_client_prompt()` and listed in Connectors — the Request Log silently under-reports.
 
-There is also no supported way for external code to write one: `AI_Request_Logging::$manager` and `::get_manager()` are `private`, and `Logging_Integration::$log_manager` is `private static` with no accessor. A consumer's only option is constructing its own `AI_Request_Log_Manager`, which bypasses the experiment-enabled check and, on `init()`, re-runs `maybe_upgrade_table()` and re-negotiates the daily cleanup cron — while skipping `init()` risks writing into an un-upgraded table.
+**Root cause.** `Logging_Integration::wrap_transporter()` swaps in a `Logging_Http_Transporter` decorator, and logging lives entirely inside that decorator's `send()`. Provider attribution compounds the gap: `Log_Data_Extractor::detect_provider()` infers the provider from the request **host**, so a provider talking to `127.0.0.1` couldn't be attributed even if its request were seen.
 
-**Proposed approach.** Two additive changes: (1) a public entry point for recording a request that no-ops when the experiment is disabled and otherwise delegates to the already-public `AI_Request_Log_Manager::log()`; and (2) validation/normalization of `type` against the same set the REST controller advertises, so the write and read sides cannot drift. Optionally an action at write time so consumers can observe rows without polling REST.
+**Proposed approach.** Add a provider-agnostic fallback alongside the transporter decorator — also listen to the core generation events, which fire for every provider regardless of transport: `wp_ai_client_before_generate_result` / `wp_ai_client_after_generate_result` (bridged from the SDK's `BeforeGenerateResultEvent` / `AfterGenerateResultEvent`). A flag reset in the before-event and set by `Logging_Http_Transporter::send()` prevents double-logging.
 
-**Implementation in flight.** **PR [#914](https://github.com/WordPress/ai/pull/914)** (azizulhasan, opened 2026-08-01, +383/-3 across 6 files) with an authoritative `Closes #906`. It adds namespaced `WordPress\AI\log_ai_request()` (returning the log ID, or `false` when the experiment is disabled, so callers can invoke unconditionally), `Logging_Integration::get_log_manager()`, `AI_Request_Log_Manager::get_types()` as the single source of truth that the REST enum now derives from, and a `wpai_ai_request_logged` action.
+**Open decisions / blockers.** **Known limitation:** the SDK's after-event fires on **success only**, so failed custom-transport generations stay a separate gap needing an SDK-level error event. Implementing PR **#757** ("capture generations that bypass the SDK HTTP transporter") is now review-ready.
 
-**Open decisions / blockers.** ⚠️ **One flagged behavior change:** `AI_Request_Log_Manager::log()` now refuses any `type` outside the supported set via `_doing_it_wrong()`. That is a behavior change on a public method — any existing caller passing a custom type would begin silently losing rows. The PR's own rationale is that a row carrying a type the REST API cannot filter is unreachable through the UI, so it is better refused at write time than stored unretrievably. Also note the naming divergence: the issue sketched `wpai_log_ai_request()`, the PR uses the namespaced `WordPress\AI\log_ai_request()` convention already used by `has_ai_credentials()` / `get_post_context()`. Checks are currently failing on #914.
+**Dependencies.** AI Request Logging experiment (`Logging_Integration`, `Logging_Http_Transporter`, `Log_Data_Extractor`, `AI_Request_Log_Manager`); WP AI Client generation events. Prior art: #680; composes with (does not duplicate) #906, which shipped this window.
 
-**Dependencies.** AI Request Logging experiment; `Logging_Integration`; `AI_Request_Log_Controller`. The MCP Adapter is the stated first consumer. **Composes with, and does not duplicate, [#732](https://github.com/WordPress/ai/issues/732):** #732 covers provider *transports* that bypass the SDK HTTP path (PR #757 in flight), whereas this covers log *types* the schema already reserves.
-
-**Discussion highlights.** Filed with a precise root-cause walkthrough naming the exact files and access modifiers, plus the reporter's own motivation — they maintain a plugin exposing abilities over MCP and want its tool calls in the site's existing AI Request Log rather than a parallel one. dkotter agreed the same day: "This all makes sense to me, happy to review a PR when it's ready." The PR followed three days later. **This is the cleanest issue → card → PR → authoritative-link chain on the board this window**, and the counter-example to the six unexplained PRs.
+**Discussion highlights.** — (Filed by henryperkins with a code-level root cause, motivated by a third-party `codex` provider brokered through a localhost sidecar and absent from the log. Moved In progress → Needs review this window.)
 
 ---
 
 ## Recently board-Done (since the 2026-06-15 snapshot)
 
-**43 issue dossiers retained for reference.** These are excluded from the 51-open-issue count. Note that many of these cards have since been **de-carded** from Project #240 in post-release cleanup passes (ten on 2026-07-27, seven by the 2026-08-01 refresh — #614, #778, #853, #864, #865, #870, #872 — and six more on 2026-08-10: #191, #192, #452, #507, #874, #883); they are kept here because the work shipped, not because the card still exists.
+**50 issue dossiers retained for reference.** These are excluded from the 48-open-issue count. Note that many of these cards have since been **de-carded** from Project #240 in post-release cleanup passes (ten on 2026-07-27, seven by the 2026-08-01 refresh — #614, #778, #853, #864, #865, #870, #872 — six more on 2026-08-10: #191, #192, #452, #507, #874, #883, and **#187** on 2026-08-14); they are kept here because the work shipped, not because the card still exists.
 
-> ⚠️ **"Board-Done" is a board status, not a delivery guarantee.** Most of this section corresponds to merged work, but three entries do not: **#900** was webinar spam, **#193** was closed because the work had *already* shipped years earlier under a different PR, and **#869** was closed **`NOT_PLANNED`** as not reproducible. Separately, PR card **#621** was closed *unmerged* on 2026-07-28 and still marked board-Done, as was dependabot PR **#922** on 2026-08-10 — see the [planned-work data-quality flags](./wordpress-ai-planned-work.md#-data-quality-flags-verify-before-acting).
+> ⚠️ **"Board-Done" is a board status, not a delivery guarantee.** Most of this section corresponds to merged work, but four entries do not: **#900** was webinar spam, **#193** was closed because the work had *already* shipped years earlier under a different PR, **#869** was closed **`NOT_PLANNED`** as not reproducible, and **#307** was closed **`NOT_PLANNED`** because the `AGENTS.md` proposal was declined. Separately, PR card **#621** was closed *unmerged* on 2026-07-28 and still marked board-Done, as was dependabot PR **#922** on 2026-08-10 — see the [planned-work data-quality flags](./wordpress-ai-planned-work.md#-data-quality-flags-verify-before-acting).
+
+### #233 — Refactor experiments to leverage AI_Service layer
+**Status:** Done · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted, [Experiment] ×6 · **Assignee(s):** — · **Updated:** 2026-08-11 · **Comments:** 1 · *(board-Done / closed 2026-08-11 as `COMPLETED` by merged PR #905)*
+**Link:** https://github.com/WordPress/ai/issues/233
+
+**How it closed.** The card whose premise reversed in July — filed as "adopt the `AI_Service` layer everywhere," answered as "remove it" after PR #898 closed unmerged — closed against merged **PR #905**, which **deprecates** the class and `get_ai_service()` rather than deleting them (dkotter: both are public surface). The two-window "board actively contradicted by its own implementation" case ends here: tracking fixed, wording no longer matters, the card is Done. The stale-title footnote that headed this dossier is retired with it.
+
+### #307 — Add AGENTS.md to streamline contributor onboarding
+**Status:** Done · **Milestone:** — *(cleared)* · **Labels:** — · **Assignee(s):** gziolo · **Updated:** 2026-08-10 · **Comments:** 6 · *(board-Done / closed 2026-08-10 as `NOT_PLANNED`)*
+**Link:** https://github.com/WordPress/ai/issues/307
+
+**How it closed.** Declined rather than shipped. The April debate (justlevine against committing a public `AGENTS.md` to WordPress.org properties, in favor of an `AGENTS.md.example`; gziolo's concrete onboarding evidence; jeffpaul's docs-first prerequisite) ended with the proposal closed `NOT_PLANNED` on 2026-08-10, its milestone cleared. Retained context: onboarding remains the pain it described — docs-first cleanup (#225/#308) is the surviving path.
+
+### #690 — Plugin does not clean up database table and options on uninstall
+**Status:** Done · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement · **Assignee(s):** hbhalodia · **Updated:** 2026-08-11 · **Comments:** 1 · *(board-Done / closed 2026-08-11 as `COMPLETED` by merged PR #692)*
+**Link:** https://github.com/WordPress/ai/issues/690
+
+**How it closed.** PR **#692** merged: `uninstall.php` drops `wp_wpai_request_logs` and removes all `wpai_*` options behind an opt-in "Remove all data on uninstall" checkbox — resolving the privacy/guidelines gap named in the dossier.
+
+### #863 — New Experiment: Abilities toggle
+**Status:** Done · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** hbhalodia · **Updated:** 2026-08-12 · **Comments:** 11 · *(board-Done / closed 2026-08-12 as `COMPLETED` by merged PR #881)*
+**Link:** https://github.com/WordPress/ai/issues/863
+
+**How it closed.** PR **#881** merged, giving standalone abilities deliberate enablement controls in the Abilities Explorer. The plugin-side half of ability governance shipped; the open design questions the dossier carried (group vs per-ability toggle, what stays visible while disabled) were answered in implementation, and the upstream half had already landed via `mcp-adapter#254`.
+
+### #866 — Bug Inconsistency: Standardize post meta key naming with the `wpai_` prefix
+**Status:** Done · **Milestone:** 1.3.0 · **Labels:** [Type] Bug · **Assignee(s):** hbhalodia · **Updated:** 2026-08-12 · **Comments:** 2 · *(board-Done / closed 2026-08-12 as `COMPLETED` by merged PR #867)*
+**Link:** https://github.com/WordPress/ai/issues/866
+
+**How it closed.** PR **#867** merged with the migration: `ai_generated` / `ai_generated_summary` / `ai_note` renamed to `wpai_*` across PHP, editor JS, tests, and uninstall behavior — the orphaned-data risk the dossier flagged was resolved by shipping the migration in the same PR.
+
+### #876 — New Experiment: Suggest permalink slugs
+**Status:** Done · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** milindmore22 · **Updated:** 2026-08-11 · **Comments:** 2 · *(board-Done / closed 2026-08-11 as `COMPLETED` by merged PR #897)*
+**Link:** https://github.com/WordPress/ai/issues/876
+
+**How it closed.** PR **#897** merged, ending the 1.4.0 → Future Release → 1.3.0 milestone round trip with delivery. The dossier's caution — the PR's own "Prototype" framing — resolved in the good direction: the prototype became the shipped experiment. Its sibling #875 (internal links) stays open in 1.4.0, still carrying the same open product question.
+
+### #906 — Request Logging: no public API to record the reserved `mcp_tool` and `ability` log types
+**Status:** Done · **Milestone:** 1.3.0 · **Labels:** [Type] Enhancement · **Assignee(s):** azizulhasan · **Updated:** 2026-08-13 · **Comments:** 1 · *(board-Done / closed 2026-08-13 as `COMPLETED` by merged PR #914)*
+**Link:** https://github.com/WordPress/ai/issues/906
+
+**How it closed.** PR **#914** merged: namespaced `WordPress\AI\log_ai_request()`, `Logging_Integration::get_log_manager()`, `AI_Request_Log_Manager::get_types()` as the single source of truth, and a `wpai_ai_request_logged` action. The flagged behavior change shipped as described — `log()` now refuses unknown types via `_doing_it_wrong()`. This was the cleanest issue → card → PR → authoritative-link chain on the board, and it delivered.
 
 ### #193 — Add developer-only log panel for inspecting AI provider responses
 **Status:** Done · **Milestone:** 1.0.0 *(was Future Release)* · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-08-05 · **Comments:** 3 · *(board-Done / closed 2026-08-05 as `COMPLETED` — already delivered by PR #437)*
@@ -1366,6 +1346,7 @@ The full `WordPress/php-ai-client` and `WordPress/mcp-adapter` repository census
 
 | Date | Change |
 |---|---|
+| 2026-08-14 | Live Project #240 refresh — the 1.3.0 delivery wave. Open issues **51 → 48**: In discussion **18 → 19**, In progress **18 → 13**, Needs review **3** (membership changed), Backlog **6**, To do **3 → 4**, Triage **3** (milestones changed). **Moved 7 dossiers to Recently board-Done** (43 → **50** retained), six closed by merged PRs — **#233** (`AI_Service` deprecation, PR #905), **#690** (uninstall cleanup, #692), **#863** (abilities toggle, #881), **#866** (`wpai_` meta prefix, #867), **#876** (permalink slugs, #897), **#906** (reserved log-type API, #914) — plus **#307 closed `NOT_PLANNED`** (the AGENTS.md proposal declined). **Dossiered 4 board-new issues:** **#923** (agent users — the auditable-identity governance discussion, with production evidence that 50.2% of webmyc's 241,614 tool calls carry no usable agent identifier), **#940** (custom settings endpoint vs `/wp/v2/settings`; dkotter reproduces the key-wiping bug), **#924** (1.3.0 release tracker, target 2026-08-17, only #459 left on the pre-release list), and **#933** (connector validity is capability-aware, not text-only; PR #935). **Relocated:** **#514** and **#732** In progress → Needs review; **#600** In discussion → To do, retitled "Remove `Enable AI` header toggle…" with a Help Wanted label. **Re-milestoned:** #660/#736/#845/#875 → 1.4.0, #890/#918 → Future Release. #187 (translation) de-carded Done from the board and noted in the retention header. | 
 | 2026-08-01 | Live Project #240 refresh. **Open issues hold at 52** while the status mix shifted by one: In progress **16 → 17**, Needs review **2 → 1**, and In discussion **20**, Backlog **7**, To do **4**, Triage **3** unchanged. **Moved 2 dossiers to Recently board-Done** (39 → **41** retained): **#187** (multilingual rewriting/translation) closed 2026-07-28 by **merged PR #747** — the v1.3.0 lane's first experiment to land since the six that closed last window, and the reason Needs review fell to 1; and **#900**, promotional webinar spam opened, carded, closed, and marked Done all on 2026-07-28, recorded only so "two cards added" is not misread as two units of intake (second spam card in three windows, after #848). **Dossiered 1 board-new issue: #906** (Request Logging has no public API for the reserved `mcp_tool`/`ability` log types) — filed 2026-07-29 with an exact root cause (the REST enum and TS client advertise three types; the only writer hardcodes `ai_client`; every manager accessor is `private`), agreed to by dkotter the same day, and implemented by **PR #914** on 2026-08-01 with a proper `Closes #906`. Its dossier flags one behavior change: `log()` now refuses unknown types via `_doing_it_wrong()`, so existing callers passing custom types would lose rows. **3 dossiers re-milestoned out of dated lanes into Future Release**, all still In progress: **#736** (1.3.0 → Future Release; PR #749 picked up CHANGES_REQUESTED), **#875** and **#876** (1.4.0 → Future Release; PRs #887/#897 both picked up CHANGES_REQUESTED). Last window's note on #875/#876 — that their move to In progress reflected code appearing rather than decisions closing — is now confirmed by the re-milestoning, and both dossiers say so. **#233 rewritten: its premise reversed.** Adoption PR #898 closed unmerged 2026-07-27, and off-board PR **#905** now *deletes* the `AI_Service` layer as dead code, answering jeffpaul's April question in the opposite direction from the card's title. Because #905 declares no `closing` reference, the board still shows "Refactor experiments to leverage AI_Service layer / In progress"; the dossier now leads with a stale-title warning. Board totals **274 → 269**; Done **207 → 203**; non-Done PR cards **15 → 14**. **7 already-Done cards de-carded** (#614/#778/#853/#864/#865/#870/#872) — all previously dossiered here and all retained, with the Recently board-Done heading updated and a new caveat that board-Done ≠ merged (PR #621 was closed unmerged yet marked Done). `WordPress/ai` open issues hold at 51 (+ #23 on `ai-provider-for-google`). |
 | 2026-07-27 | Live Project #240 refresh — the largest dossier reshuffle since the 1.2.0 transition. Open issues **57 → 52**: In discussion **22 → 20**, In progress **15 → 16**, Backlog **8 → 7**, To do **6 → 4**, Needs review **3 → 2**, Triage **3** (membership changed). **Moved 6 dossiers to Recently board-Done** (33 → **39** retained), all closed by merged PRs: **#191** (settings import/export, PR #734, 2026-07-24 — the credential-handling debate, not the code, was the six-week long pole), **#192** (prompt-template extension points, PR #770, 2026-07-20 — pulled Future Release → 1.3.0 *as* it closed), **#452** (taxonomy relevance, PR #633, 2026-07-21), **#507** (Editorial Updates → Visual Revisions, PR #861, 2026-07-24 — retains a dependency on a private WP 7.0 editor-store action), **#874** (Yoast meta-description interop, PR #886, 2026-07-20, milestoned — → 1.3.0 on close; the dossier keeps the full two-store/REST-subtype root cause and upstream `Yoast/wordpress-seo#23458`), and **#883** (Abilities Explorer custom providers + statistics, PR #884, 2026-07-24). **5 dossiers relocated into In progress** as authoritative closing PRs opened against them: **#233** (To do → In progress, PR #898), **#421** (To do → In progress; **relationship correction** — PR #459 is confirmed as its `closing` PR, not the conceptual sibling earlier docs described), **#844** (Backlog → In progress, PR #891 — opened *ahead of* its stated #683 blocker, flagged as a duplicate-indexing risk), **#875** and **#876** (both In discussion → In progress, PRs #887/#897; their product questions remain open, so the moves reflect code starting, not decisions closing). **Dossiered 1 board-new Triage issue:** **#890** (mobile right-sidebar component — no labels, milestone, assignee, comments, or target surface; needs triage before scoping). Board totals **283 → 274**; Done **209 → 207**; non-Done PR cards **17 → 15**. **10 already-Done cards de-carded** from Project #240 (#508/#793/#809/#815/#816/#818/#833/#839/#846 + spam #848) — all previously dossiered here and all retained, with a note added to the Recently board-Done heading explaining that retained ≠ still carded. `WordPress/ai` open issues 56 → 51 (+ #23 on `ai-provider-for-google`). |
 | 2026-07-20 | Live Project #240 recheck: dossier membership and board counts unchanged — **57 open issues** (In discussion 22, In progress 15, Backlog 8, To do 6, Triage 3, Needs review 3), Done 209, non-Done PR cards 17. No status, milestone, or membership moves since 2026-07-18. Bumped #876's Updated cell to 2026-07-20 (a non-status thread edit; still In discussion / 1.4.0, 0 comments); #883's implementing-PR note (#884) remains current. Cross-repo note: board PR #858 (`core/read-nav-menus`) moved merge DIRTY → BLOCKED, tracked in the planned-work file. |
