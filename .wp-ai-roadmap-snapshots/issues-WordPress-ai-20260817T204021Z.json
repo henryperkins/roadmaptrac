@@ -1,0 +1,895 @@
+[
+  {
+    "id": "WordPress/ai#21",
+    "repo": "WordPress/ai",
+    "number": 21,
+    "title": "How to best support hundreds or thousands of abilities",
+    "url": "https://github.com/WordPress/ai/issues/21",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Question"
+    ],
+    "assignees": [],
+    "author": "JasonTheAdams",
+    "isBot": false,
+    "comments": 11,
+    "createdAt": "2025-09-08T20:35:04Z",
+    "updatedAt": "2026-05-25T04:55:21Z"
+  },
+  {
+    "id": "WordPress/ai#27",
+    "repo": "WordPress/ai",
+    "number": 27,
+    "title": "Display additional AI provider plugins on Connectors page (alongside default Anthropic, Google, and OpenAI ones)",
+    "url": "https://github.com/WordPress/ai/issues/27",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "[Type] Enhancement",
+      "Help Wanted"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 14,
+    "createdAt": "2025-10-06T17:30:22Z",
+    "updatedAt": "2026-08-07T13:38:25Z"
+  },
+  {
+    "id": "WordPress/ai#32",
+    "repo": "WordPress/ai",
+    "number": 32,
+    "title": "Add AI Playground interface (prompt testing & debug tools)",
+    "url": "https://github.com/WordPress/ai/issues/32",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 3,
+    "createdAt": "2025-10-06T20:59:14Z",
+    "updatedAt": "2026-05-04T18:19:46Z"
+  },
+  {
+    "id": "WordPress/ai#37",
+    "repo": "WordPress/ai",
+    "number": 37,
+    "title": "MCP usage across features and request routing",
+    "url": "https://github.com/WordPress/ai/issues/37",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 2,
+    "createdAt": "2025-10-06T21:30:20Z",
+    "updatedAt": "2026-08-05T02:58:11Z"
+  },
+  {
+    "id": "WordPress/ai#40",
+    "repo": "WordPress/ai",
+    "number": 40,
+    "title": "WordPress Core Abilities",
+    "url": "https://github.com/WordPress/ai/issues/40",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [
+      "gziolo",
+      "jorgefilipecosta"
+    ],
+    "author": "Jameswlepage",
+    "isBot": false,
+    "comments": 40,
+    "createdAt": "2025-08-31T22:37:44Z",
+    "updatedAt": "2026-08-05T03:33:51Z"
+  },
+  {
+    "id": "WordPress/ai#47",
+    "repo": "WordPress/ai",
+    "number": 47,
+    "title": "Low-/no-tech educational content",
+    "url": "https://github.com/WordPress/ai/issues/47",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "Good first issue",
+      "[Type] Task",
+      "Help Wanted"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 3,
+    "createdAt": "2025-10-20T22:16:55Z",
+    "updatedAt": "2026-08-16T10:10:11Z"
+  },
+  {
+    "id": "WordPress/ai#90",
+    "repo": "WordPress/ai",
+    "number": 90,
+    "title": "Clarify and consolidate Title Generation options in UI and Experiment settings",
+    "url": "https://github.com/WordPress/ai/issues/90",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement",
+      "Needs Design Feedback",
+      "Help Wanted",
+      "[Experiment] Title Generation"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2025-11-18T19:04:29Z",
+    "updatedAt": "2026-02-20T03:26:13Z"
+  },
+  {
+    "id": "WordPress/ai#142",
+    "repo": "WordPress/ai",
+    "number": 142,
+    "title": "Frontend chat agent powered by site content",
+    "url": "https://github.com/WordPress/ai/issues/142",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement",
+      "Needs Design"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 3,
+    "createdAt": "2025-12-08T21:27:20Z",
+    "updatedAt": "2026-08-05T03:17:24Z"
+  },
+  {
+    "id": "WordPress/ai#186",
+    "repo": "WordPress/ai",
+    "number": 186,
+    "title": "Add tone adjustment controls for AI-generated content",
+    "url": "https://github.com/WordPress/ai/issues/186",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 4,
+    "createdAt": "2026-01-17T21:07:45Z",
+    "updatedAt": "2026-03-10T17:54:39Z"
+  },
+  {
+    "id": "WordPress/ai#188",
+    "repo": "WordPress/ai",
+    "number": 188,
+    "title": "Add persona-driven content generation experiments",
+    "url": "https://github.com/WordPress/ai/issues/188",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 0,
+    "createdAt": "2026-01-17T21:11:04Z",
+    "updatedAt": "2026-08-16T13:31:13Z"
+  },
+  {
+    "id": "WordPress/ai#189",
+    "repo": "WordPress/ai",
+    "number": 189,
+    "title": "Explore an admin Site Agent for executing WordPress actions",
+    "url": "https://github.com/WordPress/ai/issues/189",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 0,
+    "createdAt": "2026-01-17T21:12:39Z",
+    "updatedAt": "2026-01-17T21:12:39Z"
+  },
+  {
+    "id": "WordPress/ai#190",
+    "repo": "WordPress/ai",
+    "number": 190,
+    "title": "Add site-wide AI-powered content insights",
+    "url": "https://github.com/WordPress/ai/issues/190",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [
+      "yogeshbhutkar"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 2,
+    "createdAt": "2026-01-17T21:13:58Z",
+    "updatedAt": "2026-06-30T18:13:33Z"
+  },
+  {
+    "id": "WordPress/ai#203",
+    "repo": "WordPress/ai",
+    "number": 203,
+    "title": "Add extensibility hook for custom Ability Table columns",
+    "url": "https://github.com/WordPress/ai/issues/203",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement",
+      "Help Wanted",
+      "[Experiment] Abilities Explorer"
+    ],
+    "assignees": [],
+    "author": "raftaar1191",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-01-27T15:00:21Z",
+    "updatedAt": "2026-07-15T19:38:27Z"
+  },
+  {
+    "id": "WordPress/ai#238",
+    "repo": "WordPress/ai",
+    "number": 238,
+    "title": "Add focus-aware crop suggestions",
+    "url": "https://github.com/WordPress/ai/issues/238",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement",
+      "Needs Design",
+      "[Experiment] Image Generation"
+    ],
+    "assignees": [
+      "TylerB24890"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 2,
+    "createdAt": "2026-02-20T03:42:22Z",
+    "updatedAt": "2026-08-16T16:40:20Z"
+  },
+  {
+    "id": "WordPress/ai#262",
+    "repo": "WordPress/ai",
+    "number": 262,
+    "title": "Provider-Level Model Bucketing for Model Selection",
+    "url": "https://github.com/WordPress/ai/issues/262",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "zeus2611",
+    "isBot": false,
+    "comments": 6,
+    "createdAt": "2026-02-28T06:20:04Z",
+    "updatedAt": "2026-08-05T03:09:03Z"
+  },
+  {
+    "id": "WordPress/ai#282",
+    "repo": "WordPress/ai",
+    "number": 282,
+    "title": "Chat experiment: Integration outside the editor and outside single-task AI use",
+    "url": "https://github.com/WordPress/ai/issues/282",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement",
+      "Needs Design"
+    ],
+    "assignees": [
+      "karmatosed"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-03-07T00:28:46Z",
+    "updatedAt": "2026-03-11T16:31:01Z"
+  },
+  {
+    "id": "WordPress/ai#297",
+    "repo": "WordPress/ai",
+    "number": 297,
+    "title": "New experiment: Content Generation",
+    "url": "https://github.com/WordPress/ai/issues/297",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement",
+      "Needs Design"
+    ],
+    "assignees": [
+      "karmatosed"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-03-11T16:49:26Z",
+    "updatedAt": "2026-03-11T16:49:52Z"
+  },
+  {
+    "id": "WordPress/ai#324",
+    "repo": "WordPress/ai",
+    "number": 324,
+    "title": "Evolve Refine from Notes into collaborative and agentic editorial workflows",
+    "url": "https://github.com/WordPress/ai/issues/324",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-03-19T16:36:03Z",
+    "updatedAt": "2026-07-13T17:22:41Z"
+  },
+  {
+    "id": "WordPress/ai#325",
+    "repo": "WordPress/ai",
+    "number": 325,
+    "title": "Integrate media features and experiments with Gutenberg's experimental Media Editor",
+    "url": "https://github.com/WordPress/ai/issues/325",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [
+      "TylerB24890"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 9,
+    "createdAt": "2026-03-19T18:28:22Z",
+    "updatedAt": "2026-05-19T18:34:03Z"
+  },
+  {
+    "id": "WordPress/ai#338",
+    "repo": "WordPress/ai",
+    "number": 338,
+    "title": "New Experiments: Analytics-aware content and amplification recommendations",
+    "url": "https://github.com/WordPress/ai/issues/338",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement",
+      "Needs Design",
+      "Help Wanted"
+    ],
+    "assignees": [
+      "zeus2611"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 7,
+    "createdAt": "2026-03-23T21:11:57Z",
+    "updatedAt": "2026-08-11T19:00:11Z"
+  },
+  {
+    "id": "WordPress/ai#339",
+    "repo": "WordPress/ai",
+    "number": 339,
+    "title": "AI 0.6 + WP7RC1 + Gutenberg 22.7.1 : can't keep connection alive within the AI plugin",
+    "url": "https://github.com/WordPress/ai/issues/339",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Bug"
+    ],
+    "assignees": [],
+    "author": "Marc-pi",
+    "isBot": false,
+    "comments": 6,
+    "createdAt": "2026-03-25T11:25:41Z",
+    "updatedAt": "2026-05-07T19:31:47Z"
+  },
+  {
+    "id": "WordPress/ai#348",
+    "repo": "WordPress/ai",
+    "number": 348,
+    "title": "Feature Request: Unified AI Management Layer for WordPress Core",
+    "url": "https://github.com/WordPress/ai/issues/348",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "HILAYTRIVEDI",
+    "isBot": false,
+    "comments": 2,
+    "createdAt": "2026-03-29T08:26:29Z",
+    "updatedAt": "2026-04-09T02:47:07Z"
+  },
+  {
+    "id": "WordPress/ai#354",
+    "repo": "WordPress/ai",
+    "number": 354,
+    "title": "Unifiied Abilities exposure controls",
+    "url": "https://github.com/WordPress/ai/issues/354",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "artpi",
+    "isBot": false,
+    "comments": 2,
+    "createdAt": "2026-03-30T11:05:21Z",
+    "updatedAt": "2026-08-10T12:48:46Z"
+  },
+  {
+    "id": "WordPress/ai#421",
+    "repo": "WordPress/ai",
+    "number": 421,
+    "title": "WordPress should detect C2PA manifests on upload",
+    "url": "https://github.com/WordPress/ai/issues/421",
+    "state": "OPEN",
+    "milestone": "1.3.0",
+    "labels": [
+      "[Type] Enhancement",
+      "Help Wanted"
+    ],
+    "assignees": [],
+    "author": "lnispel",
+    "isBot": false,
+    "comments": 4,
+    "createdAt": "2026-04-12T20:28:50Z",
+    "updatedAt": "2026-07-20T13:55:20Z"
+  },
+  {
+    "id": "WordPress/ai#425",
+    "repo": "WordPress/ai",
+    "number": 425,
+    "title": "Update placement of Alt Text generation buttons",
+    "url": "https://github.com/WordPress/ai/issues/425",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement",
+      "Good first issue",
+      "[Status] Blocked",
+      "Help Wanted"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 6,
+    "createdAt": "2026-04-13T19:38:30Z",
+    "updatedAt": "2026-05-18T22:16:08Z"
+  },
+  {
+    "id": "WordPress/ai#430",
+    "repo": "WordPress/ai",
+    "number": 430,
+    "title": "Skills in a WordPress admin context",
+    "url": "https://github.com/WordPress/ai/issues/430",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [],
+    "assignees": [],
+    "author": "swissspidy",
+    "isBot": false,
+    "comments": 9,
+    "createdAt": "2026-04-15T12:24:10Z",
+    "updatedAt": "2026-04-27T12:05:18Z"
+  },
+  {
+    "id": "WordPress/ai#448",
+    "repo": "WordPress/ai",
+    "number": 448,
+    "title": "Add WebMCP experiment",
+    "url": "https://github.com/WordPress/ai/issues/448",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "gziolo",
+    "isBot": false,
+    "comments": 2,
+    "createdAt": "2026-04-20T06:57:18Z",
+    "updatedAt": "2026-04-21T21:15:54Z"
+  },
+  {
+    "id": "WordPress/ai#502",
+    "repo": "WordPress/ai",
+    "number": 502,
+    "title": "Define how AI provider plugins are discovered, labeled, and surfaced in Connectors",
+    "url": "https://github.com/WordPress/ai/issues/502",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-05-04T18:39:49Z",
+    "updatedAt": "2026-05-05T01:53:29Z"
+  },
+  {
+    "id": "WordPress/ai#514",
+    "repo": "WordPress/ai",
+    "number": 514,
+    "title": "Add comment value / relevance to Comment Moderation experiment",
+    "url": "https://github.com/WordPress/ai/issues/514",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 0,
+    "createdAt": "2026-05-06T16:17:35Z",
+    "updatedAt": "2026-08-13T15:52:44Z"
+  },
+  {
+    "id": "WordPress/ai#600",
+    "repo": "WordPress/ai",
+    "number": 600,
+    "title": "Remove `Enable AI` header toggle, allow feature/experiment toggles (and group toggles) to control plugin functionality",
+    "url": "https://github.com/WordPress/ai/issues/600",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "[Type] Bug",
+      "Help Wanted"
+    ],
+    "assignees": [],
+    "author": "gziolo",
+    "isBot": false,
+    "comments": 6,
+    "createdAt": "2026-05-21T11:45:15Z",
+    "updatedAt": "2026-08-12T15:58:24Z"
+  },
+  {
+    "id": "WordPress/ai#625",
+    "repo": "WordPress/ai",
+    "number": 625,
+    "title": "New Experiment: Social Content Generation for platform-specific social posts",
+    "url": "https://github.com/WordPress/ai/issues/625",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement",
+      "Needs Design"
+    ],
+    "assignees": [
+      "Malayt04"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 3,
+    "createdAt": "2026-05-26T18:26:52Z",
+    "updatedAt": "2026-08-05T03:30:59Z"
+  },
+  {
+    "id": "WordPress/ai#643",
+    "repo": "WordPress/ai",
+    "number": 643,
+    "title": "\"AI\" plugin 1.0.1 – Connectors and AI settings pages load blank (JavaScript error) on WordPress 7.0",
+    "url": "https://github.com/WordPress/ai/issues/643",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [],
+    "assignees": [],
+    "author": "polipsicomorfico",
+    "isBot": false,
+    "comments": 3,
+    "createdAt": "2026-05-31T06:25:28Z",
+    "updatedAt": "2026-06-18T14:59:12Z"
+  },
+  {
+    "id": "WordPress/ai#660",
+    "repo": "WordPress/ai",
+    "number": 660,
+    "title": "UX: Ambiguous error message in editor when a provider is blocked by Connector Approvals",
+    "url": "https://github.com/WordPress/ai/issues/660",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "riccardodicurti",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-06-04T09:10:38Z",
+    "updatedAt": "2026-08-12T22:10:11Z"
+  },
+  {
+    "id": "WordPress/ai#689",
+    "repo": "WordPress/ai",
+    "number": 689,
+    "title": "Add a user-facing control for automatic log cleanup",
+    "url": "https://github.com/WordPress/ai/issues/689",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [
+      "i-anubhav-anand"
+    ],
+    "author": "itsgajendraSingh",
+    "isBot": false,
+    "comments": 7,
+    "createdAt": "2026-06-09T15:05:55Z",
+    "updatedAt": "2026-06-18T14:51:26Z"
+  },
+  {
+    "id": "WordPress/ai#732",
+    "repo": "WordPress/ai",
+    "number": 732,
+    "title": "AI Request Logging only captures providers that use the SDK HTTP transporter; sidecar/custom-transport providers are invisible",
+    "url": "https://github.com/WordPress/ai/issues/732",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "Help Wanted"
+    ],
+    "assignees": [],
+    "author": "henryperkins",
+    "isBot": false,
+    "comments": 0,
+    "createdAt": "2026-06-15T21:17:21Z",
+    "updatedAt": "2026-08-11T22:02:23Z"
+  },
+  {
+    "id": "WordPress/ai#736",
+    "repo": "WordPress/ai",
+    "number": 736,
+    "title": "Expose role/user access controls per feature/experiment",
+    "url": "https://github.com/WordPress/ai/issues/736",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 9,
+    "createdAt": "2026-06-16T16:46:00Z",
+    "updatedAt": "2026-08-10T16:21:36Z"
+  },
+  {
+    "id": "WordPress/ai#741",
+    "repo": "WordPress/ai",
+    "number": 741,
+    "title": "AI Admin Pages Exhibit Visible Flicker During Initial Render",
+    "url": "https://github.com/WordPress/ai/issues/741",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "[Type] Bug"
+    ],
+    "assignees": [
+      "prasadkarmalkar"
+    ],
+    "author": "ankitguptaindia",
+    "isBot": false,
+    "comments": 8,
+    "createdAt": "2026-06-17T15:59:15Z",
+    "updatedAt": "2026-08-13T14:50:10Z"
+  },
+  {
+    "id": "WordPress/ai#791",
+    "repo": "WordPress/ai",
+    "number": 791,
+    "title": "Add loading animation/custom cursor for Type Ahead",
+    "url": "https://github.com/WordPress/ai/issues/791",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 2,
+    "createdAt": "2026-06-26T16:19:57Z",
+    "updatedAt": "2026-08-05T03:07:03Z"
+  },
+  {
+    "id": "WordPress/ai#844",
+    "repo": "WordPress/ai",
+    "number": 844,
+    "title": "New Experiment: Semantic search in wp admin",
+    "url": "https://github.com/WordPress/ai/issues/844",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [
+      "priyanshuhaldar007"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-07-08T19:54:17Z",
+    "updatedAt": "2026-08-05T20:26:11Z"
+  },
+  {
+    "id": "WordPress/ai#845",
+    "repo": "WordPress/ai",
+    "number": 845,
+    "title": "New Experiment: Markdown feeds (powered by `html-to-md`)",
+    "url": "https://github.com/WordPress/ai/issues/845",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "[Type] Enhancement",
+      "Help Wanted"
+    ],
+    "assignees": [
+      "dkotter"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 0,
+    "createdAt": "2026-07-08T20:10:39Z",
+    "updatedAt": "2026-08-13T14:49:15Z"
+  },
+  {
+    "id": "WordPress/ai#875",
+    "repo": "WordPress/ai",
+    "number": 875,
+    "title": "New Experiment: Suggest internal links within post content",
+    "url": "https://github.com/WordPress/ai/issues/875",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "[Type] Enhancement",
+      "Help Wanted"
+    ],
+    "assignees": [
+      "Infinite-Null"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 4,
+    "createdAt": "2026-07-16T22:42:07Z",
+    "updatedAt": "2026-08-12T21:42:57Z"
+  },
+  {
+    "id": "WordPress/ai#890",
+    "repo": "WordPress/ai",
+    "number": 890,
+    "title": "Add mobile right sidebar display component",
+    "url": "https://github.com/WordPress/ai/issues/890",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [],
+    "assignees": [],
+    "author": "aabhishekchuobey-ops",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-07-23T04:21:31Z",
+    "updatedAt": "2026-08-10T17:47:39Z"
+  },
+  {
+    "id": "WordPress/ai#918",
+    "repo": "WordPress/ai",
+    "number": 918,
+    "title": "Feature: AI-generated llms.txt - a curated, LLM-friendly site index served at /llms.txt",
+    "url": "https://github.com/WordPress/ai/issues/918",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [],
+    "author": "hbhalodia",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-08-07T06:04:35Z",
+    "updatedAt": "2026-08-10T17:47:26Z"
+  },
+  {
+    "id": "WordPress/ai#923",
+    "repo": "WordPress/ai",
+    "number": 923,
+    "title": "Introduce agent users to give AI agents an auditable identity",
+    "url": "https://github.com/WordPress/ai/issues/923",
+    "state": "OPEN",
+    "milestone": "Future Release",
+    "labels": [
+      "[Type] Enhancement"
+    ],
+    "assignees": [
+      "gziolo"
+    ],
+    "author": "gziolo",
+    "isBot": false,
+    "comments": 8,
+    "createdAt": "2026-08-10T14:27:36Z",
+    "updatedAt": "2026-08-17T13:20:55Z"
+  },
+  {
+    "id": "WordPress/ai#924",
+    "repo": "WordPress/ai",
+    "number": 924,
+    "title": "Release version 1.3.0",
+    "url": "https://github.com/WordPress/ai/issues/924",
+    "state": "OPEN",
+    "milestone": "1.3.0",
+    "labels": [],
+    "assignees": [
+      "dkotter",
+      "jeffpaul"
+    ],
+    "author": "jeffpaul",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2026-08-10T18:03:07Z",
+    "updatedAt": "2026-08-17T17:28:35Z"
+  },
+  {
+    "id": "WordPress/ai#933",
+    "repo": "WordPress/ai",
+    "number": 933,
+    "title": "Connector validity check assumes text generation, so speech-only and image-only connectors report as invalid",
+    "url": "https://github.com/WordPress/ai/issues/933",
+    "state": "OPEN",
+    "milestone": "1.4.0",
+    "labels": [
+      "Help Wanted"
+    ],
+    "assignees": [
+      "whyisjake"
+    ],
+    "author": "whyisjake",
+    "isBot": false,
+    "comments": 0,
+    "createdAt": "2026-08-13T01:36:36Z",
+    "updatedAt": "2026-08-13T18:12:23Z"
+  },
+  {
+    "id": "WordPress/ai#940",
+    "repo": "WordPress/ai",
+    "number": 940,
+    "title": "Introduce new custom endpoint for settings save and by pass core /wp/v2/settings endpoint for saving AI options",
+    "url": "https://github.com/WordPress/ai/issues/940",
+    "state": "OPEN",
+    "milestone": null,
+    "labels": [
+      "[Type] Bug"
+    ],
+    "assignees": [
+      "hbhalodia"
+    ],
+    "author": "hbhalodia",
+    "isBot": false,
+    "comments": 5,
+    "createdAt": "2026-08-14T09:27:21Z",
+    "updatedAt": "2026-08-17T18:56:36Z"
+  }
+]

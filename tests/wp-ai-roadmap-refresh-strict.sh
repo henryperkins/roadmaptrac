@@ -62,7 +62,7 @@ find "$TEST_SNAP_DIR" -maxdepth 1 -type f \
   -exec sha256sum {} + | sort >"$TMP_DIR/test-snapshots.after"
 diff -u "$TMP_DIR/test-snapshots.before" "$TMP_DIR/test-snapshots.after"
 sha256sum -c "$TMP_DIR/planned.before"
-rg 'persistence skipped' "$ERR"
+grep -F 'persistence skipped' "$ERR"
 
 before_count="$(find "$TEST_SNAP_DIR" -maxdepth 1 -type f | wc -l)"
 PATH="$MOCK_BIN:$PATH" \
@@ -101,7 +101,7 @@ set -e
 [ "$first_strict_status" -eq 2 ]
 jq -e '(.validation.ok|not)' "$TMP_DIR/first-strict.json" >/dev/null
 [ "$(find "$FIRST_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 0 ]
-rg 'persistence skipped' "$TMP_DIR/first-strict.err" >/dev/null
+grep -F 'persistence skipped' "$TMP_DIR/first-strict.err" >/dev/null
 
 # Normal-mode first run still establishes all four baselines and emits pure JSON.
 PATH="$MOCK_BIN:$PATH" \
@@ -117,7 +117,7 @@ WP_AI_TEST_RELEASES="$RELEASES" \
   >"$TMP_DIR/first-normal.json" 2>"$TMP_DIR/first-normal.err"
 jq -e '(keys | sort)==["board","dependencies","repo","repositories","validation"]' "$TMP_DIR/first-normal.json" >/dev/null
 [ "$(find "$FIRST_SNAP_DIR" -maxdepth 1 -type f | wc -l)" -eq 5 ]  # board + prs + issues + releases + deps
-rg 'Baseline established' "$TMP_DIR/first-normal.err" >/dev/null
+grep -F 'Baseline established' "$TMP_DIR/first-normal.err" >/dev/null
 
 # An invalid registry must never produce a dependency snapshot: a normal-mode
 # --save run still saves board/PR/release snapshots but skips the dependency
@@ -138,7 +138,7 @@ WP_AI_TEST_RELEASES="$RELEASES" \
 jq -e '.dependencies.validation.ok|not' "$TMP_DIR/broken-save.json" >/dev/null
 dep_count_after="$(find "$TEST_SNAP_DIR" -maxdepth 1 -type f -name 'wordpress-ai-cross-repo-dependencies-*' | wc -l)"
 [ "$dep_count_after" -eq "$dep_count_before" ]
-rg 'dependency snapshot skipped' "$TMP_DIR/broken-save.err" >/dev/null
+grep -F 'dependency snapshot skipped' "$TMP_DIR/broken-save.err" >/dev/null
 
 # Readiness rendering must print boolean values verbatim: a draft PR going
 # ready is "isDraft true → false", never "true → —".
@@ -156,7 +156,7 @@ WP_AI_TEST_PR_PAGES="$ROOT_DIR/tests/fixtures/pr-graphql-pages.jsonl" \
 WP_AI_TEST_RELEASES="$RELEASES" \
   "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --markdown \
   >"$TMP_DIR/radar.md" 2>/dev/null
-rg -F 'isDraft true → false' "$TMP_DIR/radar.md" >/dev/null
+grep -F 'isDraft true → false' "$TMP_DIR/radar.md" >/dev/null
 
 set +e
 "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --not-a-real-option >/dev/null 2>&1

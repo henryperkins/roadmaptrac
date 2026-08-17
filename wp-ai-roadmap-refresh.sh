@@ -1244,7 +1244,10 @@ build_repository_reports() { # census_file temp_dir -> enriched repository array
   : >"$reports_file"
 
   while IFS= read -r entry; do
-    repo="$(jq -r '.repo' <<<"$entry")"
+    # jq_lines, not jq: this slug becomes a filename, and a CRLF-emitting jq
+    # would write prs-WordPress-ai$'\r'-current.json while the report assembly
+    # below looks for the clean name. `$(…)` strips the trailing \n, not the \r.
+    repo="$(jq_lines -r '.repo' <<<"$entry")"
     slug="${repo//\//-}"
     prs_file="$temp_dir/prs-$slug-current.json"
     releases_file="$temp_dir/releases-$slug-current.json"
@@ -1416,10 +1419,13 @@ fetch_dependencies() { # -> {items,validation}; every registry entry emits a rec
 
   local item id repo number max_attempts endpoint issue pr
   while IFS= read -r item; do
-    id="$(jq -r '.id' <<<"$item")"
+    # jq_lines for both: the id becomes a `gh api` endpoint (argv) and the
+    # required flag is compared against a literal, so a trailing CR from a
+    # text-mode jq would 404 the fetch and silently demote required items.
+    id="$(jq_lines -r '.id' <<<"$item")"
     repo="${id%#*}"
     number="${id##*#}"
-    if [ "$(jq -r '.required' <<<"$item")" = true ]; then max_attempts=2; else max_attempts=1; fi
+    if [ "$(jq_lines -r '.required' <<<"$item")" = true ]; then max_attempts=2; else max_attempts=1; fi
 
     endpoint="repos/$repo/issues/$number"
     if ! issue="$(fetch_dependency_endpoint "$endpoint" "$max_attempts" "$err_file")"; then
@@ -1746,7 +1752,9 @@ jq -n \
     }
   | .ok=(.errors|length==0)
 ' > "$AGG_FILE"
-VALIDATION_OK="$(jq -r '.ok' "$AGG_FILE")"
+# jq_lines: this is compared against the literal `true`, so a CR would make a
+# clean report look like a strict failure.
+VALIDATION_OK="$(jq_lines -r '.ok' "$AGG_FILE")"
 
 case "$OUT_MODE" in
   json)

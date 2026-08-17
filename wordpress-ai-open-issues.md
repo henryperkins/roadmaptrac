@@ -1,20 +1,20 @@
 # WordPress AI — Open Issues Dossier (Companion Reference)
 
-> Deep per-issue documentation for all **48 open issues** (status rechecked 2026-08-14) on the [WordPress AI Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
+> Deep per-issue documentation for all **48 open issues** (status rechecked 2026-08-17) on the [WordPress AI Roadmap board (#240)](https://github.com/orgs/WordPress/projects/240).
 > Companion to [`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md) and [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md). Each dossier records the problem, approach, open decisions, dependencies, and discussion.
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-08-14 |
+> | **Data snapshot** | 2026-08-17 20:39 UTC |
 > | **Scope** | 48 current open-issue dossiers + 1 removed-board reference (#84) + 50 recently board-Done dossiers retained for reference. Excludes 17 non-Done PR cards, the rest of the 214 Done cards, and census-only upstream issues. |
 > | **Repos** | Board dossiers: `WordPress/ai` (47 open issues) · `WordPress/ai-provider-for-google` (#23). Removed-board reference: `WordPress/abilities-api` #84. `WordPress/php-ai-client` and `WordPress/mcp-adapter` are tracked separately as full PR/issue/release censuses, not imported as issue dossiers. |
 > | **Each dossier** | Status · Milestone · Labels · Assignees · Last updated · Comment count · Link, then Problem → Approach → Open decisions → Dependencies → Discussion |
 
-**Grouped by board status:** [In discussion / Needs decision (19)](#in-discussion--needs-decision-19) · [In progress (13)](#in-progress-13) · [Backlog (6)](#backlog-6) · [To do (4)](#to-do-4) · [Triage (3)](#triage-3) · [Needs review (3)](#needs-review-3) · [Recently board-Done (50 retained)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
+**Grouped by board status:** [In discussion / Needs decision (19)](#in-discussion--needs-decision-19) · [In progress (14)](#in-progress-14) · [Backlog (5)](#backlog-5) · [To do (4)](#to-do-4) · [Triage (3)](#triage-3) · [Needs review (3)](#needs-review-3) · [Recently board-Done (50 retained)](#recently-board-done-since-the-2026-06-15-snapshot) · [Removed from Project #240](#removed-from-project-240-reference)
 
 > ⭐ = major strategic bet · ⚠️ = notable risk / live regression. "Status" reflects the board; "Milestone" is the release target.
 
-**Movement in the 2026-08-14 window:** the 1.3.0 delivery wave closed seven dossiered issues by merged PRs — **#233** (`AI_Service` deprecation, PR #905), **#690** (uninstall cleanup, #692), **#863** (abilities toggle, #881), **#866** (`wpai_` meta prefix, #867), **#876** (permalink slugs, #897), **#906** (reserved log-type API, #914) — and declined **#307** (`NOT_PLANNED`); all seven moved to *Recently board-Done*. **#514** and **#732** moved In progress → Needs review; **#600** moved In discussion → To do (retitled "Remove `Enable AI` header toggle…" with a Help Wanted label). Board-new dossiers: **#923** (agent users) and **#940** (custom settings endpoint) in In discussion, **#924** (1.3.0 release) and **#933** (connector validity) In progress. #736/#845/#875 re-milestoned 1.3.0 → 1.4.0, #890/#918 → Future Release.
+**Movement in the 2026-08-17 window:** exactly one dossier moved — **#188** (persona-driven content generation) went **Backlog → In progress**, the only board change of any kind in this window. It moved with **no PR, no assignee, and no comments**, so read it as intent rather than implementation — the same shape #338 and #625 had when they moved in the 2026-08-10 window. No dossier was opened, closed, retitled, or re-milestoned; the 1.3.0 release residue (**#421**, **#924**) is unchanged, and **#924** carries the latest activity of any `WordPress/ai` card (2026-08-17 17:28 UTC) without the release having shipped. The board's single latest touch is **#23** at 18:20 UTC — an upstream milestone renumbering in `ai-provider-for-google` that left its recorded milestone string identical; see that dossier's milestone note.
 
 ---
 
@@ -40,7 +40,7 @@
 **Discussion highlights.** JasonTheAdams framed it and argued the limit is model-general, not MCP-specific. justlevine cautioned against letting MCP's current immaturity drive a generic abstraction, recommending MCP limitations be handled inside the MCP Adapter while the registry gets independent discoverability. By the May 2026 contributor call, justlevine reported the ecosystem converging on a single semantic `find_tool`/`call_tool` pattern; gziolo linked research on architecting tools for AI agents at scale. jeffpaul flagged it for an AI-call agenda; a community member shared an external adapter handling 1518 abilities across 42 categories.
 
 ### #23 — [Bug]: Image Generation fails with "Unexpected Google API response: Missing the candidates[0].content key"
-**Status:** In discussion / Needs decision · **Milestone:** 1.2.0 · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-05-13 · **Comments:** 2 · **Repo:** `WordPress/ai-provider-for-google`
+**Status:** In discussion / Needs decision · **Milestone:** 1.2.0 · **Labels:** — · **Assignee(s):** — · **Updated:** 2026-08-17 · **Comments:** 2 · **Repo:** `WordPress/ai-provider-for-google`
 **Link:** https://github.com/WordPress/ai-provider-for-google/issues/23
 
 **Problem / goal.** Using "Generate Image" in the Image block (WP 7.0 RC, Google/Gemini provider, on WordPress Playground), clicking Generate fails immediately with `Unexpected Google API response: Missing the "candidates[0].content" key`; no image is produced. Suspected: the Gemini API response format changed, the request was silently rejected, or the provider's parsing mishandles it.
@@ -51,7 +51,9 @@
 
 **Dependencies.** Google Gemini API; AI Provider for Google plugin; WP 7.0 RC; reproduced on Playground.
 
-**Discussion highlights.** Originally filed on `WordPress/ai`; jeffpaul (cc felixarntz, JasonTheAdams) judged it "almost certainly a bug in the provider plugin" and transferred it to the provider repo. No fix posted yet.
+**Discussion highlights.** Originally filed on `WordPress/ai`; jeffpaul (cc felixarntz, JasonTheAdams) judged it "almost certainly a bug in the provider plugin" and transferred it to the provider repo. No fix posted yet — no comment since 2026-05-07, three months on.
+
+**Milestone note (2026-08-17).** Its 2026-08-17 timestamp is *not* diagnostic progress. At 18:20:53 UTC jeffpaul re-milestoned it as part of a milestone renumbering in `ai-provider-for-google`: the milestone this issue sat on was renamed **1.2.0 → 1.1.1**, a new 1.2.0 was created at 18:20:00 UTC, and #23 was moved onto it. The recorded milestone string is unchanged, so the board diff is correctly empty, but "1.2.0" now names a different milestone than it did in the last snapshot — worth knowing before reading this card's target as unchanged. This was the whole board's most recent activity in the window.
 
 ### #27 — Display additional AI provider plugins on Connectors page (alongside default Anthropic, Google, and OpenAI ones)
 **Status:** In discussion / Needs decision · **Milestone:** 1.4.0 · **Labels:** [Type] Enhancement, Help Wanted · **Assignee(s):** — · **Updated:** 2026-07-16 · **Comments:** 12
@@ -332,9 +334,23 @@
 
 ---
 
-## In progress (13)
+## In progress (14)
 
 *Actively being implemented or investigated.*
+
+### #188 — Add persona-driven content generation experiments
+**Status:** In progress *(moved from Backlog 2026-08-17)* · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-08-16 · **Comments:** 0
+**Link:** https://github.com/WordPress/ai/issues/188
+
+**Problem / goal.** Introduce personas/voices (roles, audiences, brand voices) that influence AI-generated content and are reusable across experiments — giving content teams a consistent voice without re-specifying it each time.
+
+**Proposed approach.** Define and select personas, consistently applied to influence output style/tone, reusable across experiments, extensible by plugins/themes.
+
+**Open decisions / blockers.** The status move is the only new information: there is **no PR, no assignee, and no comment** on this card, so nothing records who is building it or how. The design questions #186 raised for tone apply here unchanged — whether personas are a modifier layered over existing experiments or a standalone generation path, and how they compose with tone when both are set.
+
+**Dependencies.** Reusable content-control layer; conceptually adjacent to Tone Adjustment #186 (still Backlog) and Content Generation #297.
+
+**Discussion highlights.** — *(none; the card has never drawn a comment)*
 
 ### #203 — Add extensibility hook for custom Ability Table columns
 **Status:** In progress · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Help Wanted, [Experiment] Abilities Explorer · **Assignee(s):** — · **Updated:** 2026-07-15 · **Comments:** 1
@@ -420,7 +436,7 @@
 
 **Dependencies.** WP attachment pipeline; new JUMBF + CBOR utilities; reference implementations in #294.
 
-**Discussion highlights.** jeffpaul wants a fast-follow adding display UI with the `cr` overlay. lukenispel: reading/storing/displaying is straightforward, but the CR icon needs a conformant validator/generator first; offered to draft the display work, gated on conformance. **Relationship correction (2026-07-27):** PR #459 is now confirmed as this issue's **authoritative `closing` PR** via GitHub's `closingIssuesReferences`, not merely a conceptual sibling as earlier docs recorded — which is why the card moved To do → In progress. The signing PRs #294/#302 remain closed unmerged, so read-only detection is the whole live C2PA path. **Movement (2026-08-14):** **PR card #459 was removed from the board** while the PR stays open and still `closing`-linked here, and its checks went FAILURE — this issue is now the only board representation of the C2PA read path, and it is one of the two cards standing between 1.3.0 and its release.
+**Discussion highlights.** jeffpaul wants a fast-follow adding display UI with the `cr` overlay. lukenispel: reading/storing/displaying is straightforward, but the CR icon needs a conformant validator/generator first; offered to draft the display work, gated on conformance. **Relationship correction (2026-07-27):** PR #459 is now confirmed as this issue's **authoritative `closing` PR** via GitHub's `closingIssuesReferences`, not merely a conceptual sibling as earlier docs recorded — which is why the card moved To do → In progress. The signing PRs #294/#302 remain closed unmerged, so read-only detection is the whole live C2PA path. **Movement (2026-08-14):** **PR card #459 was removed from the board** while the PR stays open and still `closing`-linked here, and its checks went FAILURE — this issue is now the only board representation of the C2PA read path, and it is one of the two cards standing between 1.3.0 and its release. **Movement (2026-08-17):** #459 regressed again — merge state **DIRTY → BLOCKED**, so it is now CHANGES_REQUESTED + BLOCKED + FAILURE on the day #924 was targeting. It is the only substantive item left unchecked on the release list, and every axis of its readiness is now red.
 
 ### #625 — New Experiment: Social Content Generation for platform-specific social posts
 **Status:** In progress *(was In discussion / Needs decision)* · **Milestone:** Future Release · **Labels:** [Type] Enhancement, Needs Design · **Assignee(s):** Malayt04 · **Updated:** 2026-07-16 · **Comments:** 3
@@ -519,10 +535,12 @@
 **Discussion highlights.** Filed board-new on 2026-07-17 with no comments; two comments and the implementation PR arrived the following window. **Milestone churn is the defining feature of this card:** 1.4.0 → Future Release (2026-07-31) → 1.3.0 → **1.4.0** (this window), three reversals, while PR #887 never cleared review and in fact regressed to DIRTY. The scheduling has moved four times; the work has not moved at all.
 
 ### #924 — Release version 1.3.0
-**Status:** In progress · **Milestone:** 1.3.0 · **Labels:** — · **Assignee(s):** dkotter, jeffpaul · **Updated:** 2026-08-13 · **Comments:** 1
+**Status:** In progress · **Milestone:** 1.3.0 · **Labels:** — · **Assignee(s):** dkotter, jeffpaul · **Updated:** 2026-08-17 · **Comments:** 1
 **Link:** https://github.com/WordPress/ai/issues/924
 
-**Problem / goal.** The release tracker for v1.3.0, following the standard pre/post-release checklist. **Target release date: 2026-08-17.**
+**Problem / goal.** The release tracker for v1.3.0, following the standard pre/post-release checklist. **Target release date: 2026-08-17** — *which is the date of this snapshot, and the release has not been cut: 1.2.0 is still the latest tagged release.*
+
+**⚠️ Target date reached, not shipped (2026-08-17).** This card carries the latest activity of any `WordPress/ai` card (17:28 UTC), one minute after dkotter opened **PR #946** ("Remove the loading of the SDK overlay class"), which is repo-milestoned 1.3.0 and explicitly says *"we don't include the changelog entry from #892 in this release"*. **#946 was then approved at 18:22 and merged at 18:54, uncarded** — so on its own target date the release lane's only completed work was **backing #892's vendored embeddings out of the release**, while this card did not advance and nothing was tagged. The other unchecked item, #459, regressed to merge BLOCKED with failing checks the same window.
 
 **Proposed approach.** The board's own release runbook: a pre-release review/punt pass over every 1.3.0 PR, then branch/version/`@since`/changelog/credits/readme work, a no-FF merge into `develop` and `trunk`, build + E2E checks, the GitHub release, and post-release milestone close/punt/announcement.
 
@@ -548,7 +566,7 @@
 
 ---
 
-## Backlog (6)
+## Backlog (5)
 
 *Accepted direction, not yet scheduled for active delivery.*
 
@@ -586,20 +604,6 @@
 **Dependencies.** Existing Abilities + prompt infra; relates to Content Generation #297 (Change Tone) and Personas #188.
 
 **Discussion highlights.** itsgajendraSingh volunteered + shared wireframes. jeffpaul requested wireframes/userflows before implementation and pinged karmatosed on whether tone should target each text option or a subset.
-
-### #188 — Add persona-driven content generation experiments
-**Status:** Backlog · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-01-17 · **Comments:** 0
-**Link:** https://github.com/WordPress/ai/issues/188
-
-**Problem / goal.** Introduce personas/voices (roles, audiences, brand voices) that influence AI-generated content and are reusable across experiments — giving content teams a consistent voice without re-specifying it each time.
-
-**Proposed approach.** Define and select personas, consistently applied to influence output style/tone, reusable across experiments, extensible by plugins/themes.
-
-**Open decisions / blockers.** —
-
-**Dependencies.** Reusable content-control layer; conceptually adjacent to Tone Adjustment #186.
-
-**Discussion highlights.** —
 
 ### #189 — Explore an admin Site Agent for executing WordPress actions
 **Status:** Backlog · **Milestone:** Future Release · **Labels:** [Type] Enhancement · **Assignee(s):** — · **Updated:** 2026-01-17 · **Comments:** 0
@@ -1346,6 +1350,7 @@ The full `WordPress/php-ai-client` and `WordPress/mcp-adapter` repository census
 
 | Date | Change |
 |---|---|
+| 2026-08-17 | Live Project #240 refresh — **one dossier moved and nothing else did.** Open issues hold at **48** with a single status change: **#188** (persona-driven content generation) **Backlog → In progress**, so In progress **13 → 14** and Backlog **6 → 5**; In discussion **19**, Needs review **3**, To do **4**, Triage **3** unchanged. Its dossier moved sections and gained a status-move caveat: the card has **no PR, no assignee, and zero comments**, so the move records intent, not implementation — the same pattern #338 and #625 showed on 2026-08-10 (#338 has since acquired draft PR #929; #625 still has nothing). No dossier was opened, closed, retitled, or re-milestoned, and none of the 50 retained board-Done dossiers changed. Board totals flat at **279**; Done **214**; non-Done PR cards **17**. `WordPress/ai` open issues hold at **47** (+ #23 on `ai-provider-for-google`), all **47 of 47 carded** on Project #240. Release context for the two 1.3.0 dossiers: **#924** carries the latest activity of any `WordPress/ai` card (2026-08-17 17:28 UTC) and is dated for **today**, but **1.2.0 is still the latest tagged release** and **#421**/PR #459 — the one substantive item left on its pre-release list — regressed to merge BLOCKED with failing checks. Three repository PRs opened with no board card (#943, #945, #946); the dossier set is unaffected, and they are recorded in the roadmap and planned-work files — though **#946** deserves noting here because it **merged uncarded at 18:54 UTC**, 87 minutes after opening and on the strength of the only approving review any open `WordPress/ai` PR has drawn in nine windows, and what it does is switch off the embedding overlay that board-Done **#892** added. #924's dossier records the release-day consequence. **One metadata touch outside the dossier moves:** the board's most recent activity in the window is **#23** at **18:20:53 UTC**, where jeffpaul re-milestoned the card during an `ai-provider-for-google` milestone renumbering (old 1.2.0 renamed 1.1.1; new 1.2.0 created 18:20:00 UTC; #23 moved onto it). The milestone *string* is unchanged, so the diff is empty and the dossier's target reads the same — but it now names a different milestone object, and that dossier records the caveat. |
 | 2026-08-14 | Live Project #240 refresh — the 1.3.0 delivery wave. Open issues **51 → 48**: In discussion **18 → 19**, In progress **18 → 13**, Needs review **3** (membership changed), Backlog **6**, To do **3 → 4**, Triage **3** (milestones changed). **Moved 7 dossiers to Recently board-Done** (43 → **50** retained), six closed by merged PRs — **#233** (`AI_Service` deprecation, PR #905), **#690** (uninstall cleanup, #692), **#863** (abilities toggle, #881), **#866** (`wpai_` meta prefix, #867), **#876** (permalink slugs, #897), **#906** (reserved log-type API, #914) — plus **#307 closed `NOT_PLANNED`** (the AGENTS.md proposal declined). **Dossiered 4 board-new issues:** **#923** (agent users — the auditable-identity governance discussion, with production evidence that 50.2% of webmyc's 241,614 tool calls carry no usable agent identifier), **#940** (custom settings endpoint vs `/wp/v2/settings`; dkotter reproduces the key-wiping bug), **#924** (1.3.0 release tracker, target 2026-08-17, only #459 left on the pre-release list), and **#933** (connector validity is capability-aware, not text-only; PR #935). **Relocated:** **#514** and **#732** In progress → Needs review; **#600** In discussion → To do, retitled "Remove `Enable AI` header toggle…" with a Help Wanted label. **Re-milestoned:** #660/#736/#845/#875 → 1.4.0, #890/#918 → Future Release. #187 (translation) de-carded Done from the board and noted in the retention header. | 
 | 2026-08-01 | Live Project #240 refresh. **Open issues hold at 52** while the status mix shifted by one: In progress **16 → 17**, Needs review **2 → 1**, and In discussion **20**, Backlog **7**, To do **4**, Triage **3** unchanged. **Moved 2 dossiers to Recently board-Done** (39 → **41** retained): **#187** (multilingual rewriting/translation) closed 2026-07-28 by **merged PR #747** — the v1.3.0 lane's first experiment to land since the six that closed last window, and the reason Needs review fell to 1; and **#900**, promotional webinar spam opened, carded, closed, and marked Done all on 2026-07-28, recorded only so "two cards added" is not misread as two units of intake (second spam card in three windows, after #848). **Dossiered 1 board-new issue: #906** (Request Logging has no public API for the reserved `mcp_tool`/`ability` log types) — filed 2026-07-29 with an exact root cause (the REST enum and TS client advertise three types; the only writer hardcodes `ai_client`; every manager accessor is `private`), agreed to by dkotter the same day, and implemented by **PR #914** on 2026-08-01 with a proper `Closes #906`. Its dossier flags one behavior change: `log()` now refuses unknown types via `_doing_it_wrong()`, so existing callers passing custom types would lose rows. **3 dossiers re-milestoned out of dated lanes into Future Release**, all still In progress: **#736** (1.3.0 → Future Release; PR #749 picked up CHANGES_REQUESTED), **#875** and **#876** (1.4.0 → Future Release; PRs #887/#897 both picked up CHANGES_REQUESTED). Last window's note on #875/#876 — that their move to In progress reflected code appearing rather than decisions closing — is now confirmed by the re-milestoning, and both dossiers say so. **#233 rewritten: its premise reversed.** Adoption PR #898 closed unmerged 2026-07-27, and off-board PR **#905** now *deletes* the `AI_Service` layer as dead code, answering jeffpaul's April question in the opposite direction from the card's title. Because #905 declares no `closing` reference, the board still shows "Refactor experiments to leverage AI_Service layer / In progress"; the dossier now leads with a stale-title warning. Board totals **274 → 269**; Done **207 → 203**; non-Done PR cards **15 → 14**. **7 already-Done cards de-carded** (#614/#778/#853/#864/#865/#870/#872) — all previously dossiered here and all retained, with the Recently board-Done heading updated and a new caveat that board-Done ≠ merged (PR #621 was closed unmerged yet marked Done). `WordPress/ai` open issues hold at 51 (+ #23 on `ai-provider-for-google`). |
 | 2026-07-27 | Live Project #240 refresh — the largest dossier reshuffle since the 1.2.0 transition. Open issues **57 → 52**: In discussion **22 → 20**, In progress **15 → 16**, Backlog **8 → 7**, To do **6 → 4**, Needs review **3 → 2**, Triage **3** (membership changed). **Moved 6 dossiers to Recently board-Done** (33 → **39** retained), all closed by merged PRs: **#191** (settings import/export, PR #734, 2026-07-24 — the credential-handling debate, not the code, was the six-week long pole), **#192** (prompt-template extension points, PR #770, 2026-07-20 — pulled Future Release → 1.3.0 *as* it closed), **#452** (taxonomy relevance, PR #633, 2026-07-21), **#507** (Editorial Updates → Visual Revisions, PR #861, 2026-07-24 — retains a dependency on a private WP 7.0 editor-store action), **#874** (Yoast meta-description interop, PR #886, 2026-07-20, milestoned — → 1.3.0 on close; the dossier keeps the full two-store/REST-subtype root cause and upstream `Yoast/wordpress-seo#23458`), and **#883** (Abilities Explorer custom providers + statistics, PR #884, 2026-07-24). **5 dossiers relocated into In progress** as authoritative closing PRs opened against them: **#233** (To do → In progress, PR #898), **#421** (To do → In progress; **relationship correction** — PR #459 is confirmed as its `closing` PR, not the conceptual sibling earlier docs described), **#844** (Backlog → In progress, PR #891 — opened *ahead of* its stated #683 blocker, flagged as a duplicate-indexing risk), **#875** and **#876** (both In discussion → In progress, PRs #887/#897; their product questions remain open, so the moves reflect code starting, not decisions closing). **Dossiered 1 board-new Triage issue:** **#890** (mobile right-sidebar component — no labels, milestone, assignee, comments, or target surface; needs triage before scoping). Board totals **283 → 274**; Done **209 → 207**; non-Done PR cards **17 → 15**. **10 already-Done cards de-carded** from Project #240 (#508/#793/#809/#815/#816/#818/#833/#839/#846 + spam #848) — all previously dossiered here and all retained, with a note added to the Recently board-Done heading explaining that retained ≠ still carded. `WordPress/ai` open issues 56 → 51 (+ #23 on `ai-provider-for-google`). |

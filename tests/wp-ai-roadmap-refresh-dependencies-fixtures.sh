@@ -68,8 +68,8 @@ WP_AI_TEST_DEP_MODE=all-ok \
 WP_AI_DEPS_FILE="$TEST_REGISTRY" \
   "$ROOT_DIR/wp-ai-roadmap-refresh.sh" dependencies --markdown \
   >"$TMP_DIR/dependencies.md"
-rg 'AI refs: #40' "$TMP_DIR/dependencies.md"
-rg 'AI refs: #430' "$TMP_DIR/dependencies.md"
+grep -F 'AI refs: #40' "$TMP_DIR/dependencies.md"
+grep -F 'AI refs: #430' "$TMP_DIR/dependencies.md"
 
 rm -rf "$STATE_DIR"; mkdir -p "$STATE_DIR"
 run_dependencies required-fail --strict "$TMP_DIR/required.json"
@@ -124,7 +124,7 @@ WP_AI_DEPS_FILE="$TMP_DIR/malformed.json" \
 malformed_md_status=$?
 set -e
 [ "$malformed_md_status" -eq 2 ]
-rg 'dependency-registry-invalid' "$TMP_DIR/malformed-md.err" >/dev/null
+grep -F 'dependency-registry-invalid' "$TMP_DIR/malformed-md.err" >/dev/null
 
 # An empty Open-dependencies list renders the explicit "_(none)_" marker.
 jq -n '{
@@ -140,7 +140,7 @@ WP_AI_TEST_DEP_MODE=optional-fail \
 WP_AI_DEPS_FILE="$TMP_DIR/optional-only.json" \
   "$ROOT_DIR/wp-ai-roadmap-refresh.sh" dependencies --markdown \
   >"$TMP_DIR/none.md" 2>/dev/null
-rg -F '_(none)_' "$TMP_DIR/none.md" >/dev/null
+grep -F '_(none)_' "$TMP_DIR/none.md" >/dev/null
 
 jq '.items += [.items[0]]' "$TEST_REGISTRY" >"$TMP_DIR/duplicate.json"
 set +e

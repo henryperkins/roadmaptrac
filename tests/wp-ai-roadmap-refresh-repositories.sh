@@ -146,12 +146,12 @@ WP_AI_TEST_PR_PAGES_DIR="$PR_DIR" \
 WP_AI_TEST_RELEASES_DIR="$RELEASE_DIR" \
   "$ROOT_DIR/wp-ai-roadmap-refresh.sh" --markdown \
   >"$TMP_DIR/full.md" 2>"$TMP_DIR/full-md.err"
-rg -F '## Tracked repository PR/issue/release census' "$TMP_DIR/full.md" >/dev/null
+grep -F '## Tracked repository PR/issue/release census' "$TMP_DIR/full.md" >/dev/null
 # Columns: repo | open PRs | open issues | latest release | ...
-rg -F '| `WordPress/php-ai-client` | 1 | 0 | `1.4.0` (2026-07-15) |' \
+grep -F '| `WordPress/php-ai-client` | 1 | 0 | `1.4.0` (2026-07-15) |' \
   "$TMP_DIR/full.md" >/dev/null
-rg -F '| `WordPress/mcp-adapter` | 2 | 0 | `v0.5.0` (2026-04-15) |' \
+grep -F '| `WordPress/mcp-adapter` | 2 | 0 | `v0.5.0` (2026-04-15) |' \
   "$TMP_DIR/full.md" >/dev/null
-rg -F '| `WordPress/abilities-api` | 2 | 0 | — |' "$TMP_DIR/full.md" >/dev/null
+grep -F '| `WordPress/abilities-api` | 2 | 0 | — |' "$TMP_DIR/full.md" >/dev/null
 
 printf 'multi-repository census fixture tests passed\n'
