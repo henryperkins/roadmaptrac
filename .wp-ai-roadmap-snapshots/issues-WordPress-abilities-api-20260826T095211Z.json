@@ -1,0 +1,140 @@
+[
+  {
+    "id": "WordPress/abilities-api#38",
+    "repo": "WordPress/abilities-api",
+    "number": 38,
+    "title": "Proposal: Add a convienient way to filter the list of all registered abilities",
+    "url": "https://github.com/WordPress/abilities-api/issues/38",
+    "state": "OPEN",
+    "milestone": "Later",
+    "labels": [
+      "[Status] In Progress",
+      "[Priority] High"
+    ],
+    "assignees": [
+      "gziolo",
+      "galatanovidiu"
+    ],
+    "author": "gziolo",
+    "isBot": false,
+    "comments": 11,
+    "createdAt": "2025-08-22T06:40:10Z",
+    "updatedAt": "2025-10-15T16:32:58Z"
+  },
+  {
+    "id": "WordPress/abilities-api#75",
+    "repo": "WordPress/abilities-api",
+    "number": 75,
+    "title": "REST endpoints should themselves be Abilities",
+    "url": "https://github.com/WordPress/abilities-api/issues/75",
+    "state": "OPEN",
+    "milestone": "Later",
+    "labels": [
+      "[Type] Question"
+    ],
+    "assignees": [],
+    "author": "justlevine",
+    "isBot": false,
+    "comments": 2,
+    "createdAt": "2025-09-13T17:10:39Z",
+    "updatedAt": "2025-10-02T07:07:47Z"
+  },
+  {
+    "id": "WordPress/abilities-api#84",
+    "repo": "WordPress/abilities-api",
+    "number": 84,
+    "title": "Create ablities for CRUD operations that work with all post types",
+    "url": "https://github.com/WordPress/abilities-api/issues/84",
+    "state": "OPEN",
+    "milestone": "Later",
+    "labels": [],
+    "assignees": [
+      "jorgefilipecosta"
+    ],
+    "author": "gziolo",
+    "isBot": false,
+    "comments": 0,
+    "createdAt": "2025-09-23T07:28:34Z",
+    "updatedAt": "2025-10-30T11:12:53Z"
+  },
+  {
+    "id": "WordPress/abilities-api#148",
+    "repo": "WordPress/abilities-api",
+    "number": 148,
+    "title": "create a plugin that lists all abilities",
+    "url": "https://github.com/WordPress/abilities-api/issues/148",
+    "state": "OPEN",
+    "milestone": null,
+    "labels": [],
+    "assignees": [],
+    "author": "pbearne",
+    "isBot": false,
+    "comments": 3,
+    "createdAt": "2025-11-17T17:24:57Z",
+    "updatedAt": "2026-01-12T20:09:29Z"
+  },
+  {
+    "id": "WordPress/abilities-api#149",
+    "repo": "WordPress/abilities-api",
+    "number": 149,
+    "title": "Proposal: add filters for input and output validation",
+    "url": "https://github.com/WordPress/abilities-api/issues/149",
+    "state": "OPEN",
+    "milestone": null,
+    "labels": [],
+    "assignees": [],
+    "author": "priethor",
+    "isBot": false,
+    "comments": 1,
+    "createdAt": "2025-11-19T19:09:43Z",
+    "updatedAt": "2025-11-26T16:10:12Z"
+  },
+  {
+    "id": "WordPress/abilities-api#154",
+    "repo": "WordPress/abilities-api",
+    "number": 154,
+    "title": "Using several plugins with Abilities API leads to a Warning",
+    "url": "https://github.com/WordPress/abilities-api/issues/154",
+    "state": "OPEN",
+    "milestone": null,
+    "labels": [],
+    "assignees": [],
+    "author": "timur987",
+    "isBot": false,
+    "comments": 2,
+    "createdAt": "2025-12-08T14:01:36Z",
+    "updatedAt": "2025-12-09T06:39:51Z"
+  },
+  {
+    "id": "WordPress/abilities-api#158",
+    "repo": "WordPress/abilities-api",
+    "number": 158,
+    "title": "Support Dynamic Input_Schema",
+    "url": "https://github.com/WordPress/abilities-api/issues/158",
+    "state": "OPEN",
+    "milestone": null,
+    "labels": [],
+    "assignees": [],
+    "author": "chubes4",
+    "isBot": false,
+    "comments": 4,
+    "createdAt": "2026-01-14T21:04:34Z",
+    "updatedAt": "2026-01-17T16:34:44Z"
+  },
+  {
+    "id": "WordPress/abilities-api#160",
+    "repo": "WordPress/abilities-api",
+    "number": 160,
+    "title": "Should this repository be archived?",
+    "url": "https://github.com/WordPress/abilities-api/issues/160",
+    "state": "OPEN",
+    "milestone": null,
+    "labels": [],
+    "assignees": [],
+    "author": "jonathanbossenger",
+    "isBot": false,
+    "comments": 4,
+    "createdAt": "2026-01-29T13:29:29Z",
+    "updatedAt": "2026-02-04T17:28:24Z"
+  }
+]

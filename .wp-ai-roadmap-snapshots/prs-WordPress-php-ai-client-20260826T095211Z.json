@@ -1,0 +1,697 @@
+[
+  {
+    "id": "WordPress/php-ai-client#70",
+    "repo": "WordPress/php-ai-client",
+    "number": 70,
+    "title": "Add comprehensive documentation suit",
+    "url": "https://github.com/WordPress/php-ai-client/pull/70",
+    "isDraft": false,
+    "author": "Ref34t",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": null,
+    "updatedAt": "2025-08-29T21:35:26Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#125",
+    "repo": "WordPress/php-ai-client",
+    "number": 125,
+    "title": "Add AI prompt to generate TypeScript types for all enums and DTOs",
+    "url": "https://github.com/WordPress/php-ai-client/pull/125",
+    "isDraft": true,
+    "author": "felixarntz",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2025-11-25T01:05:38Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#126",
+    "repo": "WordPress/php-ai-client",
+    "number": 126,
+    "title": "Implement OpenAI Text-to-Speech Conversion Model",
+    "url": "https://github.com/WordPress/php-ai-client/pull/126",
+    "isDraft": false,
+    "author": "caseymanos",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2025-12-04T08:27:40Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 90,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      90
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#167",
+    "repo": "WordPress/php-ai-client",
+    "number": 167,
+    "title": "Adds CodeExecution support",
+    "url": "https://github.com/WordPress/php-ai-client/pull/167",
+    "isDraft": true,
+    "author": "JasonTheAdams",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-01-16T18:06:08Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#222",
+    "repo": "WordPress/php-ai-client",
+    "number": 222,
+    "title": "Add sound generation support",
+    "url": "https://github.com/WordPress/php-ai-client/pull/222",
+    "isDraft": false,
+    "author": "saarnilauri",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-05-27T07:47:55Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#224",
+    "repo": "WordPress/php-ai-client",
+    "number": 224,
+    "title": "Fix: register providers and load .env in cli.php",
+    "url": "https://github.com/WordPress/php-ai-client/pull/224",
+    "isDraft": false,
+    "author": "sarthak-19",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-12T22:12:48Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 223,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      223
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#227",
+    "repo": "WordPress/php-ai-client",
+    "number": 227,
+    "title": "Expose model capabilities",
+    "url": "https://github.com/WordPress/php-ai-client/pull/227",
+    "isDraft": false,
+    "author": "sarthak-19",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-09T02:07:35Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 226,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      226
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#232",
+    "repo": "WordPress/php-ai-client",
+    "number": 232,
+    "title": "Use `non-empty-string` instead of `string` for Provider properties ",
+    "url": "https://github.com/WordPress/php-ai-client/pull/232",
+    "isDraft": false,
+    "author": "westonruter",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "APPROVED",
+    "mergeStateStatus": "UNSTABLE",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-06-09T07:37:40Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#234",
+    "repo": "WordPress/php-ai-client",
+    "number": 234,
+    "title": "Preserve empty JSON schema object maps",
+    "url": "https://github.com/WordPress/php-ai-client/pull/234",
+    "isDraft": false,
+    "author": "chubes4",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-10T23:10:42Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 233,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      233
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#238",
+    "repo": "WordPress/php-ai-client",
+    "number": 238,
+    "title": "Add bearer token request authentication",
+    "url": "https://github.com/WordPress/php-ai-client/pull/238",
+    "isDraft": false,
+    "author": "chubes4",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-11T03:20:28Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 237,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      237
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#239",
+    "repo": "WordPress/php-ai-client",
+    "number": 239,
+    "title": "Add provider-priority ordering and runtime fallback",
+    "url": "https://github.com/WordPress/php-ai-client/pull/239",
+    "isDraft": false,
+    "author": "georgestephanis",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-05-27T17:37:35Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#245",
+    "repo": "WordPress/php-ai-client",
+    "number": 245,
+    "title": "Throw when no requested model preference is available",
+    "url": "https://github.com/WordPress/php-ai-client/pull/245",
+    "isDraft": false,
+    "author": "alewolf",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-02T18:29:27Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 241,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      241
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#248",
+    "repo": "WordPress/php-ai-client",
+    "number": 248,
+    "title": "Update stale documentation links to canonical URLs",
+    "url": "https://github.com/WordPress/php-ai-client/pull/248",
+    "isDraft": false,
+    "author": "alewolf",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "APPROVED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-02T18:25:21Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#250",
+    "repo": "WordPress/php-ai-client",
+    "number": 250,
+    "title": "Fix article typo and broken method chain in README max-tokens example",
+    "url": "https://github.com/WordPress/php-ai-client/pull/250",
+    "isDraft": false,
+    "author": "alewolf",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "APPROVED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-02T18:26:26Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#251",
+    "repo": "WordPress/php-ai-client",
+    "number": 251,
+    "title": "Fix malformed json_schema envelope for OpenAI-compatible providers",
+    "url": "https://github.com/WordPress/php-ai-client/pull/251",
+    "isDraft": false,
+    "author": "alewolf",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-06-04T13:32:24Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 229,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      229
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#254",
+    "repo": "WordPress/php-ai-client",
+    "number": 254,
+    "title": "Distinguish unmet required options from unsupported capabilities in model selection errors",
+    "url": "https://github.com/WordPress/php-ai-client/pull/254",
+    "isDraft": false,
+    "author": "saarnilauri",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "APPROVED",
+    "mergeStateStatus": "CLEAN",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-02T18:24:15Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#255",
+    "repo": "WordPress/php-ai-client",
+    "number": 255,
+    "title": "Add support for streaming",
+    "url": "https://github.com/WordPress/php-ai-client/pull/255",
+    "isDraft": false,
+    "author": "thelovekesh",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-26T08:38:06Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 100,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      100
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#259",
+    "repo": "WordPress/php-ai-client",
+    "number": 259,
+    "title": "Add cached token fields to TokenUsage and parse OpenAI-compatible cache usage",
+    "url": "https://github.com/WordPress/php-ai-client/pull/259",
+    "isDraft": false,
+    "author": "yaman-694",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-14T14:18:29Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 236,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      236
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#263",
+    "repo": "WordPress/php-ai-client",
+    "number": 263,
+    "title": "Reject non-finite values in embedding vectors",
+    "url": "https://github.com/WordPress/php-ai-client/pull/263",
+    "isDraft": false,
+    "author": "henryperkins",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-05T03:22:01Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 262,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      262
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#264",
+    "repo": "WordPress/php-ai-client",
+    "number": 264,
+    "title": "Add model context window metadata and proactive token-limit check",
+    "url": "https://github.com/WordPress/php-ai-client/pull/264",
+    "isDraft": false,
+    "author": "the-hercules",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-26T08:56:53Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 193,
+        "source": "fallback-body"
+      }
+    ],
+    "issues": [
+      193
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#266",
+    "repo": "WordPress/php-ai-client",
+    "number": 266,
+    "title": "GH#265: Preserve Guzzle HTTP error responses",
+    "url": "https://github.com/WordPress/php-ai-client/pull/266",
+    "isDraft": false,
+    "author": "superdav42",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-28T22:58:03Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 265,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      265
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#267",
+    "repo": "WordPress/php-ai-client",
+    "number": 267,
+    "title": "Fix avoid file_exists() on oversized strings in File detection to prevent PHP warnings",
+    "url": "https://github.com/WordPress/php-ai-client/pull/267",
+    "isDraft": false,
+    "author": "the-hercules",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-16T12:07:48Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 258,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      258
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#269",
+    "repo": "WordPress/php-ai-client",
+    "number": 269,
+    "title": "Add text extraction (OCR / document parsing) capability",
+    "url": "https://github.com/WordPress/php-ai-client/pull/269",
+    "isDraft": false,
+    "author": "saarnilauri",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-03T11:04:28Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 268,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      268
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#271",
+    "repo": "WordPress/php-ai-client",
+    "number": 271,
+    "title": "Return false from isSupported() when the output modality has no matching capability",
+    "url": "https://github.com/WordPress/php-ai-client/pull/271",
+    "isDraft": false,
+    "author": "jigneshbhavani",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-01T21:29:58Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 270,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      270
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#273",
+    "repo": "WordPress/php-ai-client",
+    "number": 273,
+    "title": "Add function call resolution loop and withMessages() to PromptBuilder",
+    "url": "https://github.com/WordPress/php-ai-client/pull/273",
+    "isDraft": true,
+    "author": "gziolo",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-05T12:25:36Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 272,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      272
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#274",
+    "repo": "WordPress/php-ai-client",
+    "number": 274,
+    "title": "Force a model to be passed when generating embeddings instead of relying on the model resolver",
+    "url": "https://github.com/WordPress/php-ai-client/pull/274",
+    "isDraft": false,
+    "author": "dkotter",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "APPROVED",
+    "mergeStateStatus": "CLEAN",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-26T04:46:55Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 242,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      242
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#276",
+    "repo": "WordPress/php-ai-client",
+    "number": 276,
+    "title": "Qualify global function and constant references",
+    "url": "https://github.com/WordPress/php-ai-client/pull/276",
+    "isDraft": true,
+    "author": "JasonTheAdams",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-17T18:22:30Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/php-ai-client#278",
+    "repo": "WordPress/php-ai-client",
+    "number": 278,
+    "title": "docs: explain the HTTP client adapter requirement",
+    "url": "https://github.com/WordPress/php-ai-client/pull/278",
+    "isDraft": false,
+    "author": "zahidgh",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-21T22:03:39Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 82,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      82
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#279",
+    "repo": "WordPress/php-ai-client",
+    "number": 279,
+    "title": "Allow token usage statistics to be unavailable",
+    "url": "https://github.com/WordPress/php-ai-client/pull/279",
+    "isDraft": false,
+    "author": "zahidgh",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-21T22:13:19Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 158,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      158
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#280",
+    "repo": "WordPress/php-ai-client",
+    "number": 280,
+    "title": "Add provider hook for preparing function declarations",
+    "url": "https://github.com/WordPress/php-ai-client/pull/280",
+    "isDraft": false,
+    "author": "zahidgh",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-22T16:16:10Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 256,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      256
+    ]
+  },
+  {
+    "id": "WordPress/php-ai-client#282",
+    "repo": "WordPress/php-ai-client",
+    "number": 282,
+    "title": "[#281] Add provider-agnostic deferred tool loading",
+    "url": "https://github.com/WordPress/php-ai-client/pull/282",
+    "isDraft": true,
+    "author": "superdav42",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-26T05:09:57Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/php-ai-client",
+        "number": 281,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      281
+    ]
+  }
+]

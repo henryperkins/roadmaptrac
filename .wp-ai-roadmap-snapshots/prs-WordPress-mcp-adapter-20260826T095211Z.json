@@ -1,0 +1,369 @@
+[
+  {
+    "id": "WordPress/mcp-adapter#184",
+    "repo": "WordPress/mcp-adapter",
+    "number": 184,
+    "title": "feat(admin): add Settings > MCP Adapter page to opt registered abilities into the default server (fixes #183)",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/184",
+    "isDraft": false,
+    "author": "webmyc",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-26T08:55:19Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 183,
+        "source": "fallback-title"
+      }
+    ],
+    "issues": [
+      183
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#196",
+    "repo": "WordPress/mcp-adapter",
+    "number": 196,
+    "title": "fix: handle non-UTF-8 bytes in tool results to prevent transport close",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/196",
+    "isDraft": false,
+    "author": "benjithaimmortal",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-11T12:14:17Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 195,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      195
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#201",
+    "repo": "WordPress/mcp-adapter",
+    "number": 201,
+    "title": "Add mcp_adapter_server_config filter and fix default ability hook timing",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/201",
+    "isDraft": false,
+    "author": "ibrahimhajjaj",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-07-16T11:28:22Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 117,
+        "source": "closing"
+      },
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 190,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      117,
+      190
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#222",
+    "repo": "WordPress/mcp-adapter",
+    "number": 222,
+    "title": "Move HttpTransport hook registration to boot()",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/222",
+    "isDraft": false,
+    "author": "mathetos",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-13T18:23:33Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 52,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      52
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#231",
+    "repo": "WordPress/mcp-adapter",
+    "number": 231,
+    "title": "feat: map open_world ability annotation to openWorldHint",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/231",
+    "isDraft": false,
+    "author": "jorgefilipecosta",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-20T21:52:17Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#244",
+    "repo": "WordPress/mcp-adapter",
+    "number": 244,
+    "title": "Make the built-in discover/get-info/execute tools' MCP exposure check filterable (#243)",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/244",
+    "isDraft": false,
+    "author": "raftaar1191",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-26T09:15:02Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 243,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      243
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#258",
+    "repo": "WordPress/mcp-adapter",
+    "number": 258,
+    "title": "Feat/resource meta",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/258",
+    "isDraft": false,
+    "author": "AshishJii",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-27T15:20:09Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 245,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      245
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#259",
+    "repo": "WordPress/mcp-adapter",
+    "number": 259,
+    "title": "Nullable singletons, WP-CLI alias & notices",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/259",
+    "isDraft": false,
+    "author": "murshed",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-13T21:18:26Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#260",
+    "repo": "WordPress/mcp-adapter",
+    "number": 260,
+    "title": "Normalize `_meta` and annotations on every emitted DTO, and emit `mimeType` as declared",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/260",
+    "isDraft": true,
+    "author": "galatanovidiu",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-07-28T18:05:58Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 245,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      245
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#281",
+    "repo": "WordPress/mcp-adapter",
+    "number": 281,
+    "title": "[Try] Implement exact-revision 2026 tools/call support",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/281",
+    "isDraft": true,
+    "author": "galatanovidiu",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-12T13:09:51Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#287",
+    "repo": "WordPress/mcp-adapter",
+    "number": 287,
+    "title": "Replace MCP DTOs with a descriptor-backed dual-revision runtime",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/287",
+    "isDraft": true,
+    "author": "galatanovidiu",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-14T09:28:46Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#288",
+    "repo": "WordPress/mcp-adapter",
+    "number": 288,
+    "title": "feat: deprecate usage of MCP Adapter as bundled dependency",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/288",
+    "isDraft": false,
+    "author": "matiasbenedetto",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "APPROVED",
+    "mergeStateStatus": "UNSTABLE",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-26T04:12:41Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#299",
+    "repo": "WordPress/mcp-adapter",
+    "number": 299,
+    "title": "Fix resources/read 500 on ability-backed resources with an object input schema",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/299",
+    "isDraft": false,
+    "author": "shoemoney",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-25T16:51:39Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 261,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      261
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#300",
+    "repo": "WordPress/mcp-adapter",
+    "number": 300,
+    "title": "Add SSE streaming to the HTTP transport GET endpoint",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/300",
+    "isDraft": true,
+    "author": "sarthak-19",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-25T15:54:23Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 280,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      280
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#302",
+    "repo": "WordPress/mcp-adapter",
+    "number": 302,
+    "title": "ci: bump dev-deps and `Tested up to` header",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/302",
+    "isDraft": false,
+    "author": "justlevine",
+    "isBot": false,
+    "routine": true,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-26T04:12:35Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#303",
+    "repo": "WordPress/mcp-adapter",
+    "number": 303,
+    "title": "tests: run tests against PHP 8.5",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/303",
+    "isDraft": false,
+    "author": "justlevine",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-26T04:12:29Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#304",
+    "repo": "WordPress/mcp-adapter",
+    "number": 304,
+    "title": "ci: implement Playground blueprint.json and PR Previews",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/304",
+    "isDraft": false,
+    "author": "justlevine",
+    "isBot": false,
+    "routine": true,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-26T04:12:07Z",
+    "issueLinks": [],
+    "issues": []
+  }
+]
