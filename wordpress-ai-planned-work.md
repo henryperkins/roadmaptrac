@@ -1,259 +1,224 @@
 # WordPress AI — Planned (Not-Yet-Shipped) Work
 
-> The **delivery plan** for every Project #240 card not in Done. It includes issue cards and board-tracked PRs, ordered by milestone. ⚠️ **Scope caveat:** `WordPress/ai` has **33 open PRs**, and Project #240 has PR cards for **17** of them; see [Board vs. repo](#board-vs-repo-pr-coverage-five-classifications). Full census-only tracking for `WordPress/php-ai-client`, `WordPress/mcp-adapter`, and `WordPress/abilities-api` appears below and does not expand Project #240 scope.
+> The **delivery plan** for every Project #240 card not in Done. It includes issue cards and board-tracked PRs, ordered by milestone. `WordPress/ai` has **41 open PRs**, and Project #240 has open PR cards for **20** of them; see [Board vs. repo](#board-vs-repo-pr-coverage-five-classifications). Full census-only tracking for `WordPress/php-ai-client`, `WordPress/mcp-adapter`, and `WordPress/abilities-api` appears below and does not expand Project #240 scope.
 >
 > Part of a 4-doc set: [`wordpress-ai-roadmap.md`](./wordpress-ai-roadmap.md) (strategy + tracker) · [`wordpress-ai-open-issues.md`](./wordpress-ai-open-issues.md) (issue dossiers) · [`wordpress-ai-cross-repo-dependencies.md`](./wordpress-ai-cross-repo-dependencies.md) (upstream dependencies + repository radar) · **this file** (release-ordered delivery plan + PR census).
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-08-26 09:19 UTC (board + live PR/issue/release checks) |
-> | **Scope** | **74 non-Done cards** = 56 issue cards + 17 open board-tracked PRs + stale merged PR #484 |
-> | **Latest shipped** | **v1.3.0** (2026-08-18; 19th release) — *nothing has shipped since; no 1.4.0 release issue exists* |
-> | **Repository radar** | Open PRs / open issues — `php-ai-client`: **31 / 35** (1.4.0) · `mcp-adapter`: **17 / 43** (v0.6.1) · `abilities-api`: **14 / 8** (v0.4.0, ⚠️ pending archival). Census-only; no Project #240 coverage gate. |
-> | **Active / next** | **v1.4.0:** 24 open (15 issue cards + 9 PRs), no release issue or date yet · **v1.5.0:** milestone created 2026-08-18, **still empty** · **Future Release:** 42 open, flat on every axis |
-> | **⚠️ Milestone vs. board** | The **repository's** `1.4.0` milestone holds **47 items**; the board cards **29** of them. The 18 uncarded are all PRs, and **nine are already merged or closed**. This table is a view of the board, not of the milestone. |
+> | **Data snapshot** | 2026-09-23 04:54 UTC (board + live PR/issue/release checks) |
+> | **Scope** | **86 non-Done cards** = 65 issue cards + 20 open board-tracked PRs + stale merged PR #484 |
+> | **Latest shipped** | **v1.3.0** (2026-08-18; 19th release) — *nothing has shipped since; no 1.4.0 release issue exists. `php-ai-client` 1.5.0 shipped 2026-09-16.* |
+> | **Repository radar** | Open PRs / open issues — `php-ai-client`: **37 / 40** (1.5.0) · `mcp-adapter`: **16 / 51** (v0.6.1) · `abilities-api`: **14 / 8** (v0.4.0, pending archival). Census-only; no Project #240 coverage gate. |
+> | **Active / next** | **v1.4.0:** 12 open (11 issue cards + 1 PR) · **v1.5.0:** 8 open (3 issues + 5 PRs) · **v1.6.0:** 3 open issues · **Future Release:** 49 open |
+> | **Milestone vs. board** | Repository `1.4.0` is **83 items (63 closed / 20 open)** and its open set is fully represented. `1.5.0` is **11 open / 0 closed**, fully represented. `1.6.0` is **6 open / 0 closed**, fully represented. Future Release in the repository is **54 open** against **49** board cards. |
 > | **For issue detail** | See the [open-issues dossier](./wordpress-ai-open-issues.md). |
 
 ## How "planned" is tracked here
 
 This file mirrors **board status**, not a promise that every card will ship. "Done" is excluded; all other statuses are included and grouped by milestone.
 
-### Commitment ladder (74 non-Done cards)
+### Commitment ladder (86 non-Done cards)
 
 | Tier | Cards | Interpretation |
 |---|---:|---|
-| **v1.4.0** | **24** | **The active lane, and still undated.** 15 issue cards + 9 PRs. Flat in total (gained board-new **#970**, lost **#916** to merge) but **the repository milestone behind it holds 47 items** — 18 of them uncarded PRs, nine already merged. **No release issue exists** eight days after v1.3.0, which is still inside the normal filing window; what is not normal is a 24-card lane with no date on the board *or* the milestone |
-| **v1.5.0** | **0** | Milestone created 2026-08-18 19:46 UTC during the release, **still empty eight days on**. Nothing has been punted there |
-| **Future Release** | **42** | Unscheduled backlog: 34 issues + 8 PRs. **Completely flat this window** — no arrivals, no departures, no status or milestone moves on any of the 42 |
-| **1.2.0 residual** | **1** | Google-provider issue #23 remains board-open after the plugin release shipped. *Its "1.2.0" label was re-pointed on 2026-08-17: `ai-provider-for-google` renamed that milestone to 1.1.1 and moved #23 onto a newly created 1.2.0, so the string is stable but the milestone behind it is not the same object* |
-| **Unmilestoned** | **6** | The five C2PA Monitor follow-ups **#953–#957** (all Triage since 2026-08-18, all untouched) plus board-new **#971**, the AI governance RFC. #953 explicitly requests 1.4.0 and still has no milestone |
+| **v1.4.0** | **12** | **The active lane, unloaded from 24, still undated.** 11 issue cards + PR #888. The repository milestone behind it holds **83 items (63 closed / 20 open)**. The 20 open items are all on the board or closing-linked. **No release issue and no date**, 36 days after v1.3.0 |
+| **v1.5.0** | **8** | First cards. 3 issues (#923, #979, #338) + 5 PRs (#764, #858, #992, #1010, #1041). The board's one Done card in this column is `php-ai-client#284`, the client's release, not plugin work. Repository milestone: **11 open**, all represented |
+| **v1.6.0** | **3** | New lane, all issues moved off 1.4.0: #660, #732, #875. Repository milestone: **6 open**, all represented (plus linked #759, #757, #887) |
+| **Future Release** | **49** | Unscheduled backlog: 35 issues + 14 PRs. Grew from 42 as 1.4.0 was unloaded and new cards arrived, including the AI Workspace |
+| **1.3.0 residual** | **1** | Google-provider issue #23, moved **1.2.0 → 1.3.0**. The plugin's 1.2.0 and the rest of 1.3.0 are Done. The repository's 1.3.0 milestone stays closed at 71 |
+| **Unmilestoned** | **12** | #1037 plus #953–#957, #994, #1006, #1012, #1016, #1036, #1048. #971 left this bucket for Future Release |
 | **Stale shipped-milestone card** | **1** | PR #484 is merged but still board-Needs review under 0.9.0 |
 
-> ⚠️ **Two of the 74 non-Done cards are bookkeeping artifacts, and neither was touched this window.** `php-ai-client#242` is carded **In progress** under 1.4.0 while having been **closed upstream on 2026-07-15**; PR **#484** is merged but board-Needs review under 0.9.0. The cleanup pass that ran this window removed four *correctly* Done cards instead — **#233**, **#690**, **#876** (all shipped 1.3.0 work) and **#307** (`NOT_PLANNED`).
+> **One of the 86 non-Done cards is a bookkeeping artifact.** PR **#484** is merged and still Needs review. `php-ai-client#242` was de-carded. New mismatches sit on the Done side instead: **#1024** is Done and closed `NOT_PLANNED`; **#211** and **#760** are Done and closed unmerged; **#514** shipped via #681 and was removed without a Done status.
 
-> **⚠️ The 1.3.0 lane is being emptied retroactively.** It closed 19/19 on release night; three of those cards (**#233**, **#690**, **#876**) were de-carded this window, so the board now shows **16**. The repository milestone remains closed at **71 items**. If you need to know what a release contained, read the milestone or the release notes — not the board, and not this document's historical lane counts.
+> **The 1.3.0 lane is 13 cards.** It closed 19/19 on release night, dropped to 16 on 2026-08-26, and dropped again when #863, #866, #906, and #924 were de-carded. Google #23 moved in. The repository milestone remains closed at **71 items**.
 
 ### Delivery readiness at a glance
 
 | Board status | Cards |
 |---|---:|
-| In progress | **25** *(+1: board-new #970)* |
-| In discussion / Needs decision | **19** *(flat — no card entered or left)* |
-| Needs review | **9** *(−1: PR #916 merged to Done)* |
-| Triage | **9** *(+1: board-new #971)* |
-| Backlog | **7** *(flat)* |
-| To do | **5** *(flat)* |
+| In progress | **35** |
+| In discussion / Needs decision | **16** |
+| Needs review | **10** |
+| Triage | **16** |
+| Backlog | **6** |
+| To do | **3** |
 
-> **Not one pre-existing card changed status or milestone this window.** Every move above is an arrival or a departure. When a board produces a diff with empty `status_changed` and `milestone_changed` arrays across three days that included five merges, an upstream approval, and two new foundation PRs, the board is not tracking the work — it is being maintained separately from it.
-
-> "In discussion" is directional, not committed. The board's active implementation signal is the combination of In progress/Needs review cards and the live repository PR census.
+> **Eight cards changed status and nineteen changed milestone.** This is the first window since 1.3.0 shipped in which the board was actually rescheduled. In progress grew because new work arrived (#1003, #1004's issue, #1032, #1052, #1054, the content-write drafts) and because #600, #732, and #923 moved in, not only because of intake.
 
 ---
 
-## 🚀 New experiments & features in the pipeline
+## New experiments and features in the pipeline
 
-### Code already in flight (17 open board-tracked PRs)
+### Code already in flight (20 open board-tracked PRs)
 
 | PR | Milestone | Board status | Live readiness (draft · review · merge · checks) |
 |---|---|---|---|
-| [#211](https://github.com/WordPress/ai/pull/211) Add Service Account experiment | Future Release | In discussion / Needs decision | draft · review — · merge DIRTY · checks FAILURE |
-| [#224](https://github.com/WordPress/ai/pull/224) Add WebMCP adapter experiment | Future Release | In discussion / Needs decision | draft · review — · merge DIRTY · checks SUCCESS |
-| [#494](https://github.com/WordPress/ai/pull/494) [Feature]: Issue 238 \| Focus-aware crop suggestions | Future Release | In progress | review — · merge DIRTY · checks SUCCESS |
-| [#683](https://github.com/WordPress/ai/pull/683) Add native vector search | 1.4.0 | In progress | draft · review — · merge DIRTY · checks FAILURE |
+| [#888](https://github.com/WordPress/ai/pull/888) New Text to Speech experiment | 1.4.0 | Needs review | review — · merge DIRTY · checks SUCCESS |
+| [#764](https://github.com/WordPress/ai/pull/764) Add a core/manage-settings ability | 1.5.0 | In progress | review — · merge DIRTY · checks SUCCESS |
+| [#858](https://github.com/WordPress/ai/pull/858) Abilities API: add core/read-nav-menus ability | 1.5.0 | Needs review | review — · merge DIRTY · checks SUCCESS |
+| [#992](https://github.com/WordPress/ai/pull/992) Add MCP Access experiment: adapter auto-install and ability exposure controls | 1.5.0 | In progress | review — · merge BLOCKED · checks FAILURE |
+| [#1010](https://github.com/WordPress/ai/pull/1010) Docs: add integrator guidance to the Agent Users README | 1.5.0 | Needs review | review — · merge UNSTABLE · checks FAILURE |
+| [#1041](https://github.com/WordPress/ai/pull/1041) Add background synchronization for post embeddings | 1.5.0 | In progress | review — · merge BLOCKED · checks FAILURE |
+| [#494](https://github.com/WordPress/ai/pull/494) [Feature]: Issue 238 \\| Focus-aware crop suggestions | Future Release | In progress | review — · merge DIRTY · checks SUCCESS |
+| [#683](https://github.com/WordPress/ai/pull/683) Add native vector search | Future Release | In progress | draft · review — · merge DIRTY · checks FAILURE |
 | [#695](https://github.com/WordPress/ai/pull/695) Add: AI-assisted payload generation to the Ability Explorer - Test Ability Screen | Future Release | In progress | review CHANGES_REQUESTED · merge BLOCKED · checks FAILURE |
-| [#760](https://github.com/WordPress/ai/pull/760) PoC: Basic integration with Chrome DevTools for agents | Future Release | In progress | review — · merge BLOCKED · checks SUCCESS |
-| [#764](https://github.com/WordPress/ai/pull/764) Add a core/manage-settings ability | 1.4.0 | In progress | review — · merge DIRTY · checks SUCCESS |
 | [#765](https://github.com/WordPress/ai/pull/765) Add Repo Automator action | Future Release | In progress | review — · merge BLOCKED · checks FAILURE |
-| [#777](https://github.com/WordPress/ai/pull/777) dev: Update Composer deps and remediate PHPStan smells | 1.4.0 | In progress | draft · review — · merge DIRTY · checks SUCCESS |
-| [#789](https://github.com/WordPress/ai/pull/789) Update bundled wp deps (theme, ui, dataviews, admin-ui) | 1.4.0 | In progress | review — · merge DIRTY · checks FAILURE |
-| [#832](https://github.com/WordPress/ai/pull/832) chore(deps): drop @wordpress dependencies to wp-7.0 versions | 1.4.0 | In progress | draft · review — · merge DIRTY · checks FAILURE |
-| [#858](https://github.com/WordPress/ai/pull/858) Abilities API: add core/read-nav-menus ability | 1.4.0 | Needs review | review — · merge DIRTY · checks SUCCESS |
-| [#888](https://github.com/WordPress/ai/pull/888) New Text to Speech experiment | 1.4.0 | Needs review | review — · merge BLOCKED · checks SUCCESS |
-| [#931](https://github.com/WordPress/ai/pull/931) Compare the core read abilities against the REST API | Future Release | In progress | draft · review — · merge **DIRTY** *(was BLOCKED)* · checks FAILURE |
-| [#943](https://github.com/WordPress/ai/pull/943) Semantic (vector) search — fixes, tests & validation atop #891 | 1.4.0 | Needs review | review — · merge BLOCKED · checks FAILURE |
-| [#945](https://github.com/WordPress/ai/pull/945) Add `core/edit-content` ability for targeted post content edits | 1.4.0 | Needs review | review — · merge BLOCKED · checks SUCCESS |
-| [#949](https://github.com/WordPress/ai/pull/949) Knowledge: add a Knowledge and Guidelines experiment | Future Release | In progress | draft · review — · merge BLOCKED · checks SUCCESS |
+| [#777](https://github.com/WordPress/ai/pull/777) dev: Update Composer deps and remediate PHPStan smells | Future Release | In progress | draft · review — · merge DIRTY · checks SUCCESS |
+| [#789](https://github.com/WordPress/ai/pull/789) Update bundled wp deps (theme, ui, dataviews, admin-ui) | Future Release | In progress | review — · merge DIRTY · checks FAILURE |
+| [#832](https://github.com/WordPress/ai/pull/832) chore(deps): drop @wordpress dependencies to wp-7.0 versions | Future Release | In progress | draft · review — · merge DIRTY · checks FAILURE |
+| [#931](https://github.com/WordPress/ai/pull/931) Compare the core read abilities against the REST API | Future Release | In progress | draft · review — · merge BLOCKED · checks FAILURE |
+| [#943](https://github.com/WordPress/ai/pull/943) Semantic (vector) search for the AI plugin — fixes, tests & validation atop #891 | Future Release | Needs review | review — · merge BLOCKED · checks FAILURE |
+| [#945](https://github.com/WordPress/ai/pull/945) Add core/edit-content ability for targeted post content edits | Future Release | Needs review | review — · merge DIRTY · checks SUCCESS |
+| [#949](https://github.com/WordPress/ai/pull/949) Knowledge: add a Knowledge and Guidelines experiment | Future Release | In progress | review — · merge BLOCKED · checks FAILURE |
+| [#1025](https://github.com/WordPress/ai/pull/1025) Add core/content-create, core/content-update, and core/content-delete abilities | Future Release | In progress | draft · review — · merge BLOCKED · checks SUCCESS |
+| [#1026](https://github.com/WordPress/ai/pull/1026) Add the content write abilities through the REST API | Future Release | In progress | draft · review — · merge CLEAN · checks SUCCESS |
+| [#1027](https://github.com/WordPress/ai/pull/1027) [WIP 🚧] Content Translation: Enable per-block translation | Future Release | In progress | draft · review — · merge BLOCKED · checks SUCCESS |
 
-> **The table lost one row and gained none.** #916 merged out on 2026-08-24 after 19 days; nothing was carded to replace it, even though three substantive PRs opened. **Exactly one readiness field moved in three days:** #931's merge state went BLOCKED → **DIRTY**, i.e. it now needs a rebase. Everything else — 16 PRs, four fields each — is byte-identical to the 2026-08-23 snapshot. **Still no board PR is mergeable:** all 17 are BLOCKED or DIRTY, and **none has an approving review**. Two are the clean tests for the queue: **#945** (green checks, no requested changes, carded 2026-08-23) and **#949** (green checks, draft).
+> **#916's row is long gone, and so are #211, #224, and #760.** #211 and #760 were closed unmerged and marked Done. #224 is still an open draft and is no longer a board card; it closes #448, so it is in the linked table. **Two open PRs carry APPROVED, and neither is in this table** — they are linked: **#459** (green, BLOCKED) and **#973** (checks FAILURE, BLOCKED). The one CLEAN pull is draft **#1026**. **#1010** is UNSTABLE. **#888** went BLOCKED → DIRTY. **#945** went BLOCKED → DIRTY and Future Release. **#949** left draft and its checks went SUCCESS → FAILURE.
 
 ### Board vs. repo: PR coverage (five classifications)
 
-The repo has **33 open PRs**. Every open PR gets exactly one coverage classification, joined to Project #240 by repository-qualified `repo#number` keys:
+The repo has **41 open PRs**. Every open PR gets exactly one coverage classification:
 
 | Classification | Count | Meaning |
 |---|---:|---|
-| `direct-board-pr` | **17** *(−1)* | The PR itself is a Project #240 card (table above). #916 merged out; nothing replaced it |
-| `linked-board-issue` | **12** *(+1)* | Off-board PR linked to an on-board issue — **all 12 via authoritative GitHub closing references**, no fallbacks. #973 joined, closing board-new #970 |
-| `routine` | **0** | Dependency/bot maintenance — no *open* dependabot PR is untracked |
-| `linked-off-board-issue` | **0** | Empty for a second window |
-| `unexplained` | **4** *(+3)* | **[#961](https://github.com/WordPress/ai/pull/961)** (Agent Users, references #923 without a closing keyword), **[#975](https://github.com/WordPress/ai/pull/975)** and **[#976](https://github.com/WordPress/ai/pull/976)** (the embedding foundation — both say "Part of #962"/"See #962", neither uses a closing keyword), and **[#977](https://github.com/WordPress/ai/pull/977)** (translation loading animation, no linked issue) |
+| `direct-board-pr` | **20** | The PR itself is an open Project #240 card (table above). #484 is a board PR card too, and it is merged, so it is not in the open-PR count |
+| `linked-board-issue` | **20** | Off-board PR linked to an on-board issue. **All 20 use authoritative `closing` references** |
+| `routine` | **0** | No open dependabot PR is untracked |
+| `linked-off-board-issue` | **0** | Empty |
+| `unexplained` | **1** | **[#1057](https://github.com/WordPress/ai/pull/1057)** (ahirpravin, documentation typos in Image Generation and Request Logging, +2/−2). BLOCKED, checks green, no closing link |
 
-PR→issue mappings come from GitHub `closingIssuesReferences` first (source `closing`, authoritative); restricted title/body/branch fallback parsing (`fallback-*`) applies only to non-routine PRs. **All 12 issue-linked PRs use authoritative `closing` references, and exactly one fallback-parsed relationship remains anywhere in the census** — the long-standing #494 → #238, on a direct board PR card.
+Three fallback-parsed relationships remain, all on PRs that are already board cards: **#494 → #238** (`fallback-title`), **#943 → #891** (`fallback-title`; the target is a PR), **#992 → #354** (`fallback-body`).
 
-⚠️ **The metric moved backwards for a reason that is not a tracking failure — which is the problem with the metric.** Coverage went **1-of-30 → 4-of-33** without anybody de-carding a PR or abandoning a convention. Three substantive PRs simply opened: two of them are the embedding foundation that tracking issue #962 explicitly asked for, and the third is an eleven-line CSS fix. Last window the same number hit its best-ever reading because nine uncarded PRs *merged*. **A coverage number that improves when work leaves and worsens when work arrives is measuring queue throughput, not tracking discipline.** The milestone view holds still by comparison: the repository's **1.4.0 milestone holds 47 items, 29 carded, 18 uncarded — nine of them already merged**.
+The previous unexplained set is gone. **#975, #976, and #977 merged.** **#961 now closes #923.** Coverage went **4 of 33 → 1 of 41** because work finished or was linked. The open milestone sets for 1.4.0 (20), 1.5.0 (11), and 1.6.0 (6) are fully represented. The historical hole is the closed side of 1.4.0: **63 closed items in a milestone of 83**, most of them never carded. Future Release is the live gap: repository **54 open** vs board **49**.
 
-| Open PR (live) | Implements (source) | Board state · assignees | Classification | Readiness (review · checks) |
-|---|---|---|---|---|
-| [#459](https://github.com/WordPress/ai/pull/459) Add C2PA Monitor experiment | [#421](https://github.com/WordPress/ai/issues/421) `closing` | In progress/1.4.0 | linked-board-issue | CHANGES_REQUESTED · SUCCESS |
-| [#681](https://github.com/WordPress/ai/pull/681) Feat 514: add comment value score | [#514](https://github.com/WordPress/ai/issues/514) `closing` | Needs review/1.4.0 | linked-board-issue | CHANGES_REQUESTED · FAILURE |
-| [#735](https://github.com/WordPress/ai/pull/735) Logging: replace "Purge All Logs" with age-based delete control | [#689](https://github.com/WordPress/ai/issues/689) `closing` | In progress/Future Release · i-anubhav-anand | linked-board-issue | CHANGES_REQUESTED · FAILURE |
-| [#749](https://github.com/WordPress/ai/pull/749) Feat/add role user access controls | [#736](https://github.com/WordPress/ai/issues/736) `closing` | In progress/1.4.0 | linked-board-issue | CHANGES_REQUESTED · SUCCESS |
-| [#757](https://github.com/WordPress/ai/pull/757) fix(logging): capture generations that bypass the SDK HTTP transporter | [#732](https://github.com/WordPress/ai/issues/732) `closing` | Needs review/1.4.0 | linked-board-issue | CHANGES_REQUESTED · FAILURE |
-| [#759](https://github.com/WordPress/ai/pull/759) [issue #660] feat: Update generalised error message for all features | [#660](https://github.com/WordPress/ai/issues/660) `closing` | Needs review/1.4.0 | linked-board-issue | CHANGES_REQUESTED · FAILURE |
-| [#855](https://github.com/WordPress/ai/pull/855) Markdown feeds experiment | [#845](https://github.com/WordPress/ai/issues/845) `closing` | In progress/1.4.0 · dkotter | linked-board-issue | — · FAILURE |
-| [#887](https://github.com/WordPress/ai/pull/887) Experiment: Add Internal link suggestions | [#875](https://github.com/WordPress/ai/issues/875) `closing` | In progress/1.4.0 · Infinite-Null | linked-board-issue | CHANGES_REQUESTED · FAILURE |
-| [#891](https://github.com/WordPress/ai/pull/891) Feat: Add semantic search experiment to AI plugin | [#844](https://github.com/WordPress/ai/issues/844) `closing` | In progress/Future Release · priyanshuhaldar007 | linked-board-issue | CHANGES_REQUESTED · FAILURE |
-| [#929](https://github.com/WordPress/ai/pull/929) Content Gap Suggestions: shared Stats_Provider layer + dashboard widget (1/2 for #338) | [#338](https://github.com/WordPress/ai/issues/338) `closing` | In progress/Future Release · zeus2611 | linked-board-issue | — · SUCCESS *(ready since 2026-08-23, still unapproved)* |
-| [#935](https://github.com/WordPress/ai/pull/935) Fix: make connector validity capability-aware instead of text-only | [#933](https://github.com/WordPress/ai/issues/933) `closing` | Needs review/1.4.0 · whyisjake | linked-board-issue | — · SUCCESS *(review-ready and unapproved since 2026-08-19)* |
-| [#973](https://github.com/WordPress/ai/pull/973) Fix: Meta Description SEO plugin detection cache never expires | [#970](https://github.com/WordPress/ai/issues/970) `closing` **(new)** | In progress/1.4.0 · hbhalodia | linked-board-issue | CHANGES_REQUESTED · SUCCESS |
-| [#961](https://github.com/WordPress/ai/pull/961) Feat[Experiment]: Add Agent Users, dedicated accounts for AI agents | — *(body says "See #923" — not a closing keyword)* | — | **unexplained** | — · FAILURE |
-| [#975](https://github.com/WordPress/ai/pull/975) Bring over latest embeddings code from the PHP AI Client | — *(body says "Part of #962")* | — *(repo milestone 1.4.0, `[Status] Blocked`)* | **unexplained** | — · FAILURE |
-| [#976](https://github.com/WordPress/ai/pull/976) Add a portable storage and CRUD layer for embeddings | — *(body says "See #962")* | — | **unexplained** | — · SUCCESS |
-| [#977](https://github.com/WordPress/ai/pull/977) Content Translation: Improve loading effect | — *(no linked issue)* | — | **unexplained** | — · SUCCESS |
+| Open PR (live) | Implements (source) | Classification | Readiness (draft · review · merge · checks) |
+|---|---|---|---|
+| [#224](https://github.com/WordPress/ai/pull/224) Add WebMCP adapter experiment | [#448](https://github.com/WordPress/ai/issues/448) `closing` · In discussion/Future Release | linked-board-issue | draft · review — · DIRTY · checks SUCCESS |
+| [#459](https://github.com/WordPress/ai/pull/459) Add C2PA Monitor experiment | [#421](https://github.com/WordPress/ai/issues/421) `closing` · In progress/1.4.0 | linked-board-issue | review APPROVED · BLOCKED · checks SUCCESS |
+| [#749](https://github.com/WordPress/ai/pull/749) Feat/add role user access controls | [#736](https://github.com/WordPress/ai/issues/736) `closing` · In progress/1.4.0 | linked-board-issue | review CHANGES_REQUESTED · BLOCKED · checks FAILURE |
+| [#757](https://github.com/WordPress/ai/pull/757) fix(logging): capture generations that bypass the SDK HTTP transporter | [#732](https://github.com/WordPress/ai/issues/732) `closing` · In progress/1.6.0 | linked-board-issue | review CHANGES_REQUESTED · BLOCKED · checks FAILURE |
+| [#759](https://github.com/WordPress/ai/pull/759) [issue #660] feat: Update generalised error message for all features | [#660](https://github.com/WordPress/ai/issues/660) `closing` · Needs review/1.6.0 | linked-board-issue | review CHANGES_REQUESTED · BLOCKED · checks FAILURE |
+| [#855](https://github.com/WordPress/ai/pull/855) Markdown feeds experiment | [#845](https://github.com/WordPress/ai/issues/845) `closing` · In progress/1.4.0 | linked-board-issue | review — · BLOCKED · checks SUCCESS |
+| [#887](https://github.com/WordPress/ai/pull/887) Experiment: Add Internal link suggestions | [#875](https://github.com/WordPress/ai/issues/875) `closing` · In progress/1.6.0 | linked-board-issue | review CHANGES_REQUESTED · BLOCKED · checks FAILURE |
+| [#891](https://github.com/WordPress/ai/pull/891) Feat: Add semantic search experiment to AI plugin | [#844](https://github.com/WordPress/ai/issues/844) `closing` · In progress/Future Release | linked-board-issue | review CHANGES_REQUESTED · BLOCKED · checks FAILURE |
+| [#929](https://github.com/WordPress/ai/pull/929) Content Gap Suggestions: shared Stats_Provider layer + dashboard widget (1/2 for #338) | [#338](https://github.com/WordPress/ai/issues/338) `closing` · Needs review/1.5.0 | linked-board-issue | review — · BLOCKED · checks FAILURE |
+| [#935](https://github.com/WordPress/ai/pull/935) Fix: make connector validity capability-aware instead of text-only | [#933](https://github.com/WordPress/ai/issues/933) `closing` · Needs review/Future Release | linked-board-issue | review — · BLOCKED · checks SUCCESS |
+| [#961](https://github.com/WordPress/ai/pull/961) Feat[Experiment]: Add Agent Users, dedicated accounts for AI agents | [#923](https://github.com/WordPress/ai/issues/923) `closing` · In progress/1.5.0 | linked-board-issue | review — · BLOCKED · checks FAILURE |
+| [#973](https://github.com/WordPress/ai/pull/973) Fix: Meta Description: SEO plugin detection cache never expires and skips the "no plugin" case | [#970](https://github.com/WordPress/ai/issues/970) `closing` · Needs review/1.4.0 | linked-board-issue | review APPROVED · BLOCKED · checks FAILURE |
+| [#985](https://github.com/WordPress/ai/pull/985) Remove Enable AI header toggle | [#600](https://github.com/WordPress/ai/issues/600) `closing` · In progress/1.4.0 | linked-board-issue | review CHANGES_REQUESTED · BLOCKED · checks SUCCESS |
+| [#1004](https://github.com/WordPress/ai/pull/1004) Add the Global AI Workspace | [#282](https://github.com/WordPress/ai/issues/282) `closing` · In progress/Future Release | linked-board-issue | review — · BLOCKED · checks FAILURE |
+| [#1009](https://github.com/WordPress/ai/pull/1009) Content Translation: support list item, verse, preformatted, and pullquote blocks | [#979](https://github.com/WordPress/ai/issues/979) `closing` · In progress/1.5.0 | linked-board-issue | review — · BLOCKED · checks SUCCESS |
+| [#1014](https://github.com/WordPress/ai/pull/1014) Let the AI Workspace admit tools by declaration | [#1003](https://github.com/WordPress/ai/issues/1003) `closing` · In progress/Future Release | linked-board-issue | review — · BLOCKED · checks FAILURE |
+| [#1040](https://github.com/WordPress/ai/pull/1040) Fix: AI Request Logs record HTTP error responses (4xx/5xx) as success | [#1032](https://github.com/WordPress/ai/issues/1032) `closing` · In progress/1.4.0 | linked-board-issue | review — · BLOCKED · checks SUCCESS |
+| [#1042](https://github.com/WordPress/ai/pull/1042) Document the plugin's architecture and developer-facing API surface | [#1037](https://github.com/WordPress/ai/issues/1037) `closing` · In progress/— | linked-board-issue | review — · BLOCKED · checks SUCCESS |
+| [#1053](https://github.com/WordPress/ai/pull/1053) Editorial Notes: Fix block selection when Show Template is active | [#1052](https://github.com/WordPress/ai/issues/1052) `closing` · In progress/Future Release | linked-board-issue | review CHANGES_REQUESTED · BLOCKED · checks SUCCESS |
+| [#1055](https://github.com/WordPress/ai/pull/1055) Content Summarization: Insert summary into post content when Show template is enabled | [#1054](https://github.com/WordPress/ai/issues/1054) `closing` · In progress/1.4.0 | linked-board-issue | review CHANGES_REQUESTED · BLOCKED · checks SUCCESS |
+| [#1057](https://github.com/WordPress/ai/pull/1057) Docs: Fix Typos in Image Generation and Request Logging | — | **unexplained** | review — · BLOCKED · checks SUCCESS |
 
-> **⚠️ The two most consequential uncarded PRs are the ones the board explicitly asked for.** Tracking issue **#962** — carded In progress under 1.4.0, assigned dkotter — says that #683/#891/#943 "should be divided into smaller, independently reviewable PRs rather than combining foundational architecture and user-facing features into large feature PRs," and lists seven ordered steps. Two of them arrived this window as exactly that:
->
-> - **[#975](https://github.com/WordPress/ai/pull/975)** (dkotter, opened 2026-08-25 20:52, +1,144/−292 across 19 files, repo milestone **1.4.0**, label `[Status] Blocked`) — checklist item **one**. Pulls `php-ai-client#274`'s changes into the plugin's vendored `Vendor` directory, updates `generate_embeddings()` for the new required-model API, **loads `SDK_Overlay` again** (undoing #946), and re-adds a temporary `wp ai embeddings generate` WP-CLI command for testing, to be removed before merge. The PR states its own status plainly: *"While the upstream PR hasn't been merged yet, I think it's close so this PR gets us started."* Patch coverage is 13.3% — expected, since most of the diff is vendored upstream code.
-> - **[#976](https://github.com/WordPress/ai/pull/976)** (ColinM-sys, opened 2026-08-26 04:50, +2,027/−1 across 11 files) — checklist item **two**, and **not blocked on #274**. A `WordPress\AI\Embeddings` namespace with a portable `wpai_embeddings` table created via `dbDelta` on first write, an `Embedding_Repository` (upsert / read-in-chunk-order / content-hash staleness check / bounded newest-first IDs / keyset-paginated iterate / scoped deletes), and a `Vector_Codec` packing little-endian float32 **in the same byte layout as MariaDB's `VECTOR` type**, so #683's `MariaDB_Index_*` backend could implement the same interface against the same bytes. The design decision that matters: the unique key is `(object_type, object_id, provider, model, chunk_index)` and every read is scoped to provider + model, so **an index can never be queried with vectors from a different model by accident** and a model switch is an explicit `delete_for_model()` re-index rather than silent corruption. 51 tests, 93.2% patch coverage, `composer lint`/`phpstan` clean on the new files.
->
-> **Neither is carded. Neither uses a closing keyword. And #962's own checklist still shows seven unchecked boxes with no PR links**, despite the issue instructing that "links to the relevant issues and PRs should be added to the checklist above as the work is defined." The decomposition the board asked for is happening; the tracking the board asked for is not.
->
-> **The gate that #975 waits on was approved.** [`php-ai-client#274`](https://github.com/WordPress/php-ai-client/pull/274) went `REVIEW_REQUIRED`/BLOCKED → **APPROVED (JasonTheAdams, 2026-08-25 22:23 UTC) / CLEAN**, after a CHANGES_REQUESTED round on 2026-08-24 and three response commits. It is still unmerged. ColinM-sys re-validated the approved head on 2026-08-26 04:46: **1,191 tests / 4,322 assertions green on PHP 8.5**, phpstan clean, **36/36 live Ollama cases**, and a table of what each failure mode actually throws — settling the reviewer's open question about whether `isSupported()`'s single `catch (AiClientExceptionInterface $e)` is broad enough (it is; every client exception implements that interface). One documented nuance: provider availability is cached for the request, so `isSupported()` is not a liveness probe.
->
-> **[#961](https://github.com/WordPress/ai/pull/961) Add Agent Users** (gziolo, `[Type] Proof of Concept`, opened 2026-08-20) grew **+2,439 → +3,318** across the same 11 files without gaining a card, a milestone, or a closing link. It implements the identity half of **#923**: an agent is a normal WordPress user marked by `wpai_agent` meta — so roles, content ownership, revisions, comments, and delete-with-reassignment all keep working — with password login and password resets blocked, credentials issued and revoked through core's Application Passwords REST flows, and provisioning gated on `create_users` + `promote_users` + `edit_users` with the requested role capped at the provisioner's own effective capabilities, **checked twice** (once while listing roles, once against the real marked agent after creation, rolling the account back on failure). #923 itself is still In discussion under Future Release.
->
-> **⚠️ Four of five merges were uncarded, and four of five opened and merged inside a single day.** Merged: **#916** (carded; 19 days open), **#967** (yogeshbhutkar — skip title translation when the title is too short; opened 06:21, merged 14:50), **#969** (hbhalodia — the six-line `delete_meta` doc-comment fix that closed board-Done **#968**; 07:18 → 14:06), **#972** (ekamran — cap the Comment Moderation bulk-analysis queue; 06:00 → 16:09), **#974** (gziolo — multisite PHPUnit CI; 08:05 → 13:27). **All five were merged by dkotter and all five carry his approving review.** Approvals are not scarce here; they are simply never given to the *queue*. That is now nine uncarded completed items under the 1.4.0 milestone alone.
+> **#1004 is the workspace, and it is linked, not missing.** It closes #282. It is BLOCKED with failing checks. **#961** is no longer an audit failure. **#1057** is the only one.
 
 ### Full-repository PR/release radar
 
-These upstream repositories are fully enumerated by the refresh script, including normalized open PR records, open issue records, readiness changes, release history/diffs, validation, and independent PR/issue/release snapshots. They are **census-only**: their work can affect the WordPress AI delivery path, but their PRs are not expected to have Project #240 cards.
+These upstream repositories are census-only. Their PRs are not expected to have Project #240 cards.
 
 | Repository | Open PRs | Latest release | Relationship to this roadmap |
 |---|---:|---|---|
-| [`WordPress/php-ai-client`](https://github.com/WordPress/php-ai-client) | **31** *(−1)* · **35** open issues *(flat)* | **1.4.0** (2026-07-15) | Provider-agnostic PHP client beneath the WordPress AI stack; embedding, streaming, model-selection, schema, and provider work can change plugin capabilities. **⭐ The gate opened: [#274](https://github.com/WordPress/php-ai-client/pull/274) is APPROVED and CLEAN.** JasonTheAdams requested changes on 2026-08-24 19:12, dkotter answered with three commits, and the approval landed 2026-08-25 22:23 — *"I believe this is good to go once those are addressed. Please make sure to run the integration tests."* ColinM-sys re-validated the approved head on 2026-08-26: 1,191 tests / 4,322 assertions on PHP 8.5, phpstan clean, 36/36 live Ollama cases, plus a failure-mode table confirming that the client's own `InvalidArgumentException` and `NetworkException` both implement `AiClientExceptionInterface`, so `isSupported()`'s single catch is sufficient. **Still unmerged.** **Two merges, the first here in three windows:** **#231** (skip the live model-list metadata fetch when an explicit text model ID is given, `Closes #230`) and **#275** (provider-plugin version bumps), both merged by jeffpaul on 2026-08-24. **One new issue + its draft PR, and it is strategically relevant:** **#281** (superdav42) proposes **provider-agnostic deferred tool loading** — mark function declarations deferred, request tool discovery, carry discovery calls/results across turns, and declare native support per model — translating to OpenAI's and Anthropic's `defer_loading` protocols. Its stated motivation is the board's #21 verbatim: tool parameter schemas are input tokens, and a large WordPress ability catalog burns context before the conversation starts. Draft **#282** (+560/−10 across 16 files) implements it. Standing watch item **#277** — `MessagePart` cannot carry citations, so Anthropic `citations`, OpenAI `annotations`, and Gemini `citationMetadata` are all silently dropped — is unchanged. |
-| [`WordPress/abilities-api`](https://github.com/WordPress/abilities-api) | **14** · 8 open issues | **v0.4.0** (2025-10-30) | ⚠️ **Pending archival — treat as archaeology, not a backlog.** **Unchanged on every axis across all five snapshots since it entered the census on 2026-08-10.** The Abilities API shipped into Core and Gutenberg, and issue **#160** carries unanimous maintainer agreement to archive the standalone repo (jeffpaul asked dd32/desrosj to action it on 2026-02-04; the issue has not been touched since). No open PR has been touched since **2026-01-21**. Several stranded PRs bear directly on live roadmap questions — **#85** `wp_query_abilities` and **#115**/**#119** ability filtering against #21 and #354, **#150** input/output validation filters against #348 — but nobody is reviewing them. Real Abilities work is now in `wordpress-develop` and `gutenberg`, neither of which is censused. |
-| [`WordPress/mcp-adapter`](https://github.com/WordPress/mcp-adapter) | **17** *(+4)* · **43** open issues *(flat)* | **v0.6.1** (2026-08-13) | Bridges Abilities to MCP; transport, exposure, approval, schema, session, and server-registration work affects agent integrations. **The largest single-window PR intake this census has recorded here.** justlevine opened three inside three hours on 2026-08-26 — **#302** (bump dev-deps and the `Tested up to` header, +2,005/−3,381), **#303** (run the suite against **PHP 8.5**, +2,241/−3,511 across 37 files), **#304** (Playground `blueprint.json` and PR previews) — and dependabot's **#296** (`@wordpress/scripts` 32.6.0 → 33.0.0) was **closed unmerged**, superseded by #302. Two substantive additions: **#299** (shoemoney) fixes a **live 500** — `McpResource::execute()` and `check_permission()` called the backing ability with zero arguments, so core validated `null` against an object `input_schema` and every ability-backed resource with an object schema failed `resources/read` with *"input is not of type object"*; the fix routes the empty argument set through `AbilityArgumentNormalizer`, the pattern `McpTool`/`McpPrompt` already use, preserving the no-schema `null` contract. `Fixes #261`, credited to lhero-org's root-cause analysis. And draft **#300** (sarthak-19, +529/−19 across 9 files) adds **SSE streaming to the HTTP transport GET endpoint**. **#288** (deprecate the bundled-dependency path) picked up justlevine's **approval** on 2026-08-25 and is UNSTABLE. Standing fail-open defects **#297** (unrecognised `meta.mcp.type` coerces to `tool`) and **#298** (`create_error_result()` discards `WP_Error` code/data) are unchanged. |
+| [`WordPress/php-ai-client`](https://github.com/WordPress/php-ai-client) | **37** *(+6)* · **40** open issues *(+5)* | **1.5.0** (2026-09-16) | **#274 merged 2026-08-31**, which is what let plugin #975 turn embeddings back on. **#282 merged 2026-09-10 retitled "Add generic annotations to function declarations"** (+141/−5, 3 files). Issue **#281** (deferred tool loading, the answer to board #21) is **still open**. Do not read the 1.5.0 notes as "deferred loading shipped." **#283** is open (+1,198, not a draft) and addresses still-open **#277** (MessagePart cannot carry citations). Eight PRs opened (#283, #287, #288, #289, #290, #295, #297, #298 draft). Readiness: #254 CLEAN → DIRTY, #263 REVIEW_REQUIRED → CHANGES_REQUESTED, #273 left draft and checks went FAILURE, #278 DIRTY → BLOCKED. |
+| [`WordPress/abilities-api`](https://github.com/WordPress/abilities-api) | **14** · 8 open issues | **v0.4.0** (2025-10-30) | **Sixth census, zero change on every axis.** Pending archival. Issue #160 untouched since 2026-02-04. No open PR touched since 2026-01-21. Archaeology, not backlog. |
+| [`WordPress/mcp-adapter`](https://github.com/WordPress/mcp-adapter) | **16** *(−1)* · **51** open issues *(+8)* | **v0.6.1** (2026-08-13) | **#288** (deprecate bundled-dependency use) merged 2026-09-01, as did **#302** and **#303**. **#304** merged 2026-08-26. Drafts **#260, #281, #287, #300** closed unmerged. **#299** (the `resources/read` 500) is still open; checks went FAILURE → SUCCESS and merge went BLOCKED → DIRTY. A `ci-artifacts` prerelease on 2026-08-27 is not a product release. New issues include origin validation, STDIO sockets, session-not-found, and WP 7.1 default-server timing. Eleven issues opened, three closed (#268, #270, #280). |
 
-Membership lives in [`wp-ai-roadmap-repositories.json`](./wp-ai-roadmap-repositories.json). Run `./wp-ai-roadmap-refresh.sh census --strict` for the complete live census; the existing five-way board-coverage classification remains exclusive to `WordPress/ai`.
+Membership lives in [`wp-ai-roadmap-repositories.json`](./wp-ai-roadmap-repositories.json).
 
 ---
 
-## ① Dated release lanes
+## Dated release lanes
 
-### v1.2.0 — ✅ Shipped 2026-07-14 — 1 residual board-open issue
+### v1.2.0 — Shipped 2026-07-14 — 0 non-Done
 
-The `WordPress/ai` release shipped and milestone #19 is closed. Project #240 still has one non-Done 1.2.0 card in another repository:
+The plugin release shipped. Google-provider **#23** left this lane for **1.3.0**. Every remaining 1.2.0 board card is Done.
+
+### v1.3.0 — Shipped 2026-08-18 — 1 non-Done, 13 cards
+
+The lane closed 19/19 on release night. It is now **13 cards: 12 Done + Google #23**. De-carded since release night: #233, #690, #876 (2026-08-26) and **#863, #866, #906, #924** (this window). The repository milestone stays closed at **71**.
 
 | Issue | Status | Summary |
 |---|---|---|
-| [#23](https://github.com/WordPress/ai-provider-for-google/issues/23) | In discussion / Needs decision | [Bug]: Image Generation fails with "Unexpected Google API response: Missing the candidates[0].content key" |
+| [#23](https://github.com/WordPress/ai-provider-for-google/issues/23) | In discussion / Needs decision | Image generation fails with a missing `candidates[0].content` key. Moved **1.2.0 → 1.3.0**. Still open upstream. Not unfinished plugin work. |
 
-This is provider follow-up, not unfinished code in the released plugin.
+**The embedding note in the 1.3.0 changelog is true in `develop` and false in the released zip.** #975 merged 2026-08-31 and loads `SDK_Overlay` again. v1.3.0 on WordPress.org was not rebuilt.
 
-### v1.3.0 — ✅ Shipped 2026-08-18 — 0 non-Done, and now 16 cards instead of 19
+### v1.4.0 — Active lane, undated — 12 non-Done (11 issues + 1 PR)
 
-**The lane closed, and is now being unwound.** It drained **5 Done / 21 open → 17 Done / 2 open** on 2026-08-14 by delivery, gained PR card **#948**, and finished at **19 Done / 0 open** when the release was cut on 2026-08-18 at 21:04 UTC. Release issue **#924** closed at 20:19; the repository milestone closed at **71 items** at 21:05.
+Down from 24. #764 and #858 moved to 1.5.0. #660, #732, and #875 moved to 1.6.0. #683, #777, #789, #832, #933, #943, and #945 moved to Future Release. `php-ai-client#242` was de-carded. #514 shipped and was removed. #27 moved back to In discussion. #600 moved to In progress. #962 moved to In discussion. #970 moved to Needs review.
 
-**⚠️ Three of those 19 cards were de-carded on 2026-08-26** — **#233** (`AI_Service` refactor, closed against merged PR #905), **#690** (uninstall cleanup, closed against merged PR #692), and **#876** (permalink-slug experiment, closed against merged PR #897). All three represent work that shipped. The board's 1.3.0 lane now reads **16**, against a repository milestone of **71**. **This is the first cleanup pass to remove cards from a release that had already been counted complete**, and it means the historical lane counts in this document — including the "19/19" above — describe a board state that no longer exists. The snapshots in `.wp-ai-roadmap-snapshots/` are the record; the board is not.
+The repository milestone holds **83 items (63 closed / 20 open)**. The 20 open items are: the 11 issue cards below, PR card **#888**, and closing-linked **#1055, #1053, #1040, #985, #973, #855, #749, #459**. #1053's issue card is Future Release even though the PR is milestoned 1.4.0 in the repository; it is still represented.
 
-**How the last two cards cleared, in order:**
+| Issue | Status | Summary |
+|---|---|---|
+| [#27](https://github.com/WordPress/ai/issues/27) | In discussion / Needs decision | Display additional AI provider plugins on Connectors page (alongside default Anthropic, Google, and OpenAI ones) |
+| [#324](https://github.com/WordPress/ai/issues/324) | In discussion / Needs decision | Evolve Refine from Notes into collaborative and agentic editorial workflows |
+| [#421](https://github.com/WordPress/ai/issues/421) | In progress | WordPress should detect C2PA manifests on upload |
+| [#600](https://github.com/WordPress/ai/issues/600) | In progress | Remove `Enable AI` header toggle, allow feature/experiment toggles (and group toggles) to control plugin functionality |
+| [#736](https://github.com/WordPress/ai/issues/736) | In progress | Expose role/user access controls per feature/experiment |
+| [#741](https://github.com/WordPress/ai/issues/741) | In discussion / Needs decision | AI Admin Pages Exhibit Visible Flicker During Initial Render |
+| [#845](https://github.com/WordPress/ai/issues/845) | In progress | New Experiment: Markdown feeds (powered by `html-to-md`) |
+| [#962](https://github.com/WordPress/ai/issues/962) | In discussion / Needs decision | Tracking: Implement Embedding Support |
+| [#970](https://github.com/WordPress/ai/issues/970) | Needs review | Meta Description: SEO plugin detection cache never expires and skips the "no plugin" case |
+| [#1032](https://github.com/WordPress/ai/issues/1032) | In progress | AI Request Logs: HTTP error responses (4xx/5xx) are recorded as "success" |
+| [#1054](https://github.com/WordPress/ai/issues/1054) | In progress | Content Summarization: Summary is not generated when Show template is enabled |
 
-- **#421 (C2PA detection) was punted, not shipped.** The release checklist's final unchecked item was "Review and merge/punt #459"; it was resolved by moving the issue **1.3.0 → 1.4.0**. Its PR #459 is still open, still BLOCKED, still CHANGES_REQUESTED, with green checks — unchanged for two windows.
-- **#924 ran the full checklist in under three hours:** release PR #958 merged 20:19 → plugin check and tests green 20:56 → local testing 21:00 → [GitHub release](https://github.com/WordPress/ai/releases/tag/1.3.0) 21:04 → WordPress.org deployment 21:11 → [announcement](https://make.wordpress.org/ai/2026/08/18/whats-new-in-ai-1-3-0/) 22:32.
+#### Open PRs (1)
 
-**⚠️ Four PRs shipped in this release with no board card:** **#947** (raises the `wp/v2/settings` PUT/POST timeout; also **closed board issue #940**), **#950** (content sanitization), **#952** (an IPv4-in-IPv6 check for PHP < 8.3), and **#958**, the release PR itself (+542/−432 across 62 files). This table never contained them, and no diff this tooling produces will.
+| PR | Status | Summary |
+|---|---|---|
+| [#888](https://github.com/WordPress/ai/pull/888) | Needs review | New Text to Speech experiment |
 
-**⚠️ And the embedding entry shipped anyway.** PR #946 disabled #892's `SDK_Overlay` on 2026-08-17 and asked that #892's changelog line be excluded. The published notes keep it, reworded to say the code loads *"conditionally"* and crediting both PRs. In `develop` the overlay still does not load. **PR #975, opened 2026-08-25, is the uncarded work of making that changelog entry true.**
+**#888** (dkotter, Text to Speech) is the only open PR card left on 1.4.0. It is Needs review, not a draft, merge **DIRTY** (was BLOCKED), checks green, no approval. It registers `ai/speech-generation` and `ai/speech-import` and is gated on provider speech support.
 
-### v1.4.0 — Active lane, undated — 24 non-Done (15 issue cards + 9 PRs)
+### v1.5.0 — 8 non-Done (3 issues + 5 PRs)
 
-**Flat at 24, and that is the least interesting thing about it.** Board-new **#970** arrived In progress; **#916** merged out to Done. No pre-existing card in this lane changed status or milestone. Two issues remain undecided (#324, #741), and **#27** sits in *To do* without a PR or assignee.
+Loaded this window. The board column also holds Done `php-ai-client#284` (the client's 1.5.0 release). Repository milestone: 11 open, 0 closed, all represented (the cards below plus linked #961, #1009, #929).
 
-**⚠️ The board lane and the repository milestone have diverged badly.** The `1.4.0` milestone in `WordPress/ai` holds **47 items** (15 closed, 32 open). Project #240 cards **29** of them. The 18 uncarded are all PRs:
+| Issue | Status | Summary |
+|---|---|---|
+| [#338](https://github.com/WordPress/ai/issues/338) | Needs review | New Experiments: Analytics-aware content and amplification recommendations |
+| [#923](https://github.com/WordPress/ai/issues/923) | In progress | Introduce agent users to give AI agents an auditable identity |
+| [#979](https://github.com/WordPress/ai/issues/979) | In progress | Increase the types of blocks Content Translation supports |
 
-- **eight open** PRs the coverage audit still counts as covered *through their linked issues* — #459, #681, #749, #757, #759, #855, #887, #935;
-- **#975**, the embedding re-vendor, uncarded and `unexplained`;
-- and **nine already merged or closed** — **#947**, **#959**, **#963**, **#965**, **#966** (carried over from earlier windows) plus **#967**, **#969**, **#972**, **#974** (this window).
+#### Open PRs (5)
 
-So **of the 15 items completed under 1.4.0 so far, nine were never carded.** Any burndown or capacity read taken off the board lane is reading roughly 60% of the milestone.
+| PR | Status | Summary |
+|---|---|---|
+| [#764](https://github.com/WordPress/ai/pull/764) | In progress | Add a core/manage-settings ability |
+| [#858](https://github.com/WordPress/ai/pull/858) | Needs review | Abilities API: add core/read-nav-menus ability |
+| [#992](https://github.com/WordPress/ai/pull/992) | In progress | Add MCP Access experiment: adapter auto-install and ability exposure controls |
+| [#1010](https://github.com/WordPress/ai/pull/1010) | Needs review | Docs: add integrator guidance to the Agent Users README |
+| [#1041](https://github.com/WordPress/ai/pull/1041) | In progress | Add background synchronization for post embeddings |
 
-| Issue | Status | Summary | Implementing PR |
-|---|---|---|---|
-| [#324](https://github.com/WordPress/ai/issues/324) | In discussion / Needs decision | Evolve Refine from Notes into collaborative and agentic editorial workflows | — |
-| [#741](https://github.com/WordPress/ai/issues/741) | In discussion / Needs decision | AI Admin Pages Exhibit Visible Flicker During Initial Render | — |
-| [#27](https://github.com/WordPress/ai/issues/27) | To do | Display additional AI provider plugins on Connectors page | — *(no PR, no assignee, unchanged since 2026-08-23)* |
-| [#600](https://github.com/WordPress/ai/issues/600) | To do | Remove `Enable AI` header toggle, allow feature/experiment toggles (and group toggles) to control plugin functionality *(Help Wanted)* | — |
-| [#421](https://github.com/WordPress/ai/issues/421) | In progress | WordPress should detect C2PA manifests on upload | [#459](https://github.com/WordPress/ai/pull/459) — green checks, BLOCKED, CHANGES_REQUESTED, still no board PR card. Linked to [core Trac #65952](https://core.trac.wordpress.org/ticket/65952) on 2026-08-25 |
-| [#736](https://github.com/WordPress/ai/issues/736) | In progress | Expose role/user access controls per feature/experiment | [#749](https://github.com/WordPress/ai/pull/749) — green checks, CHANGES_REQUESTED |
-| [#845](https://github.com/WordPress/ai/issues/845) | In progress | New Experiment: Markdown feeds (powered by `html-to-md`) | [#855](https://github.com/WordPress/ai/pull/855) |
-| [#875](https://github.com/WordPress/ai/issues/875) | In progress | New Experiment: Suggest internal links within post content | [#887](https://github.com/WordPress/ai/pull/887) — BLOCKED, failing checks, CHANGES_REQUESTED |
-| [#962](https://github.com/WordPress/ai/issues/962) | In progress | Tracking: Implement Embedding Support — seven ordered steps, assigned dkotter | ⚠️ **Steps 1–2 are in uncarded PRs [#975](https://github.com/WordPress/ai/pull/975) and [#976](https://github.com/WordPress/ai/pull/976); the checklist still shows seven unchecked boxes and no PR links** |
-| [#970](https://github.com/WordPress/ai/issues/970) | **In progress** *(board-new)* | Meta Description: SEO plugin detection cache never expires and skips the "no plugin" case | [#973](https://github.com/WordPress/ai/pull/973) — `CHANGES_REQUESTED` from dkotter within eight hours |
-| [`php-ai-client#242`](https://github.com/WordPress/php-ai-client/issues/242) | In progress | Implement embedding generation contracts and client APIs — ⚠️ **closed upstream 2026-07-15** | — *(shipped in php-ai-client 1.4.0)* |
-| [#514](https://github.com/WordPress/ai/issues/514) | Needs review | Add comment value / relevance to Comment Moderation experiment | [#681](https://github.com/WordPress/ai/pull/681) |
-| [#660](https://github.com/WordPress/ai/issues/660) | Needs review | UX: Ambiguous error message in editor when a provider is blocked by Connector Approvals | [#759](https://github.com/WordPress/ai/pull/759) |
-| [#732](https://github.com/WordPress/ai/issues/732) | Needs review | AI Request Logging only captures providers that use the SDK HTTP transporter; sidecar/custom-transport providers are invisible | [#757](https://github.com/WordPress/ai/pull/757) — ⚠️ **now a governance blocker: board-new RFC #971 names this as its prerequisite** |
-| [#933](https://github.com/WordPress/ai/issues/933) | Needs review | Connector validity check assumes text generation, so speech-only and image-only connectors report as invalid | [#935](https://github.com/WordPress/ai/pull/935) — green checks, no requested changes, BLOCKED and unapproved for a second week |
+**#764** `core/manage-settings` moved here from 1.4.0. Still DIRTY, checks green, no review. **#858** `core/read-nav-menus` moved here and is still Needs review, DIRTY, checks green. **#992** (andreilupu) is the MCP Access experiment; its body mentions #354 (`fallback-body`); BLOCKED, checks failing. **#1010** (webmyc) is integrator docs for Agent Users, Needs review, merge **UNSTABLE**, checks failing. **#1041** (theaminulai) is background sync for post embeddings. It does not close #1036. BLOCKED, checks failing.
 
-#### Open PRs (9)
+### v1.6.0 — 3 non-Done issues
 
-#### PR #683 — Add native vector search · *In progress · draft · DIRTY · +8565/-4, 37 files · 1.4.0*
-[Link](https://github.com/WordPress/ai/pull/683) · @artpi
-**Delivers.** A new opt-in `rag-search` experiment for semantic search/RAG. Primary path uses MariaDB 11.8+ `VECTOR(1536)` storage plus a cosine vector index and OpenAI `text-embedding-3-small`; fallback stores embeddings in post meta and searches in memory for smaller sites. Adds indexing lifecycle hooks, one-hour dirty-post cron scheduling, transactional replace-by-post behavior where possible, cleanup hooks, `wp ai rag` WP-CLI utilities, public-search augmentation, and related-posts output.
-**Blockers.** Draft; merge-state **CONFLICTING** (needs rebase); untouched since 2026-08-20. Tracking issue **#962** names this PR as one of three that "should be divided into smaller, independently reviewable PRs rather than combining foundational architecture and user-facing features" — so its future is decomposition, not review as it stands. **That decomposition now has a concrete competitor for its storage layer:** uncarded **#976** explicitly designs its `Vector_Codec` byte layout to match MariaDB's `VECTOR` type *"so a native-index backend (#683's `MariaDB_Index_*`) can implement the same interface against the same bytes"*, and asks @artpi directly to shape the contract. Whether #683 becomes a backend behind #976's repository or stays a standalone experiment is now the open question.
+New lane. All three moved off 1.4.0 together. No PR cards. Repository milestone: 6 open, all represented via these issues plus #759, #757, and #887.
 
-#### PR #764 — Add a core/manage-settings ability · *In progress · not draft · DIRTY · +408/-11, 3 files · 1.4.0*
-[Link](https://github.com/WordPress/ai/pull/764) · @jorgefilipecosta
-**Delivers.** The write-oriented `core/manage-settings` ability — the counterpart to the read-only `core/settings` added in #691. Takes a map of setting name → new value (reusing each setting's own value schema, `additionalProperties: false`); permission `manage_options`; annotations `readonly:false, destructive:false, idempotent:true`. **Atomic, all-or-nothing**: the Abilities API validates the whole input against the schema before any `update_option()` fires, matching `WP_REST_Settings_Controller::update_item()`.
-**Blockers.** DIRTY against `develop`. It pairs with `core/settings` (#691), merged `core/read-content` (#739), and carded `core/edit-content` (#945). Its 2026-08-26 08:45 UTC touch is the most recent activity on any board card.
+| Issue | Status | Summary |
+|---|---|---|
+| [#660](https://github.com/WordPress/ai/issues/660) | Needs review | UX: Ambiguous error message in editor when a provider is blocked by Connector Approvals |
+| [#732](https://github.com/WordPress/ai/issues/732) | In progress | AI Request Logging only captures providers that use the SDK HTTP transporter; sidecar/custom-transport providers are invisible |
+| [#875](https://github.com/WordPress/ai/issues/875) | In progress | New Experiment: Suggest internal links within post content |
 
-#### PR #777 — dev: Update Composer deps and remediate PHPStan smells · *In progress · draft · DIRTY · +106/-36, 13 files · 1.4.0*
-[Link](https://github.com/WordPress/ai/pull/777) · @justlevine
-**Delivers.** Tooling hygiene: bumps Composer dependencies to their latest versions and fixes the resulting PHPStan errors (including updating `php-stubs/wordpress-stubs`). No feature impact.
-**Blockers.** Draft; awaiting review since 2026-08-11.
-
-#### PR #789 — Update bundled wp deps (theme, ui, dataviews, admin-ui) · *In progress · not draft · DIRTY · +629/-538, 4 files · **1.4.0** (was Future Release)*
-[Link](https://github.com/WordPress/ai/pull/789) · @simison
-**Delivers.** Refreshes the bundled `@wordpress/*` packages (theme, ui, dataviews, admin-ui) pulled from Gutenberg. Dependency maintenance; no feature impact.
-**Blockers.** Still DIRTY against `develop` with failing checks, unchanged since 2026-08-18; refresh dependencies before review. It sits with #777/#832 in the dependency-alignment cluster, and the tension with #832 is unresolved: one refreshes the bundled packages forward, the other pins them back to WP 7.0.
-
-#### PR #832 — chore(deps): drop @wordpress dependencies to wp-7.0 versions · *In progress · draft · DIRTY · +12969/-8969, 3 files · 1.4.0*
-[Link](https://github.com/WordPress/ai/pull/832) · @justlevine
-**Delivers.** Dependency alignment: pins the bundled `@wordpress/*` packages to the versions shipping in **WP 7.0** (rather than newer Gutenberg majors), part of the wp-7.0 compatibility pass alongside #789 and the dependabot `@wordpress` bumps (#824–#827). The large diff is the regenerated lockfile.
-**Blockers.** Draft; no feature impact. Complements #831 (which now pins NPM deps and tells dependabot to ignore `@wordpress`). Note the tension with #789, now in the same lane: one refreshes the bundled packages forward, the other pins them back to 7.0.
-
-#### PR #858 — Abilities API: add core/read-nav-menus ability · *Needs review · not draft · DIRTY · +870/-0, 3 files · 1.4.0*
-[Link](https://github.com/WordPress/ai/pull/858) · @Builder106
-**Delivers.** A read-only `core/read-nav-menus` ability that lists menus and theme-location assignments or fetches one menu by ID, slug, or location with its items. It uses `edit_theme_options`, follows the existing read-users/read-settings pattern, and is intended to land here before a WordPress Core proposal.
-**Blockers.** **DIRTY** with green checks and no approving review, unchanged for a fortnight. The permission boundary and eventual Core ownership remain the substantive review points.
-
-#### PR #888 — New Text to Speech experiment · *Needs review · not draft · BLOCKED · checks SUCCESS · 1.4.0*
-[Link](https://github.com/WordPress/ai/pull/888) · @dkotter
-**Delivers.** A complete Text to Speech experiment (+4,216/−1 across 28 files) registering two new abilities — `ai/speech-generation` and `ai/speech-import` — chunking content to stay under provider limits, importing generated audio into the Media Library, and rendering a front-end player with per-post opt-out. Gated on provider work in `ai-provider-for-openai#42` / `ai-provider-for-google#31`.
-**Blockers.** Green checks, BLOCKED merge state, no approving review — unchanged. It expands the standalone-ability surface the #863 toggle now governs, and that toggle shipped in v1.3.0 as a breaking change for existing ability callers.
-
-#### PR #943 — Semantic (vector) search for the AI plugin — fixes, tests & validation atop #891 · *Needs review · not draft · BLOCKED · checks FAILURE · +2049/-2, 14 files · 1.4.0* **(board-new)**
-[Link](https://github.com/WordPress/ai/pull/943) · @ColinM-sys
-**Delivers.** A fork-forward of someone else's open branch: it carries **#891**'s semantic-search work (wp-admin search, Cmd-K palette, indexing) and adds fixes, tests, and validation on top, crediting #891 (priyanshuhaldar007), #683 (artpi), and #892 explicitly. Named fixes include replacing `posts_per_page => -1` (VIP-prohibited, unbounded) in `Vector_Search::search()` with a bounded lookup.
-**Blockers.** BLOCKED with failing checks, unchanged since 2026-08-21. **The same experiment still exists in two open PRs** (#891 and #943), one carded and one not, both `closing`- or credit-linked to #844, and both built on the embedding overlay #946 switched off. **#976 changes the shape of that question rather than answering it:** it offers a shared, model-scoped storage layer that both could sit on — postmeta storage in #891/#943, a RAG-specific MariaDB/memory pair in #683 — so the decision is now "which callers migrate onto the shared layer", not "which branch wins".
-
-#### PR #945 — Add `core/edit-content` ability for targeted post content edits · *Needs review · not draft · BLOCKED · checks SUCCESS · +1347/-14, 5 files · 1.4.0* **(board-new)**
-[Link](https://github.com/WordPress/ai/pull/945) · @seedprod
-**Delivers.** The **write** twin of `core/read-content` (#739): a server-side, exact-match text replacement against a post's title, excerpt, or content, so an agent patches an anchored snippet instead of round-tripping the whole field. `old_content` is matched byte-for-byte against the stored raw value and the match count must equal `expected_matches` (default 1) or the edit is refused — the "exact string, unique match, fail loudly" contract AI coding tools converged on, applied to WordPress content with capability checks and revisions.
-**Blockers.** Green checks, BLOCKED merge state, no approving review — ten days review-ready and untouched. It references **#40** (Core Abilities, still Triage) without a closing link, so the ability arrives ahead of the governance frame #863's toggle and #923's identity question are meant to provide.
-
-### v1.5.0 — 🆕 Created empty — 0 cards
-
-The milestone was created in the repository on **2026-08-18 at 19:46 UTC**, 33 minutes before the 1.3.0 release PR merged, and has carried **zero issues and zero PRs** for eight days. No board card references it. It exists as a punt target for 1.4.0 triage and nothing has been punted there yet — including the five C2PA follow-ups that have been unmilestoned in Triage since the day it was created.
+**#660** stayed Needs review; PR #759 is still CHANGES_REQUESTED with failing checks. **#732** moved Needs review → In progress; PR #757 is the same shape, and #971 still names this issue as its prerequisite. **#875** stayed In progress; PR #887 is still CHANGES_REQUESTED with failing checks.
 
 ---
 
-## ② Planned backlog — Future Release (42)
+## Planned backlog — Future Release (49)
 
+**42 → 49.** Arrivals include the AI Workspace cluster, content-write drafts, #971 from the unmilestoned bucket, and the 1.4.0 cards that were pushed out (#683, #777, #789, #832, #933, #943, #945). Departures: #923, #338, and #979 to 1.5.0; #791 to Done; #262 removed. The repository milestone is **54 open**, so five open items in that milestone are not board cards.
 
-**Flat at 42, on every axis.** No card entered or left this tier, none changed status, none changed milestone, and none of the eight PR cards changed a readiness field except #931 (BLOCKED → DIRTY). Seven issue cards here are In progress (#203, #238, #325, #338, #625, #689, #844) — four with live PRs (#238/#494, #338/#929, #689/#735, #844/#891) — so read "Future Release" as *unscheduled*, not *inactive*, and read In progress here as *claimed*, not *underway*. **The one thing that moved is off-board:** #923's uncarded implementation PR **#961** grew by ~900 lines while #923 itself sat still in this tier.
-
-### Issues (34)
+### Issues (35)
 
 | Issue | Status | Summary |
 |---|---|---|
@@ -265,16 +230,14 @@ The milestone was created in the repository on **2026-08-18 at 19:46 UTC**, 33 m
 | [#90](https://github.com/WordPress/ai/issues/90) | In discussion / Needs decision | Clarify and consolidate Title Generation options in UI and Experiment settings |
 | [#142](https://github.com/WordPress/ai/issues/142) | Backlog | Frontend chat agent powered by site content |
 | [#186](https://github.com/WordPress/ai/issues/186) | Backlog | Add tone adjustment controls for AI-generated content |
-| [#188](https://github.com/WordPress/ai/issues/188) | Backlog | Add persona-driven content generation experiments *(no PR, no assignee, no comments — in either direction of its 2026-08-17/23 round trip)* |
+| [#188](https://github.com/WordPress/ai/issues/188) | Backlog | Add persona-driven content generation experiments |
 | [#189](https://github.com/WordPress/ai/issues/189) | Backlog | Explore an admin Site Agent for executing WordPress actions |
 | [#190](https://github.com/WordPress/ai/issues/190) | To do | Add site-wide AI-powered content insights |
 | [#203](https://github.com/WordPress/ai/issues/203) | In progress | Add extensibility hook for custom Ability Table columns |
-| [#238](https://github.com/WordPress/ai/issues/238) | In progress | Add focus-aware crop suggestions *(`Help Wanted`; PR #494)* |
-| [#262](https://github.com/WordPress/ai/issues/262) | In discussion / Needs decision | Provider-Level Model Bucketing for Model Selection |
-| [#282](https://github.com/WordPress/ai/issues/282) | Backlog | Chat experiment: Integration outside the editor and outside single-task AI use |
+| [#238](https://github.com/WordPress/ai/issues/238) | In progress | Add focus-aware crop suggestions |
+| [#282](https://github.com/WordPress/ai/issues/282) | In progress | Chat experiment: Integration outside the editor and outside single-task AI use |
 | [#297](https://github.com/WordPress/ai/issues/297) | Backlog | New experiment: Content Generation |
 | [#325](https://github.com/WordPress/ai/issues/325) | In progress | Integrate media features and experiments with Gutenberg's experimental Media Editor |
-| [#338](https://github.com/WordPress/ai/issues/338) | In progress | New Experiments: Analytics-aware content and amplification recommendations *(PR #929 — review-ready since 2026-08-23, 2,907 added lines, green checks, still unapproved)* |
 | [#339](https://github.com/WordPress/ai/issues/339) | To do | AI 0.6 + WP7RC1 + Gutenberg 22.7.1 : can't keep connection alive within the AI plugin |
 | [#348](https://github.com/WordPress/ai/issues/348) | In discussion / Needs decision | Feature Request: Unified AI Management Layer for WordPress Core |
 | [#354](https://github.com/WordPress/ai/issues/354) | In discussion / Needs decision | Unifiied Abilities exposure controls |
@@ -282,162 +245,137 @@ The milestone was created in the repository on **2026-08-18 at 19:46 UTC**, 33 m
 | [#430](https://github.com/WordPress/ai/issues/430) | In discussion / Needs decision | Skills in a WordPress admin context |
 | [#448](https://github.com/WordPress/ai/issues/448) | In discussion / Needs decision | Add WebMCP experiment |
 | [#502](https://github.com/WordPress/ai/issues/502) | In discussion / Needs decision | Define how AI provider plugins are discovered, labeled, and surfaced in Connectors |
-| [#625](https://github.com/WordPress/ai/issues/625) | In progress | New Experiment: Social Content Generation for platform-specific social posts *(no PR yet — but a full end-to-end implementation demo was posted 2026-08-21)* |
+| [#625](https://github.com/WordPress/ai/issues/625) | In progress | New Experiment: Social Content Generation for platform-specific social posts |
 | [#643](https://github.com/WordPress/ai/issues/643) | In discussion / Needs decision | "AI" plugin 1.0.1 – Connectors and AI settings pages load blank (JavaScript error) on WordPress 7.0 |
 | [#689](https://github.com/WordPress/ai/issues/689) | In progress | Add a user-facing control for automatic log cleanup |
-| [#791](https://github.com/WordPress/ai/issues/791) | In discussion / Needs decision | Add loading animation/custom cursor for Type Ahead |
-| [#844](https://github.com/WordPress/ai/issues/844) | In progress | New Experiment: Semantic search in wp admin *(PRs #891 **and** carded #943; uncarded #976 now offers a shared storage layer under both)* |
-| [#923](https://github.com/WordPress/ai/issues/923) | In discussion / Needs decision | Introduce agent users to give AI agents an auditable identity *(⚠️ **uncarded PR #961**, now +3,318 lines, implements the identity half)* |
-| [#951](https://github.com/WordPress/ai/issues/951) | Backlog | New Experiment: Generate AI block labels in List View *(from a georgestephanis Slack wish-list item; untouched since 2026-08-18)* |
-| [#890](https://github.com/WordPress/ai/issues/890) | Triage | Add mobile right sidebar display component *(moved in from unmilestoned)* |
-| [#918](https://github.com/WordPress/ai/issues/918) | Triage | Feature: AI-generated `llms.txt`, a curated LLM-friendly site index served at `/llms.txt` *(moved in from unmilestoned)* |
+| [#844](https://github.com/WordPress/ai/issues/844) | In progress | New Experiment: Semantic search in wp admin |
+| [#890](https://github.com/WordPress/ai/issues/890) | Triage | Add mobile right sidebar display component |
+| [#918](https://github.com/WordPress/ai/issues/918) | Triage | Feature: AI-generated llms.txt - a curated, LLM-friendly site index served at /llms.txt |
+| [#933](https://github.com/WordPress/ai/issues/933) | Needs review | Connector validity check assumes text generation, so speech-only and image-only connectors report as invalid |
+| [#951](https://github.com/WordPress/ai/issues/951) | Backlog | New Experiment: Generate AI block labels in List View |
+| [#971](https://github.com/WordPress/ai/issues/971) | Triage | RFC: AI governance experiment for role-based usage controls |
+| [#1003](https://github.com/WordPress/ai/issues/1003) | In progress | Let the AI Workspace's tool surface come from the Abilities API |
+| [#1017](https://github.com/WordPress/ai/issues/1017) | Triage | New Experiment: AI-assisted custom block creation |
+| [#1052](https://github.com/WordPress/ai/issues/1052) | In progress | Editorial Notes: Only reviews template blocks instead of post content when "Show template" is enabled |
 
-### Open PRs (8)
+### Open PRs (14)
 
-#### PR #211 — Add Service Account experiment · *In discussion / Needs decision · draft · DIRTY · +3853/-0, 8 files · Future Release*
-[Link](https://github.com/WordPress/ai/pull/211) · @Jameswlepage
-**Delivers.** Exploratory **Service Account** experiment: a real, creatable user type for non-interactive/automation access (Claude Code, automation, APIs). Adds a Service role, Users → Add New customizations, a Service Accounts list view, and REST CRUD + application-password regeneration.
-**Blockers.** Genuinely exploratory — the author frames it as a **"do we need this?"** question; provider-specific labels would need removing if it advances. Draft, no reviews — a concept for decision, not a merge candidate.
+| PR | Status | Summary |
+|---|---|---|
+| [#494](https://github.com/WordPress/ai/pull/494) | In progress | [Feature]: Issue 238 \| Focus-aware crop suggestions |
+| [#683](https://github.com/WordPress/ai/pull/683) | In progress | Add native vector search |
+| [#695](https://github.com/WordPress/ai/pull/695) | In progress | Add: AI-assisted payload generation to the Ability Explorer - Test Ability Screen |
+| [#765](https://github.com/WordPress/ai/pull/765) | In progress | Add Repo Automator action |
+| [#777](https://github.com/WordPress/ai/pull/777) | In progress | dev: Update Composer deps and remediate PHPStan smells |
+| [#789](https://github.com/WordPress/ai/pull/789) | In progress | Update bundled wp deps (theme, ui, dataviews, admin-ui) |
+| [#832](https://github.com/WordPress/ai/pull/832) | In progress | chore(deps): drop @wordpress dependencies to wp-7.0 versions |
+| [#931](https://github.com/WordPress/ai/pull/931) | In progress | Compare the core read abilities against the REST API |
+| [#943](https://github.com/WordPress/ai/pull/943) | Needs review | Semantic (vector) search for the AI plugin — fixes, tests & validation atop #891 |
+| [#945](https://github.com/WordPress/ai/pull/945) | Needs review | Add core/edit-content ability for targeted post content edits |
+| [#949](https://github.com/WordPress/ai/pull/949) | In progress | Knowledge: add a Knowledge and Guidelines experiment |
+| [#1025](https://github.com/WordPress/ai/pull/1025) | In progress | Add core/content-create, core/content-update, and core/content-delete abilities |
+| [#1026](https://github.com/WordPress/ai/pull/1026) | In progress | Add the content write abilities through the REST API |
+| [#1027](https://github.com/WordPress/ai/pull/1027) | In progress | [WIP 🚧] Content Translation: Enable per-block translation |
 
-#### PR #224 — Add WebMCP adapter experiment · *In discussion / Needs decision · draft · DIRTY · +2371/-55, 9 files · Future Release*
-[Link](https://github.com/WordPress/ai/pull/224) · @Jameswlepage
-**Delivers.** A `webmcp-adapter` experiment exposing layered `navigator.modelContext` (WebMCP) tools in wp-admin for discovering/inspecting/executing Abilities. Adds `is_available()`/`get_unavailable_reason()` to `Abstract_Experiment`, gates on Abilities API availability, enforces server-side option sanitization.
-**Blockers.** Functionally validated (abilities executed via WebMCP in Chrome Canary) but **held by spec instability** — WebMCP is a fast-moving W3C CG draft (tool-registration shape already changed). swissspidy recommended stepping back to discussion issue #448 and exploring declarative form-exposure first. Current merge state is **DIRTY** and the branch needs an update before review.
+**Closed out of this lane.** **#211** (Service Account) and **#760** (Chrome DevTools PoC) were closed unmerged, marked Done, and had their milestones cleared. **#224** (WebMCP adapter) is still an open draft, DIRTY, checks green, and is no longer a board card; it closes #448.
 
-#### PR #494 — [Feature]: Issue 238 | Focus-aware crop suggestions · *In progress · not draft · DIRTY · +2152/-315, 9 files · Future Release*
-[Link](https://github.com/WordPress/ai/pull/494) · @TylerB24890
-**Delivers.** A `Suggest_Image_Crops` experiment + Ability: feeds an image (data URI) to a vision model that returns focal point + crop-window coordinates in Focal-Point-Picker space. Adds a shared `Resolves_Image_Reference` trait and refactors `Alt_Text_Generation` to use it. Customizable aspect ratios via filter.
-**Blockers.** **[Status] Blocked** — the Gutenberg Media Editor modal isn't yet extensible (epic gutenberg#73771); no UI surface until `registerImageEditorPanel()` (name TBD) lands. Backend Ability works standalone via the Abilities Explorer. Related: #325, PR [#446](https://github.com/WordPress/ai/pull/446) (already merged in 1.0.0).
+**Readiness worth naming.** **#1026** is the only CLEAN open pull in the plugin, and it is a draft (content write abilities through the REST API, checks green). **#1025** and **#1027** are drafts with green checks and BLOCKED merge states. **#945** (`core/edit-content`) moved here from 1.4.0; merge went BLOCKED → DIRTY; checks still green; still no approval; still references #40 without a closing link. **#949** left draft; checks went SUCCESS → FAILURE. **#943** is still Needs review, BLOCKED, checks failing. **#683** is still a draft, DIRTY, checks failing — and the storage layer it was going to invent (#976) has already merged. **#931** went DIRTY → BLOCKED and is still a draft with failing checks.
 
-#### PR #695 — Add: AI-assisted payload generation to the Ability Explorer - Test Ability Screen · *In progress · not draft · BLOCKED · CHANGES_REQUESTED · +263/-12, 4 files · Future Release*
-[Link](https://github.com/WordPress/ai/pull/695) · @Arkenon
-**Delivers.** Adds AI-assisted payload generation to the Ability Test Runner: users describe a test scenario in natural language and the tool generates a valid JSON payload from the selected ability's input schema — lowering the bar to exercise abilities with complex inputs.
-**Blockers.** BLOCKED with CHANGES_REQUESTED and failing checks; untouched since 2026-07-21. Address review feedback before another mergeability check.
-
-#### PR #760 — PoC: Basic integration with Chrome DevTools for agents · *Needs review · not draft · BLOCKED · +474/-0, 16 files · Future Release*
-[Link](https://github.com/WordPress/ai/pull/760) · @dkotter
-**Delivers.** A third-party integration exposing the site's available AI Features — plus a lightweight log of which Features ran recently — to Chrome DevTools for agents, which recently added 3P-tool support. A deliberately basic proof-of-concept to validate the surface.
-**Blockers.** PoC framing — a "does this direction have legs?" exploration rather than a finished feature. Checks are green but the PR is BLOCKED with no approving review; product direction and review are still needed.
-
-#### PR #765 — Add Repo Automator action · *In progress · not draft · BLOCKED · +48/-0, 1 file · Future Release*
-[Link](https://github.com/WordPress/ai/pull/765) · @jeffpaul
-**Delivers.** Repo-ops tooling, not a user feature: a `.github/workflows/repo-automator.yml` running 10up/action-repo-automator on the `develop` branch to auto-label, comment, and assign reviewers on PRs/issues — operational support for the rising issue/PR volume (jeffpaul + dkotter).
-**Blockers.** Awaiting review; no feature impact. Remains in Future Release.
-
-#### PR #931 — Compare the core read abilities against the REST API · *In progress · draft · **DIRTY** (was BLOCKED) · checks FAILURE · +1525/-8, 11 files · Future Release*
-[Link](https://github.com/WordPress/ai/pull/931) · @gziolo
-**Delivers.** An audit comparing the shipped `core/read-*` abilities against the REST API to surface semantic drift between the two surfaces.
-**Blockers.** Draft, failing checks, no review, and now **DIRTY** — the only readiness field that moved anywhere on the board this window, and it moved in the direction of needing a rebase. One finding was already split out and merged separately: **#948** (`core/read-users` ordered by display name, matching `/wp/v2/users`, shipped in v1.3.0), which is the pattern this PR is for.
-
-#### PR #949 — Knowledge: add a Knowledge and Guidelines experiment · *In progress · draft · BLOCKED · checks SUCCESS · +4074/-283, 36 files · Future Release*
-[Link](https://github.com/WordPress/ai/pull/949) · @gziolo
-**Delivers.** Ports Gutenberg's `lib/experimental/knowledge` storage layer and `routes/guidelines` into the AI plugin as a **Knowledge and Guidelines** experiment, adding a `wp_knowledge` store and a Settings → Guidelines page. Two consequences: site guidelines stop requiring the Gutenberg plugin with its `gutenberg-guidelines` experiment enabled, and **`includes/Services/Guidelines.php` — which had quietly stopped injecting guidelines into prompts — is fixed**.
-**Blockers.** Draft, BLOCKED merge state, green checks, no review, **untouched since it opened on 2026-08-18**. It is the plugin-side landing of upstream `gutenberg#77230` (Guidelines built on Knowledge in WP 7.2), tracked on the [dependency watchlist](./wordpress-ai-cross-repo-dependencies.md) against **#430** — and that watchlist item has not moved either, for two windows running. A 36-file draft touching a shared prompt path is a rebase hazard for the editorial experiments queued behind it.
-
-> **⚠️ The embeddings thread is still reversed in `develop` — but the recovery is now in code, and the board still cannot see it.** PR **#892** (the `SDK_Overlay` vendoring of php-ai-client 1.4.0 embedding support) merged under 1.3.0 on 2026-08-14; uncarded **#946** disabled it on 2026-08-17 pending `php-ai-client#274`, and `generate_embeddings()` still returns `WP_Error`. Everything downstream inherits that: **#683** (native vector search, 1.4.0), **#844**/**#891** (semantic search, here), and carded **#943**.
->
-> **Three things changed this window, in this order.** (1) dkotter opened uncarded **#975** on 2026-08-25 at 20:52 — checklist item one: pull #274's changes into the vendored directory, rewrite `generate_embeddings()` for the required-model API, load `SDK_Overlay` again, and re-add a temporary `wp ai embeddings generate` command for testing. (2) At 22:23, ninety minutes later, **JasonTheAdams approved `php-ai-client#274`**; it is now **CLEAN** and still unmerged, and ColinM-sys re-validated the approved head on 2026-08-26 (1,191 tests / 4,322 assertions on PHP 8.5, phpstan clean, 36/36 live Ollama cases). (3) At 04:50 on 2026-08-26, ColinM-sys opened uncarded **#976** — checklist item two, deliberately **not** blocked on #274: a portable `wpai_embeddings` table and repository whose unique key `(object_type, object_id, provider, model, chunk_index)` makes the model part of every vector's identity, with a `Vector_Codec` byte layout chosen to match MariaDB's `VECTOR` type so #683's backend can implement the same interface.
->
-> **So the substrate is one merge and two reviews away, and none of that is on the board.** #975 and #976 are both `unexplained` in the coverage audit, and **#962's checklist still shows seven unchecked boxes with no PR links.** Treat the embedding layer as *unavailable pending #274's merge plus #975*, note that **#976 could be reviewed today**, and note that the board still records only #892's merge, never the reversal and never the repair.
+**#1004 is not in this table.** It closes #282, so it is linked-board-issue. It is the workspace implementation (+25,745/−33, 91 files), BLOCKED, checks failing.
 
 ---
 
-## ③ Stragglers — 2
+## Stragglers — 1
 
-Both are unchanged, and neither was touched by this window's cleanup pass — which removed four *correctly* Done cards instead.
+- **[PR #484](https://github.com/WordPress/ai/pull/484)** is merged (2026-04-29) and still board-Needs review under 0.9.0.
+- **`php-ai-client#242` was de-carded.** It is no longer a straggler.
 
-- **[PR #484](https://github.com/WordPress/ai/pull/484) — "Ignore .wp-env.test.override.json"** is already merged (2026-04-29) but remains board-Needs review under 0.9.0. It is a board-hygiene item, not pending delivery.
-- **[`php-ai-client#242`](https://github.com/WordPress/php-ai-client/issues/242) — "Implement embedding generation contracts and client APIs"** was **closed upstream on 2026-07-15** (its contracts shipped in php-ai-client 1.4.0) and was added to Project #240 on 2026-08-20 as **In progress under 1.4.0**. It is counted in this document's 24-card 1.4.0 lane because the board counts it, but it is not open work. The live tracking for that programme is **#962**; the live blocker is `php-ai-client#274`, **now approved and awaiting merge**.
-
-**Removed-board reference:** [WordPress/abilities-api#84](https://github.com/WordPress/abilities-api/issues/84) remains open upstream under milestone Later but is not part of Project #240.
+**Removed-board reference:** [WordPress/abilities-api#84](https://github.com/WordPress/abilities-api/issues/84) remains open upstream under milestone Later and is not part of Project #240.
 
 ---
 
-## ④ Unscheduled — 6
+## Unscheduled — 12
 
-Six unmilestoned cards, all in **Triage**: the five C2PA Monitor follow-ups lnispel filed on **2026-08-18** within two minutes of each other, plus board-new governance RFC **#971**.
+Twelve unmilestoned non-Done cards, all issues. #971 left for Future Release. #1037 is In progress; the other eleven are Triage.
 
 | Issue | Status | Summary |
 |---|---|---|
-| [#953](https://github.com/WordPress/ai/issues/953) | Triage | JUMBF box reader + CBOR decoder to populate `c2pa.decoded`, which the `_wpai_monitor_record` postmeta reserves and always leaves null. **The issue asks for 1.4.0 and still has no milestone, eight days on.** |
-| [#954](https://github.com/WordPress/ai/issues/954) | Triage | In-browser cryptographic verification via `@contentauth/sdk` (WASM loaded only on explicit user action), replacing the download-and-drag CAI Verify round trip that fails on auth-gated and private sites |
-| [#955](https://github.com/WordPress/ai/issues/955) | Triage | Media Library **grid-view** indicator. ⚠️ **Blocked by a certification mark, not by engineering:** the Content Credentials trustmark is administered under the C2PA Conformance Program and restricted to products on the conforming-products list; WordPress is not one |
-| [#956](https://github.com/WordPress/ai/issues/956) | Triage | Preserve manifests through the GD/Imagick subsize pipeline — **both strip APP11/JUMBF on every JPEG re-encode** and drop auxiliary chunks from PNG/WebP, so no generated thumbnail carries credentials. Open question the issue does not settle: whether re-embedding a manifest into re-encoded bytes is valid under C2PA at all |
-| [#957](https://github.com/WordPress/ai/issues/957) | Triage | Pre-fill CAI Verify with a `?source=` URL — **deliberately deferred**, because no heuristic reliably proves a URL is publicly reachable (`wp_remote_head()` only proves self-reachability; exclusion lists miss auth-gated staging). **#954** would make it moot |
-| [#971](https://github.com/WordPress/ai/issues/971) | **Triage** *(board-new)* | **RFC: AI governance experiment for role-based usage controls** (WouterP0lman, 2026-08-25). Which roles may use AI, how much usage is acceptable per period, which users/features/requests account for it, and what happens at the limit — all local and site-owned, with no hosted service, central account, remote telemetry, or paid tier. Explicitly distinguishes itself from Connector Approvals, which answer whether a *plugin* may use a connector. ⚠️ **Names [#732](https://github.com/WordPress/ai/issues/732) as a prerequisite:** enforcement must not claim complete usage while request logging misses sidecar-transport providers, so #732's lifecycle direction should be agreed first |
+| [#953](https://github.com/WordPress/ai/issues/953) | Triage | C2PA Monitor: JUMBF box reader and CBOR decoder for c2pa.decoded |
+| [#954](https://github.com/WordPress/ai/issues/954) | Triage | C2PA Monitor: In-browser cryptographic verification via @contentauth/sdk |
+| [#955](https://github.com/WordPress/ai/issues/955) | Triage | C2PA Monitor: Media Library grid view indicator |
+| [#956](https://github.com/WordPress/ai/issues/956) | Triage | C2PA Monitor: Preserve C2PA manifests through WordPress GD/Imagick subsize pipeline |
+| [#957](https://github.com/WordPress/ai/issues/957) | Triage | C2PA Monitor: Pre-fill CAI Verify tool with publicly reachable attachment URL (?source=) |
+| [#994](https://github.com/WordPress/ai/issues/994) | Triage | Improving onboarding |
+| [#1006](https://github.com/WordPress/ai/issues/1006) | Triage | AI Workspace: the failure and replay stories need policies, not patches |
+| [#1012](https://github.com/WordPress/ai/issues/1012) | Triage | Move the Key Encryption experiment onto the new Secrets API feature plugin |
+| [#1016](https://github.com/WordPress/ai/issues/1016) | Triage | Move the Abilities Explorer to DataViews |
+| [#1036](https://github.com/WordPress/ai/issues/1036) | Triage | Add background synchronization and large-scale processing |
+| [#1037](https://github.com/WordPress/ai/issues/1037) | In progress | Document the architecture and developer-facing APIs for Embeddings support |
+| [#1048](https://github.com/WordPress/ai/issues/1048) | Triage | Settings::register() calls register_initial_settings() on admin form saves; options.php then saves admin_email as NULL and every Settings › General save shows "not a valid email address" |
 
-- **The C2PA read path still has six open cards and no merged code:** issue **#421** (In progress, punted to 1.4.0), its PR **#459** (open, BLOCKED, CHANGES_REQUESTED, de-carded), and these five follow-ups — **none of which moved this window**. Milestoning them is still the first decision to make; the empty 1.5.0 milestone created the same day is the obvious target and has been used for nothing.
-- **#971 is a different kind of unscheduled.** It is not waiting on triage bandwidth; it is waiting on a decision that lives on another card. It also arrives credibly self-limiting: the author reports a working local proof of concept *and* declines to propose it, because its `pre_http_request` enforcement point "is too broad for upstream use because it cannot reliably identify the AI client, actor, feature, and model context." That is the same lifecycle gap #732 documents from the logging side.
-- **Board-new #970 did *not* land here.** It arrived In progress under 1.4.0 with an implementing PR the next morning — the fastest issue → card → PR path the board has recorded, and the counter-example to everything above.
+- **#953–#957** are still the C2PA follow-ups filed 2026-08-18, still unmilestoned. #955 is still blocked by the C2PA Conformance Program. #421's PR **#459 is now APPROVED**, green, and BLOCKED, so the cluster has an approval and still cannot merge.
+- **#1036 and #1037 have empty bodies.** They were spun out of the embeddings checklist. #1042 closes #1037. #1041 does not close #1036.
+- **#1048** is a live settings bug (admin email nulled on General save) with no PR and no milestone.
+- **#1006** is the workspace failure/replay policy, with no PR and no comments.
+
+---
+
+## Data-quality flags (verify before acting)
+
+1. **PR #484 is merged**, not open, despite its board status. It is the only non-Done bookkeeping artifact left. `php-ai-client#242` was removed.
+2. **"Done" does not mean shipped.** #211 and #760 were closed unmerged and marked Done this window. #621 was the earlier proof and is still Done and unmerged. Check `state` and `mergedAt`.
+3. **"Done" can mean declined.** **#1024** was closed `NOT_PLANNED` the same minute #1028 was closed unmerged, and the board card is Done. #307 was the older case and has been de-carded.
+4. **"Done" can mean a different fix shipped, and then the card can disappear.** #940 closed against the timeout bump (#947) rather than the custom endpoint it asked for, and was de-carded this window.
+5. **A shipped issue can leave the board without becoming Done.** **#514** closed COMPLETED via merged #681 on 2026-09-03 and was removed from Needs review. **#262** closed COMPLETED and was removed while the card was still In discussion.
+6. **De-carding continues to reach shipped releases.** This window removed Done #863, #866, #906, #924 (1.3.0) and #940, #968 (1.4.0). The 1.3.0 board lane reads **13** where it read 19 on release night, against a repository milestone of 71.
+7. **Board ≠ repo on open PRs is now one typo.** 41 open PRs = **20** direct + **20** linked + 0 routine + 0 off-board + **1 unexplained (#1057)**. That is 4-of-33 → 1-of-41 because #975, #976, and #977 merged and #961 gained a closing link. The number still counts only open PRs.
+8. **The milestone view is the historical one.** Repository `1.4.0` holds **83 items, 63 closed / 20 open**. The open 20 are represented. Most of the closed 63 were never cards. `1.5.0` (11 open) and `1.6.0` (6 open) are fully represented. Future Release is **54 open in the repository and 49 on the board**.
+9. **Two new issues have null bodies.** #1036 and #1037. Do not invent a specification from the title alone. #1041 does not close #1036; #1042 does close #1037.
+10. **`php-ai-client#282` did not ship deferred tool loading.** It merged retitled as generic annotations. **#281 is still open.** The 1.5.0 release notes credit #282. Read the merged title before treating #21 as answered.
+11. **Approvals exist and are not mergeable.** #459 is APPROVED, green, BLOCKED. #973 is APPROVED, checks FAILURE, BLOCKED. The rest of the 41: 29 BLOCKED, 10 DIRTY, 1 CLEAN (draft #1026), 1 UNSTABLE (#1010), 21 failing checks, 9 CHANGES_REQUESTED, 8 drafts.
+12. **#935 is still the clean review test.** Green checks, no requested changes, BLOCKED, no approval, review-ready since 2026-08-19, and its issue moved to Future Release.
+13. **Empty-body and milestone mismatches.** #1053's repository milestone is 1.4.0 and its board issue #1052 is Future Release. #1041 is board-milestoned 1.5.0 and does not close the unmilestoned #1036.
+14. **A board total can rise while nothing ships.** 290 → 309, 42 merges into `develop`, zero plugin releases. Read added, removed, and the milestone table.
+15. **Milestone strings are not stable across repositories.** #23's "1.2.0" was re-pointed inside `ai-provider-for-google` on 2026-08-17, and this window the board string moved to 1.3.0. `php-ai-client#284` sits in the board's 1.5.0 column because that is the client's milestone title.
+16. **Merge-state UNKNOWN is "not computed yet."** The first census of this window warned on cold PRs. A second pull, after GitHub computed mergeability, had zero warnings. The saved baseline must be that second pull. `PRDIFF_JQ` ignores transitions into or out of UNKNOWN.
+17. **Every open `WordPress/ai` issue is carded: 64 of 64.** An uncarded one fails `--strict`. Upstream issues are census-only.
+18. **Do not sum the dependency watchlist and the abilities-api census.** The watchlist is 16 items (9 open / 4 closed / 3 merged) and has not changed `updatedAt` since 2026-08-17. abilities-api census is 14 / 8 / v0.4.0, a sixth static census, pending archival.
+19. **Three fallback links are not authoritative.** #494 → #238 by title, #943 → #891 by title (a PR, not an issue), #992 → #354 by body. Only `closing` links should be used to correct a dossier.
+20. **#689 no longer has an implementation.** #735 was closed unmerged on 2026-09-03. The issue is still In progress / Future Release.
+
+## Work for Later
+
+- [x] **Ship v1.3.0** — released 2026-08-18. Milestone closed at 71 items. Board lane now 13 cards.
+- [x] **Merge `php-ai-client#274`, #975, and #976** — all three merged. #993 (similarity) merged after them. The substrate loads in `develop`.
+- [x] **Remove `php-ai-client#242` from the board** — de-carded this window.
+- [x] **Link #961 to #923** — #961 now has an authoritative closing reference, and #923 is In progress / 1.5.0.
+- [ ] **Cut a plugin release, or say why 1.4.0 is not one.** v1.3.0 is 36 days old. There is no 1.4.0 release issue. The board has split the old pile across 1.4.0 (12 non-Done), 1.5.0 (8), and 1.6.0 (3), with no date on any of them.
+- [ ] **Review #459.** It is APPROVED with green checks and still BLOCKED. It is the C2PA path for six other cards.
+- [ ] **Repair #973's checks or re-review.** The SEO-cache fix is APPROVED and its checks went FAILURE.
+- [ ] **Review #935.** Green, no requested changes, unapproved since 2026-08-19, now Future Release.
+- [ ] **Decide what #1024's Done status means.** The issue was closed `NOT_PLANNED`.
+- [ ] **Mark #514 Done in the historical record, or accept the removal.** It shipped via #681 and left the board from Needs review.
+- [ ] **Give #1036 and #1037 bodies.** Both were filed empty. #1041 does not close #1036.
+- [ ] **Do not describe #282 as deferred tool loading.** The merged PR is generic annotations. #281 is the open proposal, and it is the one that speaks to board #21.
+- [ ] **Milestone or explicitly defer #953–#957 and #1048.** #1048 nulls `admin_email` on Settings save and has no PR.
+- [ ] **Settle #732 before building #971's enforcement.** #732 moved to 1.6.0 and back to In progress. #757 is still CHANGES_REQUESTED with failing checks. #971 is Triage / Future Release, assigned to WouterP0lman.
+- [ ] **Review the workspace before it becomes the release.** #1004 is +25,745/−33 across 91 files, BLOCKED, checks failing, no review. #1006 is the failure-policy follow-up and has no milestone.
+- [ ] **Pick a storage caller.** #976 merged. #683, #891, and #943 are still open on Future Release.
+- [ ] **Reconcile #789 and #832**, both now Future Release: one refreshes bundled `@wordpress/*` packages forward, the other pins them to WP 7.0.
+- [ ] **Resolve merged-but-Needs-review #484**, and the Done-but-unmerged #621 and #922.
+- [ ] **State whether #27 is in 1.4.0.** It moved back to In discussion. Still no PR and no assignee.
+- [ ] **Watch `php-ai-client#277` / #283** — citations still cannot ride on `MessagePart`. #283 is the open DTO.
+- [ ] **Rebase `mcp-adapter#299`.** The `resources/read` 500 fix is green and DIRTY.
+- [x] **Maintain the refresh workflow** — script unchanged this window unless verification finds drift. Eight offline suites, `census --strict`, and the live dependency smoke test are part of the close-out.
 
 ---
 
-## ⚠️ Data-quality flags (verify before acting)
-
-1. **PR #484 is merged**, not open, despite its board status — and `php-ai-client#242` is carded **In progress under 1.4.0** while closed upstream on 2026-07-15. Two of 74 non-Done cards are bookkeeping artifacts rather than open work, and **neither was touched by this window's cleanup pass**.
-2. **"Done" does not mean shipped — PR #621 is the proof.** It was closed **unmerged** on 2026-07-28 after weeks of contributor silence (dkotter: "happy to re-open"), then marked board-**Done** with its 1.3.0 milestone stripped. Its uploads-base-URL hardening is not in `develop` and has no successor PR. Check `state`/`mergedAt`, not board status.
-3. **"Done" can also mean *a different fix shipped*.** #940 asked for a custom settings endpoint to bypass core's `/wp/v2/settings`; it closed 2026-08-19 against **uncarded PR #947**, which raises the PUT/POST timeout instead — authoritatively `Closes #940`. Before treating a Done card as a delivered specification, read the closing PR.
-4. **"Done" can also mean *the card was never a plan*.** **#968** was filed at 07:11 on 2026-08-24, closed at 14:06 the same day by its author's own six-line PR **#969**, and appeared on the board **already Done**. The card is a receipt, not a commitment — and the PR that produced it has no card at all.
-5. **⚠️ De-carding now reaches shipped releases, so historical lane counts in this document are not reproducible from the live board.** This window removed **#233**, **#690**, **#876** (all closed 2026-08-11, all milestone **1.3.0**, all delivered) and **#307** (closed `NOT_PLANNED`). The 1.3.0 board lane reads **16** where it read **19** on release night, against a repository milestone closed at **71**. If you need to know what a release contained, read the milestone or the release notes. The git-tracked snapshots in `.wp-ai-roadmap-snapshots/` are this document's only stable record of prior board states.
-6. **Board ≠ repo, and the open-PR coverage metric moves for reasons unrelated to tracking.** 33 open PRs = **17** direct-board-pr + **12** linked-board-issue + 0 routine + 0 linked-off-board-issue + **4 unexplained** (#961, #975, #976, #977). That is 1-of-30 → **4-of-33** in three days, with **no de-carding and no change in convention** — three substantive PRs simply opened. Last window the same metric hit its best-ever reading because nine uncarded PRs *merged*. **A number that improves when work leaves and worsens when work arrives is measuring throughput, not coverage.**
-7. **⚠️ The milestone view is the stable one, and it is worse.** The `1.4.0` milestone in `WordPress/ai` holds **47 items**; Project #240 cards **29**. All 18 uncarded are PRs, and **nine are already merged or closed** (#947, #959, #963, #965, #966, #967, #969, #972, #974). **Of the 15 items completed under 1.4.0, nine were never carded.** Quote this alongside any open-PR coverage figure.
-8. **Uncarded merges are permanently unrecoverable, and this window produced four more.** #967, #969, #972, and #974 each opened and merged between two snapshots, so no board diff and no PR-census diff will ever contain them — the same permanent invisibility as #913, #946, #947, #950, #952, #958, #959, and #963–#966 before them.
-9. **A board total can fall while the project grows.** 291 → **290** on four deletions, in a window that gained three PRs, merged five, opened two issues, and had its most consequential upstream blocker approved. Last window the same total rose 279 → 291 on intake. Read `.board.added`/`.board.removed` and the milestone deltas, never the total.
-10. **An empty diff is not a quiet project.** `status_changed` and `milestone_changed` are **both empty arrays** this window. In the same three days five PRs merged, three opened, `php-ai-client#274` was approved, and mcp-adapter gained four PRs. The board did not disagree with any of that — it simply was not updated.
-11. **A dated lane can empty by deferral.** v1.3.0 closed 19/19 Done — but its last substantive item, **#421**, was **punted to 1.4.0** rather than shipped, and its PR #459 is still open. "Milestone complete" and "everything in the milestone shipped" are different statements.
-12. **1.2.0 and 1.3.0 milestones are closed** (1.3.0 at 71 items), but external provider issue #23 still carries the 1.2.0 label and remains board-open.
-13. **A `NOT_PLANNED` close is not a fix, and now it is not even a record.** #869 was closed as not reproducible and remains dormant; **#307** was closed `NOT_PLANNED` because the `AGENTS.md` proposal was **declined** — and both have now been de-carded. Both counted toward Done while they existed; neither is delivered functionality, and neither is on the board to check.
-14. **#890 is unscoped, and #918 is unscoped in a different way — and both sit in Future Release.** #890 still has no labels, assignee, or named target surface; jeffpaul's 2026-08-05 question about which sidebar is meant is now three weeks unanswered. #918's standard-settledness question is likewise unanswered.
-15. **The provenance path is six cards deep, zero merged, and completely static.** PR **#459** is the sole live path and the authoritative closing PR for **#421** — green checks, still BLOCKED, still CHANGES_REQUESTED, still de-carded, unchanged for two windows. Behind it, **#953–#957** remain unmilestoned in Triage, including **#955**, blocked by the **C2PA Conformance Program** rather than by engineering. The only movement was a contributor linking #421 to [core Trac #65952](https://core.trac.wordpress.org/ticket/65952).
-16. **The semantic-search cluster gained a fourth design instead of choosing among three.** #683 (MariaDB `VECTOR` + post-meta fallback), #891 (post-meta), #943 (#891's work plus fixes) — and now uncarded **#976**, a shared model-scoped repository explicitly designed so #683's backend could implement its interface. #976 is the best-argued of the four and the only one nobody has to choose *against*; it is also the only one with no board card. **Underneath all of them, `generate_embeddings()` still returns `WP_Error`** pending #274's merge plus #975.
-17. **⚠️ Three governance threads, three statuses, three milestones, no common owner.** Identity: **#923** (In discussion / Future Release) with uncarded **#961** (+3,318) implementing it. Access control: **#736** (In progress / 1.4.0) with PR **#749** at CHANGES_REQUESTED. Usage governance: board-new **#971** (Triage / unmilestoned), which is the only one that states its dependency (**#732**). Before scheduling any of them, decide whether they are three experiments or one.
-18. **Merge-state fields are volatile** and should be rechecked before prioritization. Aggregate: **every one of the 33 open `WordPress/ai` PRs is BLOCKED (21) or DIRTY (12); none carries an APPROVED review; 17 have failing checks, 10 carry CHANGES_REQUESTED, and 7 are drafts.** Zero approvals in the open queue is now a **twelve**-window streak. **But approvals are not scarce:** all five merges this window carry dkotter's approving review, and four were approved and merged within hours of opening. **Exactly one readiness field moved in three days** — #931 BLOCKED → DIRTY. Note also that the census reads merge state from a *list* query, which GitHub answers from cache, so treat a just-changed merge state as provisional.
-19. **GitHub's `mergeStateStatus` transiently reads `UNKNOWN` — the script handles it, so don't hand-correct for it.** Mergeability is computed lazily and *asking* is what schedules the job, so a cold census reports `UNKNOWN` for PRs nothing has touched. `fetch_pr_census()` re-queries once (`WP_AI_MERGESTATE_RETRY_DELAY`, default 2s), keeps whichever answer knows more, emits a `pr-mergestate-unknown` **warning** — never an error, since uncomputed mergeability is not a coverage failure — for any PR still cold, and `PRDIFF_JQ` ignores transitions into or out of `UNKNOWN`. Both halves matter: without the retry the report is wrong, and without the diff guard the *saved snapshot* is wrong and replays the phantom churn in reverse next window. Regression-tested by `tests/wp-ai-roadmap-refresh-mergestate.sh`.
-20. **Cross-repo signals are separate:** neither the 16-item Gutenberg/abilities-api dependency watchlist nor the full `php-ai-client` / `mcp-adapter` / `abilities-api` PR-issue-release censuses are included in Project #240 counts; coverage validation applies only to `WordPress/ai`.
-21. **Do not sum the dependency watchlist and the repository census.** `WordPress/abilities-api` appears in both by design: the watchlist carries curation the census cannot derive (`theme`, `aiRefs`, `note`, `required`) and follows items through closure, while the census tracks only the live open set. Items `#38` and `#84` are open issues counted in both.
-22. **`abilities-api` counts are archaeology, not backlog.** The repository is pending archival (issue #160, unanimous agreement since January, still unactioned and untouched since 2026-02-04). Its 14 open PRs and 8 open issues have not moved on **any** axis across all five snapshots since it entered the census on 2026-08-10.
-23. **Every open `WordPress/ai` issue is required to be carded.** An uncarded one is an `issue-roadmap-coverage-missing` error that fails `--strict`. Current state is **54 of 54 carded**, fifth window running. The asymmetry with PRs persists and has an explanation: filing an issue *is* how work enters the board, while a PR can be opened, reviewed, and merged without anyone touching the tracker.
-24. **A tracking issue's checklist is not a tracker unless somebody ticks it.** **#962** instructs that "links to the relevant issues and PRs should be added to the checklist above as the work is defined." Two of its seven items now have PRs (#975, #976) and the checklist still shows seven unchecked boxes and no links. The board card says In progress; the card's own body says nothing has started.
-
-## 🔭 Work for Later
-
-- [x] **Ship v1.3.0** — released 2026-08-18 21:04 UTC, one day past target, deployed to WordPress.org and announced. Its repository milestone is closed at 71 items.
-- [x] **Give v1.4.0 content or retire the lane** — it holds 24 non-Done board cards and 47 repository milestone items.
-- [ ] **⚠️ Card #975 and #976, or say why the embedding foundation is exempt.** Tracking issue **#962** — a carded, assigned, In-progress board card — asked for exactly these two PRs, and neither is on the board. This is the sharpest available case for the carding policy: if the board's own plan produces work the board does not record, the plan card is decorative.
-- [ ] **Tick #962's checklist.** Two of seven items have PRs. The issue instructs that links be added "as the work is defined". Doing it costs one edit and makes the tracking issue actually track.
-- [ ] **Merge `php-ai-client#274`.** It is APPROVED, CLEAN, independently re-validated on the approved head (1,191 tests, 36/36 live cases), and the sole blocker on **#975**, which is the sole blocker on re-enabling a capability the 1.3.0 changelog already claims. JasonTheAdams's approval asked only that the integration tests be run.
-- [ ] **Review #976 now — it is not blocked on #274.** #962 lists storage as independent of step one; #976 arrives with 51 tests, 93% patch coverage, clean lint/phpstan, and a deliberate interface contract for #683's MariaDB backend. It is the one piece of the embedding programme that could merge today, and it is also the one that decides the storage design for #683/#891/#943.
-- [ ] **Decide whether #683 becomes a backend or stays an experiment.** #976 asks @artpi directly. Answering it settles the three-way #683/#891/#943 overlap that #962 deferred.
-- [ ] **⚠️ Extend the coverage audit to merged PRs, or replace it with the milestone view.** Open-PR coverage went 1 → 4 in a window where nothing about tracking discipline changed. The milestone measure — **47 items, 29 carded, 18 uncarded, 9 already merged** — is stable and tells the real story. A merged-PR arm remains the missing half of the tooling.
-- [ ] **State the carding policy.** Dependabot PRs were carded in earlier windows and not since; release PRs have never been carded; #459 stays de-carded while it is the closing PR for #421; and now the two PRs implementing a carded tracking issue are uncarded. Whatever the rule is, it is not written down, and the audit's meaning depends on it.
-- [ ] **Stop de-carding shipped work, or document why.** This pass removed three delivered 1.3.0 cards and one declined proposal. The board's history of the release is now materially incomplete while two genuinely wrong cards (#484, `php-ai-client#242`) remain untouched.
-- [ ] **Give 1.4.0 a date, or say it does not have one.** 24 board cards, 47 milestone items, no date on either, no release issue, and an empty 1.5.0 created eight days ago with nothing punted into it.
-- [ ] **Unblock the review queue.** All **33** open PRs are BLOCKED (21) or DIRTY (12) with **no approving review anywhere** — a twelve-window streak. Approvals clearly happen: five merges this window, all approved by dkotter, four within hours of opening. Start with **#935** (green checks, no requested changes, review-ready since 2026-08-19), then **#929** (ready since 2026-08-23, 2,907 lines), **#945**, and **#949**.
-- [ ] **Settle #732 before #971 is scoped.** The governance RFC says so itself: enforcement "must not claim complete usage or enforce limits only for some providers," and #732 documents that request logging misses sidecar-transport providers. #732's PR **#757** has been at CHANGES_REQUESTED since 2026-08-11.
-- [ ] **Decide whether #923, #736, and #971 are three things or one.** Identity, per-feature access control, and usage governance are three cards in three statuses under three milestones, with a 3,318-line uncarded PR against the first and a declined PoC behind the third.
-- [ ] **Milestone the C2PA follow-ups.** **#953–#957** have been Triage and unmilestoned for eight days; #953 explicitly asks for 1.4.0. **#955 is blocked by the C2PA Conformance Program**, not by engineering, and **#957** documents why it should not be built at all yet. The empty 1.5.0 is the obvious home.
-- [ ] **Land or punt the C2PA path properly.** #421 was punted to 1.4.0 to close the release. **#459** has green checks and is still BLOCKED, CHANGES_REQUESTED, and de-carded. It is the only remaining substantive blocker on six cards, and the new [core Trac #65952](https://core.trac.wordpress.org/ticket/65952) link suggests the question is moving upstream regardless.
-- [ ] **Resolve the two closed-state stragglers** — merged PR **#484** (Needs review under 0.9.0) and **`php-ai-client#242`** (In progress under 1.4.0, closed upstream 2026-07-15) — plus **#922**, a dependabot PR closed unmerged that still shows Done.
-- [ ] **Decide whether #621's hardening still matters.** It was closed for contributor inactivity, not because the concern was dismissed.
-- [ ] **Give #27 an owner.** It has been in To do since 2026-08-23 with no PR and no assignee, and the discovery mechanism is still open — hardcoded list vs WP.org Plugins API vs a connector-only tag.
-- [ ] **Answer the #875 product question** — it sits in 1.4.0 after its fourth milestone label, and PR #887 is BLOCKED with failing checks on top of CHANGES_REQUESTED.
-- [ ] **Triage #918** — decide whether a site-wide public `/llms.txt` endpoint belongs in an experiments plugin before it accrues an implementation PR.
-- [ ] **Triage #890 into a defined scope, or close it** — no labels, no assignee, and jeffpaul's 2026-08-05 question about *which* sidebar (and whether it is an upstream Gutenberg concern first) has gone unanswered for three weeks.
-- [ ] **Close or re-milestone provider issue #23** now that the plugin's 1.2.0 milestone is closed.
-- [ ] **Reconcile #789 and #832**, both in the 1.4.0 lane: one refreshes the bundled `@wordpress/*` packages forward from Gutenberg, the other pins them back to the WP 7.0 versions. Neither moved this window.
-- [ ] **Rebase/review the v1.4.0 PR lane**, especially DIRTY #683/#764/#777/#789/#832/#858 — and now #931, which went BLOCKED → DIRTY.
-- [ ] **Fix the connector defect that is still open** — #933 (validity must be capability-aware; PR #935 review-ready and unapproved for a second week).
-- [ ] **Watch `php-ai-client#281`/`#282`** — provider-agnostic deferred tool loading is the first upstream answer to **#21**, the board's oldest open platform question. If it lands, the "how do we expose thousands of abilities" problem may be solved a layer below the plugin.
-- [ ] **Watch `php-ai-client#277`** — `MessagePart` cannot carry citations, so all three first-party providers drop source attribution. Any plugin feature that wants to show sources (RAG, chat, semantic search) inherits that gap.
-- [ ] **Watch `mcp-adapter#299`** — an unreviewed contributor fix for a **live 500** on `resources/read` for every ability with an object input schema. Also `#297`/`#298`, both still fail-open or error-discarding in the bridge this plugin depends on.
-- [x] **Maintain the refresh workflow** — `wp-ai-roadmap-refresh.sh` passes `bash -n`, all **eight** offline fixture suites, `census --strict` (exit 0), and the live 16-ID dependency smoke test in this refresh. No drift or bug found; the script is unchanged this window.
-
----
 
 ## Changelog
 
 | Date | Change |
 |---|---|
+| 2026-09-23 | **Live refresh vs the 2026-08-26 09:19 UTC baseline — lanes split, embeddings merged, coverage down to one typo PR.** Non-Done **74 → 86** = **65 issue cards + 21 PR cards** (20 open + stale merged #484). The board was actually rescheduled: **8 status changes, 19 milestone changes.** Tier moves: **v1.4.0 24 → 12** (11 issues + PR #888), **v1.5.0 0 → 8**, **v1.6.0 new at 3**, **Future Release 42 → 49**, **1.2.0 residual gone** (Google #23 moved to 1.3.0), **1.3.0 lane now 13 cards with 1 non-Done**, **Unscheduled 6 → 12**, **Stragglers 2 → 1** (`php-ai-client#242` de-carded). Status: In progress **25 → 35**, In discussion **19 → 16**, Needs review **9 → 10**, Triage **9 → 16**, Backlog **7 → 6**, To do **5 → 3**. Open board PRs **17 → 20**; #211 and #760 left by being closed unmerged and marked Done; #224 left the board and now closes #448. **Coverage 4-of-33 → 1-of-41** (20 direct + 20 linked + 1 unexplained, **#1057**). #975/#976/#977 merged; #961 now closes #923. Repository milestones: 1.4.0 **83 (63 closed / 20 open, open set fully represented)**, 1.5.0 **11 open**, 1.6.0 **6 open**, Future Release **54 open vs 49 cards**. Readiness: **29 BLOCKED / 10 DIRTY / 1 CLEAN (draft #1026) / 1 UNSTABLE (#1010)**, **2 APPROVED (#459, #973)**, neither mergeable. `php-ai-client` **37 / 40 / 1.5.0** — #274 merged, #282 merged as annotations not deferred loading, #281 still open. `mcp-adapter` **16 / 51 / v0.6.1**. `abilities-api` static for a sixth census. Watchlist empty for a third consecutive refresh. |
 | 2026-08-26 | **Live refresh vs the 2026-08-23 17:04 UTC baseline — a flat board over a busy repository, and the embedding foundation arrived uncarded.** Non-Done **73 → 74** = **56 issue cards + 18 PR cards** (17 open + stale merged #484). **Zero status changes and zero milestone changes on any pre-existing card**, across three days that saw five merges, three new PRs, two new issues, and an upstream approval. Tier moves: **v1.4.0 flat at 24** (15 issue cards + 9 PRs — gained board-new **#970**, lost **#916** to merge), **Future Release flat at 42 on every axis**, **v1.5.0 still 0** eight days after creation, **Unscheduled 5 → 6** (board-new governance RFC **#971**), **Stragglers 2** (untouched). Readiness tiers: In progress **24 → 25**, Triage **8 → 9**, Needs review **10 → 9**, In discussion **19**, Backlog **7**, To do **5** — every move an arrival or departure. **Board-tracked PR table 18 → 17 rows:** #916 merged out after 19 days and nothing was carded to replace it, though three substantive PRs opened. **Exactly one readiness field moved in three days** — #931 BLOCKED → **DIRTY**. **⚠️ Coverage regressed 1-of-30 → 4-of-33: 17 direct + 12 linked + 0 routine + 0 off-board + 4 unexplained** (#961, and board-new #975/#976/#977) — with no de-carding and no change in convention, because three substantive PRs simply opened. **#975** (dkotter, +1,144/−292 across 19 files, repo milestone 1.4.0, `[Status] Blocked`) and **#976** (ColinM-sys, +2,027/−1, 51 tests, 93% patch coverage) are **checklist items one and two of carded tracking issue #962** — the decomposition the board explicitly asked for — and **neither is carded, neither uses a closing keyword, and #962's checklist still shows seven unchecked boxes with no PR links**. #976 is *not* blocked on #274 and could be reviewed today; its unique key `(object_type, object_id, provider, model, chunk_index)` makes the model part of every vector's identity, and its `Vector_Codec` matches MariaDB's `VECTOR` byte layout so #683's backend could implement the same interface. **⭐ The gate opened: `php-ai-client#274` is APPROVED (JasonTheAdams, 2026-08-25 22:23 UTC) and CLEAN**, still unmerged, re-validated by ColinM-sys on the approved head (1,191 tests / 4,322 assertions on PHP 8.5, phpstan clean, 36/36 live Ollama cases, plus a failure-mode table settling the open `isSupported()` catch question); dkotter opened #975 ninety minutes before it landed. **Merges: five, four uncarded, four opened and merged inside a single day** — #916 (carded, 19 days), #967 (8h), #969 (7h, closed board-Done #968), #972 (10h), #974 (5h); **all five merged by dkotter and all five carry his approving review**, while the standing queue holds **0 of 33** approvals for a **twelfth** window, with 21 BLOCKED / 12 DIRTY, 17 failing checks, 10 CHANGES_REQUESTED, 7 drafts. **New measure introduced: milestone-level carding.** The repository's `1.4.0` milestone holds **47 items**; the board cards **29**; all 18 uncarded are PRs and **nine are already merged or closed** — so **of 15 completed 1.4.0 items, nine were never carded**. **⚠️ De-carding reached a shipped release:** #233, #690, #876 (all closed 2026-08-11, all 1.3.0, all delivered) and #307 (`NOT_PLANNED`) were removed, so the **1.3.0 board lane reads 16 where it read 19 on release night**, against a repository milestone closed at 71 — the historical lane counts in this document are no longer reproducible from the live board. Radar: `php-ai-client` **32 → 31** PRs / 35 issues — **two merges** (#231 closing #230, #275; jeffpaul 2026-08-24) and new **#281**/draft **#282** proposing *provider-agnostic deferred tool loading*, the first upstream answer to **#21**; `mcp-adapter` **13 → 17** PRs / 43 issues — justlevine's #302/#303/#304 in three hours, **#299** fixing a live 500 on `resources/read` for object-schema abilities (`Fixes #261`), draft **#300** adding SSE streaming, dependabot #296 closed unmerged, **#288** approved; `abilities-api` **14 / 8 / v0.4.0**, static on every axis for a fifth census. Rewrote the data-quality flags (21 → 24; new: Done-as-receipt, de-carding shipped releases, empty-diff-is-not-a-quiet-project, the three-governance-threads flag, and the unticked-checklist flag). Verification: `bash -n`, eight offline suites, `census --strict` (exit 0), live dependency smoke test — all pass; `--strict --json` exits **2** on four `pr-roadmap-coverage-missing` errors. Script unchanged. |
 | 2026-08-23 | **Live refresh vs the 2026-08-17 20:39 UTC baseline — v1.3.0 shipped, the 1.4.0 lane loaded to 24, and the open-PR audit hit its best-ever reading for the wrong reason.** Non-Done **65 → 73** = **54 issue cards + 19 PR cards** (18 open + stale merged #484). **v1.3.0 released 2026-08-18 21:04 UTC**, one day past its 2026-08-17 target and **35 days after v1.2.0**; the lane closed **19/19** — but partly by **punting #421 to 1.4.0** rather than shipping it, and **four PRs that landed in the release (#947, #950, #952, and release PR #958) were never carded**. Milestone 1.3.0 closed at **71 items**; **1.5.0 was created empty at 19:46** on release night and has stayed empty; no 1.4.0 release issue exists yet (normal this soon — trackers are filed days *before* a release). Tier moves: **v1.4.0 19 → 24** (gained punted #421, #789 from Future Release, carded PR cards #943/#945, and the embeddings pair **#962** + **`php-ai-client#242`**; lost #917/#941/#960 to merge and #940 to Done), **Future Release 41 → 42** (gained Backlog #951 and PR card #949, lost #789), **Unscheduled 1 → 5** (the C2PA follow-ups **#953–#957**, all Triage, all unmilestoned despite #953 asking for 1.4.0), **Stragglers 1 → 2** (`php-ai-client#242` is carded In progress while closed upstream since 2026-07-15). Readiness tiers: In progress **24** flat, In discussion **21 → 19**, Needs review **8 → 10**, **Triage 3 → 8**, Backlog **5 → 7**, To do **4 → 5**. **Board-tracked PR table 16 → 18 rows:** #943, #945, and #949 joined; #917 merged out; #888's checks went FAILURE → SUCCESS while its merge state went DIRTY → BLOCKED; #789's milestone moved Future Release → 1.4.0. **Coverage 30 open PRs = 18 direct + 11 linked + 0 routine + 0 off-board + 1 unexplained** — the `linked-off-board-issue` bucket is empty for the first time, exactly one fallback-parsed relationship remains anywhere (#494 → #238), and the sole failure is **#961** (gziolo's Agent Users PoC, +2,439/11 files, implementing #923's identity half and referencing it without a closing keyword). **⚠️ That improvement is partly an artifact:** nine of the thirteen `WordPress/ai` PRs merged this window had no board card — #947 (which **closed board issue #940**, with a timeout bump rather than the custom endpoint the issue specified), #950, #952, #958, #959, and dependabot #963–#966 — so the audit scored a release as progress. A new flag (#4/#5) and a new *Work for Later* item now call for a merged-PR arm on the coverage metric. Readiness moved both ways for the first time in months (#459 and #749 FAILURE → SUCCESS; #887 DIRTY → BLOCKED + SUCCESS → FAILURE; #888 DIRTY → BLOCKED + FAILURE → SUCCESS) while the standing queue held: **0 of 30 approving reviews, eleven windows running**, 19 BLOCKED / 11 DIRTY, 17 failing checks, 10 CHANGES_REQUESTED, 7 drafts — **#935** is the clean test case, green and unapproved since 2026-08-19, joined on the closing day by **#929**. Radar: **`php-ai-client` 29 → 32 PRs / 34 → 35 issues** (zahidgh's #278/#279/#280; new #277 — `MessagePart` cannot carry citations, so all three first-party providers drop source attribution) with **#274 still the gate**, plus ColinM-sys's end-to-end Ollama verification showing it removes `usingProvider()`/`usingModelPreference()`, making re-enablement a caller migration; **`mcp-adapter` 14 → 13 PRs** (#291 merged, overlapping #292 closed unmerged) **/ 41 → 43 issues** (#297 coerces unknown `mcp.type` to `tool`, #298 discards `WP_Error` code/data — both fail open); **`abilities-api` unchanged on every axis** across all four snapshots since 2026-08-10. Dependency watchlist **16, zero drift**. Registries unchanged; script unchanged (no drift or bug found); `bash -n`, all eight offline suites, and the live dependency smoke test pass. **Closing pull at 17:04 UTC:** re-pulled nine hours after the 07:41 read and flat on every axis — board 291, both censuses, all four release sets, and the watchlist unchanged — except **PR #929 leaving draft at 14:48 UTC** (DIRTY → BLOCKED, checks already green). No tier, milestone, or classification count moves; the untracked-PR row for #929 loses its *(draft)* marker, and the delivery-readiness picture closes with two PRs that are green, carry no requested changes, and have no reviewer — #935 since 2026-08-19 and now #929. |
 | 2026-08-17 | **Live board + repo refresh vs the 2026-08-15 00:31 UTC baseline — the board stood still, the repository did not, and the release date passed unshipped.** Non-Done scope unchanged at **65** = 48 open issues + 16 open board-tracked PRs + stale merged #484; every tier holds (**① v1.3.0 2**, **① v1.4.0 19** = 11i+8PR, **② Future Release 41** = 33i+8PR, **③ #484**, **④ #940**). **One status change in the whole board:** **#188** (persona-driven content generation, Future Release) **Backlog → In progress** — no PR, no assignee, zero comments — so In progress **23 → 24** and Backlog **6 → 5**; new flag 19 records that a status can be a claim rather than a state, and #188 is the third such move after #338/#625. The 16-PR in-flight table is **byte-for-byte unchanged**: no card joined, left, or moved, and not one draft/review/merge/check field changed. **The movement is all repository-side: 28 → 30 open PRs, coverage gap 1 → 4 during the window and 3 at its close** = 16 direct + 11 linked-board-issue + 0 routine + **1 linked-off-board (#943)** + **2 unexplained (#941, #945)**, nothing carded — and the fourth uncarded PR **merged**. **#946** (dkotter, repo-milestoned **1.3.0**) is the serious one: it disables the `SDK_Overlay` loading that board-Done **#892** added, because the embedding contract is being changed upstream in `php-ai-client#274`; `generate_embeddings()` now returns `WP_Error`, dependent tests are skipped, and #892's changelog entry is to be kept out of the release — a **reversal of a Done card, invisible on the board** (flag 3 rewritten around it). **It opened 17:27, was approved by jeffpaul 18:22, and dkotter merged it into `develop` at 18:54 — 87 minutes, no card at any point.** Because its entire life fits between two snapshots, it produces no row in the board diff *and* no row in the PR-census diff: the struck-through entry in the coverage table above is the only record this repository will keep of it. That makes it the second permanently invisible merge after **#913** (2026-08-07), and the first to remove a capability the board still lists as Done. **#945** (seedprod, +1,347) adds a `core/edit-content` write ability referencing #40 without a closing link; **#943** (ColinM-sys, +2,049) carries #891's semantic-search work plus fixes/tests from a different author, so one experiment now lives in two open PRs — and its only link is a `fallback-title` match to **#891**, a PR rather than an issue, which is why it classifies as off-board (second fallback relationship in the census, after #494 → #238). **Readiness deteriorated for every PR except the revert:** 30 open PRs, 11 CHANGES_REQUESTED, **BLOCKED 12 → 16**, DIRTY 16 → 14, failing checks **17 → 19**, 7 drafts; regressions on **#459** (DIRTY → BLOCKED — every axis now red on the one item blocking the release) and **#749** (DIRTY → BLOCKED, checks SUCCESS → FAILURE). **Approving reviews are back to zero for a tenth straight window** — the window's only approval went to #946 and merged out with it 32 minutes later, so nothing now in the queue carries one. None of the 16 board PR cards has an approving review, and the sixteen-row in-flight table above is byte-for-byte unchanged. **v1.3.0's target date (2026-08-17) is this snapshot's date and the release is not cut**; #924 carries the latest activity of any `WordPress/ai` card at 17:28 UTC, one minute after #946 opened, while the board's single latest touch is Google-provider **#23** at 18:20 UTC — an upstream milestone renumbering that left its recorded milestone string unchanged. Issue coverage holds at **47 of 47 carded**. Upstream: `php-ai-client` **28 → 29** / 34 / 1.4.0 on draft **#276** alone (an 82-file `token_get_all()` pass qualifying global function/constant references, no behavior change) while **#274** — which now gates the plugin's embedding layer — did not move; `mcp-adapter` **12 → 14**, all documentation (**#285** readme.txt merged 2026-08-16; **#288**/**#291**/**#292** opened; draft **#281** BLOCKED → DIRTY); `abilities-api` static at **14 / 8 / v0.4.0**. Dependency watchlist unchanged at 16 (9 open / 4 closed / 3 merged) with one activity bump (`gutenberg#75221` → 2026-08-16, its first movement since February, mapped to #238 which moved the same day). **Tooling:** fixed the non-executable `tests/helpers/crlf-jq.sh` (mode 100644 → 100755), which had been silently disabling the CRLF regression suite everywhere except Windows; with the shim actually running it caught four CR-unsafe `$(jq …)` scalar captures — a snapshot filename, a `gh api` endpoint, and two literal comparisons — now all `jq_lines`. **Two more bugs of the same class, found by running the suite from a clean environment:** three test files — `-crlf.sh`, `-issues.sh`, `-mergestate.sh` — were themselves committed **non-executable**, so the invocations CLAUDE.md documents fail on Linux while passing on msys; and five suites shelled out to **`rg`**, never a documented dependency here (`gh` + `jq` are), so they died on `rg: command not found` as soon as they became runnable. Those calls are now `grep -F` — every pattern was a fixed string, so no assertion changed. Script passes `bash -n`, all **eight** offline suites, `census --strict`, `dependencies --strict --json`, and the live dependency smoke test; `--strict --json` exits 2 for #941/#943/#945 (it exited 2 for four earlier in this same refresh, before #946 merged). **Readiness-data caveat, newly observed:** the census reads `mergeStateStatus` from a *list* query and GitHub answers those from cache, so the 18:49 pull still reported #946 `BLOCKED` while a forced single-PR query and the REST `mergeable_state` both returned `CLEAN` — its approval had landed 27 minutes earlier, and it merged 5 minutes later. GitHub-side lag, not a script defect: the existing retry covers `UNKNOWN` (an uncomputed answer), not a stale computed one, and re-asking per PR would cost one query per PR per repository. **Also exercised, unintentionally:** GitHub 503s took out the primary `WordPress/ai` census on one run, and the fail-soft path behaved exactly as designed — board-plus-three-repos report, one `repository-census-unavailable` error, no snapshot damage. |
