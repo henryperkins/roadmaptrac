@@ -1,0 +1,376 @@
+[
+  {
+    "id": "WordPress/abilities-api#38",
+    "repo": "WordPress/abilities-api",
+    "number": 38,
+    "type": "Issue",
+    "title": "Proposal: Add a convienient way to filter the list of all registered abilities",
+    "state": "OPEN",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": "Later",
+    "updatedAt": "2025-10-15T16:32:58Z",
+    "labels": [
+      "[Status] In Progress",
+      "[Priority] High"
+    ],
+    "url": "https://github.com/WordPress/abilities-api/issues/38",
+    "theme": "Ability registry filtering",
+    "aiRefs": [
+      21,
+      354
+    ],
+    "note": "Filter registered abilities by namespace, category, and metadata",
+    "required": true
+  },
+  {
+    "id": "WordPress/abilities-api#62",
+    "repo": "WordPress/abilities-api",
+    "number": 62,
+    "type": "Issue",
+    "title": "Add property for marking Ability hints like destructive, read-only, idempotent",
+    "state": "CLOSED",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": "pre WP 6.9",
+    "updatedAt": "2025-10-09T16:12:46Z",
+    "labels": [
+      "[Status] In Progress"
+    ],
+    "url": "https://github.com/WordPress/abilities-api/issues/62",
+    "theme": "Ability safety metadata",
+    "aiRefs": [
+      40
+    ],
+    "note": "Hints for destructive, read-only, and idempotent abilities",
+    "required": true
+  },
+  {
+    "id": "WordPress/abilities-api#84",
+    "repo": "WordPress/abilities-api",
+    "number": 84,
+    "type": "Issue",
+    "title": "Create ablities for CRUD operations that work with all post types",
+    "state": "OPEN",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": "Later",
+    "updatedAt": "2025-10-30T11:12:53Z",
+    "labels": [],
+    "url": "https://github.com/WordPress/abilities-api/issues/84",
+    "theme": "Core CRUD abilities",
+    "aiRefs": [
+      40
+    ],
+    "note": "CRUD abilities that work across post types",
+    "required": true
+  },
+  {
+    "id": "WordPress/abilities-api#105",
+    "repo": "WordPress/abilities-api",
+    "number": 105,
+    "type": "Issue",
+    "title": "Core Abilities for WordPress 6.9",
+    "state": "CLOSED",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": "pre WP 6.9",
+    "updatedAt": "2025-10-24T12:10:51Z",
+    "labels": [
+      "[Status] Needs More Info",
+      "[Priority] High"
+    ],
+    "url": "https://github.com/WordPress/abilities-api/issues/105",
+    "theme": "Core abilities scope",
+    "aiRefs": [
+      40
+    ],
+    "note": "Core Abilities for WordPress 6.9",
+    "required": true
+  },
+  {
+    "id": "WordPress/abilities-api#106",
+    "repo": "WordPress/abilities-api",
+    "number": 106,
+    "type": "Issue",
+    "title": "Determine what goes in Ability meta",
+    "state": "CLOSED",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": "WP 6.9",
+    "updatedAt": "2025-10-24T12:21:58Z",
+    "labels": [
+      "[Priority] High"
+    ],
+    "url": "https://github.com/WordPress/abilities-api/issues/106",
+    "theme": "Ability metadata",
+    "aiRefs": [
+      40
+    ],
+    "note": "Determine what belongs in Ability meta",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#16549",
+    "repo": "WordPress/gutenberg",
+    "number": 16549,
+    "type": "Issue",
+    "title": "Snackbar Accessibility Issues",
+    "state": "OPEN",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-02-23T07:31:45Z",
+    "labels": [
+      "[Type] Enhancement",
+      "[Focus] Accessibility (a11y)",
+      "[Feature] UI Components",
+      "Needs Accessibility Feedback"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/issues/16549",
+    "theme": "Admin UX / accessibility",
+    "aiRefs": [
+      699
+    ],
+    "note": "Snackbar accessibility caveat for copy-feedback UI",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#70710",
+    "repo": "WordPress/gutenberg",
+    "number": 70710,
+    "type": "Issue",
+    "title": "Abilities & Workflows Overview",
+    "state": "OPEN",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-06-22T17:10:03Z",
+    "labels": [
+      "[Type] Overview",
+      "[Package] Commands",
+      "[Feature] Command Palette"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/issues/70710",
+    "theme": "Platform / workflows",
+    "aiRefs": [
+      21,
+      40,
+      430
+    ],
+    "note": "Abilities and Workflows overview for Command Palette and AI tool surfaces",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#72734",
+    "repo": "WordPress/gutenberg",
+    "number": 72734,
+    "type": "Issue",
+    "title": "Media Library: Create a dedicated media editor",
+    "state": "OPEN",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-08-13T06:10:55Z",
+    "labels": [
+      "[Type] Enhancement",
+      "[Feature] Media"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/issues/72734",
+    "theme": "Media Editor",
+    "aiRefs": [
+      325
+    ],
+    "note": "Dedicated media editor foundation",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#73771",
+    "repo": "WordPress/gutenberg",
+    "number": 73771,
+    "type": "Issue",
+    "title": "WordPress 7.1 Iteration: Media Editor Modal task tracking",
+    "state": "CLOSED",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-08-12T23:53:33Z",
+    "labels": [
+      "[Feature] Media",
+      "[Type] Iteration"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/issues/73771",
+    "theme": "Media Editor",
+    "aiRefs": [
+      238,
+      325
+    ],
+    "note": "Media Editor modal task tracking and extension surface",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#74234",
+    "repo": "WordPress/gutenberg",
+    "number": 74234,
+    "type": "PullRequest",
+    "title": "Add: WordPress Core Post Management Abilities",
+    "state": "OPEN",
+    "isDraft": false,
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-06-19T10:53:20Z",
+    "labels": [
+      "[Type] Feature"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/pull/74234",
+    "theme": "Platform / core abilities",
+    "aiRefs": [
+      40
+    ],
+    "note": "Core post-management abilities implementation",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#74572",
+    "repo": "WordPress/gutenberg",
+    "number": 74572,
+    "type": "PullRequest",
+    "title": "DataViews: Avoid flickering while refreshing",
+    "state": "MERGED",
+    "isDraft": false,
+    "mergedAt": "2026-02-26T11:38:36Z",
+    "milestone": "Gutenberg 22.7",
+    "updatedAt": "2026-02-26T13:45:53Z",
+    "labels": [
+      "[Type] Bug",
+      "Needs Design Feedback",
+      "[Package] Edit Site",
+      "[Feature] DataViews",
+      "Backported to WP Core",
+      "[Package] DataViews"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/pull/74572",
+    "theme": "Admin UX / DataViews",
+    "aiRefs": [
+      741
+    ],
+    "note": "DataViews flicker fix used as a reference for AI admin flicker",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#75221",
+    "repo": "WordPress/gutenberg",
+    "number": 75221,
+    "type": "Issue",
+    "title": "Gutenberg-Based Media Editor: Add Media Level Focal Point Selector",
+    "state": "OPEN",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-08-16T18:10:47Z",
+    "labels": [
+      "[Type] Enhancement",
+      "[Feature] Media"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/issues/75221",
+    "theme": "Media / focal point",
+    "aiRefs": [
+      238
+    ],
+    "note": "Media-level focal point selector for AI crop suggestions",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#77230",
+    "repo": "WordPress/gutenberg",
+    "number": 77230,
+    "type": "Issue",
+    "title": "Guidelines built on Knowledge in WordPress 7.2",
+    "state": "OPEN",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-07-11T14:07:57Z",
+    "labels": [
+      "[Type] Iteration",
+      "[Feature] Guidelines"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/issues/77230",
+    "theme": "Skills / Guidelines",
+    "aiRefs": [
+      430
+    ],
+    "note": "Guidelines CPT evolution toward skills, memory, and plans",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#77643",
+    "repo": "WordPress/gutenberg",
+    "number": 77643,
+    "type": "PullRequest",
+    "title": "Guidelines: Extract initial public API methods",
+    "state": "MERGED",
+    "isDraft": false,
+    "mergedAt": "2026-04-29T04:30:21Z",
+    "milestone": "Gutenberg 23.1",
+    "updatedAt": "2026-04-29T04:31:05Z",
+    "labels": [
+      "[Type] New API",
+      "[Feature] Guidelines"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/pull/77643",
+    "theme": "Skills / Guidelines",
+    "aiRefs": [
+      430
+    ],
+    "note": "Guidelines public API extraction",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#77816",
+    "repo": "WordPress/gutenberg",
+    "number": 77816,
+    "type": "Issue",
+    "title": "Introduce a Toast component in @wordpress/ui based on base ui (with semantic intent variants)",
+    "state": "OPEN",
+    "isDraft": null,
+    "mergedAt": null,
+    "milestone": null,
+    "updatedAt": "2026-06-29T14:10:42Z",
+    "labels": [
+      "[Type] Feature",
+      "[Package] UI"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/issues/77816",
+    "theme": "Admin UX / toast component",
+    "aiRefs": [
+      699
+    ],
+    "note": "Toast component direction related to snackbar replacement",
+    "required": true
+  },
+  {
+    "id": "WordPress/gutenberg#77994",
+    "repo": "WordPress/gutenberg",
+    "number": 77994,
+    "type": "PullRequest",
+    "title": "Media Editor Experiment: Add a route, based on the media editor modal, refactor the modal components",
+    "state": "MERGED",
+    "isDraft": false,
+    "mergedAt": "2026-05-10T23:17:36Z",
+    "milestone": "Gutenberg 23.2",
+    "updatedAt": "2026-06-25T23:45:03Z",
+    "labels": [
+      "[Feature] Media",
+      "[Package] Block library",
+      "[Type] Experimental"
+    ],
+    "url": "https://github.com/WordPress/gutenberg/pull/77994",
+    "theme": "Media Editor",
+    "aiRefs": [
+      325
+    ],
+    "note": "Media Editor route and modal component refactor",
+    "required": true
+  }
+]

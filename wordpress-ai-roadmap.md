@@ -5,7 +5,7 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-09-23 04:28 UTC (latest board-item activity: 2026-09-22 16:42 UTC — issue #1054; the project record itself last changed at 2026-09-22 16:42 UTC) |
+> | **Data snapshot** | 2026-09-23 04:54 UTC (latest board-item activity: 2026-09-22 16:42 UTC — issue #1054; the project record itself last changed at 2026-09-22 16:42 UTC) |
 > | **Items captured** | 309 (full board, via GraphQL Projects API) — **up 19 from 290** |
 > | **Plugin** | [`WordPress/ai`](https://github.com/WordPress/ai) — the official "AI" Showcase Plugin on WordPress.org |
 > | **Latest shipped** | **v1.3.0** (shipped 2026-08-18 21:04 UTC) — still the latest plugin release, **36 days on**, with **no 1.4.0 release issue**. The 1.3.0 repository milestone stays closed at 71 items. The **board** lane is now **13 cards (12 Done + Google-provider #23)**, down from 16 at the previous snapshot and from 19 on release night. |

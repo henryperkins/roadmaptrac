@@ -1,0 +1,272 @@
+[
+  {
+    "id": "WordPress/abilities-api#66",
+    "repo": "WordPress/abilities-api",
+    "number": 66,
+    "title": "Change package type from library to wordpress-plugin",
+    "url": "https://github.com/WordPress/abilities-api/pull/66",
+    "isDraft": false,
+    "author": "spenserhale",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2025-10-14T18:35:09Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/abilities-api#85",
+    "repo": "WordPress/abilities-api",
+    "number": 85,
+    "title": "Add wp_query_abilities: flexible filtering for registered abilities",
+    "url": "https://github.com/WordPress/abilities-api/pull/85",
+    "isDraft": false,
+    "author": "prab18hat",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2025-10-24T12:27:33Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/abilities-api",
+        "number": 38,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      38
+    ]
+  },
+  {
+    "id": "WordPress/abilities-api#89",
+    "repo": "WordPress/abilities-api",
+    "number": 89,
+    "title": "docs: add Composer-managed installation instructions",
+    "url": "https://github.com/WordPress/abilities-api/pull/89",
+    "isDraft": false,
+    "author": "justlevine",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2025-10-24T12:33:58Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/abilities-api#95",
+    "repo": "WordPress/abilities-api",
+    "number": 95,
+    "title": "docs: Improve permission checking documentation and examples",
+    "url": "https://github.com/WordPress/abilities-api/pull/95",
+    "isDraft": false,
+    "author": "Ref34t",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2025-10-24T12:33:11Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/abilities-api#109",
+    "repo": "WordPress/abilities-api",
+    "number": 109,
+    "title": "Add serialization methods to WP_Ability and WP_Ability_Category",
+    "url": "https://github.com/WordPress/abilities-api/pull/109",
+    "isDraft": false,
+    "author": "bordoni",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2025-11-13T15:09:15Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/abilities-api#115",
+    "repo": "WordPress/abilities-api",
+    "number": 115,
+    "title": "Add Filtering Capabilities for Registered Abilities",
+    "url": "https://github.com/WordPress/abilities-api/pull/115",
+    "isDraft": false,
+    "author": "galatanovidiu",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2025-10-30T09:32:10Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/abilities-api",
+        "number": 38,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      38
+    ]
+  },
+  {
+    "id": "WordPress/abilities-api#119",
+    "repo": "WordPress/abilities-api",
+    "number": 119,
+    "title": "Add Filtering Capabilities for Registered Abilities using collections (POC)",
+    "url": "https://github.com/WordPress/abilities-api/pull/119",
+    "isDraft": true,
+    "author": "galatanovidiu",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2025-11-10T12:09:12Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/abilities-api",
+        "number": 38,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      38
+    ]
+  },
+  {
+    "id": "WordPress/abilities-api#138",
+    "repo": "WordPress/abilities-api",
+    "number": 138,
+    "title": "WIP: Doc updates ",
+    "url": "https://github.com/WordPress/abilities-api/pull/138",
+    "isDraft": false,
+    "author": "jonathanbossenger",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2025-11-28T08:37:07Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/abilities-api#146",
+    "repo": "WordPress/abilities-api",
+    "number": 146,
+    "title": "Docs: Add missing @return tags and improve return value descriptions",
+    "url": "https://github.com/WordPress/abilities-api/pull/146",
+    "isDraft": false,
+    "author": "huzaifaalmesbah",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2025-11-17T07:13:22Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/abilities-api#150",
+    "repo": "WordPress/abilities-api",
+    "number": 150,
+    "title": "Add filters for input and output validation",
+    "url": "https://github.com/WordPress/abilities-api/pull/150",
+    "isDraft": false,
+    "author": "priethor",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2025-11-27T19:09:51Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/abilities-api",
+        "number": 149,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      149
+    ]
+  },
+  {
+    "id": "WordPress/abilities-api#155",
+    "repo": "WordPress/abilities-api",
+    "number": 155,
+    "title": "Developer.wordpress.org updates",
+    "url": "https://github.com/WordPress/abilities-api/pull/155",
+    "isDraft": false,
+    "author": "jonathanbossenger",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2025-12-22T11:26:06Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/abilities-api#156",
+    "repo": "WordPress/abilities-api",
+    "number": 156,
+    "title": "Make example workable",
+    "url": "https://github.com/WordPress/abilities-api/pull/156",
+    "isDraft": false,
+    "author": "leogermani",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2025-12-22T19:24:33Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/abilities-api#157",
+    "repo": "WordPress/abilities-api",
+    "number": 157,
+    "title": "Fix incomplete translator comments in WP_Ability and WP_Ability_Category",
+    "url": "https://github.com/WordPress/abilities-api/pull/157",
+    "isDraft": false,
+    "author": "igorradovanov",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2025-12-30T16:18:49Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/abilities-api#159",
+    "repo": "WordPress/abilities-api",
+    "number": 159,
+    "title": "Add DeepWiki badge to README",
+    "url": "https://github.com/WordPress/abilities-api/pull/159",
+    "isDraft": false,
+    "author": "jonathanbossenger",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-01-21T07:40:42Z",
+    "issueLinks": [],
+    "issues": []
+  }
+]

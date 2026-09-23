@@ -5,7 +5,7 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-09-23 04:28 UTC |
+> | **Data snapshot** | 2026-09-23 04:54 UTC |
 > | **Scope** | 65 current non-Done issue dossiers + removed-board references (#84, and `php-ai-client#242` de-carded this window) + 62 recently board-Done dossiers retained for reference. Excludes 21 non-Done PR cards, the rest of the 223 Done cards, and census-only upstream issues. |
 > | **Repos** | Board dossiers: `WordPress/ai` (64 open issues) · `WordPress/ai-provider-for-google` (#23, now milestoned 1.3.0). Removed-board references: `WordPress/abilities-api` #84 and `WordPress/php-ai-client` #242. `WordPress/php-ai-client` and `WordPress/mcp-adapter` are otherwise tracked as full PR/issue/release censuses, not imported as issue dossiers. |
 > | **Each dossier** | Status · Milestone · Labels · Assignees · Last updated · Comment count · Link, then Problem → Approach → Open decisions → Dependencies → Discussion |

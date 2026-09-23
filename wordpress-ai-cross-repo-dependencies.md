@@ -4,7 +4,7 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-09-23 04:28 UTC |
+> | **Data snapshot** | 2026-09-23 04:54 UTC |
 > | **Scope** | 16 tracked dependencies = 11 Gutenberg items + 5 abilities-api items; full PR/issue/release census for `WordPress/ai`, `WordPress/php-ai-client`, `WordPress/mcp-adapter`, and `WordPress/abilities-api` |
 > | **State split** | 9 open · 4 closed · 3 merged *(**zero drift on every axis for a third consecutive window** — no membership, state, milestone, title, or activity change; every `updatedAt` is still the 2026-08-17 value)* |
 > | **Membership source** | `wp-ai-roadmap-dependencies.json` (versioned registry; `WP_AI_DEPS_FILE` overrides) |

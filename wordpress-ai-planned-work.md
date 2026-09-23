@@ -6,7 +6,7 @@
 >
 > | | |
 > |---|---|
-> | **Data snapshot** | 2026-09-23 04:28 UTC (board + live PR/issue/release checks) |
+> | **Data snapshot** | 2026-09-23 04:54 UTC (board + live PR/issue/release checks) |
 > | **Scope** | **86 non-Done cards** = 65 issue cards + 20 open board-tracked PRs + stale merged PR #484 |
 > | **Latest shipped** | **v1.3.0** (2026-08-18; 19th release) — *nothing has shipped since; no 1.4.0 release issue exists. `php-ai-client` 1.5.0 shipped 2026-09-16.* |
 > | **Repository radar** | Open PRs / open issues — `php-ai-client`: **37 / 40** (1.5.0) · `mcp-adapter`: **16 / 51** (v0.6.1) · `abilities-api`: **14 / 8** (v0.4.0, pending archival). Census-only; no Project #240 coverage gate. |

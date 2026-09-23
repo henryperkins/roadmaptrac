@@ -1,0 +1,360 @@
+[
+  {
+    "id": "WordPress/mcp-adapter#184",
+    "repo": "WordPress/mcp-adapter",
+    "number": 184,
+    "title": "feat(admin): add Settings > MCP Adapter page to opt registered abilities into the default server (fixes #183)",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/184",
+    "isDraft": false,
+    "author": "webmyc",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-26T21:02:23Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 183,
+        "source": "fallback-title"
+      }
+    ],
+    "issues": [
+      183
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#196",
+    "repo": "WordPress/mcp-adapter",
+    "number": 196,
+    "title": "fix: handle non-UTF-8 bytes in tool results to prevent transport close",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/196",
+    "isDraft": false,
+    "author": "benjithaimmortal",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-11T12:14:17Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 195,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      195
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#201",
+    "repo": "WordPress/mcp-adapter",
+    "number": 201,
+    "title": "Add mcp_adapter_server_config filter and fix default ability hook timing",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/201",
+    "isDraft": false,
+    "author": "ibrahimhajjaj",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "CHANGES_REQUESTED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-27T05:53:46Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 117,
+        "source": "closing"
+      },
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 190,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      117,
+      190
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#222",
+    "repo": "WordPress/mcp-adapter",
+    "number": 222,
+    "title": "Move HttpTransport hook registration to boot()",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/222",
+    "isDraft": false,
+    "author": "mathetos",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-13T18:23:33Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 52,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      52
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#231",
+    "repo": "WordPress/mcp-adapter",
+    "number": 231,
+    "title": "feat: map open_world ability annotation to openWorldHint",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/231",
+    "isDraft": false,
+    "author": "jorgefilipecosta",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-20T21:52:17Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#244",
+    "repo": "WordPress/mcp-adapter",
+    "number": 244,
+    "title": "Make the built-in discover/get-info/execute tools' MCP exposure check filterable (#243)",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/244",
+    "isDraft": false,
+    "author": "raftaar1191",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-27T10:08:53Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 243,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      243
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#258",
+    "repo": "WordPress/mcp-adapter",
+    "number": 258,
+    "title": "Feat/resource meta",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/258",
+    "isDraft": false,
+    "author": "AshishJii",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-27T06:17:23Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 245,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      245
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#259",
+    "repo": "WordPress/mcp-adapter",
+    "number": 259,
+    "title": "Nullable singletons, WP-CLI alias & notices",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/259",
+    "isDraft": false,
+    "author": "murshed",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-08-27T06:12:50Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#299",
+    "repo": "WordPress/mcp-adapter",
+    "number": 299,
+    "title": "Fix resources/read 500 on ability-backed resources with an object input schema",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/299",
+    "isDraft": false,
+    "author": "shoemoney",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-09-01T19:28:05Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 261,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      261
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#309",
+    "repo": "WordPress/mcp-adapter",
+    "number": 309,
+    "title": "Keep the STDIO bridge alive when standard input is a socket",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/309",
+    "isDraft": false,
+    "author": "Alexrydder",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "FAILURE",
+    "updatedAt": "2026-08-29T11:51:22Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 308,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      308
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#327",
+    "repo": "WordPress/mcp-adapter",
+    "number": 327,
+    "title": "fix: pass three arguments to mcp_adapter_validation_enabled at every call site",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/327",
+    "isDraft": false,
+    "author": "cpruijsen",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-09-12T01:03:07Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 305,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      305
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#333",
+    "repo": "WordPress/mcp-adapter",
+    "number": 333,
+    "title": "Validate the HTTP Origin header on the Streamable HTTP transport",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/333",
+    "isDraft": false,
+    "author": "theaminulai",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "DIRTY",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-09-21T08:35:30Z",
+    "issueLinks": [
+      {
+        "repo": "WordPress/mcp-adapter",
+        "number": 323,
+        "source": "closing"
+      }
+    ],
+    "issues": [
+      323
+    ]
+  },
+  {
+    "id": "WordPress/mcp-adapter#335",
+    "repo": "WordPress/mcp-adapter",
+    "number": 335,
+    "title": "Add unit tests for ConsoleObservabilityHandler",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/335",
+    "isDraft": false,
+    "author": "noruzzamans",
+    "isBot": false,
+    "routine": false,
+    "reviewDecision": null,
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-09-20T07:57:23Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#336",
+    "repo": "WordPress/mcp-adapter",
+    "number": 336,
+    "title": "fix(deps-dev): bump the composer-dev-minor-patch group with 3 updates",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/336",
+    "isDraft": false,
+    "author": "dependabot",
+    "isBot": true,
+    "routine": true,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-09-22T18:36:02Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#337",
+    "repo": "WordPress/mcp-adapter",
+    "number": 337,
+    "title": "fix(deps-dev): bump the npm-dev-minor-patch group with 2 updates",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/337",
+    "isDraft": false,
+    "author": "dependabot",
+    "isBot": true,
+    "routine": true,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-09-22T18:36:36Z",
+    "issueLinks": [],
+    "issues": []
+  },
+  {
+    "id": "WordPress/mcp-adapter#338",
+    "repo": "WordPress/mcp-adapter",
+    "number": 338,
+    "title": "chore(ci): bump codecov/codecov-action from 7.0.0 to 7.1.0 in the github-actions-updates group",
+    "url": "https://github.com/WordPress/mcp-adapter/pull/338",
+    "isDraft": false,
+    "author": "dependabot",
+    "isBot": true,
+    "routine": true,
+    "reviewDecision": "REVIEW_REQUIRED",
+    "mergeStateStatus": "BLOCKED",
+    "checkState": "SUCCESS",
+    "updatedAt": "2026-09-22T18:36:15Z",
+    "issueLinks": [],
+    "issues": []
+  }
+]

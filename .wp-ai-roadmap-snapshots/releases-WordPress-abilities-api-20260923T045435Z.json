@@ -1,0 +1,44 @@
+[
+  {
+    "tag": "v0.1.0",
+    "name": "Initial release",
+    "isDraft": false,
+    "isPrerelease": false,
+    "publishedAt": "2025-08-29T07:00:06Z"
+  },
+  {
+    "tag": "v0.1.1",
+    "name": "v0.1.1",
+    "isDraft": false,
+    "isPrerelease": false,
+    "publishedAt": "2025-09-05T07:34:30Z"
+  },
+  {
+    "tag": "v0.2.0",
+    "name": "v0.2.0",
+    "isDraft": false,
+    "isPrerelease": false,
+    "publishedAt": "2025-10-03T12:38:16Z"
+  },
+  {
+    "tag": "v0.3.0",
+    "name": "v0.3.0",
+    "isDraft": false,
+    "isPrerelease": false,
+    "publishedAt": "2025-10-20T07:21:19Z"
+  },
+  {
+    "tag": "v0.4.0",
+    "name": "v0.4.0",
+    "isDraft": false,
+    "isPrerelease": false,
+    "publishedAt": "2025-10-30T08:47:13Z"
+  },
+  {
+    "tag": "v0.5.0-rc",
+    "name": "v0.5.0-rc",
+    "isDraft": false,
+    "isPrerelease": true,
+    "publishedAt": "2025-11-14T12:01:18Z"
+  }
+]
